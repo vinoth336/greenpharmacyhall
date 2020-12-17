@@ -12,7 +12,6 @@ namespace Carbon\Traits;
 
 use Carbon\CarbonInterface;
 use DateTimeInterface;
-use Throwable;
 
 /**
  * Trait Options.
@@ -104,21 +103,6 @@ trait Options
         // The formats below are combinations of the above formats.
         'c' => '(([1-9]?[0-9]{4})-(1[012]|0[1-9])-(3[01]|[12][0-9]|0[1-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])[+-](1[012]|0[0-9]):([0134][05]))', // Y-m-dTH:i:sP
         'r' => '(([a-zA-Z]{3}), ([123][0-9]|0[1-9]) ([a-zA-Z]{3}) ([1-9]?[0-9]{4}) (2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9]) [+-](1[012]|0[0-9])([0134][05]))', // D, d M Y H:i:s O
-    ];
-
-    /**
-     * Format modifiers (such as available in createFromFormat) regex patterns.
-     *
-     * @var array
-     */
-    protected static $regexFormatModifiers = [
-        '*' => '.+',
-        ' ' => '[   ]',
-        '#' => '[;:\\/.,()-]',
-        '?' => '([^a]|[a])',
-        '!' => '',
-        '|' => '',
-        '+' => '',
     ];
 
     /**
@@ -377,7 +361,7 @@ trait Options
         if (isset($settings['locale'])) {
             $locales = $settings['locale'];
 
-            if (!\is_array($locales)) {
+            if (!is_array($locales)) {
                 $locales = [$locales];
             }
 
@@ -439,25 +423,20 @@ trait Options
             }
         }
 
-        $this->addExtraDebugInfos($infos);
+        // @codeCoverageIgnoreStart
 
-        return $infos;
-    }
-
-    protected function addExtraDebugInfos(&$infos): void
-    {
         if ($this instanceof CarbonInterface || $this instanceof DateTimeInterface) {
-            try {
-                if (!isset($infos['date'])) {
-                    $infos['date'] = $this->format(CarbonInterface::MOCK_DATETIME_FORMAT);
-                }
+            if (!isset($infos['date'])) {
+                $infos['date'] = $this->format(CarbonInterface::MOCK_DATETIME_FORMAT);
+            }
 
-                if (!isset($infos['timezone'])) {
-                    $infos['timezone'] = $this->tzName;
-                }
-            } catch (Throwable $exception) {
-                // noop
+            if (!isset($infos['timezone'])) {
+                $infos['timezone'] = $this->tzName;
             }
         }
+
+        // @codeCoverageIgnoreEnd
+
+        return $infos;
     }
 }
