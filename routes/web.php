@@ -18,6 +18,7 @@ Route::get('/service/{slug?}', 'SiteController@services')->name('service');
 Route::get('/portfolio/', 'SiteController@portfolio')->name('portfolio');
 Route::get('/faqs/', 'SiteController@faqs')->name('site_faqs');
 Route::post('enquiry', 'SaveEnquiryController@store')->name('enquiry.store');
+Route::get('/product/summary/{productId}', 'SiteController@viewProductSummary')->name('view_product_summary');
 
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

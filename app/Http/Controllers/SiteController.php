@@ -86,6 +86,13 @@ class SiteController extends Controller
         }
     }
 
+    public function viewProductSummary(Request $request, $productId)
+    {
+        $product = Portfolio::with('portfolioImages')->where('id', $productId)->orderBy('sequence')->first();
+
+        return view('site.show_single_item_summary')->with('product', $product);
+    }
+
     public function portfolio()
     {
 

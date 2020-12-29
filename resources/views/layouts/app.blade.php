@@ -18,7 +18,9 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{{ asset('material') }}/js/jquery-1.12.4.js"></script>
+    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+
     </head>
     <script type="text/javascript">
         $.ajaxSetup({

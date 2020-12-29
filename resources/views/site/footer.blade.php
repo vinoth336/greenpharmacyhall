@@ -33,7 +33,7 @@
 <script src="{{  asset('web/js/plugins.min.js') }}"></script>
 <script src="{{  asset('web/js/functions.js') }}"></script>
 
-<a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi Marriedly," class="float" target="_blank">
+<a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="float" target="_blank">
 <i class="fa icon-whatsapp my-float"></i>
 </a>
 

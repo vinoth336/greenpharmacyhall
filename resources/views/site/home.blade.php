@@ -69,7 +69,7 @@
                                             <a href="#" class="btn btn-dark mr-2"><i
                                                     class="icon-shopping-basket"></i>
                                             </a>
-                                            <a href="include/ajax/shop-item.html" class="btn btn-dark"
+                                            <a href="{{ route('view_product_summary', $product->id) }}" class="btn btn-dark"
                                                 data-lightbox="ajax"><i class="icon-line-expand"></i>
                                             </a>
                                         </div>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section border-top-0 border-bottom-0 mb-0 p-0 bg-transparent footer-stick">
+            <div class="section border-top-0 border-bottom-0 mb-0 p-0 bg-transparent footer-stick" style="display: none">
                 <div class="container clearfix">
                     <div class="row col-mb-50">
                         <div class="col-md-6 d-none d-md-flex align-self-end">

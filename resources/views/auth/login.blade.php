@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Marriedly Wedding Planner')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Green Pharmacy Hall')])
 
 @section('content')
 <div class="container" style="height: auto;">
@@ -10,7 +10,7 @@
         <div class="card card-login card-hidden mb-3">
           <div class="card-header card-header-primary text-center">
             <h4 class="card-title"><strong>{{ __('Login') }}</strong></h4>
-           
+
           </div>
           <div class="card-body">
             <p class="card-description text-center"><br></p>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </form>
-      
+
     </div>
   </div>
 </div>

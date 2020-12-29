@@ -65,10 +65,10 @@
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
-						<p class="mb-0 py-2 text-center text-md-left"><strong>Call:</strong> 1800-547-2145 |
+						<p class="mb-0 py-2 text-center text-md-left"><strong>Call:</strong> {{ $siteInformation->phone_no }} |
 							<strong>Email:</strong> <a href="http://themes.semicolonweb.com/cdn-cgi/l/email-protection"
 								class="__cf_email__"
-								data-cfemail="0960676f66496a68677f687a276a6664">[email&#160;protected]</a></p>
+								data-cfemail="0960676f66496a68677f687a276a6664">{{ $siteInformation->email_id }}</a></p>
 					</div>
 					<div class="col-12 col-md-auto">
 					</div>

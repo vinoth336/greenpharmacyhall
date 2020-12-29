@@ -224,6 +224,8 @@ $(document).ready(function() {
 
     <script>
 
+        CKEDITOR.replace('description');
+
         function updateSequence()
         {
             $.ajax({

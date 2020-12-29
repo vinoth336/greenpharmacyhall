@@ -3,12 +3,12 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="Marriedly" />
+	<meta name="author" content="Green Pharmacy Hall" />
 
 	<link
 		href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&amp;display=swap"
         rel="stylesheet" type="text/css" />
-    
+
     <link rel="stylesheet" href="{{ asset('web/style.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('web/css/bootstrap.css') }} " type="text/css" />
 	<link rel="stylesheet" href="{{ asset('web/css/dark.css') }}" type="text/css" />
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/layers.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/navigation.css') }}">
 
-	<title>Marriedly - Wedding Planner</title>
+	<title>Green Pharmacy Hall</title>
 </head>
 
 <body class="stretched">
@@ -114,13 +114,13 @@
 						<div class="swiper-slide dark">
 							<div class="container">
 								<div class="slider-caption slider-caption-center">
-									<h3 data-animate="fadeInUp">Welcome to Marriedly Wedding planner</h3>
+									<h3 data-animate="fadeInUp">Welcome to Green Pharmacy Hall</h3>
 								</div>
 							</div>
 							<div class="swiper-slide-bg" style="background-image: url('{{ asset('web/images/banner/banner1.jpg') }}');">
 							</div>
 						</div>
-						
+
 						<div class="swiper-slide dark">
 							<div class="container">
 								<div class="slider-caption">
@@ -148,13 +148,13 @@
 									<div class="heading-block bottommargin-sm">
 										<h3>Who We Are</h3>
 									</div>
-									<p class="mb-0 justify-content-center">Marriedly is a bespoke wedding planning and
+									<p class="mb-0 justify-content-center">Green Pharmacy Hallis a bespoke wedding planning and
 										decor company based in Coimbatore.
 										They believe in delivering quality services to their clients.
 										They understand the client’s vision first and then conceptualise the wedding
 										based on those points.
 										Their mission is to convert your vision into a beautiful reality.
-										The team at Marriedly specialise in Décor and Planning.
+										The team at Green Pharmacy Hallspecialise in Décor and Planning.
 										For décor they have their own in-house team that works efficiently but they are
 										happy to work with other decorators as well as per the clients’ requirements.
 									</p>
@@ -587,8 +587,8 @@
 
 				<div class="container mx-auto clearfix">
 					<div class="heading-block center">
-						<h2>Marriedly: We know you want it!</h2>
-						<span>Built with passion &amp; intuitiveness in mind. Marriedly is a masterclass piece of work
+						<h2>Green Pharmacy Hall: We know you want it!</h2>
+						<span>Built with passion &amp; intuitiveness in mind. Green Pharmacy Hallis a masterclass piece of work
 							presented to you.</span>
 					</div>
 				</div>
@@ -606,13 +606,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="video-wrap">
-						<video poster="{{ asset('web/images/banner/banner3.jpg') }}" preload="none" loop autoplay muted>
-							<source src='{{  asset('web/images/banner/marriedly.mp4') }}' type='video/mp4' />
-							<source src='{{  asset('web/images/banner/marriedly.mp4') }}' type='video/mp4' />
-						</video>
-						<div class="video-overlay" style="background-color: rgba(0,0,0,0.3);"></div>
-					</div>
 				</div>
 				<div class="line" style="padding: 20px 0; margin:20px 0;"></div>
 				<div class="container clearfix">
@@ -622,7 +615,7 @@
 						</div>
 						<div class="col-md-7">
 							<div class="heading-block">
-								<h2>Marriedly Wedding Planner</h2>
+								<h2>Green Pharmacy HallWedding Planner</h2>
 								<span>Fabulously Sharp &amp; Intuitive on your HD Devices.</span>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus deserunt, nobis quae
@@ -636,7 +629,7 @@
 					<div class="row align-items-center gutter-40 col-mb-50">
 						<div class="col-md-7">
 							<div class="heading-block">
-								<h2>Marriedly Wedding Planner</h2>
+								<h2>Green Pharmacy HallWedding Planner</h2>
 								<span>Fabulously Sharp &amp; Intuitive on your HD Devices.</span>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus deserunt, nobis quae
