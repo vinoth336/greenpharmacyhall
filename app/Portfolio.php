@@ -34,5 +34,10 @@ class Portfolio extends Model
         return $this->belongsToMany(Services::class)->withTimestamps();
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
+    }
+
 
 }

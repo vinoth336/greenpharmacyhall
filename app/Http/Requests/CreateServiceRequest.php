@@ -27,6 +27,7 @@ class CreateServiceRequest extends FormRequest
         return [
             'name' => "required|unique:services,slug,{$id},id",
             'description' => 'required',
+            'brand' => 'required|exists:brands,id',
             'banner' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }

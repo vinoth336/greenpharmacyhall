@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Http\Requests\CreateServiceRequest;
 use App\Portfolio;
 use App\PortfolioImage;
@@ -20,7 +21,7 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $portfolioImages = Portfolio::OrderBy('sequence')->get();
+        $portfolioImages = Portfolio::with('brand')->OrderBy('sequence')->get();
 
         return view('portfolio.list', ['portfolios' => $portfolioImages]);
     }
@@ -34,8 +35,9 @@ class PortfolioController extends Controller
     {
 
         $services = $this->getServices()->orderBy('sequence')->get();
+        $brands = Brand::get();
 
-        return view('portfolio.create', ['services' => $services]);
+        return view('portfolio.create', ['services' => $services, 'brands' => $brands]);
     }
 
     /**
@@ -84,10 +86,13 @@ class PortfolioController extends Controller
     public function edit(Portfolio $portfolio)
     {
         $services = $this->getServices()->orderBy('sequence')->get();
+        $brands = Brand::get();
+
 
         return view('portfolio.edit')->with([
             'portfolio' => $portfolio,
-            'services' => $services
+            'services' => $services,
+            'brands' => $brands
             ]);
     }
 
@@ -186,6 +191,7 @@ class PortfolioController extends Controller
         $portfolioBanner = $request->file('portfolio_banner_image') ?? null;
         $portfolio->storeImage($portfolioBanner, ['width' => 161 , 'height' => 161]);
         $portfolio->name = $request->input('name');
+        $portfolio->brand_id = $request->input('brand');
         $portfolio->product_code = $request->input('product_code');
         $portfolio->description = $request->input('description');
         $portfolio->price = (float) $request->input('price');

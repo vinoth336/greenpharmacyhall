@@ -13,7 +13,7 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
           <i class="material-icons">dashboard</i>
             <p>{{ __('Dashboard') }}</p>
         </a>
@@ -36,10 +36,22 @@
             <p>{{ __('Banners') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'category_types' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('category_types.index') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Category Types') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'services' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('services.index') }}">
           <i class="material-icons">content_paste</i>
             <p>{{ __('Category') }}</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'brands' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('brands.index') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Brands') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'portfolio' ? ' active' : '' }}">

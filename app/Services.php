@@ -33,4 +33,15 @@ class Services extends Model
         return $this->belongsToMany(Portfolio::class);
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Portfolio::class);
+    }
+
+
+    public function category_type()
+    {
+        return $this->belongsTo(CategoryType::class, 'category_type_id', 'id');
+    }
+
 }

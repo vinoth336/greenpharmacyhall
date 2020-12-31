@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoryType;
 use App\Http\Requests\CreateServiceRequest;
 use App\Services;
 use Exception;
@@ -30,7 +31,8 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $category_types = CategoryType::get();
+        return view('services.create')->with('category_types', $category_types);
     }
 
     /**
@@ -78,7 +80,8 @@ class ServicesController extends Controller
      */
     public function edit(Services $service)
     {
-        return view('services.edit')->with(['service' => $service]);
+        $category_types = CategoryType::get();
+        return view('services.edit')->with(['service' => $service, 'category_types' => $category_types]);
     }
 
     /**
@@ -173,7 +176,7 @@ class ServicesController extends Controller
         $service->storeImage($image, ['width' => 230 , 'height' => 230]);
         $service->name = $request->input('name');
         $service->slug = str_slug($request->input('name'));
-        $service->icon = $request->input('icon');
+        $service->category_type_id = $request->input('category_type');
         $service->description = $request->input('description');
         $service->sequence = $service->sequence ?? Services::count() + 1;
         $service->save();

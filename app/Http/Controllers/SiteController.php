@@ -39,6 +39,8 @@ class SiteController extends Controller
             ->orderBy('created_at', 'desc')->limit(12)->get();
         $testmonials = Testimonial::orderBy('created_at', 'desc')->get();
 
+
+
         return view('site.home', [
             'siteInformation' => $siteInformation,
             'sliders' => $sliders,

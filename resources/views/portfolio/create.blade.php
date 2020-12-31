@@ -61,8 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
-                                    <label class="col-sm-2 col-form-label">{{ __('Service') }}</label>
+                                    <label class="col-sm-2 col-form-label">{{ __('Category') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('service') ? ' has-danger' : '' }}">
                                             <select
@@ -70,7 +69,7 @@
                                                 name="services[]" id="input-service" type="text"
                                                 placeholder="{{ __('Image Name') }}"
                                                 required="true" aria-required="true" >
-                                                    <option value=''>Select Services</option>
+                                                    <option value=''>Select Category</option>
                                                 @foreach($services as $service)
 
                                                     <option value="{{ $service->id }}" @if($service->id == old('service')) selected @endif >{{  $service->name }}</option>
@@ -81,6 +80,27 @@
                                             @if ($errors->has('service'))
                                                 <span id="service-error" class="error text-danger"
                                                     for="input-service">{{ $errors->first('service') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Brand') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('brand') ? ' has-danger' : '' }}">
+                                            <select
+                                                class="selectpicker form-control{{ $errors->has('brand') ? ' is-invalid' : '' }}"
+                                                name="brand" id="input-brand" type="text"
+                                                placeholder="{{ __('Brand Name') }}"
+                                                required="true" aria-required="true" >
+                                                    <option value=''>Select Brand</option>
+                                                @foreach($brands as $brand)
+                                                    <option value="{{ $brand->id }}" @if($brand->id == old('brand')) selected @endif >{{  $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('brand'))
+                                                <span id="brand-error" class="error text-danger"
+                                                    for="input-brand">{{ $errors->first('brand') }}</span>
                                             @endif
                                         </div>
                                     </div>

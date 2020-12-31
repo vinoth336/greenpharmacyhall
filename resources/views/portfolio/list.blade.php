@@ -51,6 +51,9 @@ $(document).ready(function() {
                                                 data-target="#collapse{{ $portfolio->id }}" aria-expanded="true"
                                                 aria-controls="collapse{{ $portfolio->id }}">
                                                 <a class="hand"><i class="material-icons">reorder</i></a>
+                                                @if($portfolio->brand)
+                                                    <b>{{ ucwords($portfolio->brand->name) }}</b> -
+                                                @endif
                                                 {{ ucwords($portfolio->name) }}
                                                 <br>
                                                 <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;

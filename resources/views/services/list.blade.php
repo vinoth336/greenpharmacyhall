@@ -37,10 +37,12 @@ $(document).ready(function() {
         <div class="col-md-12">
                 <div class="card ">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title float-left">{{ __('services') }}</h4>
+                        <h4 class="card-title float-left">{{ __('Category') }}</h4>
                         <a href="{{ route('services.create') }}" class="btn btn-success float-right"><i class="material-icons">add</i></a>
                     </div>
                     <div class="card-body ">
+
+
 
                         <ul class="accordion" id="sortable">
                             @foreach ($services as $service )
@@ -51,7 +53,7 @@ $(document).ready(function() {
                                                 data-target="#collapse{{ $service->id }}" aria-expanded="true"
                                                 aria-controls="collapse{{ $service->id }}">
                                                 <a class="hand"><i class="material-icons">reorder</i></a>
-                                                @if(file_exists(public_path('web/images/portfolio_images/thumbnails/' . $service->banner)))
+                                                @if(file_exists(public_path('web/images/portfolio_images/thumbnails/' . $service->banner)) && $service->banner)
                                                 <img src="{{ asset('web/images/portfolio_images/thumbnails/' . $service->banner ) }}" style="width:70px;display:inline-block" class="inline-block" />
                                                 @else
                                                 <img src="{{ asset('site_images/no-image.png') }}" style="width:70px;display:inline-block" class="inline-block" />

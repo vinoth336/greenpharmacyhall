@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'services', 'titlePage' => __('Edit services')])
+@extends('layouts.app', ['activePage' => 'services', 'titlePage' => __('Edit Category')])
 
 @section('content')
     <div class="content">
@@ -11,7 +11,7 @@
 
                         <div class="card ">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">{{ __('Edit services') }}</h4>
+                                <h4 class="card-title">{{ __('Edit Category') }}</h4>
 
                             </div>
                             <div class="card-body ">
@@ -28,7 +28,7 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Service Name') }}</label>
+                                    <label class="col-sm-2 col-form-label">{{ __('Category Name') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('question') ? ' has-danger' : '' }}">
                                             <input
@@ -44,17 +44,22 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Service Icon') }}</label>
+                                    <label class="col-sm-2 col-form-label">{{ __('Category Type') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('icon') ? ' has-danger' : '' }}">
-                                            <input
-                                                class="form-control{{ $errors->has('icon') ? ' is-invalid' : '' }}"
-                                                name="icon" id="input-contact_person" type="text"
-                                                placeholder="{{ __('Service Icon') }}" value="{{ old('icon', $service->icon) }}"
-                                                required="true" aria-required="true" />
-                                            @if ($errors->has('icon'))
+                                            <select name="category_type" class="selectpicker">
+                                                @foreach($category_types as $category_type)
+                                                    <option value="{{ $category_type->id }}"
+                                                        @if(old('category_type', $service->category_type_id) == $category_type->id)
+                                                            selected
+                                                        @endif
+                                                    > {{ $category_type->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('category_type'))
                                                 <span id="name-error" class="error text-danger"
-                                                    for="input-contact_person">{{ $errors->first('icon') }}</span>
+                                                    for="input-category_type">{{ $errors->first('category_type') }}</span>
                                             @endif
                                         </div>
                                     </div>
@@ -77,7 +82,6 @@
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Banner') }}</label>
                                     <div class="col-sm-7">
-
                                         <div class="fileinput @if(!$service->banner) fileinput-new @else fileinput-exists @endif text-center" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
                                               <img src="{{ asset('material') . "/img/image_placeholder.jpg" }}" alt="...">

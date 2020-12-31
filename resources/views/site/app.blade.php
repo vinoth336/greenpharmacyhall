@@ -89,12 +89,12 @@
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" alt="{{ config('app.name') }}" style="height: 37px !important;"></a>
 						</div>
 						<div class="header-misc">
-                            <div id="top-search" class="header-misc-icon">
+                            <div id="top-search" class="header-misc-icon d-none">
 								<a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i
 										class="icon-line-cross"></i></a>
 							</div>
 
-							<div id="top-cart" class="header-misc-icon d-none d-sm-block">
+							<div id="top-cart" class="header-misc-icon d-none">
 								<a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span
 										class="top-cart-number">5</span></a>
 								<div class="top-cart-content">
