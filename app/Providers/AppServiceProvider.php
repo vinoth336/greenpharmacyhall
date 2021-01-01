@@ -45,17 +45,15 @@ class AppServiceProvider extends ServiceProvider
 
 
         View::composer('*', function ($view) {
-
-
-            if(!Cache::has('site_information')) {
-                Cache::add('site_information', SiteInformation::first());
+            if(!Cache::has('site_information') || true) {
+                Cache::add('site_information', SiteInformation::first(), 5000);
             }
 
-            if(!Cache::has('site_menu_items')) {
+            if(!Cache::has('site_menu_items') || true) {
                 $categories = Services::with(['products' => function($query) {
                     $query->with('brand');
                 }])->get();
-                Cache::add('site_menu_items', $categories);
+                Cache::add('site_menu_items', $categories, 5000);
             }
 
             $siteInformation = Cache::get('site_information');
