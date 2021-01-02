@@ -7,10 +7,10 @@
                 <form class="mt-5" method="post" action="{{ route('public.login') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter email">
+                        <label for="exampleInputEmail1">Phone No</label>
+                        <input type="number" class="form-control" name="phone_no" placeholder="Enter Phone No" min="10">
                         <span id="first_nameMsg" class="error">
-                            @error('email')
+                            @error('phone_no')
                                 {{ $message }}
                             @enderror
                         </span>

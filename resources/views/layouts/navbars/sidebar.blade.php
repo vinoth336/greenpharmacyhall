@@ -66,6 +66,12 @@
             <p>{{ __('Testimonial') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'pharma_orders' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('pharma_orders.index') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Pharma - View Orders') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'enquiries' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('enquiries.index') }}">
           <i class="material-icons">content_paste</i>

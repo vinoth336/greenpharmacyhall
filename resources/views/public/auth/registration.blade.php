@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="zip" name="zipcode" min="6" max="6">
+                            <input type="text" class="form-control" id="zip" name="zipcode" min="6" max="6" value="{{ old('zipcode') }}">
                             <span id="first_nameMsg" class="error">
                                 @error('zipcode')
                                     {{ $message }}

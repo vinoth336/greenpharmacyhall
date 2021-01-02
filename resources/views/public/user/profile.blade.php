@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Phone No</label>
-                            <input type="text" class="form-control" id="phone" placeholder="----------" min="10" max="10" name="phone_no" value="{{ old('phone_no', $user->phone_no) }}">
+                            <input type="text" class="form-control" id="phone" placeholder="----------" min="10" max="10" disabled name="phone_no" value="{{ old('phone_no', $user->phone_no) }}">
                             <span id="first_nameMsg" class="error">
                                 @error('phone_no')
                                     {{ $message }}
@@ -75,7 +75,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="email" disabled placeholder="Email" name="email" value="{{ old('email', $user->email) }}">
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ old('email', $user->email) }}">
                             <span id="first_nameMsg" class="error">
                                 @error('email')
                                     {{ $message }}

@@ -13,4 +13,6 @@ class AdminUser extends Authenticatable
     protected $redirectTo = '/admin/home';
 
     protected $table = 'admin_users';
+
+    protected $fillable = ['email', 'name'];
 }

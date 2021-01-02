@@ -17,14 +17,8 @@ class UserLoginController extends Controller
 
     public function login(UserLoginRequest $request)
     {
-        if (Auth::guard('web')->attempt($request->only('email', 'password'), $request->filled('remember'))) {
+        if (Auth::guard('web')->attempt($request->only('phone_no', 'password'), $request->filled('remember'))) {
             //Authentication passed...
-            $user = auth()->user();
-            if(!$user->email_verified_at) {
-                Auth::logout();
-                 //Authentication failed...
-                return $this->loginFailed();
-            }
 
             return redirect()
                  ->intended(route('public.dashboard'))

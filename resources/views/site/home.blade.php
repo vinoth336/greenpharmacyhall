@@ -30,7 +30,7 @@
         <div class="content-wrap">
             <div class="container clearfix">
                 <!-- Banner Section-->
-                <div class="row align-items-stretch gutter-20 min-vh-60">
+                <div class="row align-items-stretch gutter-20 min-vh-60 d-none d-md-flex d-lg-flex">
                     <div class="col-md-8">
                         <div class="row align-items-stretch gutter-20 h-100">
                             @foreach ($boxBanners as $boxBanner)

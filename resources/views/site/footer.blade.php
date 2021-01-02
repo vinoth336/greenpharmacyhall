@@ -15,11 +15,11 @@
                         <div class="col-sm-7 text-white "  style="background-color:#fff">
                             <button type="button" class="close mt-2" data-dismiss="modal"
                         aria-hidden="true">&times;</button>
-                            <form class="mt-5 floating-group" method="POST" action="{{ route('public.login') }}">
+                            <form class="mt-5 floating-group" method="post" action="{{ route('public.login') }}">
                                 @csrf
 								<div class="form-group">
-									<label for="exampleInputEmail1">Email address</label>
-									<input type="email" class="form-control" name="email" placeholder="Enter email">
+									<label for="exampleInputEmail1">Phone No</label>
+									<input type="number" class="form-control" name="phone_no" min="10" placeholder="Phone No">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">Password</label>

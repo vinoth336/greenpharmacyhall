@@ -8,6 +8,7 @@ use App\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -40,14 +41,12 @@ class UserRegistrationController extends Controller
             'password' => Hash::make($request->input('password'))
             ]);
 
-
-
-            $this->sendVerificationEmail($user);
-
             DB::commit();
 
-            return redirect()->route('public.registration_success', encrypt($user->email))
-            ->with(['status' => 'Registered Successfully, Please check your mail for the next process']);
+            Auth::loginUsingId($user->phone_no);
+
+            return redirect()->intended(route('public.dashboard'))
+            ->with('status', 'You are Logged in Successfully!');
         } catch (Exception $e) {
             DB::rollback();
             Log::error('Error Occurred in UserRegistraionController@save - ' . $e->getMessage());

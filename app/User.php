@@ -31,7 +31,7 @@ class User extends Authenticatable
     ];
 
     public $incrementing = false;
-    protected $primaryKey = 'email';
+    protected $primaryKey = 'phone_no';
 
     /**
      * The attributes that should be cast to native types.

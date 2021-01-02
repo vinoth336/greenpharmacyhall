@@ -34,9 +34,9 @@
                                 <td>{{ $order->created_at }}</td>
                                 <td><a href="{{ $order->image_url }}" target="_blank">View</a></td>
                                 <td>{{ $order->comment_text }}</td>
-                                <td>{{ $order->order_status_text }}</td>
+                                <td>{{ $order->order_status->name }}</td>
                                 <td>
-                                    @if($order->order_status == 1)
+                                    @if($order->order_status->slug_name == 'pending')
                                         <form method="POST" action="{{ route('public.pharma_order_delete', $order->id) }}"
                                             onsubmit="return confirm('Are You Sure Want Delete This Order ?');"
                                             >

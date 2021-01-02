@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserLoginRequest extends FormRequest
+class UpdatePharmaOrderStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class UserLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone_no' => 'required|numeric|regex:/[0-9]{10}/|exists:users,phone_no',
-            'password' => 'required|min:6'
+            'order_status' => 'required|exists:order_statuses,id'
         ];
     }
 }

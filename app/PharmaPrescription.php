@@ -37,27 +37,13 @@ class PharmaPrescription extends Model
         return null;
     }
 
-    public function getOrderStatusTextAttribute()
+    public function order_status()
     {
-        $value = $this->attributes['order_status'];
-        if($value == 1) {
-            return 'Pending';
-        }else if($value == 2) {
-            return 'Approved';
-        }else if($value == 3) {
-            return 'Processing';
-        }else if($value == 4) {
-            return 'Pending';
-        }else if($value == 5) {
-            return 'Out For Delivery';
-        }else if($value == 6) {
-            return 'Deliveried';
-        }else if($value == 7) {
-            return 'Not Deliveried';
-        }else if($value == 8) {
-            return 'Order Cancelled By You';
-        }else if($value == 9) {
-            return 'Order Cancelled By Admin';
-        }
+        return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

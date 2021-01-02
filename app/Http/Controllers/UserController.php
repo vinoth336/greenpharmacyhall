@@ -34,7 +34,7 @@ class UserController extends Controller
             $user->name = $request->input('name');
             $user->sex = $request->input('sex');
             $user->address = $request->input('address');
-            $user->phone_no = $request->input('phone_no');
+            $user->email = $request->input('email');
             $user->zipcode = $request->input('zipcode');
             $user->save();
 
