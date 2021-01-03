@@ -43,7 +43,7 @@
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title float-left">{{ __('Enquiries') }}</h4>
+                            <h4 class="card-title float-left">{{ __('Pharma - Orders') }}</h4>
                         </div>
                         <?php $sno = 1; ?>
                         <div class="card-body ">
@@ -55,9 +55,9 @@
                                         <div class="col-lg-3 col-md-6 col-sm-3 " style="margin-bottom: 10px">
                                             <select name="status" class="selectpicker form-control">
                                                     <option >All</option>
-                                                @foreach($orderStatus as $key => $status)
-                                                    <option value='{{ $key }}' @if($key == request()->get('status')) selected @endif>
-                                                        {{ $status }}
+                                                @foreach($orderStatus as $status)
+                                                    <option value='{{ $status->id }}' @if($status->id == request()->get('status')) selected @endif>
+                                                        {{ $status->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -123,7 +123,7 @@
                                                     <a id="order_status_block_{{ $order->id }}"
                                                         style="cursor:pointer; color: #9c27b0" class="view_enquiry"
                                                         data-recordid="{{ $order->id }}">
-                                                        {{ strtoupper($order->order_status->name) }}
+                                                        {{ strtoupper(optional($order->order_status)->name) }}
                                                     </a>
                                                 </td>
                                                 <td class="text-right ">
@@ -160,7 +160,7 @@
                         <table class="table table-bordered order_table">
                             <tbody>
                                 <tr>
-                                    <th class="">On</th>
+                                    <th class="">Created On</th>
                                     <td id="order_created_on"></td>
                                 </tr>
                                 <tr>
@@ -213,6 +213,7 @@
 
     <!-- Modal Ended -->
     <script>
+        var imageUrl = "{{ config('app.url') }}/web/images/prescriptions/";
         $(document).ready(function() {
             $("#datatables").dataTable();
             $('.datepicker').datetimepicker({
@@ -237,14 +238,14 @@
                 type: 'put',
                 dataType: 'json',
                 "data": {
-                    'status': $("#orderStatus").val(),
+                    'order_status': $("#orderStatus").val(),
                     'comment': $("#order_comment").val()
                 },
                 success: function(data) {
                     alert('Updated Successfully');
 
                     var order_block = $("#order_status_block_" + $("#order_id").val());
-                    order_block.html(($("#orderStatus").val()).toUpperCase());
+                    order_block.html($("#orderStatus").find("option:selected").text().toUpperCase());
                     $("#updateOrderStatus").modal('hide');
 
                 },
@@ -274,8 +275,8 @@
                     $("#order_created_on").html(data.created_at);
                     $("#order_user_phone_no").html(data.user.phone_no);
                     $("#order_User_email_id").html(data.user.email);
-                    $("#order_prescription_url").attr('href', data.image);
-                    $("#orderStatus").val(data.status);
+                    $("#order_prescription_url").attr('href', "" + imageUrl + data.image);
+                    $("#orderStatus").val(data.order_status_id);
                     $("#orderStatus").trigger('change');
                     $("#order_user_comment").html(data.comment);
                     $("#updateOrderStatus").modal('show');

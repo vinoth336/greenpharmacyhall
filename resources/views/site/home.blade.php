@@ -56,11 +56,13 @@
 
                 <div id="shop"  class="shop row grid-container gutter-30 " data-layout="fitRows" style="margin-top:10px;">
                     @foreach($allProducts as $product)
-                        <div class="product col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm">
                             <div class="grid-inner">
                                 <div class="product-image">
                                     @foreach($product->portfolioImages as $productImage)
-                                        <a href="#"><img src="{{ asset('web/images/portfolio_images/' . $productImage->image)}}" alt="{{ $product->name }}"></a>
+                                        <a href="#">
+                                            <img src="{{ asset('web/images/portfolio_images/' . $productImage->image)}}" alt="{{ $product->name }}">
+                                        </a>
                                     @endforeach
                                     <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
                                     <div class="bg-overlay">

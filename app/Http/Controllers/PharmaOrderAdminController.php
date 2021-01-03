@@ -20,13 +20,13 @@ class PharmaOrderAdminController extends Controller
         $orders = PharmaPrescription::with(['user', 'order_status'])->OrderBy('created_at');
         if ($request->has('status')) {
             if(!in_array($request->input('status'), ['All', 'all', ''])) {
-                $orders->where('status', $request->input('status'));
+                $orders->where('order_status_id', $request->input('status'));
             }
         }
 
         if ($request->input('from_date') && $request->input('to_date')) {
-            $startDate = date("Y-m-d", strtotime($request->input('from_date')));
-            $endDate   = date("Y-m-d", strtotime($request->input('to_date')));
+            $startDate = date("Y-m-d 00:00:00", strtotime($request->input('from_date')));
+            $endDate   = date("Y-m-d 23:59:59", strtotime($request->input('to_date')));
             $orders->whereBetween("created_at", array($startDate, $endDate));
         }
 

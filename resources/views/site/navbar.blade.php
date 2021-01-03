@@ -2,7 +2,7 @@
 	<ul class="menu-container">
 		<li class="menu-item mega-menu sub-menu">
 			<a class="menu-link" href="{{ route('home') }}">
-				<div>Non Pharma</div>
+				<div>Categories</div>
             </a>
             <div class="mega-menu-content mega-menu-style-2" style="width: 1291px;">
                 <div class="container" style="">

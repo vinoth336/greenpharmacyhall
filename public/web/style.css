@@ -7212,7 +7212,8 @@ p.wp-caption-text {
 .product-image img,
 .product-image>a {
     display: block;
-    width: 100%
+    width: 80%;
+    margin: auto;
 }
 
 body:not(.device-touch):not(.device-sm):not(.device-xs) .product-image>a {
@@ -7244,7 +7245,7 @@ body:not(.device-touch):not(.device-sm):not(.device-xs) .product-image>a {
 
 .product-title h3 {
     margin: 0;
-    font-size: 1.25rem
+    font-size: 0.9rem
 }
 
 .product-title h3 a,
