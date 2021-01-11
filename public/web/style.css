@@ -1537,6 +1537,10 @@ a.h-text-dark:hover {
     min-height: 40vh!important
 }
 
+.min-vh-30 {
+    min-height: 30vh!important
+}
+
 .min-vh-25 {
     min-height: 25vh!important
 }
@@ -1591,6 +1595,10 @@ a.h-text-dark:hover {
 
 .max-vh-40 {
     max-height: 40vh!important
+}
+
+.max-vh-30 {
+    max-height: 30vh!important
 }
 
 .max-vh-25 {
@@ -1676,6 +1684,9 @@ a.h-text-dark:hover {
     }
     .max-vh-sm-40 {
         max-height: 40vh!important
+    }
+    .max-vh-sm-30 {
+        max-height: 30vh!important
     }
     .max-vh-sm-25 {
         max-height: 25vh!important

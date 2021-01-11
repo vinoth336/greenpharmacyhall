@@ -87,7 +87,8 @@
 									alt="{{ config('app.name') }}" ></a>
 							<a href="index.html" class="retina-logo" data-dark-logo="">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" alt="{{ config('app.name') }}" style="height: 37px !important;"></a>
-						</div>
+                        </div>
+                        <div style="clear:both"></div>
 						<div class="header-misc mobile-ml-auto">
                             <div style="margin-right: 10px" class="header-misc-icon d-sm-block d-md-none d-lg-none">
 								<a href="#" class="menu-link" data-toggle="modal" data-target=".show-login-modal" style="width: 56px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
