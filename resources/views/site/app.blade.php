@@ -80,7 +80,7 @@
 				<div class="container">
 					<div class="header-row">
 
-						<div id="logo" style="border:none" >
+						<div id="logo" class="mobile-width-100" style="border:none" >
 							<a  href="{{ route('home') }}" class="standard-logo"
                                 data-dark-logo="{{ asset('web/images/logo/' . $siteInformation->logo) }}">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}"

@@ -3049,6 +3049,9 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
     .mobile-ml-auto {
         margin-left: auto !important;
     }
+    .mobile-width-100 {
+        width: 100%;
+    }
 }
 
 @media(min-width:992px) {
