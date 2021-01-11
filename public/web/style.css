@@ -1689,6 +1689,9 @@ a.h-text-dark:hover {
     .min-vh-md-100 {
         min-height: 100vh!important
     }
+    .min-vh-md-80 {
+        min-height: 80vh!important
+    }
     .min-vh-md-75 {
         min-height: 75vh!important
     }
