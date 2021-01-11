@@ -67,7 +67,7 @@
                                     <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
                                     <div class="bg-overlay">
                                         <div class="bg-overlay-content align-items-end justify-content-between"
-                                            data-hover-animate="fadeIn" data-hover-speed="400">
+                                             data-hover-speed="400">
                                             <a href="#" class="btn btn-dark mr-2"><i
                                                     class="icon-shopping-basket"></i>
                                             </a>

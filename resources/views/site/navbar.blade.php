@@ -19,7 +19,7 @@
                                     @endphp
                                     @foreach($brands as $brand_slug => $brand_name)
                                     <li class="menu-item" style="">
-                                        <a class="menu-link" href="search?category={{ $category->slug }}&brand={{ $brand_slug }}">
+                                        <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&brand={{ $brand_slug }}">
                                             <div>{{ $brand_name }}</div>
                                         </a>
                                     </li>
@@ -66,7 +66,7 @@
         @endif
         @guest
             <li class="menu-item">
-                <a class="menu-link" href="#" data-toggle="modal" data-target=".show-login-modal">
+                <a class="menu-link" href="#">
                     <div>Login</div>
                 </a>
                 <ul class="sub-menu-container">

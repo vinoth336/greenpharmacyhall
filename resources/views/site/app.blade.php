@@ -75,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		<header id="header" class="full-header" data-logo-height="60" data-mobile-sticky=true data-mobile-sticky-logo-height="36" data-sticky-logo-height="36" data-menu-padding="32">
+		<header id="header" class="full-header" data-logo-height="60" data-mobile-sticky=true data-mobile-sticky-logo-height="30" data-sticky-logo-height="30" data-menu-padding="32">
 			<div id="header-wrap">
 				<div class="container">
 					<div class="header-row">
@@ -84,14 +84,23 @@
 							<a  href="{{ route('home') }}" class="standard-logo"
                                 data-dark-logo="{{ asset('web/images/logo/' . $siteInformation->logo) }}">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}"
-									alt="{{ config('app.name') }}" style="height: 60px !important;" ></a>
+									alt="{{ config('app.name') }}" ></a>
 							<a href="index.html" class="retina-logo" data-dark-logo="">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" alt="{{ config('app.name') }}" style="height: 37px !important;"></a>
 						</div>
-						<div class="header-misc">
+						<div class="header-misc ml-auto">
+                            <div style="margin-right: 10px" class="header-misc-icon d-sm-block d-md-none d-lg-none">
+								<a href="#" class="menu-link" data-toggle="modal" data-target=".show-login-modal" style="width: 56px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
+                                    Login
+                                </a>
+							</div>
+
                             <div id="top-search" class="header-misc-icon d-none">
-								<a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i
-										class="icon-line-cross"></i></a>
+								<a href="#" id="top-search-trigger">
+                                    <i class="icon-line-search"></i>
+                                    <i class="icon-line-cross"></i>
+
+                                </a>
 							</div>
 
 							<div id="top-cart" class="header-misc-icon d-none">

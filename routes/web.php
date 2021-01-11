@@ -19,6 +19,7 @@ Route::get('/portfolio/', 'SiteController@portfolio')->name('portfolio');
 Route::get('/faqs/', 'SiteController@faqs')->name('site_faqs');
 Route::post('enquiry', 'SaveEnquiryController@store')->name('enquiry.store');
 Route::get('/product/summary/{productId}', 'SiteController@viewProductSummary')->name('view_product_summary');
+Route::get('/search', 'ProductSearchController@index')->name('public.product_list');
 
 
 
