@@ -2785,7 +2785,7 @@ only screen and (min-resolution:2dppx) {
     justify-content: center;
     align-items: center;
     -webkit-transition: opacity .3s ease;
-    transition: opacity .3s ease
+    transition: opacity .3s ease;
 }
 
 body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
@@ -3031,6 +3031,9 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
         -webkit-transform: translate(0, 0);
         -o-transform: translate(0, 0);
         transform: translate(0, 0)
+    }
+    .mobile-ml-auto {
+        margin-left: auto !important;
     }
 }
 

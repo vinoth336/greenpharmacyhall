@@ -1,6 +1,6 @@
 @extends('site.app')
 @section('content')
-    <section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-60 min-vh-md-100 include-header"
+    <section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-40 min-vh-md-75 include-header"
         data-autoplay="5000" data-speed="650" data-loop="true" data-effect="fade" data-progress="true">
         <div class="slider-inner">
             <div class="swiper-container swiper-parent">
