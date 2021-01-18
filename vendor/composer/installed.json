@@ -1232,7 +1232,8 @@
             "data",
             "faker",
             "fixtures"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "guzzlehttp/guzzle",
@@ -1549,6 +1550,50 @@
             "thumbnail",
             "watermark"
         ]
+    },
+    {
+        "name": "jamesh/laravel-uuid",
+        "version": "v1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/JamesHemery/laravel-uuid.git",
+            "reference": "f798e9ed91e216e59ca7170f465ff93bede5323f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/JamesHemery/laravel-uuid/zipball/f798e9ed91e216e59ca7170f465ff93bede5323f",
+            "reference": "f798e9ed91e216e59ca7170f465ff93bede5323f",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "^5.7|^6|^7|^8",
+            "illuminate/support": "^5.7|^6|^7|^8",
+            "php": "^7.2|^8.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "^3.7|^4|^5|^6",
+            "phpunit/phpunit": "^7.0|^8.0"
+        },
+        "time": "2020-12-18T10:17:23+00:00",
+        "type": "plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Jamesh\\Uuid\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "James Hemery",
+                "email": "hello@james-hemery.pro"
+            }
+        ],
+        "description": "Eloquent UUID Trait for Laravel 5.7 and above."
     },
     {
         "name": "laravel-frontend-presets/material-dashboard",

@@ -25,7 +25,7 @@ class CreateBrandRequest extends FormRequest
     {
         $id = $this->brand->id ?? null;
         return [
-            'name' => "required|unique:brands,name,{$id},id",
+            'name' => "required|unique:brands,name,{$id},id,deleted_at,NULL",
             'status' => 'required',
             'banner' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048'
         ];

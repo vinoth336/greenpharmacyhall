@@ -1,0 +1,236 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Brand;
+use App\Http\Requests\CreateServiceRequest;
+use App\Http\Requests\GetSlugNameRequest;
+use App\Product;
+use App\ProductImage;
+use App\Services;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Psy\Util\Str;
+
+class ProductController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $ProductImages = Product::with('brand')->OrderBy('sequence')->get();
+
+        return view('product.list', ['products' => $ProductImages]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+
+        $services = $this->getServices()->orderBy('sequence')->get();
+        $brands = Brand::get();
+
+        return view('product.create', ['services' => $services, 'brands' => $brands]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateServiceRequest $request)
+    {
+
+        DB::beginTransaction();
+        try{
+
+            $this->savePortfolio(new Product(), $request);
+
+            DB::commit();
+
+            return redirect()->route('product.index')->with('status', 'Created Successfully');
+
+        } catch(Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return response(['status' => "Can't Store Data", "message" => $e->getMessage()], 500);
+        }
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $product)
+    {
+        $services = $this->getServices()->orderBy('sequence')->get();
+        $brands = Brand::get();
+
+
+        return view('product.edit')->with([
+            'product' => $product,
+            'services' => $services,
+            'brands' => $brands
+            ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CreateServiceRequest $request, Product $product)
+    {
+        DB::beginTransaction();
+        try{
+
+            $this->savePortfolio($product, $request);
+
+            DB::commit();
+
+            return redirect()->route('product.index')->with('status', 'Created Successfully');
+
+        } catch(Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return response(['status' => "Can't Store Data"], 500);
+        }
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Product $product)
+    {
+        DB::beginTransaction();
+
+        try{
+
+            foreach($product->ProductImages as $ProductImage){
+                    $ProductImage->unlinkImage($ProductImage->image);
+            }
+
+            $product->ProductImages()->delete();
+            $product->services()->detach();
+            $product->delete();
+
+            DB::commit();
+
+            return redirect()->route('product.index')->with('status', 'Removed Successfully');
+
+        } catch(Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return response(['status' => "Can't Delete Data"], 500);
+        }
+
+    }
+
+    public function updateSequence(Request $request)
+    {
+
+        DB::beginTransaction();
+
+        try
+        {
+            foreach($request->input('sequence') as $sequence => $id) {
+                $product = Product::find($id);
+                $product->sequence = $sequence + 1;
+                $product->save();
+            }
+        } catch(Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+            response(['status' => 'Cannot Update Sequence'], 500);
+        }
+
+        DB::commit();
+
+        return response(['message' => 'Updated Successfully'], 200);
+    }
+
+
+     /**
+     * Create or Update the Product in storage
+     *
+     * @param PortfolioImageRequest $request
+     * @param Product $Product
+     * @return Product
+     */
+    public function savePortfolio($product, $request)
+    {
+
+        $portfolioBanner = $request->file('portfolio_banner_image') ?? null;
+        $product->storeImage($portfolioBanner, ['width' => 161 , 'height' => 161]);
+        $product->name = $request->input('name');
+        $product->slug = str_slug($request->input('name'));
+        $product->brand_id = $request->input('brand');
+        $product->product_code = $request->input('product_code');
+        $product->description = $request->input('description');
+        $product->price = (float) $request->input('price');
+        $product->discount_amount = (float) $request->input('discount_amount');
+        $product->sequence = $product->sequence ?? Product::count() + 1;
+        $product->save();
+        $product->services()->sync($request->input('services'));
+        $product->touch(); // This will help to add in cache
+        if($request->has('product_images')) {
+            $portfolioImageCount = $product->ProductImages()->count() + 1;
+            $images = $request->file('product_images');
+            foreach($images as $image){
+                $ProductImage = new ProductImage();
+                $ProductImage->storeImage($image, ['width' => 230 , 'height' => 230]);
+                $ProductImage->sequence = $portfolioImageCount++;
+                $product->ProductImages()->save($ProductImage);
+            }
+        }
+
+        return $product;
+    }
+
+    public function getSlugName(GetSlugNameRequest $request)
+    {
+        if($request->has('name')) {
+            return ['slug_name' => str_slug($request->input('name'))];
+        }
+
+        return null;
+    }
+
+    public function getServices()
+    {
+
+        return new Services;
+    }
+
+
+}

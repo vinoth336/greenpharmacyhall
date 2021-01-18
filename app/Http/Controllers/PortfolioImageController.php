@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateServiceRequest;
-use App\Portfolio;
-use App\PortfolioImage;
+use App\Product;
+use App\ProductImage;
 use App\Services;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,15 +21,15 @@ class PortfolioImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PortfolioImage $portfolioImage)
+    public function destroy(ProductImage $ProductImage)
     {
         DB::beginTransaction();
 
         try{
 
-            $portfolioImage->unlinkImage($portfolioImage->image);
+            $ProductImage->unlinkImage($ProductImage->image);
 
-            $portfolioImage->delete();
+            $ProductImage->delete();
 
             DB::commit();
 
@@ -51,7 +51,7 @@ class PortfolioImageController extends Controller
         try
         {
             foreach($request->input('sequence') as $sequence => $id) {
-                $service = PortfolioImage::find($id);
+                $service = ProductImage::find($id);
                 $service->sequence = $sequence + 1;
                 $service->save();
             }

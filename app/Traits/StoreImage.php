@@ -33,7 +33,12 @@ trait StoreImage {
                 if(!empty($thumbnailSize)) {
                     $this->saveThumbnails($image, $thumbnailSize, $name);
                 }
-                $image->move($storagePath, $name);
+
+                if($this->resizeImage ?? false ){
+                    $this->resize($image, $this->resizeValue, $name, $storagePath);
+                } else {
+                    $image->move($storagePath, $name);
+                }
             }
 
             $this->unlinkImage($this->getOriginal($this->fileParamName));
@@ -76,6 +81,15 @@ trait StoreImage {
         return true;
     }
 
+    public function resize($image, $resizeValue, $name, $storagePath)
+    {
+        $this->makeFolder($storagePath);
+
+        $img = Image::make($image->getRealPath())->resize($resizeValue['width'], $resizeValue['height'], function($constraint) {
+            //$constraint->aspectRatio();
+        });
+        $img->save($storagePath . '/' . $name);
+    }
 
     public function saveThumbnails($image, $thumbnailSize, $name)
     {

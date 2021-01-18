@@ -23,11 +23,10 @@ class CreateServiceRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->service->id ?? null;
+        $serviceId = $this->service->id ?? null;
         return [
-            'name' => "required|unique:services,slug,{$id},id",
+            'name' => "required|unique:services,slug,{$serviceId},id",
             'description' => 'required',
-            'brand' => 'required|exists:brands,id',
             'banner' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }

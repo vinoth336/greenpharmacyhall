@@ -6,10 +6,11 @@ use Illuminate\Auth\MustVerifyEmail as AuthMustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Jamesh\Uuid\HasUuid;
 
 class User extends Authenticatable
 {
-    use Notifiable, AuthMustVerifyEmail;
+    use Notifiable, AuthMustVerifyEmail, HasUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -46,4 +47,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(PharmaPrescription::class, 'user_id', 'id');
     }
+
+    public function non_pharma_orders()
+    {
+        return $this->hasMany(UserOrder::class, 'user_id', 'id');
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class, 'user_id', 'id');
+    }
+
 }

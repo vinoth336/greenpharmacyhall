@@ -53,8 +53,8 @@ $(document).ready(function() {
                                                 data-target="#collapse{{ $service->id }}" aria-expanded="true"
                                                 aria-controls="collapse{{ $service->id }}">
                                                 <a class="hand"><i class="material-icons">reorder</i></a>
-                                                @if(file_exists(public_path('web/images/portfolio_images/thumbnails/' . $service->banner)) && $service->banner)
-                                                <img src="{{ asset('web/images/portfolio_images/thumbnails/' . $service->banner ) }}" style="width:70px;display:inline-block" class="inline-block" />
+                                                @if(file_exists(public_path('web/images/product_images/thumbnails/' . $service->banner)) && $service->banner)
+                                                <img src="{{ asset('web/images/product_images/thumbnails/' . $service->banner ) }}" style="width:70px;display:inline-block" class="inline-block" />
                                                 @else
                                                 <img src="{{ asset('site_images/no-image.png') }}" style="width:70px;display:inline-block" class="inline-block" />
                                                 @endif

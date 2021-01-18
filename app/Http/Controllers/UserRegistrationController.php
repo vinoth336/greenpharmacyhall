@@ -43,10 +43,16 @@ class UserRegistrationController extends Controller
 
             DB::commit();
 
-            Auth::loginUsingId($user->phone_no);
+            Auth::guard('web')->loginUsingId($user->phone_no);
+            $redirectTo = route('public.dashboard');
+            $message = ['status' => 'You are Logged in Successfully!'];
+            if($request->has('redirectTo')) {
+                $redirectTo = route('public.cart.checkout');
+                $message['checkout_show_address_info'] = true;
+            }
 
-            return redirect()->intended(route('public.dashboard'))
-            ->with('status', 'You are Logged in Successfully!');
+            return redirect()->intended($redirectTo)
+            ->with($message);
         } catch (Exception $e) {
             DB::rollback();
             Log::error('Error Occurred in UserRegistraionController@save - ' . $e->getMessage());

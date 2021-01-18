@@ -16,21 +16,21 @@
             </div>
         </div>
 
-        <div id="portfolio" class="portfolio row grid-container gutter-20 has-init-isotope" data-layout="fitRows">
+        <div id="product" class="product row grid-container gutter-20 has-init-isotope" data-layout="fitRows">
             @foreach($services as $service)
-            <article class="portfolio-item col-lg-3 col-md-4 col-sm-6 col-12 pf-media pf-icons">
+            <article class="product-item col-lg-3 col-md-4 col-sm-6 col-12 pf-media pf-icons">
                 <div class="grid-inner">
 
-                    <div class="portfolio-image">
+                    <div class="product-image">
                         <a href="{{ route('service', $service->slug) }}">
-                            @if(file_exists(public_path('web/images/portfolio_images/thumbnails/' . $service->banner)))
-                            <img style="height:200px" src="{{ asset('web/images/portfolio_images/thumbnails/' . $service->banner ) }}" />
+                            @if(file_exists(public_path('web/images/product_images/thumbnails/' . $service->banner)))
+                            <img style="height:200px" src="{{ asset('web/images/product_images/thumbnails/' . $service->banner ) }}" />
                             @else
                             <img style="height:200px" src="{{ asset('site_images/no-image.png') }}" />
                             @endif
                         </a>
                     </div>
-                    <div class="portfolio-desc">
+                    <div class="product-desc">
                     <h3><a href="{{ route('service', $service->slug) }}">{{ ucwords($service->name) }}</a></h3>
                     </div>
                 </div>

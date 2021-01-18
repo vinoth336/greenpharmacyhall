@@ -47,7 +47,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Status') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
-                                            <input type="checkbox" name="status" class="" value="1" @if(old('status') == 1) checked @endif />
+                                            <input type="checkbox" name="status" class="" value="1" @if(old('status', 1) == 1) checked @endif />
                                             &nbsp;Active
                                             @if ($errors->has('status'))
                                                 <span id="status-error" class="error text-danger"

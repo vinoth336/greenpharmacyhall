@@ -29,7 +29,7 @@ class UserRegistrationRequest extends FormRequest
             'phone_no' => 'required|numeric|regex:/[0-9]{10}/|unique:users,phone_no',
             'address' => 'required|string|max:500',
             'zipcode' => 'required|regex:/[0-9]{6}/',
-            'email' => 'nullable|email|unique:users,email',
+            'email' => 'nullable|email:rfc,dns|unique:users,email',
             'password' => 'required|min:6'
         ];
     }

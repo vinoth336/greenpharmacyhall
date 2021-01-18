@@ -1,20 +1,7 @@
-@extends('site.app')
 
-@section('content')
-
-<section id="page-title">
-<div class="container clearfix">
-<h1>Easy To Purchase</h1>
-<span>Less Than 2 mins will purchase your order</span>
-</div>
-</section>
-
-<section id="content">
-<div class="content-wrap">
-<div class="container clearfix">
-    <div class="row gutter-40 col-mb-80">
-        <div class="postcontent col-lg-9">
-            <div class="faqs">
+        <div class="postcontent col-lg-12">
+            <h4>Pharma Orders</h4>
+            <div class="">
                 <table class="table table-bordered" >
                     <thead>
                         <tr>
@@ -28,7 +15,7 @@
                     </thead>
                     <tbody>
                         @php $i=1 @endphp
-                        @foreach ($orders as $order)
+                        @foreach ($pharmaOrders as $order)
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $order->created_at }}</td>
@@ -54,11 +41,4 @@
                 </table>
             </div>
         </div>
-        <div class="col-lg-3">
-            @include('public.user.sidebar')
-        </div>
-    </div>
-</div>
-</div>
-</section>
-@endsection
+

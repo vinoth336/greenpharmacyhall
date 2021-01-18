@@ -54,8 +54,8 @@
             <p>{{ __('Brands') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'portfolio' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('portfolio.index') }}">
+      <li class="nav-item{{ $activePage == 'product' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('product.index') }}">
           <i class="material-icons">content_paste</i>
             <p>{{ __('Product') }}</p>
         </a>

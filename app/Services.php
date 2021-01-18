@@ -6,10 +6,11 @@ use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jamesh\Uuid\HasUuid;
 
 class Services extends Model
 {
-    use SoftDeletes, StoreImage;
+    use SoftDeletes, StoreImage, HasUuid;
 
     protected $fileParamName = 'banner';
 
@@ -17,7 +18,7 @@ class Services extends Model
 
     protected $storeFileNameAsUploadName = '';
 
-    protected $storagePath = 'portfolio_images';
+    protected $storagePath = 'product_images';
 
     protected $imageFieldName = 'banner';
 
@@ -28,14 +29,9 @@ class Services extends Model
     public $timestamps = true;
 
 
-    public function portfolios()
-    {
-        return $this->belongsToMany(Portfolio::class);
-    }
-
     public function products()
     {
-        return $this->belongsToMany(Portfolio::class);
+        return $this->belongsToMany(Product::class);
     }
 
 
@@ -44,4 +40,9 @@ class Services extends Model
         return $this->belongsTo(CategoryType::class, 'category_type_id', 'id');
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+    }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Banners;
 use App\Faqs;
-use App\Portfolio;
-use App\PortfolioImage;
+use App\Product;
+use App\ProductImage;
 use App\Services;
 use App\SiteInformation;
 use App\Slider;
@@ -33,9 +33,9 @@ class SiteController extends Controller
         $services = Services::orderBy('sequence');
         $servicesForEnquiries = Services::orderBy('sequence')->get();
 
-        $allProducts = Portfolio::with('portfolioImages')->orderBy('sequence')->get();
+        $allProducts = Product::with('ProductImages')->orderBy('sequence')->get();
 
-        $awesomeWorks = PortfolioImage::where('show_in_home_page', 1)
+        $awesomeWorks = ProductImage::where('show_in_home_page', 1)
             ->orderBy('created_at', 'desc')->limit(12)->get();
         $testmonials = Testimonial::orderBy('created_at', 'desc')->get();
 
@@ -88,23 +88,23 @@ class SiteController extends Controller
         }
     }
 
-    public function viewProductSummary(Request $request, $productId)
+    public function viewProductSummary(Request $request, Product $product)
     {
-        $product = Portfolio::with('portfolioImages')->where('id', $productId)->orderBy('sequence')->first();
+        $product->load('ProductImages')->orderBy('sequence')->first();
 
         return view('site.show_single_item_summary')->with('product', $product);
     }
 
-    public function portfolio()
+    public function product()
     {
 
         $siteInformation = SiteInformation::first();
-        $portfolios = Portfolio::orderBy('sequence')->get();
+        $products = Product::orderBy('sequence')->get();
 
         return view(
-            'site.portfolio',
+            'site.product',
             [
-                'portfolios' => $portfolios,
+                'products' => $products,
                 'siteInformation' => $siteInformation
             ]
         );

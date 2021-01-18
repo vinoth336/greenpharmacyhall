@@ -17,7 +17,7 @@
     <meta name="twitter:creator" content="@GreenPharmacyHall">
     <meta name="twitter:site" content="@GreenPharmacyHall">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 	<link
 		href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&amp;display=swap"
         rel="stylesheet" type="text/css" />
@@ -32,9 +32,17 @@
 	<link rel="stylesheet" href="{{ asset('web/css/swiper.css') }}" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/settings.css') }}" media="screen" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/layers.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/navigation.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/navigation.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
     <title>{{ $siteInformation->site_name }}</title>
     <script src="{{  asset('web/js/jquery.js') }}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 </head>
 
 <body class="stretched">
@@ -104,44 +112,19 @@
                                 </a>
 							</div>
 
-							<div id="top-cart" class="header-misc-icon d-none">
+							<div id="top-cart" class="header-misc-icon">
 								<a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span
-										class="top-cart-number">5</span></a>
+										class="top-cart-number" id="top-cart-number"></span></a>
 								<div class="top-cart-content">
 									<div class="top-cart-title">
-										<h4>Shopping Cart</h4>
+										<h4>Cart</h4>
 									</div>
-									<div class="top-cart-items">
-										<div class="top-cart-item">
-											<div class="top-cart-item-image">
-												<a href="#"><img src="images/shop/small/1.jpg"
-														alt="Blue Round-Neck Tshirt" /></a>
-											</div>
-											<div class="top-cart-item-desc">
-												<div class="top-cart-item-desc-title">
-													<a href="#">Blue Round-Neck Tshirt with a Button</a>
-													<span class="top-cart-item-price d-block">$19.99</span>
-												</div>
-												<div class="top-cart-item-quantity">x 2</div>
-											</div>
-										</div>
-										<div class="top-cart-item">
-											<div class="top-cart-item-image">
-												<a href="#"><img src="images/shop/small/6.jpg"
-														alt="Light Blue Denim Dress" /></a>
-											</div>
-											<div class="top-cart-item-desc">
-												<div class="top-cart-item-desc-title">
-													<a href="#">Light Blue Denim Dress</a>
-													<span class="top-cart-item-price d-block">$24.99</span>
-												</div>
-												<div class="top-cart-item-quantity">x 3</div>
-											</div>
-										</div>
+									<div class="top-cart-items" id="top-cart-items">
+
 									</div>
 									<div class="top-cart-action">
-										<span class="top-checkout-price">$114.95</span>
-										<a href="car" class="button button-3d button-small m-0">View Cart</a>
+										<span class="top-checkout-price" id="top-checkout-price"></span>
+										<a href="{{ route('public.cart.checkout') }}" class="button button-3d button-small m-0">Checkout</a>
 									</div>
 								</div>
 							</div>

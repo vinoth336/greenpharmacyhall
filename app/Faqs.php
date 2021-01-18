@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Jamesh\Uuid\HasUuid;
 
 class Faqs extends Model
 {
-    
-    use SoftDeletes;
+
+    use SoftDeletes, HasUuid;
 
 
     protected $table = 'faqs';
@@ -24,7 +24,7 @@ class Faqs extends Model
         parent::boot();
         static::creating(function($model)
         {
-            
+
         });
     }
 

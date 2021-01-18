@@ -4,22 +4,27 @@ namespace App;
 
 use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
+use Jamesh\Uuid\HasUuid;
 
-class PortfolioImage extends Model
+class ProductImage extends Model
 {
-    use StoreImage;
+    use StoreImage, HasUuid;
 
-    protected $fileParamName = 'portfolio_images';
+    protected $fileParamName = 'product_images';
 
     protected $storeFileName = '';
 
     protected $storeFileNameAsUploadName = '';
 
-    protected $storagePath = 'portfolio_images';
+    protected $storagePath = 'product_images';
 
     protected $imageFieldName = 'image';
 
-    protected $table = 'portfolio_images';
+    protected $table = 'product_images';
 
+    public function getProductImageAttribute()
+    {
+        return asset('web/images/product_images/thumbnails/') . "/" . $this->image;
+    }
 
 }

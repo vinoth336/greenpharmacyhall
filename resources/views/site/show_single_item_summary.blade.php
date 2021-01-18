@@ -9,10 +9,10 @@
                     <div class="fslider" data-pagi="false">
                         <div class="flexslider">
                             <div class="slider-wrap">
-                                @foreach($product->portfolioImages as $productImage)
+                                @foreach($product->productImages as $productImage)
                                     <div class="slide">
-                                        <a href="{{ asset('web/images/portfolio_images/' . $productImage->image)}}" title="{{ $product->name }}">
-                                        <img src="{{ asset('web/images/portfolio_images/' . $productImage->image)}}" alt="{{ $product->name }}"></a>
+                                        <a href="{{ asset('web/images/product_images/' . $productImage->image)}}" title="{{ $product->name }}">
+                                        <img src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $product->name }}"></a>
                                     </div>
                                 @endforeach
                             </div>

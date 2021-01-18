@@ -32,7 +32,7 @@ class PharmaOrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('public.pharma_order_list');
+            return redirect()->route('public.order_list');
 
         } catch (Exception $e) {
             DB::rollback();
@@ -63,7 +63,7 @@ class PharmaOrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('public.pharma_order_list');
+            return redirect()->route('public.order_list');
 
         } catch (Exception $e) {
             DB::rollback();

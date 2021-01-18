@@ -6,7 +6,7 @@
 
     <section id="page-title">
         <div class="container clearfix">
-            <h1>Portfolio</h1>
+            <h1>Product</h1>
             <span>Description of service</span>
         </div>
     </section>
@@ -27,17 +27,17 @@
 
                     <section id="slider" class="slider-element">
                         <div id="flickr" class="widget clearfix">
-                            @foreach ($portfolios as $portfolio)
-                                <h3>{{ strtoupper($portfolio->name) }}</h3><br>
+                            @foreach ($portfolios as $product)
+                                <h3>{{ strtoupper($product->name) }}</h3><br>
                                 <div id="flickr-widget" class="flickr-feed masonry-thumbs grid-container has-init-isotope"
                                     data-id="" data-count="" data-type="group" data-lightbox="gallery"
                                     style="position: relative; height: 130px;">
-                                    @foreach ($portfolio->portfolioImages()->orderBy('sequence')->get() as $portfolioImage)
+                                    @foreach ($product->productImages()->orderBy('sequence')->get() as $portfolioImage)
                                         <a class="grid-item"
-                                            href="{{ asset('web/images/portfolio_images/' . $portfolioImage->image) }}"
+                                            href="{{ asset('web/images/product_images/' . $portfolioImage->image) }}"
                                             title="Justice" data-lightbox="gallery-item"
                                             style="position: absolute; left: 0%; top: 0px;">
-                                            <img src="{{ asset('web/images/portfolio_images/thumbnails/' . $portfolioImage->image) }}"
+                                            <img src="{{ asset('web/images/product_images/thumbnails/' . $portfolioImage->image) }}"
                                                 alt="Justice">
                                         </a>
                                     @endforeach

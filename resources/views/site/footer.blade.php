@@ -15,8 +15,9 @@
                         <div class="col-sm-7 text-white "  style="background-color:#fff">
                             <button type="button" class="close mt-2" data-dismiss="modal"
                         aria-hidden="true">&times;</button>
-                            <form class="mt-5 floating-group" method="post" action="{{ route('public.login') }}">
+                            <form id="login_form" class="mt-5 floating-group" method="post" action="{{ route('public.login') }}">
                                 @csrf
+                                <input type="hidden" name="redirectTo" value="{{ $redirectTo ?? 'dashboard' }}" />
 								<div class="form-group">
 									<label for="exampleInputEmail1">Phone No</label>
 									<input type="number" class="form-control" name="phone_no" min="10" placeholder="Phone No">
@@ -89,6 +90,8 @@
 
 <script src="{{ asset('web/js/plugins.min.js') }}"></script>
 <script src="{{ asset('web/js/functions.js') }}"></script>
+<script type="text/javascript" src="{{ asset('web/js/cart.js') }}"></script>
+@stack('js')
 
 <a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="float"
     target="_blank">

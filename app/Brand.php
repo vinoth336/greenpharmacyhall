@@ -6,10 +6,11 @@ use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jamesh\Uuid\HasUuid;
 
 class Brand extends Model
 {
-    use SoftDeletes, StoreImage;
+    use SoftDeletes, StoreImage, HasUuid;
 
     protected $fileParamName = 'logo';
 
@@ -35,5 +36,10 @@ class Brand extends Model
             $builder->where('status', 1);
             $builder->orderBy('sequence', 'asc');
         });
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id', 'id');
     }
 }

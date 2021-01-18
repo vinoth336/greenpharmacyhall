@@ -45,25 +45,19 @@ class AppServiceProvider extends ServiceProvider
 
 
         View::composer('*', function ($view) {
-            // if(!Cache::has('site_information') || true) {
-            //     Cache::add('site_information', SiteInformation::first(), 5000);
-            // }
 
-            // if(!Cache::has('site_menu_items') || true) {
-
-            //     Cache::add('site_menu_items', $categories, 5000);
-            // }
-            //$siteInformation = Cache::get('site_information');
-            //$categories = Cache::get('site_menu_items');
-            $siteInformation = SiteInformation::first();
-            $categories = Services::with(['products' => function($query) {
-                $query->with('brand');
-            }])->get();
+            if (!Cache::has('site_information')) {
+                setSiteInformationInCache();
+            }
+            if (!Cache::has('site_menu_items')) {
+                setSiteMenuValueInCache(getSiteMenus());
+            }
+            $siteInformation = Cache::get('site_information');
+            $categories = Cache::get('site_menu_items');
             $user = auth()->user() ?? null;
             $view->with('categories', $categories);
             $view->with('siteInformation', $siteInformation);
             $view->with('user', $user);
         });
-
     }
 }

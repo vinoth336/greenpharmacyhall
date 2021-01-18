@@ -87,7 +87,7 @@
                                               <img src="{{ asset('material') . "/img/image_placeholder.jpg" }}" alt="...">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail">
-                                                    <img src="{{ asset('web/images/portfolio_images/thumbnails/' . $service->banner ) }}" />
+                                                    <img src="{{ asset('web/images/product_images/thumbnails/' . $service->banner ) }}" />
                                             </div>
                                             <div>
                                               <span class="btn btn-rose btn-round btn-file">

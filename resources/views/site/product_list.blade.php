@@ -14,9 +14,9 @@
                             <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm">
                                 <div class="grid-inner">
                                     <div class="product-image">
-                                        @foreach($product->portfolioImages as $productImage)
+                                        @foreach($product->productImages as $productImage)
                                             <a href="#">
-                                                <img src="{{ asset('web/images/portfolio_images/' . $productImage->image)}}" alt="{{ $product->name }}">
+                                                <img src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $product->name }}">
                                             </a>
                                         @endforeach
                                         <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>

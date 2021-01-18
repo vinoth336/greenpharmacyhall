@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19b9c5d4ed8dd8913df9164933834972",
+    "content-hash": "5489195de4e354546ec21c01037c6131",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1100,6 +1100,48 @@
                 "watermark"
             ],
             "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "jamesh/laravel-uuid",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JamesHemery/laravel-uuid.git",
+                "reference": "f798e9ed91e216e59ca7170f465ff93bede5323f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JamesHemery/laravel-uuid/zipball/f798e9ed91e216e59ca7170f465ff93bede5323f",
+                "reference": "f798e9ed91e216e59ca7170f465ff93bede5323f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.7|^6|^7|^8",
+                "illuminate/support": "^5.7|^6|^7|^8",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.7|^4|^5|^6",
+                "phpunit/phpunit": "^7.0|^8.0"
+            },
+            "type": "plugin",
+            "autoload": {
+                "psr-4": {
+                    "Jamesh\\Uuid\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Hemery",
+                    "email": "hello@james-hemery.pro"
+                }
+            ],
+            "description": "Eloquent UUID Trait for Laravel 5.7 and above.",
+            "time": "2020-12-18T10:17:23+00:00"
         },
         {
             "name": "laravel-frontend-presets/material-dashboard",

@@ -5,10 +5,11 @@ namespace App;
 use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jamesh\Uuid\HasUuid;
 
 class PharmaPrescription extends Model
 {
-    use StoreImage, SoftDeletes;
+    use StoreImage, SoftDeletes, HasUuid;
 
     protected $fileParamName = 'prescription';
 

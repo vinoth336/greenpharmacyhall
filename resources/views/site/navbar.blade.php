@@ -10,6 +10,7 @@
                         <ul class="sub-menu-container mega-menu-column col-lg-3" style="">
 
                             @foreach($categories as $category)
+                            @if($category->products->count() ?? null)
                             <li class="menu-item mega-menu-title sub-menu" style="">
                                 <a class="menu-link" href="#"><div>{{ ucfirst($category->name) }}</div></a>
                                 <ul class="sub-menu-container" style="">
@@ -26,6 +27,7 @@
                                     @endforeach
                                 </ul>
                             </li>
+                            @endif
                             @endforeach
                         </ul>
                     </div>

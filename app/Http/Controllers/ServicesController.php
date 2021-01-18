@@ -48,7 +48,6 @@ class ServicesController extends Controller
         try{
 
             $this->saveServices(new Services(), $request);
-
             DB::commit();
 
             return redirect()->route('services.index')->with('status', 'Created Successfully');
@@ -124,7 +123,7 @@ class ServicesController extends Controller
 
             $service->unlinkImage($service->banner);
 
-            $service->portfolios()->detach();
+            $service->products()->detach();
             $service->delete();
 
             DB::commit();

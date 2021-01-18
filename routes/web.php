@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@index')->name('home');
 Route::get('/service/{slug?}', 'SiteController@services')->name('service');
-Route::get('/portfolio/', 'SiteController@portfolio')->name('portfolio');
+Route::get('/product/', 'SiteController@product')->name('product');
 Route::get('/faqs/', 'SiteController@faqs')->name('site_faqs');
 Route::post('enquiry', 'SaveEnquiryController@store')->name('enquiry.store');
-Route::get('/product/summary/{productId}', 'SiteController@viewProductSummary')->name('view_product_summary');
+Route::get('/product/summary/{product}', 'SiteController@viewProductSummary')->name('view_product_summary');
 Route::get('/search', 'ProductSearchController@index')->name('public.product_list');
 
 
@@ -38,15 +38,27 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-
+Route::get('/cart/checkout/', 'CartController@checkout')->name('public.cart.checkout');
 Route::group(['middleware' => 'auth:web'], function() {
     Route::get('dashboard', 'UserController@dashboard')->name('public.dashboard');
     Route::put('profile', 'UserController@update')->name('public.update_profile');
     Route::get('pharma_create_order', 'PharmaOrderController@index')->name('public.pharma_purchase_order');
     Route::post('pharma_create_order', 'PharmaOrderController@create');
-    Route::get('pharma_orders', 'PharmaOrderController@orderList')->name('public.pharma_order_list');
-    Route::delete('pharma_order_delete/{order}', 'PharmaOrderController@deleteOrder')->name('public.pharma_order_delete');
+    Route::get('orders', 'UserOrderDetailController@orderList')->name('public.order_list');
 
+    Route::delete('pharma_order_delete/{order}', 'PharmaOrderController@deleteOrder')->name('public.pharma_order_delete');
+    Route::delete('order/{order}/removeOrder', 'UserOrderDetailController@delete')->name('public.order_delete');
+
+    //Cart
+    Route::get('/cart/', 'CartController@list');
+    Route::post('/cart/{product}/add', 'CartController@store');
+    Route::delete('/cart/{product}/remove', 'CartController@delete');
+    Route::put('/cart/{product}/update', 'CartController@update');
+    Route::delete('/cart/removeAll', 'CartController@deleteAll');
+    Route::post('/cart/sync_cart', 'CartController@syncCart');
+    Route::put('/cart/{product}/update_status', 'CartController@updateStatus');
+    Route::post('/cart/checkout', 'UserOrderController@checkout')->name('public.cart.checkout')
+    ->middleware('throttle:5,1');
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -73,11 +85,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('banner', 'BannerController');
         Route::resource('enquiries', 'EnquiriesController')->except('store');
         Route::resource('testimonials', 'TestimonialController');
-        Route::put('portfolio/update_sequence', 'PortfolioController@updateSequence')->name('portfolio.update_sequence');
-        Route::resource('portfolio', 'PortfolioController');
+        Route::put('product/update_sequence', 'ProductController@updateSequence')->name('product.update_sequence');
+        Route::post('product/get_slug_name', 'ProductController@getSlugName')->name('product.get_slug_name');
 
-        Route::put('portfolio_images/update_sequence', 'PortfolioImageController@updateSequence')->name('portfolio_images.update_sequence');
-        Route::delete('portfolio_images/{portfolio_image}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
+        Route::resource('product', 'ProductController');
+
+        Route::put('product_images/update_sequence', 'PortfolioImageController@updateSequence')->name('product_images.update_sequence');
+        Route::delete('product_images/{portfolio_image}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
 
         Route::resource('pharma_orders', 'PharmaOrderAdminController')->except(['store', 'create', 'edit']);
 

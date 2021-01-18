@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jamesh\Uuid\HasUuid;
 
 class Enquiries extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasUuid;
 
     protected $table = 'enquiries';
 

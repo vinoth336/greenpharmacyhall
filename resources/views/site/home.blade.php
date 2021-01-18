@@ -1,6 +1,6 @@
 @extends('site.app')
 @section('content')
-    <section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-30 min-vh-md-80 include-header"
+    <section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-30 min-vh-md-75"
         data-autoplay="5000" data-speed="650" data-loop="true" data-effect="fade" data-progress="true">
         <div class="slider-inner">
             <div class="swiper-container swiper-parent">
@@ -30,9 +30,9 @@
         <div class="content-wrap">
             <div class="container clearfix">
                 <!-- Banner Section-->
-                <div class="row align-items-stretch gutter-20 min-vh-60 d-none d-md-flex d-lg-flex">
+                <div class="row align-items-stretch min-vh-60 d-none d-md-flex d-lg-flex my-sm-6">
                     <div class="col-md-8">
-                        <div class="row align-items-stretch gutter-20 h-100">
+                        <div class="row align-items-stretch h-100">
                             @foreach ($boxBanners as $boxBanner)
                                 <div class="col-md-6 min-vh-25 min-vh-md-0">
                                     <a href="#" class="grid-inner d-block h-100"
@@ -47,48 +47,52 @@
                     </div>
                     <div class="col-md-4 min-vh-50">
                         <a href="#" class="grid-inner d-block h-100"
-                            style="background-image: url('{{  asset('web/images/banners/' . $verticalWideBanner->banner ?? null) }}'); background-position: center top;"></a>
+                            style="background-image: url('{{ asset('web/images/banners/' . $verticalWideBanner->banner ?? null) }}'); background-position: center top;"></a>
                     </div>
                 </div>
                 <!-- Banner Section Ended-->
                 <div class="clear"></div>
                 <!-- Shop Details started-->
 
-                <div id="shop"  class="shop row grid-container gutter-30 " data-layout="fitRows" style="margin-top:10px;">
-                    @foreach($allProducts as $product)
-                        <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm">
+                <div id="shop" class="shop row grid-container " data-layout="fitRows" style="margin-top:10px;">
+                    @foreach ($allProducts as $product)
+                        <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm" style="margin-bottom: 2rem" id="product_{{ $product->slug }}">
                             <div class="grid-inner">
                                 <div class="product-image">
-                                    @foreach($product->portfolioImages as $productImage)
-                                        <a href="#">
-                                            <img src="{{ asset('web/images/portfolio_images/' . $productImage->image)}}" alt="{{ $product->name }}">
+                                    @foreach ($product->productImages as $productImage)
+                                        <a href="{{ route('view_product_summary', $product->slug) }}"
+                                            data-lightbox="ajax">
+                                            <img class="product_image"
+                                                src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
+                                                alt="{{ $product->name }}">
                                         </a>
                                     @endforeach
                                     <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
-                                    <div class="bg-overlay">
-                                        <div class="bg-overlay-content align-items-end justify-content-between"
-                                             data-hover-speed="400">
-                                            <a href="#" class="btn btn-dark mr-2"><i
-                                                    class="icon-shopping-basket"></i>
-                                            </a>
-                                            <a href="{{ route('view_product_summary', $product->id) }}" class="btn btn-dark"
-                                                data-lightbox="ajax"><i class="icon-line-expand"></i>
-                                            </a>
-                                        </div>
-                                        <div class="bg-overlay-bg bg-transparent"></div>
-                                    </div>
                                 </div>
                                 <div class="product-desc">
-                                    <div class="product-title">
-                                        <h3><a href="#">{{ $product->name }}</a></h3>
+                                    <div class="product-title min-h-30">
+                                        <h3><a href="{{ route('view_product_summary', $product->slug) }}"
+                                                data-lightbox="ajax">{{ $product->name }}</a></h3>
                                     </div>
                                     <div class="product-price">
-                                        @if($product->discount_amount > 0)
-                                            <del>₹ {{ $product->price }}</del>
-                                            <ins>₹ {{ $product->discount_amount }}</ins>
-                                        @else
-                                            <ins>₹ {{ $product->price }}</ins>
-                                        @endif
+                                        <div class="float-left">
+                                            @if ($product->discount_amount > 0)
+                                                <del>₹ {{ $product->price }}</del>
+                                                <ins>₹ {{ $product->discount_amount }}</ins>
+                                            @else
+                                                <ins>₹ {{ $product->price }}</ins>
+                                            @endif
+                                            <input type="hidden" class="product_price" value="{{ $product->price }}" />
+                                            <input type="hidden" class="product_name" value="{{ $product->name }}" />
+
+                                        </div>
+                                        <div class="float-right">
+                                            <a onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                                class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                                class="" href="Javascript:void(0)">
+                                                <i class="icon-shopping-cart"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -166,8 +170,8 @@
                                 accusamus porro illo exercitationem molestias.</p>
                             <div class="widget-subscribe-form-result"></div>
                             <form id="widget-subscribe-form3"
-                                action="http://themes.semicolonweb.com/html/canvas/include/subscribe.php"
-                                method="post" class="mb-0">
+                                action="http://themes.semicolonweb.com/html/canvas/include/subscribe.php" method="post"
+                                class="mb-0">
                                 <div class="input-group" style="max-width:400px;">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="icon-email2"></i></div>
@@ -196,8 +200,9 @@
                         </div>
                         <!-- Enquiry Form Start Here -->
 
-                        <?php $enquiry_form_class = 'col-md-4';
-                              $services = $servicesForEnquiries;
+                        <?php
+                        $enquiry_form_class = 'col-md-4';
+                        $services = $servicesForEnquiries;
                         ?>
                         @include('site.enquiry_form', ['enquiry_form_class' => $enquiry_form_class] )
 
@@ -212,68 +217,70 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit reprehenderit
                                     voluptates.</p>
                                 <ul class="iconlist mb-0">
-                                    <li><i class="icon-time color"></i> <strong>Mondays-Fridays:</strong> {{ $siteInformation->working_hours_mon_fri }}</li>
-                                    <li><i class="icon-time color"></i> <strong>Saturdays:</strong> {{ $siteInformation->working_hours_sat }}</li>
-                                    <li><i class="icon-time text-danger"></i> <strong>Sundays:</strong> {{ $siteInformation->working_hours_sun }}</li>
+                                    <li><i class="icon-time color"></i> <strong>Mondays-Fridays:</strong>
+                                        {{ $siteInformation->working_hours_mon_fri }}</li>
+                                    <li><i class="icon-time color"></i> <strong>Saturdays:</strong>
+                                        {{ $siteInformation->working_hours_sat }}</li>
+                                    <li><i class="icon-time text-danger"></i> <strong>Sundays:</strong>
+                                        {{ $siteInformation->working_hours_sun }}</li>
                                 </ul>
                                 <i class="icon-time bgicon"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                    <div class="row col-mb-50">
-                        <div class="col-sm-6 col-lg-3" style="cursor: pointer" onclick="window.open('https://goo.gl/maps/u86ebsZ7AeX54e7g9', '_blank')">
-                            <div class="feature-box fbox-center fbox-bg fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-map-marker2"></i></a>
-                                </div>
-                                <div class="fbox-content" >
-                                    <h3>Get Direction<span class="subtitle">Check In<br>Google Map</span></h3>
-                                </div>
+                <div class="row col-mb-50">
+                    <div class="col-sm-6 col-lg-3" style="cursor: pointer"
+                        onclick="window.open('https://goo.gl/maps/u86ebsZ7AeX54e7g9', '_blank')">
+                        <div class="feature-box fbox-center fbox-bg fbox-plain">
+                            <div class="fbox-icon">
+                                <a href="#"><i class="icon-map-marker2"></i></a>
+                            </div>
+                            <div class="fbox-content">
+                                <h3>Get Direction<span class="subtitle">Check In<br>Google Map</span></h3>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-3" style="cursor: pointer" onclick="window.open('tel:+91{{ $siteInformation->phone_no }}', '_blank')">
-                            <div class="feature-box fbox-center fbox-bg fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href=""><i class="icon-phone3"></i></a>
-                                </div>
-                                <div class="fbox-content">
-                                    <h3>Speak to<br> Us<span class="subtitle"><a style="text-decoration: none;color:#000" href="tel:+91{{ $siteInformation->phone_no }}"> (+91) {{ $siteInformation->phone_no  }}</a></span></h3>
-                                </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3" style="cursor: pointer"
+                        onclick="window.open('tel:+91{{ $siteInformation->phone_no }}', '_blank')">
+                        <div class="feature-box fbox-center fbox-bg fbox-plain">
+                            <div class="fbox-icon">
+                                <a href=""><i class="icon-phone3"></i></a>
+                            </div>
+                            <div class="fbox-content">
+                                <h3>Speak to<br> Us<span class="subtitle"><a style="text-decoration: none;color:#000"
+                                            href="tel:+91{{ $siteInformation->phone_no }}"> (+91)
+                                            {{ $siteInformation->phone_no }}</a></span></h3>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-3" style="cursor: pointer" onclick="window.open('https://www.instagram.com/{{ $siteInformation->instagram_id }}/', '_blank')">
-                            <div class="feature-box fbox-center fbox-bg fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-instagram"></i></a>
-                                </div>
-                                <div class="fbox-content">
-                                    <h3>Follow<br>Us<span class="subtitle">2.3M Followers</span></h3>
-                                </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3" style="cursor: pointer"
+                        onclick="window.open('https://www.instagram.com/{{ $siteInformation->instagram_id }}/', '_blank')">
+                        <div class="feature-box fbox-center fbox-bg fbox-plain">
+                            <div class="fbox-icon">
+                                <a href="#"><i class="icon-instagram"></i></a>
+                            </div>
+                            <div class="fbox-content">
+                                <h3>Follow<br>Us<span class="subtitle">2.3M Followers</span></h3>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-3" style="cursor: pointer" onclick="window.open('https://www.facebook.com/{{ $siteInformation->facebook_id }}', '_blank')">
-                            <div class="feature-box fbox-center fbox-bg fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-facebook2"></i></a>
-                                </div>
-                                <div class="fbox-content">
-                                    <h3>Follow<br>Us<span class="subtitle">2.3M Followers</span></h3>
-                                </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3" style="cursor: pointer"
+                        onclick="window.open('https://www.facebook.com/{{ $siteInformation->facebook_id }}', '_blank')">
+                        <div class="feature-box fbox-center fbox-bg fbox-plain">
+                            <div class="fbox-icon">
+                                <a href="#"><i class="icon-facebook2"></i></a>
+                            </div>
+                            <div class="fbox-content">
+                                <h3>Follow<br>Us<span class="subtitle">2.3M Followers</span></h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
-    <script>
-        $(document).ready(function() {
-            // bind 'myForm' and provide a simple callback function
-            $('#myForm').ajaxForm(function() {
-                alert("Thank you for your comment!");
-            });
-        });
 
-    </script>
+
 @endsection

@@ -121,10 +121,7 @@ class BrandController extends Controller
         DB::beginTransaction();
 
         try{
-
             $brand->unlinkImage($brand->logo);
-
-            $brand->portfolios()->detach();
             $brand->delete();
 
             DB::commit();

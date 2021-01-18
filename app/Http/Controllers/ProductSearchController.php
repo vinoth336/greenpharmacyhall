@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
-use App\Portfolio;
+use App\Product;
 use App\Services;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class ProductSearchController extends Controller
 
 
         $categories = Services::get();
-        $products = Portfolio::inRandomOrder()->get();
+        $products = Product::inRandomOrder()->get();
         $brands = Brand::get();
 
         return view('site.product_list')

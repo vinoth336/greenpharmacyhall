@@ -4,11 +4,12 @@ namespace App;
 
 use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
+use Jamesh\Uuid\HasUuid;
 
 class Slider extends Model
 {
 
-    use StoreImage;
+    use StoreImage, HasUuid;
 
     protected $fileParamName = 'slider';
 
@@ -24,5 +25,8 @@ class Slider extends Model
 
     public $timestamp = true;
 
+    protected $resizeImage = true;
+
+    protected $resizeValue = ['width' => 1440, 'height' => 650];
 
 }
