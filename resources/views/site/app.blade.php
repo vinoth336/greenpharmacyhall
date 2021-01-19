@@ -98,12 +98,13 @@
                         </div>
                         <div style="clear:both"></div>
 						<div class="header-misc mobile-ml-auto">
+                            @guest
                             <div style="margin-right: 10px" class="header-misc-icon d-sm-block d-md-none d-lg-none">
 								<a href="#" class="menu-link" data-toggle="modal" data-target=".show-login-modal" style="width: 56px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
                                     Login
                                 </a>
 							</div>
-
+                            @endguest
                             <div id="top-search" class="header-misc-icon d-none">
 								<a href="#" id="top-search-trigger">
                                     <i class="icon-line-search"></i>
