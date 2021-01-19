@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserRegistrationController extends Controller
 {
@@ -30,6 +31,7 @@ class UserRegistrationController extends Controller
 
         try {
             $user = User::create([
+            'id' => Str::uuid(),
             'name' => $request->input('name'),
             'sex' => $request->input('sex'),
             'phone_no' => $request->input('phone_no'),
