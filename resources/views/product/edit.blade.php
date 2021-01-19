@@ -28,7 +28,7 @@ $(document).ready(function() {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post" action="{{ route('product.update', $product->id) }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('product.update', $product->slug) }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="card ">
@@ -121,6 +121,27 @@ $(document).ready(function() {
                                             @if ($errors->has('service'))
                                                 <span id="service-error" class="error text-danger"
                                                     for="input-service">{{ $errors->first('service') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Sub Category') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('sub_category') ? ' has-danger' : '' }}">
+                                            <select
+                                                class="selectpicker form-control{{ $errors->has('sub_category') ? ' is-invalid' : '' }}"
+                                                name="sub_category" id="input-service" type="text"
+                                                placeholder="{{ __('Sub Category') }}"
+                                                required="true" aria-required="true" >
+                                                    <option value=''>Select Sub Category</option>
+                                                @foreach($subCategories as $subCategory)
+                                                    <option value="{{ $subCategory->id }}" @if($subCategory->id == old('sub_category', $product->sub_category_id)) selected @endif >{{  $subCategory->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('service'))
+                                                <span id="service-error" class="error text-danger"
+                                                    for="input-service">{{ $errors->first('sub_category') }}</span>
                                             @endif
                                         </div>
                                     </div>

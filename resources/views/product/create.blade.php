@@ -101,6 +101,27 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Sub Category') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('sub_category') ? ' has-danger' : '' }}">
+                                            <select
+                                                class="selectpicker form-control{{ $errors->has('sub_category') ? ' is-invalid' : '' }}"
+                                                name="sub_category" id="input-service" type="text"
+                                                placeholder="{{ __('Sub Category') }}"
+                                                required="true" aria-required="true" >
+                                                    <option value=''>Select Sub Category</option>
+                                                @foreach($subCategories as $subCategory)
+                                                    <option value="{{ $subCategory->id }}" @if($subCategory->id == old('sub_category')) selected @endif >{{  $subCategory->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('service'))
+                                                <span id="service-error" class="error text-danger"
+                                                    for="input-service">{{ $errors->first('sub_category') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Brand') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('brand') ? ' has-danger' : '' }}">

@@ -8,6 +8,7 @@ use App\Http\Requests\GetSlugNameRequest;
 use App\Product;
 use App\ProductImage;
 use App\Services;
+use App\SubCategory;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,9 +38,11 @@ class ProductController extends Controller
     {
 
         $services = $this->getServices()->orderBy('sequence')->get();
+        $subCategories = SubCategory::orderBy('sequence')->get();
+
         $brands = Brand::get();
 
-        return view('product.create', ['services' => $services, 'brands' => $brands]);
+        return view('product.create', ['services' => $services, 'brands' => $brands, 'subCategories' => $subCategories]);
     }
 
     /**
@@ -88,13 +91,15 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $services = $this->getServices()->orderBy('sequence')->get();
+        $subCategories = SubCategory::orderBy('sequence')->get();
         $brands = Brand::get();
 
 
         return view('product.edit')->with([
             'product' => $product,
             'services' => $services,
-            'brands' => $brands
+            'brands' => $brands,
+            'subCategories' => $subCategories
             ]);
     }
 
@@ -195,6 +200,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->slug = str_slug($request->input('name'));
         $product->brand_id = $request->input('brand');
+        $product->sub_category_id = $request->input('sub_category');
         $product->product_code = $request->input('product_code');
         $product->description = $request->input('description');
         $product->price = (float) $request->input('price');

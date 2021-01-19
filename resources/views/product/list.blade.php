@@ -63,10 +63,10 @@ $(document).ready(function() {
                                             <input type="hidden" name="sequence[]" value="{{ $product->id }}" />
                                         </div>
                                         <div class="pull-right">
-                                            <form onsubmit="Javascript: return confirm('Are You Sure, Want To Remove This ?');"  method="POST" action="{{ route('product.destroy', $product->id) }}">
+                                            <form onsubmit="Javascript: return confirm('Are You Sure, Want To Remove This ?');"  method="POST" action="{{ route('product.destroy', $product->slug) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-success" data-original-title title><i class="material-icons">edit</i></a>
+                                                <a href="{{ route('product.edit', $product->slug) }}" class="btn btn-sm btn-success" data-original-title title><i class="material-icons">edit</i></a>
                                             <button type="submit" class="btn  btn-sm btn-danger"><i class="material-icons" data-original-title title>close</i></button>
                                             </form>
                                         </div>

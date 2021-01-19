@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 function getSiteMenus()
 {
     $categories = Services::with(['products' => function ($query) {
-                    $query->with('brand');
+                    $query->with('sub_category');
                 }])->get();
 
     return $categories;

@@ -74,6 +74,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('faqs', 'FaqsController');
         Route::put('category_types/update_sequence', 'CategoryTypeController@updateSequence')->name('category_types.update_sequence');
         Route::resource('category_types', 'CategoryTypeController');
+        Route::put('sub_categories/update_sequence', 'SubCategoryController@updateSequence')->name('sub_categories.update_sequence');
+        Route::resource('sub_categories', 'SubCategoryController');
         Route::put('brands/update_sequence', 'BrandController@updateSequence')->name('brands.update_sequence');
         Route::resource('brands', 'BrandController');
         Route::put('services/update_sequence', 'ServicesController@updateSequence')->name('faqs.update_sequence');

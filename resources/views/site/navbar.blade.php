@@ -16,12 +16,12 @@
                                 <ul class="sub-menu-container" style="">
                                     @php
                                         $products = $category->products;
-                                        $brands = $products->whereNotNull('brand.name')->pluck('brand.name', 'brand.slug') ?? null;
+                                        $subCategories = $products->whereNotNull('sub_category.name')->pluck('sub_category.name', 'sub_category.slug_name') ?? null;
                                     @endphp
-                                    @foreach($brands as $brand_slug => $brand_name)
+                                    @foreach($subCategories as $subCategorySlugName => $subCategoryName)
                                     <li class="menu-item" style="">
-                                        <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&brand={{ $brand_slug }}">
-                                            <div>{{ $brand_name }}</div>
+                                        <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&sub_category={{ $subCategorySlugName }}">
+                                            <div>{{ $subCategoryName }}</div>
                                         </a>
                                     </li>
                                     @endforeach

@@ -42,6 +42,12 @@
             <p>{{ __('Category Types') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'sub_categories' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('sub_categories.index') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Sub Categories Types') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'services' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('services.index') }}">
           <i class="material-icons">content_paste</i>
