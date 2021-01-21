@@ -2091,6 +2091,22 @@ pre code {
     .table-responsive-sm>.table-bordered {
         border: 0
     }
+    .col-sm-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .product-desc,
+    .product-title,
+    .product-title h3,
+    .product-title h3 a,
+    .product-price,
+    .product-price [class^=icon-] {
+        font-size: 4vw !important
+    }
+    .sale-flash .badge .badge-success {
+        display: none !important;
+    }
 }
 
 @media(max-width:767.98px) {
@@ -10625,4 +10641,9 @@ a.text-dark:focus {
         color: inherit;
         border-color: #dee2e6
     }
+}
+
+
+}
+
 }

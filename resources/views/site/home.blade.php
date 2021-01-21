@@ -56,7 +56,7 @@
 
                 <div id="shop" class="shop row grid-container " data-layout="fitRows" style="margin-top:10px;">
                     @foreach ($allProducts as $product)
-                        <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm" style="margin-bottom: 2rem" id="product_{{ $product->slug }}">
+                        <div class="product col-lg-3 col-md-3 col-sm-6" style="margin-bottom: 2rem" id="product_{{ $product->slug }}">
                             <div class="grid-inner">
                                 <div class="product-image">
                                     @foreach ($product->productImages as $productImage)
@@ -67,7 +67,7 @@
                                                 alt="{{ $product->name }}">
                                         </a>
                                     @endforeach
-                                    <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
+                                    <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">Sale!</div>
                                 </div>
                                 <div class="product-desc">
                                     <div class="product-title min-h-30">
