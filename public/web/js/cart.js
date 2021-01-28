@@ -415,17 +415,21 @@ var ItemListTemplate = `<div class="top-cart-item" id="order_item_PRODUCT_ID">
                                         <img src="IMG_SRC"
                                             alt="PRODUCT_NAME" />
                                     </a>
-
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
                                         <a href="product/summary/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
-                                        <span class="top-cart-item-price d-block float-left">
-                                           <input type="hidden" class="product_price" value="PRODUCT_PRICE" />
-                                           <input onkeyup="Cart.updateQty('.top-cart-item', this)" id="checkout_row_PRODUCT_ID" data-productid="PRODUCT_ID" type="text" style="width:35px;margin-right:5px" value="QTY" /> * PRODUCT_PRICE
-                                        </span>
+                                        <div class="quantity clearfix">
+                                                <input type="button" value="-" class="minus">
+                                                <input type="hidden" class="product_price" value="PRODUCT_PRICE" />
+                                                <input type="number" onchange="Cart.updateQty('.top-cart-item', this)" onkeyup="Cart.updateQty('.top-cart-item', this)" id="checkout_row_PRODUCT_ID" data-productid="PRODUCT_ID"  step="1" min="1" value="QTY" class="qty">
+                                                <input type="button" value="+" class="plus">
+                                        </div>
+                                        <div class="inline-block">
+                                            * PRODUCT_PRICE
+                                        </div>
                                         <span class="top-cart-item-price top-cart-item-price-total d-block float-right">
                                             <b>TOTAL_AMOUNT</b>
                                         </span>
@@ -454,7 +458,7 @@ var cartItemListTemplate = `<div class="top-cart-item" id="cart_item_PRODUCT_ID"
                                         </a>
                                         <span class="top-cart-item-price d-block float-left">
                                            <input type="hidden" class="product_price" value="PRODUCT_PRICE" />
-                                           <input onkeyup="Cart.updateQty('.top-cart-item', this)" id="cart_row_PRODUCT_ID" data-productid="PRODUCT_ID" type="text" style="width:35px;margin-right:5px" value="QTY" /> * PRODUCT_PRICE
+                                           <input onkeyup="Cart.updateQty('.top-cart-item', this)" id="cart_row_PRODUCT_ID" data-productid="PRODUCT_ID" type="number" min="1" style="width:35px;margin-right:5px" value="QTY" /> * PRODUCT_PRICE
                                         </span>
                                         <span class="top-cart-item-price top-cart-item-price-total d-block float-right">
                                             <b>TOTAL_AMOUNT</b>

@@ -27,7 +27,7 @@
     </section>
 
     <section id="content">
-        <div class="content-wrap">
+        <div class="content-wrap" style="padding-top: 0px">
             <div class="container clearfix">
                 <!-- Banner Section-->
                 <div class="row align-items-stretch min-vh-60 d-none d-md-flex d-lg-flex my-sm-6">
@@ -60,8 +60,7 @@
                             <div class="grid-inner">
                                 <div class="product-image">
                                     @foreach ($product->productImages as $productImage)
-                                        <a href="{{ route('view_product_summary', $product->slug) }}"
-                                            data-lightbox="ajax">
+                                        <a href="{{ route('view_product', $product->slug) }}">
                                             <img class="product_image"
                                                 src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
                                                 alt="{{ $product->name }}">
@@ -71,8 +70,8 @@
                                 </div>
                                 <div class="product-desc">
                                     <div class="product-title min-h-30">
-                                        <h3><a href="{{ route('view_product_summary', $product->slug) }}"
-                                                data-lightbox="ajax">{{ $product->name }}</a></h3>
+                                        <h3><a href="{{ route('view_product', $product->slug) }}"
+                                               >{{ $product->name }}</a></h3>
                                     </div>
                                     <div class="product-price">
                                         <div class="float-left">
@@ -90,7 +89,10 @@
                                             <a onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
                                                 class="text-info" style="font-weight: 300 !important; font-size:18px;"
                                                 class="" href="Javascript:void(0)">
+                                                <p>
+                                                <span class="add_cart_label">Add To Cart</span>
                                                 <i class="icon-shopping-cart"></i>
+                                                </p>
                                             </a>
                                         </div>
                                     </div>

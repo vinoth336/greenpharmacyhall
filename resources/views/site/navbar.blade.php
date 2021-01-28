@@ -12,7 +12,7 @@
                             @foreach($categories as $category)
                             @if($category->products->count() ?? null)
                             <li class="menu-item mega-menu-title sub-menu" style="">
-                                <a class="menu-link" href="#"><div>{{ ucfirst($category->name) }}</div></a>
+                                <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}"><div>{{ ucfirst($category->name) }}</div></a>
                                 <ul class="sub-menu-container" style="">
                                     @php
                                         $products = $category->products;
@@ -20,7 +20,7 @@
                                     @endphp
                                     @foreach($subCategories as $subCategorySlugName => $subCategoryName)
                                     <li class="menu-item" style="">
-                                        <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&sub_category={{ $subCategorySlugName }}">
+                                        <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&sub_categories[]={{ $subCategorySlugName }}">
                                             <div>{{ $subCategoryName }}</div>
                                         </a>
                                     </li>

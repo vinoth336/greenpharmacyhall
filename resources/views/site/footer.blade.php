@@ -90,7 +90,7 @@
 
 <script src="{{ asset('web/js/plugins.min.js') }}"></script>
 <script src="{{ asset('web/js/functions.js') }}"></script>
-<script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v=1"></script>
+<script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v={{ $version }}"></script>
 @stack('js')
 
 <a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="float"

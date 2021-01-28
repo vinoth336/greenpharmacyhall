@@ -12,7 +12,7 @@
                                 @foreach($product->productImages as $productImage)
                                     <div class="slide">
                                         <a href="{{ asset('web/images/product_images/' . $productImage->image)}}" title="{{ $product->name }}">
-                                        <img src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $product->name }}"></a>
+                                        <img src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image)}}" alt="{{ $product->name }}"></a>
                                     </div>
                                 @endforeach
                             </div>

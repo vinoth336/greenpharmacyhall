@@ -60,6 +60,7 @@ class SiteController extends Controller
         $siteInformation = SiteInformation::first();
         $services = Services::orderBy('sequence')->get();
 
+
         try {
 
 
@@ -94,6 +95,14 @@ class SiteController extends Controller
 
         return view('site.show_single_item_summary')->with('product', $product);
     }
+
+    public function viewProduct(Request $request, Product $product)
+    {
+        $product->load('ProductImages')->orderBy('sequence')->first();
+
+        return view('site.view_single_product')->with('product', $product);
+    }
+
 
     public function product()
     {

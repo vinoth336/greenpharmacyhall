@@ -37,3 +37,21 @@ function orderNumber()
 
     return sprintf('%04d', $string+1);
 }
+
+
+function filterRemoveEmptyValues($input)
+{
+    if(!is_array($input)) {
+        $temp = $input;
+        $input = [$temp];
+    }
+    $newValues = [];
+
+    foreach($input as $key => $value) {
+        if($value !='' && $value != 'all') {
+            $newValues[$key] = $value;
+        }
+    }
+
+    return count($newValues) ? null : $newValues;
+}

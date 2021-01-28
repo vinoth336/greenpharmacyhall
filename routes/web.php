@@ -19,6 +19,8 @@ Route::get('/product/', 'SiteController@product')->name('product');
 Route::get('/faqs/', 'SiteController@faqs')->name('site_faqs');
 Route::post('enquiry', 'SaveEnquiryController@store')->name('enquiry.store');
 Route::get('/product/summary/{product}', 'SiteController@viewProductSummary')->name('view_product_summary');
+Route::get('/product/{product}', 'SiteController@viewProduct')->name('view_product');
+
 Route::get('/search', 'ProductSearchController@index')->name('public.product_list');
 
 

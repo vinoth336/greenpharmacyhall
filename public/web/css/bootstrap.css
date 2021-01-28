@@ -2094,7 +2094,8 @@ pre code {
     .shop .col-sm-6 {
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
-        max-width: 50%
+        max-width: 50%;
+        border-bottom: 1px solid #eaeaea;
     }
     .product-desc,
     .product-title,
@@ -2102,6 +2103,9 @@ pre code {
     .product-title h3 a,
     .product-price,
     .product-price [class^=icon-] {
+        font-size: 4vw !important
+    }
+    .product-price .add_cart_label {
         font-size: 4vw !important
     }
     .sale-flash .badge .badge-success {

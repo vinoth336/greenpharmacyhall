@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Brand;
 use App\Services;
 use App\SiteInformation;
+use App\SubCategory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -54,10 +56,17 @@ class AppServiceProvider extends ServiceProvider
             }
             $siteInformation = Cache::get('site_information');
             $categories = Cache::get('site_menu_items');
+            $subCategories = SubCategory::get();
+            $brands = Brand::get();
+            $input = request()->all();
             $user = auth()->user() ?? null;
             $view->with('categories', $categories);
             $view->with('siteInformation', $siteInformation);
             $view->with('user', $user);
+            $view->with('version', '1.0.2');
+            $view->with('subCategories', $subCategories);
+            $view->with('brands', $brands);
+            $view->with('input', $input);
         });
     }
 }

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-@php
-    $version = '1.0.0';
-@endphp
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="{{ $siteInformation->site_name }}" />
@@ -36,6 +33,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/layers.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web/include/rs-plugin/css/navigation.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+    @stack('css')
     <title>{{ $siteInformation->site_name }}</title>
     <script src="{{  asset('web/js/jquery.js') }}"></script>
     <script>
