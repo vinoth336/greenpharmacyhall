@@ -8,10 +8,10 @@
 
                 <div class="postcontent col-lg-9 order-lg-last">
 
-                    <div id="shop" class="shop row grid-container gutter-20" data-layout="fitRows">
+                    <div id="shop" class="shop row grid-container gutter-20" >
 
                         @foreach($products as $product)
-                            <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm" id="product_{{ $product->slug }}">
+                            <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm" style="margin-bottom: 2rem" id="product_{{ $product->slug }}">
                                 <div class="grid-inner">
                                     <div class="product-image">
                                         @foreach($product->productImages as $productImage)
@@ -51,14 +51,18 @@
                                                 <input type="hidden" class="product_name" value="{{ $product->name }}" />
 
                                             </div>
-                                            <div class="float-right">
-                                                <a onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
-                                                    class="text-info" style="font-weight: 300 !important; font-size:18px;"
-                                                    class="" href="Javascript:void(0)">
-                                                    <i class="icon-shopping-cart"></i>
-                                                </a>
-                                            </div>
+
                                         </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                            class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                            class="" href="Javascript:void(0)">
+                                            <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                            <span class="add_cart_label">Add To Cart</span>
+                                            <i class="icon-shopping-cart"></i>
+                                            </p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

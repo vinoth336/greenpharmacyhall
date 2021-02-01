@@ -15962,3 +15962,11 @@ label.radio {
 .min-h-40 {
     height: 40px;
 }
+
+.add_cart_label {
+    font-size: 0.8rem;
+}
+
+.add_cart_container {
+    text-align: right;
+}

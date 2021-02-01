@@ -53,5 +53,5 @@ function filterRemoveEmptyValues($input)
         }
     }
 
-    return count($newValues) ? null : $newValues;
+    return $newValues;
 }

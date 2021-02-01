@@ -51,7 +51,14 @@
         @if(auth()->guard('web')->check())
         <li class="menu-item sub-menu">
 			<a class="menu-link" >
-				<div>Portal</div>
+				<div>
+                    <i class="icon-user-alt"></i>
+                    @if(strlen(auth()->user()->name) <= 15 )
+                        {{  auth()->user()->name }}
+                    @else
+                        {{  substr(auth()->user()->name, 0, 15) }}..
+                    @endif
+                </div>
             </a>
             <form id="logout-form" action="{{ route('public.logout') }}" method="POST" style="display: none;">
                 @csrf

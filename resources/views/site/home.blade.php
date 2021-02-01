@@ -74,7 +74,7 @@
                                                >{{ $product->name }}</a></h3>
                                     </div>
                                     <div class="product-price">
-                                        <div class="float-left">
+                                        <div class="text-left">
                                             @if ($product->discount_amount > 0)
                                                 <del>₹ {{ $product->price }}</del>
                                                 <ins>₹ {{ $product->discount_amount }}</ins>
@@ -83,18 +83,17 @@
                                             @endif
                                             <input type="hidden" class="product_price" value="{{ $product->price }}" />
                                             <input type="hidden" class="product_name" value="{{ $product->name }}" />
-
                                         </div>
-                                        <div class="float-right">
-                                            <a onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
-                                                class="text-info" style="font-weight: 300 !important; font-size:18px;"
-                                                class="" href="Javascript:void(0)">
-                                                <p>
-                                                <span class="add_cart_label">Add To Cart</span>
-                                                <i class="icon-shopping-cart"></i>
-                                                </p>
-                                            </a>
-                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                            class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                            class="" href="Javascript:void(0)">
+                                            <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                            <span class="add_cart_label">Add To Cart</span>
+                                            <i class="icon-shopping-cart"></i>
+                                            </p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

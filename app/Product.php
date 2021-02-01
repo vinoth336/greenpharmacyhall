@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Traits\RelatedProducts;
 use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
 use Jamesh\Uuid\HasUuid;
 
 class Product extends Model
 {
-    use StoreImage, HasUuid;
+    use StoreImage, HasUuid, RelatedProducts;
 
     protected $fileParamName = 'portfolio_banner_image';
 

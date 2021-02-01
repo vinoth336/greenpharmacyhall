@@ -2105,8 +2105,12 @@ pre code {
     .product-price [class^=icon-] {
         font-size: 4vw !important
     }
-    .product-price .add_cart_label {
-        font-size: 4vw !important
+    .add_cart_label {
+        font-size: 4vw !important;
+        text-align: center;
+    }
+    .add_cart_container {
+        text-align: center;
     }
     .sale-flash .badge .badge-success {
         display: none !important;

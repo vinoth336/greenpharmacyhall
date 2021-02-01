@@ -29,24 +29,14 @@ class SiteController extends Controller
         $boxBanners = Banners::where('banner_size', 3)->orderBy('sequence', 'asc')->get();
         $verticalBanner = Banners::where('banner_size', 6)->orderBy('sequence', 'asc')->first();
         $verticalWideBanner = Banners::where('banner_size', 8)->orderBy('sequence', 'asc')->first();
-
         $services = Services::orderBy('sequence');
         $servicesForEnquiries = Services::orderBy('sequence')->get();
-
-        $allProducts = Product::with('ProductImages')->orderBy('sequence')->get();
-
-        $awesomeWorks = ProductImage::where('show_in_home_page', 1)
-            ->orderBy('created_at', 'desc')->limit(12)->get();
-        $testmonials = Testimonial::orderBy('created_at', 'desc')->get();
-
-
+        $allProducts = Product::with('ProductImages')->limit(50)->orderBy('sequence')->get();
 
         return view('site.home', [
             'siteInformation' => $siteInformation,
             'sliders' => $sliders,
             'services' => $services,
-            'awesomeWorks' => $awesomeWorks,
-            'testmonials' => $testmonials,
             'servicesForEnquiries' => $servicesForEnquiries,
             'boxBanners' => $boxBanners,
             'verticalBanner' => $verticalBanner ?? new Banners(),
@@ -99,8 +89,12 @@ class SiteController extends Controller
     public function viewProduct(Request $request, Product $product)
     {
         $product->load('ProductImages')->orderBy('sequence')->first();
+        $relatedProducts = $product->getRelatedProducts();
 
-        return view('site.view_single_product')->with('product', $product);
+        return view('site.view_single_product')
+        ->with('product', $product)
+        ->with('relatedProducts', $relatedProducts)
+        ;
     }
 
 

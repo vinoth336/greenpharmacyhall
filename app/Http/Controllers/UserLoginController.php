@@ -20,7 +20,7 @@ class UserLoginController extends Controller
         if (Auth::guard('web')->attempt($request->only('phone_no', 'password'), $request->filled('remember'))) {
             //Authentication passed...
 
-            $redirectTo = route('public.dashboard');
+            $redirectTo = route('home');
             if($request->has('redirectTo')) {
                 if($request->get('redirectTo') == 'checkout') {
                     $redirectTo = route('public.cart.checkout');
@@ -28,8 +28,7 @@ class UserLoginController extends Controller
             }
 
             return redirect()
-                 ->intended($redirectTo)
-                 ->with('status', 'You are Logged in Successfully!');
+                 ->intended($redirectTo);
         }
 
         //Authentication failed...

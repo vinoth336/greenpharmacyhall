@@ -35,8 +35,7 @@ var Cart = {
             }
         });
     },
-    add: function(product) {
-        var qty = 1;
+    add: function(product, qty = 1) {
         var productId = $(product).data('productid');
         $.ajax({
             "url": "/cart/" + productId + "/add",
@@ -64,6 +63,12 @@ var Cart = {
         container = $(product).closest('' + container);
         if (qty < 1) {
             return false;
+        }
+
+        //This logic used in view single product page
+        if (!Cart.isProductExistsInCart(productId)) {
+            Cart.add(product, qty);
+            return true;
         }
 
         $.ajax({
@@ -324,6 +329,16 @@ var Cart = {
                 }
             });
         }
+    },
+    isProductExistsInCart: function(productId) {
+        if (localStorage.cart) {
+            data = Cart.getItemFromLocalStorage();
+            if (typeof data[productId] != 'undefined') {
+                return true;
+            }
+        }
+
+        return false
     },
     updateActiveCartItemTotal: function(id = 'order_amount') {
         var cart = Cart.getItemFromLocalStorage();
