@@ -1,4 +1,4 @@
-<div class="sidebar col-lg-3 d-sm-none d-md-block d-lg-block">
+<div class="sidebar col-lg-3 d-md-none d-lg-block">
     <div class="row">
         <div class="col-lg-12">
             <h6>Select Category</h6>
