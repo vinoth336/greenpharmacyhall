@@ -87,20 +87,6 @@
 </div>
 
 <div id="gotoTop" class="icon-angle-up"></div>
-<div class="scw-switcher-wrap d-md-none d-lg-none">
-	<button type="button" class="scw-trigger-icon scw-trigger">
-		<i class="icon-filter1"></i>
-		<i class="icon-line-cross"></i>
-	</button>
-    <h5>Filter</h5>
-	<hr>
-	<div class="widget">
-		<div class="row">
-            @include('site.mobile_side_filter')
-		</div>
-	</div>
-
-</div>
 
 <script src="{{ asset('web/js/plugins.min.js') }}"></script>
 <script src="{{ asset('web/js/functions.js') }}"></script>

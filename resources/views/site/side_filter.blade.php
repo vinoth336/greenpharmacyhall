@@ -1,4 +1,4 @@
-<div class="sidebar col-lg-3 d-sm-none d-md-block d-lg-block">
+<div class="sidebar col-lg-3 d-sm-none d-md-none d-lg-block">
     <div class="row">
         <div class="col-lg-12 " style="text-align: left; margin-bottom:10px">
             <a href="Javascript:void(0)" class="text-danger"  id="reset" onclick="Filter.resetFilter()">Reset Filter</a>
