@@ -1,8 +1,5 @@
 <div class="sidebar col-lg-3 d-sm-none d-md-block d-lg-block">
     <div class="row">
-        <div class="col-lg-12 " style="text-align: left; margin-bottom:10px">
-            <a href="Javascript:void(0)" class="text-danger"  id="reset" onclick="Filter.resetFilter()">Reset Filter</a>
-        </div>
         <div class="col-lg-12">
             <h6>Select Category</h6>
             <select class="selectpicker input_filter" name="categories[]" id="categories" multiple>
@@ -51,14 +48,10 @@
         </div>
 
     </div>
+    <div class="col-lg-12 " style="text-align: right; margin-top:10px">
+        <a href="Javascript:void(0)" class="btn btn-danger"  id="reset" onclick="Filter.resetFilter()">
+        Reset
+        </a>
+        <a href="Javascript:void(0)" class="btn btn-success"  id="reset" onclick="Filter.resetFilter()">Search</a>
+    </div>
 </div>
-
-@push('css')
-<link rel="stylesheet" href="{{ asset('web/css/components/bs-select.css') }}" type="text/css" />
-@endpush
-
-@push('js')
-<script src="{{ asset('web/js/components/bs-select.js') }}"></script>
-<script src="{{ asset('web/js/components/selectsplitter.js') }}"></script>
-<script type="text/javascript" src="{{ asset('web/js/filter.js') }}?v={{ $version }}"></script>
-@endpush

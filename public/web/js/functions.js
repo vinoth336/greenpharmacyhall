@@ -1,7 +1,8 @@
 ! function(e, i, n) {
-    "object" == typeof module && module && "object" == typeof module.exports ? module.exports = n : (e[i] = n, "function" == typeof define && define.amd && define(i, [], function() {
-        return n
-    }))
+    "object" == typeof module && module && "object" == typeof module.exports ? module.exports = n : (e[i] = n,
+        "function" == typeof define && define.amd && define(i, [], function() {
+            return n
+        }))
 }(this, "jRespond", function(e, i, n) {
     "use strict";
     return function(e) {
@@ -15,49 +16,68 @@
             d = function(e) {
                 var s = e.breakpoint,
                     o = e.enter || n;
-                i.push(e), t.push(!1), c(s) && (o !== n && o.call(null, {
-                    entering: l,
-                    exiting: a
-                }), t[i.length - 1] = !0)
+                i.push(e),
+                    t.push(!1),
+                    c(s) && (o !== n && o.call(null, {
+                            entering: l,
+                            exiting: a
+                        }),
+                        t[i.length - 1] = !0)
             },
             u = function() {
                 for (var e = [], s = [], o = 0; o < i.length; o++) {
                     var r = i[o].breakpoint,
                         d = i[o].enter || n,
                         u = i[o].exit || n;
-                    "*" === r ? (d !== n && e.push(d), u !== n && s.push(u)) : c(r) ? (d === n || t[o] || e.push(d), t[o] = !0) : (u !== n && t[o] && s.push(u), t[o] = !1)
+                    "*" === r ? (d !== n && e.push(d),
+                        u !== n && s.push(u)) : c(r) ? (d === n || t[o] || e.push(d),
+                        t[o] = !0) : (u !== n && t[o] && s.push(u),
+                        t[o] = !1)
                 }
                 for (var g = {
                         entering: l,
                         exiting: a
-                    }, f = 0; f < s.length; f++) s[f].call(null, g);
-                for (var p = 0; p < e.length; p++) e[p].call(null, g)
+                    }, f = 0; f < s.length; f++)
+                    s[f].call(null, g);
+                for (var p = 0; p < e.length; p++)
+                    e[p].call(null, g)
             },
             c = function(e) {
                 if ("object" == typeof e) {
-                    if (e.join().indexOf(l) >= 0) return !0
+                    if (e.join().indexOf(l) >= 0)
+                        return !0
                 } else {
-                    if ("*" === e) return !0;
-                    if ("string" == typeof e && l === e) return !0
+                    if ("*" === e)
+                        return !0;
+                    if ("string" == typeof e && l === e)
+                        return !0
                 }
             },
             g = function() {
                 var e = "number" != typeof window.innerWidth ? 0 !== document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth : window.innerWidth;
-                e !== o ? (r = 100, function(e) {
-                    for (var i = !1, n = 0; n < s.length; n++)
-                        if (e >= s[n].enter && e <= s[n].exit) {
-                            i = !0;
-                            break
-                        }
-                    i && l !== s[n].label ? (a = l, l = s[n].label, u()) : i || "" === l || (l = "", u())
-                }(e)) : r = 500, o = e, setTimeout(g, r)
+                e !== o ? (r = 100,
+                        function(e) {
+                            for (var i = !1, n = 0; n < s.length; n++)
+                                if (e >= s[n].enter && e <= s[n].exit) {
+                                    i = !0;
+                                    break
+                                }
+                            i && l !== s[n].label ? (a = l,
+                                l = s[n].label,
+                                u()) : i || "" === l || (l = "",
+                                u())
+                        }(e)) : r = 500,
+                    o = e,
+                    setTimeout(g, r)
             };
         return g(), {
             addFunc: function(e) {
                 ! function(e) {
-                    if (e.length === n) d(e);
+                    if (e.length === n)
+                        d(e);
                     else
-                        for (var i = 0; i < e.length; i++) d(e[i])
+                        for (var i = 0; i < e.length; i++)
+                            d(e[i])
                 }(e)
             },
             getBreakpoint: function() {
@@ -71,86 +91,120 @@ var $ = jQuery.noConflict();
 function debounce(e, i, n) {
     let t, s, l, a, o;
     return function() {
-        l = this, s = arguments, a = new Date;
+        l = this,
+            s = arguments,
+            a = new Date;
         let r = function() {
                 let d = new Date - a;
-                d < i ? t = setTimeout(r, i - d) : (t = null, n || (o = e.apply(l, s)))
+                d < i ? t = setTimeout(r, i - d) : (t = null,
+                    n || (o = e.apply(l, s)))
             },
             d = n && !t;
-        return t || (t = setTimeout(r, i)), d && (o = e.apply(l, s)), o
+        return t || (t = setTimeout(r, i)),
+            d && (o = e.apply(l, s)),
+            o
     }
 }
 
 function onScrollSliderParallax() {
-    SEMICOLON.slider.sliderParallax(), SEMICOLON.slider.sliderElementsFade()
+    SEMICOLON.slider.sliderParallax(),
+        SEMICOLON.slider.sliderElementsFade()
 }
 $.fn.scrollEnd = function(e, i) {
         $(this).scroll(function() {
             let n = $(this);
-            n.data("scrollTimeout") && clearTimeout(n.data("scrollTimeout")), n.data("scrollTimeout", setTimeout(e, i))
+            n.data("scrollTimeout") && clearTimeout(n.data("scrollTimeout")),
+                n.data("scrollTimeout", setTimeout(e, i))
         })
     },
     function() {
         let e = 0,
             i = ["ms", "moz", "webkit", "o"];
-        for (let e = 0; e < i.length && !window.requestAnimationFrame; ++e) window.requestAnimationFrame = window[i[e] + "RequestAnimationFrame"], window.cancelAnimationFrame = window[i[e] + "CancelAnimationFrame"] || window[i[e] + "CancelRequestAnimationFrame"];
+        for (let e = 0; e < i.length && !window.requestAnimationFrame; ++e)
+            window.requestAnimationFrame = window[i[e] + "RequestAnimationFrame"],
+            window.cancelAnimationFrame = window[i[e] + "CancelAnimationFrame"] || window[i[e] + "CancelRequestAnimationFrame"];
         window.requestAnimationFrame || (window.requestAnimationFrame = function(i, n) {
-            let t = (new Date).getTime(),
-                s = Math.max(0, 16 - (t - e)),
-                l = window.setTimeout(function() {
-                    i(t + s)
-                }, s);
-            return e = t + s, l
-        }), window.cancelAnimationFrame || (window.cancelAnimationFrame = function(e) {
-            clearTimeout(e)
-        })
+                let t = (new Date).getTime(),
+                    s = Math.max(0, 16 - (t - e)),
+                    l = window.setTimeout(function() {
+                        i(t + s)
+                    }, s);
+                return e = t + s,
+                    l
+            }),
+            window.cancelAnimationFrame || (window.cancelAnimationFrame = function(e) {
+                clearTimeout(e)
+            })
     }();
 var SEMICOLON = SEMICOLON || {};
 ! function(e) {
     "use strict";
     SEMICOLON.initialize = {
             init: function() {
-                SEMICOLON.initialize.defaults(), SEMICOLON.initialize.pageTransition(), SEMICOLON.initialize.goToTop(), SEMICOLON.initialize.lazyLoad(), SEMICOLON.initialize.lightbox(), SEMICOLON.initialize.resizeVideos(), SEMICOLON.initialize.dataResponsiveClasses(), SEMICOLON.initialize.dataResponsiveHeights(), SEMICOLON.initialize.stickFooterOnSmall()
+                SEMICOLON.initialize.defaults(),
+                    SEMICOLON.initialize.pageTransition(),
+                    SEMICOLON.initialize.goToTop(),
+                    SEMICOLON.initialize.lazyLoad(),
+                    SEMICOLON.initialize.lightbox(),
+                    SEMICOLON.initialize.resizeVideos(),
+                    SEMICOLON.initialize.dataResponsiveClasses(),
+                    SEMICOLON.initialize.dataResponsiveHeights(),
+                    SEMICOLON.initialize.stickFooterOnSmall()
             },
             execFunc: function(e, i) {
                 let n = Array.prototype.slice.call(arguments, 2),
                     t = e.split("."),
                     s = t.pop();
-                for (let e = 0; e < t.length; e++) i = i[t[e]];
-                if (void 0 !== i[s]) return i[s].apply(i, n);
+                for (let e = 0; e < t.length; e++)
+                    i = i[t[e]];
+                if (void 0 !== i[s])
+                    return i[s].apply(i, n);
                 console.log(e + " Function does not exist")
             },
             execPlugin: function(i, n) {
-                if (n.trigger) {
-                    let i = setInterval(function() {
-                        Function("return " + n.pluginfn)() && (e(window).trigger(n.trigger), clearInterval(i))
-                    }, 1e3)
-                }
-                n.execfn && (n.trigger ? e(window).on(n.trigger, function() {
-                    SEMICOLON.initialize.execFunc(n.execfn, window, i)
-                }) : SEMICOLON.initialize.execFunc(n.execfn, window, i)), n.class && o.addClass(n.class)
+                window.scwEvents = window.scwEvents || {};
+                let t, s = !1;
+                n.trigger && !scwEvents[n.trigger] ? t = setInterval(function i() {
+                        return Function("return " + n.pluginfn)() && (e(window).trigger(n.trigger),
+                                scwEvents[n.trigger] = !0,
+                                clearInterval(t)),
+                            i
+                    }(), 1e3) : s = !0,
+                    n.execfn && (n.trigger && !s ? e(window).on(n.trigger, function() {
+                        SEMICOLON.initialize.execFunc(n.execfn, window, i)
+                    }) : SEMICOLON.initialize.execFunc(n.execfn, window, i)),
+                    n.class && o.addClass(n.class)
             },
             jsLinking: function(i, n) {
-                if (i.length < 1) return !1;
-                if (n.hiddendisable && i.filter(":hidden").length == i.length) return !1;
+                if (i.length < 1)
+                    return !1;
+                if (n.hiddendisable && i.filter(":hidden").length == i.length)
+                    return !1;
                 let t, s = Function("return " + n.pluginfn)(),
                     l = "js/",
                     a = !1;
-                "undefined" != typeof scwJsPath && (l = scwJsPath + "/"), "undefined" != typeof scwDisableJsAJAX && !0 === scwDisableJsAJAX && (a = !0), t = /^(f|ht)tps?:\/\//i.test(window.decodeURIComponent(n.file)) ? n.file : l + n.file, s ? SEMICOLON.initialize.execPlugin(i, n) : a ? console.log(n.error) : e.ajax({
-                    url: t,
-                    dataType: "script",
-                    cache: !0,
-                    crossDomain: !0,
-                    timeout: 5e3
-                }).done(function() {
-                    SEMICOLON.initialize.execPlugin(i, n)
-                }).fail(function() {
-                    console.log(n.error)
-                })
+                "undefined" != typeof scwJsPath && (l = scwJsPath + "/"),
+                    "undefined" != typeof scwDisableJsAJAX && !0 === scwDisableJsAJAX && (a = !0),
+                    t = /^(f|ht)tps?:\/\//i.test(window.decodeURIComponent(n.file)) ? n.file : l + n.file,
+                    s ? SEMICOLON.initialize.execPlugin(i, n) : a ? console.log(n.error) : e.ajax({
+                        url: t,
+                        dataType: "script",
+                        cache: !0,
+                        crossDomain: !0,
+                        timeout: 5e3
+                    }).done(function() {
+                        SEMICOLON.initialize.execPlugin(i, n)
+                    }).fail(function() {
+                        console.log(n.error)
+                    })
             },
             functions: function(i) {
                 let n, t, s;
-                "object" == typeof i.element && null !== i.element && ("undefined" !== i.element.parent && (t = i.element.parent), "undefined" !== i.element.el && (i.element = i.element.el)), s = i.element ? i.element : i.default, n = "object" === t ? t.find(s) : e(s), this.jsLinking(n, i)
+                "object" == typeof i.element && null !== i.element && ("undefined" !== i.element.parent && (t = i.element.parent),
+                        "undefined" !== i.element.el && (i.element = i.element.el)),
+                    s = i.element ? i.element : i.default,
+                    n = "object" === t ? t.find(s) : e(s),
+                    this.jsLinking(n, i)
             },
             defaults: function() {
                 if (jRespond([{
@@ -213,21 +267,25 @@ var SEMICOLON = SEMICOLON || {};
                         exit: function() {
                             o.removeClass("device-xs")
                         }
-                    }]), SEMICOLON.initialize.functions({
+                    }]),
+                    SEMICOLON.initialize.functions({
                         default: "body",
                         file: "plugins.easing.js",
                         error: "plugins.easing.js: Plugin could not be loaded",
-                        pluginfn: 'typeof jQuery.easing !== "undefined"',
+                        pluginfn: 'typeof jQuery.easing["easeOutQuad"] !== "undefined"',
                         trigger: "pluginEasingReady",
                         class: "has-plugin-easing"
-                    }), SEMICOLON.initialize.functions({
+                    }),
+                    SEMICOLON.initialize.functions({
                         default: "body",
                         file: "plugins.bootstrap.js",
                         error: "plugins.bootstrap.js: Plugin could not be loaded",
                         pluginfn: 'typeof bootstrap !== "undefined"',
                         trigger: "pluginBootstrapReady",
                         class: "has-plugin-bootstrap"
-                    }), "IntersectionObserver" in window) console.log("IntersectionObserver supported");
+                    }),
+                    "IntersectionObserver" in window)
+                    console.log("IntersectionObserver supported");
                 else {
                     let e = {
                         default: "body",
@@ -243,17 +301,23 @@ var SEMICOLON = SEMICOLON || {};
             goToTop: function() {
                 let i = X.attr("data-speed"),
                     n = X.attr("data-easing");
-                i || (i = 700), n || (n = "easeOutQuad"), X.off("click").on("click", function() {
-                    return e("body,html").stop(!0).animate({
-                        scrollTop: 0
-                    }, Number(i), n), !1
-                })
+                i || (i = 700),
+                    n || (n = "easeOutQuad"),
+                    X.off("click").on("click", function() {
+                        return e("body,html").stop(!0).animate({
+                            scrollTop: 0
+                        }, Number(i), n), !1
+                    })
             },
             goToTopScroll: function() {
                 let e = X.attr("data-mobile"),
                     i = X.attr("data-offset");
-                if (i || (i = 450), "true" != e && (o.hasClass("device-sm") || o.hasClass("device-xs"))) return !0;
-                a.scrollTop() > Number(i) ? (X.fadeIn(), o.addClass("gototop-active")) : (X.fadeOut(), o.removeClass("gototop-active"))
+                if (i || (i = 450),
+                    "true" != e && (o.hasClass("device-sm") || o.hasClass("device-xs")))
+                    return !0;
+                a.scrollTop() > Number(i) ? (X.fadeIn(),
+                    o.addClass("gototop-active")) : (X.fadeOut(),
+                    o.removeClass("gototop-active"))
             },
             lightbox: function(e) {
                 let i = {
@@ -275,7 +339,7 @@ var SEMICOLON = SEMICOLON || {};
                     file: "plugins.lightbox.js",
                     error: "plugins.lightbox.js: Plugin could not be loaded",
                     execfn: "SEMICOLON_modalInit",
-                    pluginfn: '$().magnificPopup && typeof Cookies !== "undefined"',
+                    pluginfn: "$().magnificPopup",
                     trigger: "pluginLightboxReady",
                     class: "has-plugin-lightbox"
                 };
@@ -318,7 +382,9 @@ var SEMICOLON = SEMICOLON || {};
             },
             topScrollOffset: function() {
                 let e = 0;
-                return !o.hasClass("device-xl") && !o.hasClass("device-lg") || SEMICOLON.isMobile.any() ? e = 40 : (e = d.hasClass("sticky-header") ? $.hasClass("dots-menu") ? 100 : 144 : $.hasClass("dots-menu") ? 140 : 184, $.length || (e = d.hasClass("sticky-header") ? 100 : 140)), e
+                return !o.hasClass("device-xl") && !o.hasClass("device-lg") || SEMICOLON.isMobile.any() ? e = 40 : (e = d.hasClass("sticky-header") ? $.hasClass("dots-menu") ? 100 : 144 : $.hasClass("dots-menu") ? 140 : 184,
+                        $.length || (e = d.hasClass("sticky-header") ? 100 : 140)),
+                    e
             },
             dataResponsiveClasses: function() {
                 SEMICOLON.initialize.functions({
@@ -352,36 +418,62 @@ var SEMICOLON = SEMICOLON || {};
                     "margin-top": e - i
                 })
             }
-        }, SEMICOLON.header = {
+        },
+        SEMICOLON.header = {
             init: function() {
-                SEMICOLON.header.initialize(), SEMICOLON.header.menufunctions(), SEMICOLON.header.fullWidthMenu(), SEMICOLON.header.stickyMenu(), SEMICOLON.header.stickyPageMenu(), SEMICOLON.header.sideHeader(), SEMICOLON.header.sidePanel(), SEMICOLON.header.onePageScroll(), SEMICOLON.header.logo(), SEMICOLON.header.topsearch(), SEMICOLON.header.topcart(), SEMICOLON.header.miscFunctions()
+                SEMICOLON.header.initialize(),
+                    SEMICOLON.header.menufunctions(),
+                    SEMICOLON.header.fullWidthMenu(),
+                    SEMICOLON.header.stickyMenu(),
+                    SEMICOLON.header.stickyPageMenu(),
+                    SEMICOLON.header.sideHeader(),
+                    SEMICOLON.header.sidePanel(),
+                    SEMICOLON.header.onePageScroll(),
+                    SEMICOLON.header.logo(),
+                    SEMICOLON.header.topsearch(),
+                    SEMICOLON.header.topcart(),
+                    SEMICOLON.header.miscFunctions()
             },
             initialize: function() {
-                u.length > 0 && (e(".header-wrap-clone").length < 1 && u.after('<div class="header-wrap-clone"></div>'), y = e(".header-wrap-clone")), $.length > 0 && ($.find("#page-menu-wrap").after('<div class="page-menu-wrap-clone"></div>'), q = e(".page-menu-wrap-clone")), e(".menu-item:has(.sub-menu-container)").addClass("sub-menu"), e(".top-links-item:has(.top-links-sub-menu,.top-links-section) > a:not(:has(.icon-angle-down)), .menu-item:not(.mega-menu-title):has(.sub-menu-container) > .menu-link > div:not(:has(.icon-angle-down)), .page-menu-item:has(.page-menu-sub-menu) > a > div:not(:has(.icon-angle-down))").append('<i class="icon-angle-down"></i>'), e(".menu-item:not(.mega-menu-title):has(.sub-menu-container):not(:has(.sub-menu-trigger))").append('<button class="sub-menu-trigger icon-chevron-right"></button>'), SEMICOLON.header.menuInvert()
+                u.length > 0 && (e(".header-wrap-clone").length < 1 && u.after('<div class="header-wrap-clone"></div>'),
+                        y = e(".header-wrap-clone")),
+                    $.length > 0 && ($.find("#page-menu-wrap").after('<div class="page-menu-wrap-clone"></div>'),
+                        q = e(".page-menu-wrap-clone")),
+                    e(".menu-item:has(.sub-menu-container)").addClass("sub-menu"),
+                    e(".top-links-item:has(.top-links-sub-menu,.top-links-section) > a:not(:has(.icon-angle-down)), .menu-item:not(.mega-menu-title):has(.sub-menu-container) > .menu-link > div:not(:has(.icon-angle-down)), .page-menu-item:has(.page-menu-sub-menu) > a > div:not(:has(.icon-angle-down))").append('<i class="icon-angle-down"></i>'),
+                    e(".menu-item:not(.mega-menu-title):has(.sub-menu-container):not(:has(.sub-menu-trigger))").append('<button class="sub-menu-trigger icon-chevron-right"></button>'),
+                    SEMICOLON.header.menuInvert()
             },
             menuInvert: function(i) {
                 let n = i || e(".mega-menu-content, .sub-menu-container, .top-links-section");
                 n.children().css({
-                    display: "block"
-                }), n.css({
-                    display: "block"
-                }), n.each(function(i, n) {
-                    let t = e(n),
-                        s = t.offset(),
-                        l = t.width();
-                    L - (l + s.left) < 0 && t.addClass("menu-pos-invert")
-                }), n.children().css({
-                    display: ""
-                }), n.css({
-                    display: ""
-                })
+                        display: "block"
+                    }),
+                    n.css({
+                        display: "block"
+                    }),
+                    n.each(function(i, n) {
+                        let t = e(n),
+                            s = t.offset(),
+                            l = t.width();
+                        E - (l + s.left) < 0 && t.addClass("menu-pos-invert")
+                    }),
+                    n.children().css({
+                        display: ""
+                    }),
+                    n.css({
+                        display: ""
+                    })
             },
             includeOffset: function() {
-                if (c.length < 1) return !0;
+                if (c.length < 1)
+                    return !0;
                 let e = d.outerHeight();
-                (d.hasClass("floating-header") || c.hasClass("include-topbar")) && (e += d.offset().top), c.css({
-                    "margin-top": -e
-                }), SEMICOLON.slider.sliderParallax()
+                (d.hasClass("floating-header") || c.hasClass("include-topbar")) && (e += d.offset().top),
+                c.css({
+                        "margin-top": -e
+                    }),
+                    SEMICOLON.slider.sliderParallax()
             },
             menufunctions: function() {
                 let i, n = e(".menu-item:has(.sub-menu-container)"),
@@ -389,68 +481,114 @@ var SEMICOLON = SEMICOLON || {};
                     s = ".mega-menu-content, .sub-menu-container",
                     l = e(s),
                     a = M.attr("data-trigger-speed") || 200;
-                a = Number(a), i = n.children(".sub-menu-trigger"), o.hasClass("device-xl") || o.hasClass("device-lg") ? (setTimeout(function() {
-                    y.length > 0 && y.css({
-                        height: u.outerHeight()
-                    }), SEMICOLON.header.includeOffset()
-                }, 1e3), M.find(l).css({
-                    display: ""
-                })) : c.css({
-                    "margin-top": ""
-                }), o.hasClass("overlay-menu") && M.hasClass("on-click") && (o.hasClass("device-xl") || o.hasClass("device-lg")) ? t.off("click").on("click", function(i) {
-                    let n = e(this);
-                    n.parents(".sub-menu").siblings().find(l).stop(!0, !0).slideUp(a), n.parent(".menu-item").children(s).stop(!0, !0).slideToggle(a), i.preventDefault()
-                }) : o.hasClass("side-header") && M.hasClass("on-click") || o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs") ? (i.removeClass("icon-rotate-90"), e(".menu-item").find(l).filter(":not(:animated)").stop(!0, !0).slideUp(a, function() {
-                    o.toggleClass("primary-menu-open", !1)
-                }), i.off("click").on("click", function(i) {
-                    let n = e(this);
-                    n.parents(".sub-menu").siblings().find(".sub-menu-trigger").removeClass("icon-rotate-90"), n.parents(".sub-menu").siblings().find(l).filter(":not(:animated)").stop(!0, !0).slideUp(a), n.parent(".menu-item").children(s).filter(":not(:animated)").stop(!0, !0).slideToggle(a), n.hasClass("icon-rotate-90") ? n.removeClass("icon-rotate-90") : n.addClass("icon-rotate-90"), i.preventDefault()
-                })) : (o.hasClass("overlay-menu") || o.hasClass("side-header")) && (o.hasClass("device-xl") || o.hasClass("device-lg")) ? (M.find(l).stop(!0, !0).slideUp(a), e(".menu-item").hover(function(i) {
-                    e(this).children(s).stop(!0, !0).slideDown(a)
-                }, function() {
-                    e(this).children(s).stop(!0, !0).slideUp(a)
-                })) : M.hasClass("on-click") && t.off("click").on("click", function(i) {
-                    let n = e(this);
-                    n.parents(".sub-menu").siblings().find(l).removeClass("d-block"), n.parent(".menu-item").children(s).toggleClass("d-block"), i.preventDefault()
-                }), (e(".top-links").hasClass("on-click") || o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && e(".top-links-item:has(.top-links-sub-menu,.top-links-section) > a").on("click", function(i) {
-                    e(this).parents("li").siblings().find(".top-links-sub-menu,.top-links-section").removeClass("d-block"), e(this).parent("li").children(".top-links-sub-menu,.top-links-section").toggleClass("d-block"), i.preventDefault()
-                }), SEMICOLON.header.menuInvert(e(".top-links-section")), e("#primary-menu-trigger").off("click").on("click", function() {
-                    return (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && (M.find(".mobile-primary-menu").length > 0 ? (e(".primary-menu:not(.mobile-menu-off-canvas) .mobile-primary-menu").stop(!0, !0).slideToggle(a), e(".primary-menu.mobile-menu-off-canvas .mobile-primary-menu").toggleClass("d-block")) : (e(".primary-menu:not(.mobile-menu-off-canvas) .menu-container").stop(!0, !0).slideToggle(a), e(".primary-menu.mobile-menu-off-canvas .menu-container").toggleClass("d-block"))), o.toggleClass("primary-menu-open"), !1
-                }), e(".menu-container:not(.mobile-primary-menu)").css({
-                    display: ""
-                }), (o.hasClass("device-xl") || o.hasClass("device-lg")) && M.find(".mobile-primary-menu").removeClass("d-block")
+                a = Number(a),
+                    i = n.children(".sub-menu-trigger"),
+                    o.hasClass("device-xl") || o.hasClass("device-lg") ? (setTimeout(function() {
+                            y.length > 0 && y.css({
+                                    height: u.outerHeight()
+                                }),
+                                SEMICOLON.header.includeOffset()
+                        }, 1e3),
+                        M.find(l).css({
+                            display: ""
+                        })) : c.css({
+                        "margin-top": ""
+                    }),
+                    o.hasClass("overlay-menu") && M.hasClass("on-click") && (o.hasClass("device-xl") || o.hasClass("device-lg")) ? t.off("click").on("click", function(i) {
+                        let n = e(this);
+                        n.parents(".sub-menu").siblings().find(l).stop(!0, !0).slideUp(a),
+                            n.parent(".menu-item").children(s).stop(!0, !0).slideToggle(a),
+                            i.preventDefault()
+                    }) : o.hasClass("side-header") && M.hasClass("on-click") || o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs") ? (i.removeClass("icon-rotate-90"),
+                        e(".menu-item").find(l).filter(":not(:animated)").stop(!0, !0).slideUp(a, function() {
+                            o.toggleClass("primary-menu-open", !1)
+                        }),
+                        (i = i.add(t.filter('[href^="#"]'))).off("click").on("click", function(i) {
+                            let n = e(this);
+                            n.parents(".sub-menu").siblings().find(".sub-menu-trigger").removeClass("icon-rotate-90"),
+                                n.parents(".sub-menu").siblings().find(l).filter(":not(:animated)").stop(!0, !0).slideUp(a),
+                                n.parent(".menu-item").children(s).filter(":not(:animated)").stop(!0, !0).slideToggle(a);
+                            let t = n.parent(".menu-item").children(".sub-menu-trigger");
+                            t.hasClass("icon-rotate-90") ? t.removeClass("icon-rotate-90") : t.addClass("icon-rotate-90"),
+                                i.preventDefault()
+                        })) : (o.hasClass("overlay-menu") || o.hasClass("side-header")) && (o.hasClass("device-xl") || o.hasClass("device-lg")) ? (M.find(l).stop(!0, !0).slideUp(a),
+                        e(".menu-item").hover(function(i) {
+                            e(this).children(s).stop(!0, !0).slideDown(a)
+                        }, function() {
+                            e(this).children(s).stop(!0, !0).slideUp(a)
+                        })) : M.hasClass("on-click") && t.off("click").on("click", function(i) {
+                        let n = e(this);
+                        n.parents(".sub-menu").siblings().find(l).removeClass("d-block"),
+                            n.parent(".menu-item").children(s).toggleClass("d-block"),
+                            i.preventDefault()
+                    }),
+                    (e(".top-links").hasClass("on-click") || o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && e(".top-links-item:has(.top-links-sub-menu,.top-links-section) > a").on("click", function(i) {
+                        e(this).parents("li").siblings().find(".top-links-sub-menu,.top-links-section").removeClass("d-block"),
+                            e(this).parent("li").children(".top-links-sub-menu,.top-links-section").toggleClass("d-block"),
+                            i.preventDefault()
+                    }),
+                    SEMICOLON.header.menuInvert(e(".top-links-section")),
+                    e("#primary-menu-trigger").off("click").on("click", function() {
+                        return (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && (M.find(".mobile-primary-menu").length > 0 ? (e(".primary-menu:not(.mobile-menu-off-canvas) .mobile-primary-menu").stop(!0, !0).slideToggle(a),
+                                e(".primary-menu.mobile-menu-off-canvas .mobile-primary-menu").toggleClass("d-block")) : (e(".primary-menu:not(.mobile-menu-off-canvas) .menu-container").stop(!0, !0).slideToggle(a),
+                                e(".primary-menu.mobile-menu-off-canvas .menu-container").toggleClass("d-block"))),
+                            o.toggleClass("primary-menu-open"), !1
+                    }),
+                    e(".menu-container:not(.mobile-primary-menu)").css({
+                        display: ""
+                    }),
+                    (o.hasClass("device-xl") || o.hasClass("device-lg")) && M.find(".mobile-primary-menu").removeClass("d-block")
             },
             fullWidthMenu: function() {
-                if (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) return e(".mega-menu-content, .top-search-form").css({
-                    width: ""
-                }), !0;
+                if (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs"))
+                    return e(".mega-menu-content, .top-search-form").css({
+                        width: ""
+                    }), !0;
                 let i = e(".mega-menu:not(.mega-menu-full):not(.mega-menu-small) .mega-menu-content").parents(".header-row").width();
                 if (d.find(".container-fullwidth").length > 0 && e(".mega-menu:not(.mega-menu-full):not(.mega-menu-small) .mega-menu-content").css({
                         width: i
-                    }), o.hasClass("stretched") ? d.hasClass("floating-header") ? e(".mega-menu:not(.mega-menu-full):not(.mega-menu-small) .mega-menu-content, .top-search-form").css({
+                    }),
+                    o.hasClass("stretched") ? d.hasClass("floating-header") ? e(".mega-menu:not(.mega-menu-full):not(.mega-menu-small) .mega-menu-content, .top-search-form").css({
                         width: i + 80
                     }) : e(".mega-menu:not(.mega-menu-full):not(.mega-menu-small) .mega-menu-content, .top-search-form").css({
                         width: i
                     }) : d.hasClass("full-header") && e(".mega-menu:not(.mega-menu-full):not(.mega-menu-small) .mega-menu-content").css({
                         width: i - 80
-                    }), d.find(".header-row").length > 1) {
+                    }),
+                    d.find(".header-row").length > 1) {
                     let i = e(".menu-container > .mega-menu:not(.mega-menu-small) .mega-menu-content").eq(0),
                         n = ".menu-container > .mega-menu:not(.mega-menu-small) .mega-menu-content { top: calc( 100% - " + (u.outerHeight() - i.parents(".header-row").outerHeight()) + "px ); }",
                         t = document.head || document.getElementsByTagName("head")[0],
                         s = document.createElement("style");
-                    t.appendChild(s), s.type = "text/css", s.appendChild(document.createTextNode(n))
+                    t.appendChild(s),
+                        s.type = "text/css",
+                        s.appendChild(document.createTextNode(n))
                 }
             },
             stickyMenu: function(e) {
-                i = a.scrollTop(), (o.hasClass("device-xl") || o.hasClass("device-lg")) && (i > e ? o.hasClass("side-header") || (d.filter(":not(.no-sticky)").addClass("sticky-header"), SEMICOLON.header.stickyMenuClass(), "true" != S || d.hasClass("no-sticky") || (i - e > Number(I) ? (d.addClass("sticky-header-shrink"), C && (x.find("img").css({
-                    height: Number(f)
-                }), SEMICOLON.header.menuItemsSpacing(O))) : (d.removeClass("sticky-header-shrink"), C && (x.find("img").css({
-                    height: Number(g)
-                }), SEMICOLON.header.menuItemsSpacing(h))))) : (SEMICOLON.header.removeStickyness(), C && (x.find("img").css({
-                    height: Number(g)
-                }), SEMICOLON.header.menuItemsSpacing(h)))), (o.hasClass("device-xs") || o.hasClass("device-sm") || o.hasClass("device-md")) && ("true" == p ? i > e ? (d.filter(":not(.no-sticky)").addClass("sticky-header"), SEMICOLON.header.stickyMenuClass()) : (SEMICOLON.header.removeStickyness(), SEMICOLON.header.responsiveMenuClass()) : SEMICOLON.header.removeStickyness(), C && (x.find("img").css({
-                    height: Number(m)
-                }), SEMICOLON.header.menuItemsSpacing("")))
+                i = a.scrollTop(),
+                    (o.hasClass("device-xl") || o.hasClass("device-lg")) && (i > e ? o.hasClass("side-header") || (d.filter(":not(.no-sticky)").addClass("sticky-header"),
+                        SEMICOLON.header.stickyMenuClass(),
+                        "true" != S || d.hasClass("no-sticky") || (i - e > Number(I) ? (d.addClass("sticky-header-shrink"),
+                            C && (x.find("img").css({
+                                    height: Number(f)
+                                }),
+                                SEMICOLON.header.menuItemsSpacing(O))) : (d.removeClass("sticky-header-shrink"),
+                            C && (x.find("img").css({
+                                    height: Number(g)
+                                }),
+                                SEMICOLON.header.menuItemsSpacing(h))))) : (SEMICOLON.header.removeStickyness(),
+                        C && (x.find("img").css({
+                                height: Number(g)
+                            }),
+                            SEMICOLON.header.menuItemsSpacing(h)))),
+                    (o.hasClass("device-xs") || o.hasClass("device-sm") || o.hasClass("device-md")) && ("true" == p ? i > e ? (d.filter(":not(.no-sticky)").addClass("sticky-header"),
+                            SEMICOLON.header.stickyMenuClass()) : (SEMICOLON.header.removeStickyness(),
+                            SEMICOLON.header.responsiveMenuClass()) : SEMICOLON.header.removeStickyness(),
+                        C && (x.find("img").css({
+                                height: Number(m)
+                            }),
+                            SEMICOLON.header.menuItemsSpacing("")))
             },
             menuItemsSpacing: function(e) {
                 let i = b;
@@ -476,15 +614,27 @@ var SEMICOLON = SEMICOLON || {};
                         d.length > 0 && !d.hasClass("no-sticky") && $.filter(".sticky-page-menu:not(.dots-menu,.no-sticky)").find(B).css({
                             top: e + "px"
                         })
-                    } else(o.hasClass("device-sm") || o.hasClass("device-xs") || o.hasClass("device-md")) && "true" == $.attr("data-mobile-sticky") && $.filter(":not(.dots-menu,.no-sticky)").addClass("sticky-page-menu");
-                else $.removeClass("sticky-page-menu"), $.find(B).css({
-                    top: ""
-                })
+                    } else
+                        (o.hasClass("device-sm") || o.hasClass("device-xs") || o.hasClass("device-md")) && "true" == $.attr("data-mobile-sticky") && $.filter(":not(.dots-menu,.no-sticky)").addClass("sticky-page-menu");
+                else
+                    $.removeClass("sticky-page-menu"),
+                    $.find(B).css({
+                        top: ""
+                    })
             },
             removeStickyness: function() {
-                d.hasClass("sticky-header") && (d.removeClass("sticky-header"), d.removeClass().addClass(E), u.removeClass().addClass(v), u.hasClass("force-not-dark") || u.removeClass("not-dark"), SEMICOLON.slider.swiperSliderMenu(), SEMICOLON.slider.revolutionSliderMenu(), y.length > 0 && u.outerHeight() > y.outerHeight() && y.css({
-                    height: u.outerHeight()
-                })), (o.hasClass("device-sm") || o.hasClass("device-xs") || o.hasClass("device-md")) && void 0 === w && (d.removeClass().addClass(E), u.removeClass().addClass(v), u.hasClass("force-not-dark") || u.removeClass("not-dark"))
+                d.hasClass("sticky-header") && (d.removeClass("sticky-header"),
+                        d.removeClass().addClass(L),
+                        u.removeClass().addClass(v),
+                        u.hasClass("force-not-dark") || u.removeClass("not-dark"),
+                        SEMICOLON.slider.swiperSliderMenu(),
+                        SEMICOLON.slider.revolutionSliderMenu(),
+                        y.length > 0 && u.outerHeight() > y.outerHeight() && y.css({
+                            height: u.outerHeight()
+                        })),
+                    (o.hasClass("device-sm") || o.hasClass("device-xs") || o.hasClass("device-md")) && void 0 === w && (d.removeClass().addClass(L),
+                        u.removeClass().addClass(v),
+                        u.hasClass("force-not-dark") || u.removeClass("not-dark"))
             },
             sideHeader: function() {
                 e("#header-trigger").off("click").on("click", function() {
@@ -493,7 +643,8 @@ var SEMICOLON = SEMICOLON || {};
             },
             sidePanel: function() {
                 e(".side-panel-trigger").off("click").on("click", function() {
-                    return o.toggleClass("side-panel-open"), o.hasClass("device-touch") && o.hasClass("side-push-panel") && o.toggleClass("ohidden"), !1
+                    return o.toggleClass("side-panel-open"),
+                        o.hasClass("device-touch") && o.hasClass("side-push-panel") && o.toggleClass("ohidden"), !1
                 })
             },
             onePageScroll: function(e) {
@@ -512,7 +663,13 @@ var SEMICOLON = SEMICOLON || {};
             logo: function() {
                 let e = j.find("img"),
                     i = P.find("img");
-                !d.hasClass("dark") && !o.hasClass("dark") || u.hasClass("not-dark") ? (z && e.attr("src") != z && e.attr("src", z), R && i.attr("src") != R && i.attr("src", R)) : (T && e.attr("src") != T && e.attr("src", T), F && i.attr("src") != F && i.attr("src", F)), d.hasClass("sticky-header") && (_ && e.attr("src") != _ && e.attr("src", _), A && i.attr("src") != A && i.attr("src", A)), (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && (H && e.attr("src") != H && e.attr("src", H), D && i.attr("src") != D && i.attr("src", D))
+                !d.hasClass("dark") && !o.hasClass("dark") || u.hasClass("not-dark") ? (z && e.attr("src") != z && e.attr("src", z),
+                        R && i.attr("src") != R && i.attr("src", R)) : (T && e.attr("src") != T && e.attr("src", T),
+                        F && i.attr("src") != F && i.attr("src", F)),
+                    d.hasClass("sticky-header") && (_ && e.attr("src") != _ && e.attr("src", _),
+                        A && i.attr("src") != A && i.attr("src", A)),
+                    (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && (H && e.attr("src") != H && e.attr("src", H),
+                        D && i.attr("src") != D && i.attr("src", D))
             },
             stickyMenuClass: function() {
                 let e = "";
@@ -520,17 +677,24 @@ var SEMICOLON = SEMICOLON || {};
                 let i = e.length;
                 if (i > 0) {
                     let n = 0;
-                    for (n = 0; n < i; n++) "not-dark" == e[n] ? (d.removeClass("dark"), u.filter(":not(.not-dark)").addClass("not-dark")) : "dark" == e[n] ? (u.removeClass("not-dark force-not-dark"), d.hasClass(e[n]) || d.addClass(e[n])) : d.hasClass(e[n]) || d.addClass(e[n])
+                    for (n = 0; n < i; n++)
+                        "not-dark" == e[n] ? (d.removeClass("dark"),
+                            u.filter(":not(.not-dark)").addClass("not-dark")) : "dark" == e[n] ? (u.removeClass("not-dark force-not-dark"),
+                            d.hasClass(e[n]) || d.addClass(e[n])) : d.hasClass(e[n]) || d.addClass(e[n])
                 }
             },
             responsiveMenuClass: function() {
-                if (o.hasClass("device-xl") || o.hasClass("device-lg")) return !0;
+                if (o.hasClass("device-xl") || o.hasClass("device-lg"))
+                    return !0;
                 let e = "";
                 w && (e = w.split(/ +/));
                 let i = e.length;
                 if (i > 0) {
                     let n = 0;
-                    for (n = 0; n < i; n++) "not-dark" == e[n] ? (d.removeClass("dark"), u.addClass("not-dark")) : "dark" == e[n] ? (u.removeClass("not-dark force-not-dark"), d.hasClass(e[n]) || d.addClass(e[n])) : d.hasClass(e[n]) || d.addClass(e[n])
+                    for (n = 0; n < i; n++)
+                        "not-dark" == e[n] ? (d.removeClass("dark"),
+                            u.addClass("not-dark")) : "dark" == e[n] ? (u.removeClass("not-dark force-not-dark"),
+                            d.hasClass(e[n]) || d.addClass(e[n])) : d.hasClass(e[n]) || d.addClass(e[n])
                 }
                 SEMICOLON.header.logo()
             },
@@ -538,54 +702,90 @@ var SEMICOLON = SEMICOLON || {};
                 Y.parents(".header-row").addClass("top-search-parent");
                 let i = d.find(".top-search-parent");
                 e("#top-search-trigger").off("click").on("click", function(e) {
-                    clearTimeout(n), o.toggleClass("top-search-open"), G.toggleClass("top-cart-open", !1), (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && (M.filter(":not(.mobile-menu-off-canvas)").find(".menu-container").slideUp(200), M.filter(".mobile-menu-off-canvas").find(".menu-container").toggleClass("d-block", !1)), o.hasClass("top-search-open") ? i.toggleClass("position-relative", !0) : n = setTimeout(function() {
-                        i.toggleClass("position-relative", !1)
-                    }, 750), o.toggleClass("primary-menu-open", !1), $.toggleClass("page-menu-open", !1), o.hasClass("top-search-open") && Y.find("input").focus(), e.stopPropagation(), e.preventDefault()
+                    clearTimeout(n),
+                        o.toggleClass("top-search-open"),
+                        G.toggleClass("top-cart-open", !1),
+                        (o.hasClass("device-md") || o.hasClass("device-sm") || o.hasClass("device-xs")) && (M.filter(":not(.mobile-menu-off-canvas)").find(".menu-container").slideUp(200),
+                            M.filter(".mobile-menu-off-canvas").find(".menu-container").toggleClass("d-block", !1)),
+                        o.hasClass("top-search-open") ? i.toggleClass("position-relative", !0) : n = setTimeout(function() {
+                            i.toggleClass("position-relative", !1)
+                        }, 750),
+                        o.toggleClass("primary-menu-open", !1),
+                        $.toggleClass("page-menu-open", !1),
+                        o.hasClass("top-search-open") && Y.find("input").focus(),
+                        e.stopPropagation(),
+                        e.preventDefault()
                 })
             },
             topcart: function() {
-                if (G.length < 1) return !0;
+                if (G.length < 1)
+                    return !0;
                 e("#top-cart-trigger").off("click").on("click", function(e) {
-                    $.toggleClass("page-menu-open", !1), G.toggleClass("top-cart-open"), e.stopPropagation(), e.preventDefault()
+                    $.toggleClass("page-menu-open", !1),
+                        G.toggleClass("top-cart-open"),
+                        e.stopPropagation(),
+                        e.preventDefault()
                 })
             },
             miscFunctions: function() {
                 let i = d.find(".top-search-parent");
                 e(document).on("click", function(t) {
-                    e(t.target).closest(".top-search-form").length || (o.toggleClass("top-search-open", !1), n = setTimeout(function() {
-                        i.toggleClass("position-relative", !1)
-                    }, 750)), e(t.target).closest("#top-cart").length || G.toggleClass("top-cart-open", !1), e(t.target).closest("#page-menu").length || $.toggleClass("page-menu-open", !1), e(t.target).closest("#side-panel").length || o.toggleClass("side-panel-open", !1), e(t.target).closest(".primary-menu.on-click").length || M.filter(".on-click").find(".menu-container").find(".d-block").removeClass("d-block"), e(t.target).closest(".primary-menu.mobile-menu-off-canvas .menu-container").length || M.filter(".mobile-menu-off-canvas").find(".menu-container").toggleClass("d-block", !1), e(t.target).closest(".top-links.on-click").length || e(".top-links.on-click").find(".top-links-sub-menu,.top-links-section").removeClass("d-block")
+                    e(t.target).closest(".top-search-form").length || (o.toggleClass("top-search-open", !1),
+                            n = setTimeout(function() {
+                                i.toggleClass("position-relative", !1)
+                            }, 750)),
+                        e(t.target).closest("#top-cart").length || G.toggleClass("top-cart-open", !1),
+                        e(t.target).closest("#page-menu").length || $.toggleClass("page-menu-open", !1),
+                        e(t.target).closest("#side-panel").length || o.toggleClass("side-panel-open", !1),
+                        e(t.target).closest(".primary-menu.on-click").length || M.filter(".on-click").find(".menu-container").find(".d-block").removeClass("d-block"),
+                        M.hasClass("mobile-menu-off-canvas") && (e(t.target).closest(".primary-menu.mobile-menu-off-canvas .menu-container").length || (M.filter(".mobile-menu-off-canvas").find(".menu-container").toggleClass("d-block", !1),
+                            o.toggleClass("primary-menu-open", !1))),
+                        e(t.target).closest(".top-links.on-click").length || e(".top-links.on-click").find(".top-links-sub-menu,.top-links-section").removeClass("d-block")
                 })
             }
-        }, SEMICOLON.slider = {
+        },
+        SEMICOLON.slider = {
             init: function() {
-                SEMICOLON.slider.sliderDimensions(), SEMICOLON.slider.sliderRun(), SEMICOLON.slider.sliderParallax(), SEMICOLON.slider.sliderElementsFade()
+                SEMICOLON.slider.sliderDimensions(),
+                    SEMICOLON.slider.sliderRun(),
+                    SEMICOLON.slider.sliderParallax(),
+                    SEMICOLON.slider.sliderElementsFade()
             },
             sliderDimensions: function() {
-                let e = U.outerHeight(),
-                    i = U.outerWidth(),
-                    n = U.find(".slider-inner"),
+                let e = Q.outerHeight(),
+                    i = Q.outerWidth(),
+                    n = Q.find(".slider-inner"),
                     t = W.find(".swiper-wrapper"),
                     s = W.find(".swiper-slide").first(),
                     l = W.hasClass("h-auto") || W.hasClass("min-vh-0");
                 if (o.hasClass("device-xl") || o.hasClass("device-lg")) {
                     if (setTimeout(function() {
-                            n.height(e), l && (e = U.find(".slider-inner").children().first().outerHeight(), U.height(e), n.height(e))
-                        }, 500), l) {
+                            n.height(e),
+                                l && (e = Q.find(".slider-inner").children().first().outerHeight(),
+                                    Q.height(e),
+                                    n.height(e))
+                        }, 500),
+                        l) {
                         let e = s.children().first();
-                        (e.hasClass("container") || e.hasClass("container-fluid")) && (e = e.children().first()), e.outerHeight() > t.outerHeight() && t.css({
+                        (e.hasClass("container") || e.hasClass("container-fluid")) && (e = e.children().first()),
+                        e.outerHeight() > t.outerHeight() && t.css({
                             height: "auto"
                         })
                     }
-                    o.hasClass("side-header") && n.width(i), o.hasClass("stretched") || (i = r.outerWidth(), n.width(i))
-                } else t.css({
-                    height: ""
-                }), U.css({
-                    height: ""
-                }), n.css({
-                    width: "",
-                    height: ""
-                })
+                    o.hasClass("side-header") && n.width(i),
+                        o.hasClass("stretched") || (i = r.outerWidth(),
+                            n.width(i))
+                } else
+                    t.css({
+                        height: ""
+                    }),
+                    Q.css({
+                        height: ""
+                    }),
+                    n.css({
+                        width: "",
+                        height: ""
+                    })
             },
             sliderRun: function(e) {
                 let i = {
@@ -603,40 +803,64 @@ var SEMICOLON = SEMICOLON || {};
             sliderParallaxOffset: function() {
                 let e = 0,
                     i = d.outerHeight();
-                return (o.hasClass("side-header") || d.next(".include-header").length > 0) && (i = 0), e = J.length > 0 ? J.outerHeight() + i : i, W.next("#header").length > 0 && (e = 0), e
+                return (o.hasClass("side-header") || d.next(".include-header").length > 0) && (i = 0),
+                    e = J.length > 0 ? J.outerHeight() + i : i,
+                    W.next("#header").length > 0 && (e = 0),
+                    e
             },
             sliderParallaxSet: function(e, i, n) {
                 n && (n.style.transform = "translate3d(" + e + ", " + i + "px, 0)")
             },
             sliderParallax: function() {
-                if (U.length < 1) return !0;
+                if (Q.length < 1)
+                    return !0;
                 let e, i, n = SEMICOLON.slider.sliderParallaxOffset(),
-                    l = U.outerHeight();
-                t = window.scrollX, s = window.scrollY, !o.hasClass("device-xl") && !o.hasClass("device-lg") || SEMICOLON.isMobile.any() ? U.find(".slider-inner").length > 0 ? (SEMICOLON.slider.sliderParallaxSet(0, 0, ie), SEMICOLON.slider.sliderParallaxSet(0, 0, ee)) : (SEMICOLON.slider.sliderParallaxSet(0, 0, Z), SEMICOLON.slider.sliderParallaxSet(0, 0, ee)) : (l + n + 50 > s ? (U.addClass("slider-parallax-visible").removeClass("slider-parallax-invisible"), s > n ? U.find(".slider-inner").length > 0 ? (e = -.4 * (s - n), i = -.15 * (s - n), SEMICOLON.slider.sliderParallaxSet(0, e, ie), SEMICOLON.slider.sliderParallaxSet(0, i, ee)) : (e = (s - n) / 1.5, i = (s - n) / 7, SEMICOLON.slider.sliderParallaxSet(0, e, Z), SEMICOLON.slider.sliderParallaxSet(0, i, ee)) : U.find(".slider-inner").length > 0 ? (SEMICOLON.slider.sliderParallaxSet(0, 0, ie), SEMICOLON.slider.sliderParallaxSet(0, 0, ee)) : (SEMICOLON.slider.sliderParallaxSet(0, 0, Z), SEMICOLON.slider.sliderParallaxSet(0, 0, ee))) : U.addClass("slider-parallax-invisible").removeClass("slider-parallax-visible"), requestAnimationFrame(function() {
-                    SEMICOLON.slider.sliderParallax(), SEMICOLON.slider.sliderElementsFade()
-                }))
+                    l = Q.outerHeight();
+                t = window.pageXOffset,
+                    s = window.pageYOffset, !o.hasClass("device-xl") && !o.hasClass("device-lg") || SEMICOLON.isMobile.any() ? (Q.find(".slider-inner").length > 0 ? (SEMICOLON.slider.sliderParallaxSet(0, 0, ie),
+                            SEMICOLON.slider.sliderParallaxSet(0, 0, ee)) : (SEMICOLON.slider.sliderParallaxSet(0, 0, Z),
+                            SEMICOLON.slider.sliderParallaxSet(0, 0, ee)),
+                        Q.addClass("slider-parallax-visible").removeClass("slider-parallax-invisible")) : (l + n + 50 > s ? (Q.addClass("slider-parallax-visible").removeClass("slider-parallax-invisible"),
+                            s > n ? Q.find(".slider-inner").length > 0 ? (e = -.4 * (s - n),
+                                i = -.15 * (s - n),
+                                SEMICOLON.slider.sliderParallaxSet(0, e, ie),
+                                SEMICOLON.slider.sliderParallaxSet(0, i, ee)) : (e = (s - n) / 1.5,
+                                i = (s - n) / 7,
+                                SEMICOLON.slider.sliderParallaxSet(0, e, Z),
+                                SEMICOLON.slider.sliderParallaxSet(0, i, ee)) : Q.find(".slider-inner").length > 0 ? (SEMICOLON.slider.sliderParallaxSet(0, 0, ie),
+                                SEMICOLON.slider.sliderParallaxSet(0, 0, ee)) : (SEMICOLON.slider.sliderParallaxSet(0, 0, Z),
+                                SEMICOLON.slider.sliderParallaxSet(0, 0, ee))) : Q.addClass("slider-parallax-invisible").removeClass("slider-parallax-visible"),
+                        requestAnimationFrame(function() {
+                            SEMICOLON.slider.sliderParallax(),
+                                SEMICOLON.slider.sliderElementsFade()
+                        }))
             },
             sliderElementsFade: function() {
-                if (U.length < 1) return !0;
-                if (!o.hasClass("device-xl") && !o.hasClass("device-lg") || SEMICOLON.isMobile.any()) U.find(".slider-arrow-left,.slider-arrow-right,.slider-caption,.slider-element-fade").css({
-                    opacity: 1
-                });
+                if (Q.length < 1)
+                    return !0;
+                if (!o.hasClass("device-xl") && !o.hasClass("device-lg") || SEMICOLON.isMobile.any())
+                    Q.find(".slider-arrow-left,.slider-arrow-right,.slider-caption,.slider-element-fade").css({
+                        opacity: 1
+                    });
                 else {
                     SEMICOLON.slider.sliderParallaxOffset();
-                    let e, i = U.outerHeight();
-                    e = d.hasClass("transparent-header") || o.hasClass("side-header") ? 100 : 0, U.filter(".slider-parallax-visible").find(".slider-arrow-left,.slider-arrow-right,.slider-caption,.slider-element-fade").css({
-                        opacity: 1 - 1.85 * (s - e) / i
-                    })
+                    let e, i = Q.outerHeight();
+                    e = d.hasClass("transparent-header") || o.hasClass("side-header") ? 100 : 0,
+                        Q.filter(".slider-parallax-visible").find(".slider-arrow-left,.slider-arrow-right,.slider-caption,.slider-element-fade").css({
+                            opacity: 1 - 1.85 * (s - e) / i
+                        })
                 }
             },
             swiperSliderMenu: function(e) {
-                if (e = void 0 !== e && e, o.hasClass("device-xl") || o.hasClass("device-lg") || d.hasClass("transparent-header-responsive") && !o.hasClass("primary-menu-open")) {
+                if (e = void 0 !== e && e,
+                    o.hasClass("device-xl") || o.hasClass("device-lg") || d.hasClass("transparent-header-responsive") && !o.hasClass("primary-menu-open")) {
                     let i = W.find(".swiper-slide.swiper-slide-active");
                     SEMICOLON.slider.headerSchemeChanger(i, e)
                 }
             },
             revolutionSliderMenu: function(e) {
-                if (e = void 0 !== e && e, o.hasClass("device-xl") || o.hasClass("device-lg") || d.hasClass("transparent-header-responsive") && !o.hasClass("primary-menu-open")) {
+                if (e = void 0 !== e && e,
+                    o.hasClass("device-xl") || o.hasClass("device-lg") || d.hasClass("transparent-header-responsive") && !o.hasClass("primary-menu-open")) {
                     let i = W.find(".active-revslide");
                     SEMICOLON.slider.headerSchemeChanger(i, e)
                 }
@@ -645,7 +869,7 @@ var SEMICOLON = SEMICOLON || {};
                 if (i.length > 0) {
                     let t, s, l = !1;
                     if (i.hasClass("dark")) {
-                        if ((s = (t = E ? E.split(/ +/) : "").length) > 0) {
+                        if ((s = (t = L ? L.split(/ +/) : "").length) > 0) {
                             let e = 0;
                             for (e = 0; e < s; e++)
                                 if ("dark" == t[e] && 1 == n) {
@@ -653,19 +877,28 @@ var SEMICOLON = SEMICOLON || {};
                                     break
                                 }
                         }
-                        e("#header.transparent-header:not(.sticky-header,.semi-transparent,.floating-header)").addClass("dark"), l || e("#header.transparent-header.sticky-header,#header.transparent-header.semi-transparent.sticky-header,#header.transparent-header.floating-header.sticky-header").removeClass("dark"), u.removeClass("not-dark")
-                    } else o.hasClass("dark") ? (i.addClass("not-dark"), e("#header.transparent-header:not(.semi-transparent,.floating-header)").removeClass("dark"), e("#header.transparent-header:not(.sticky-header,.semi-transparent,.floating-header)").find("#header-wrap").addClass("not-dark")) : (e("#header.transparent-header:not(.semi-transparent,.floating-header)").removeClass("dark"), u.removeClass("not-dark"));
-                    d.hasClass("sticky-header") && SEMICOLON.header.stickyMenuClass(), SEMICOLON.header.logo()
+                        e("#header.transparent-header:not(.sticky-header,.semi-transparent,.floating-header)").addClass("dark"),
+                            l || e("#header.transparent-header.sticky-header,#header.transparent-header.semi-transparent.sticky-header,#header.transparent-header.floating-header.sticky-header").removeClass("dark"),
+                            u.removeClass("not-dark")
+                    } else
+                        o.hasClass("dark") ? (i.addClass("not-dark"),
+                            e("#header.transparent-header:not(.semi-transparent,.floating-header)").removeClass("dark"),
+                            e("#header.transparent-header:not(.sticky-header,.semi-transparent,.floating-header)").find("#header-wrap").addClass("not-dark")) : (e("#header.transparent-header:not(.semi-transparent,.floating-header)").removeClass("dark"),
+                            u.removeClass("not-dark"));
+                    d.hasClass("sticky-header") && SEMICOLON.header.stickyMenuClass(),
+                        SEMICOLON.header.logo()
                 }
             }
         },
         SEMICOLON.portfolio = {
             init: function() {
-                SEMICOLON.portfolio.revealDesc(), SEMICOLON.portfolio.ajaxload()
+                SEMICOLON.portfolio.revealDesc(),
+                    SEMICOLON.portfolio.ajaxload()
             },
             revealDesc: function() {
                 let i = e(".portfolio-reveal");
-                if (i < 1) return !0;
+                if (i < 1)
+                    return !0;
                 i.each(function() {
                     e(this).find(".portfolio-item").each(function() {
                         let i = e(this).find(".portfolio-desc"),
@@ -687,9 +920,37 @@ var SEMICOLON = SEMICOLON || {};
                     class: "has-plugin-ajaxportfolio"
                 })
             }
-        }, SEMICOLON.widget = {
+        },
+        SEMICOLON.widget = {
             init: function() {
-                SEMICOLON.widget.animations(), SEMICOLON.widget.hoverAnimation(), SEMICOLON.widget.youtubeBgVideo(), SEMICOLON.widget.tabs(), SEMICOLON.widget.toggles(), SEMICOLON.widget.accordions(), SEMICOLON.widget.counter(), SEMICOLON.widget.countdown(), SEMICOLON.widget.gmap(), SEMICOLON.widget.roundedSkill(), SEMICOLON.widget.progress(), SEMICOLON.widget.twitterFeed(), SEMICOLON.widget.flickrFeed(), SEMICOLON.widget.instagramPhotos(), SEMICOLON.widget.dribbbleShots(), SEMICOLON.widget.navTree(), SEMICOLON.widget.textRotator(), SEMICOLON.widget.carousel(), SEMICOLON.widget.linkScroll(), SEMICOLON.widget.ajaxForm(), SEMICOLON.widget.subscription(), SEMICOLON.widget.shapeDivider(), SEMICOLON.widget.stickySidebar(), SEMICOLON.widget.cookieNotify(), SEMICOLON.widget.cartQuantity(), SEMICOLON.widget.readmore(), SEMICOLON.widget.pricingSwitcher(), SEMICOLON.widget.extras()
+                SEMICOLON.widget.animations(),
+                    SEMICOLON.widget.hoverAnimation(),
+                    SEMICOLON.widget.youtubeBgVideo(),
+                    SEMICOLON.widget.tabs(),
+                    SEMICOLON.widget.toggles(),
+                    SEMICOLON.widget.accordions(),
+                    SEMICOLON.widget.counter(),
+                    SEMICOLON.widget.countdown(),
+                    SEMICOLON.widget.gmap(),
+                    SEMICOLON.widget.roundedSkill(),
+                    SEMICOLON.widget.progress(),
+                    SEMICOLON.widget.twitterFeed(),
+                    SEMICOLON.widget.flickrFeed(),
+                    SEMICOLON.widget.instagramPhotos(),
+                    SEMICOLON.widget.dribbbleShots(),
+                    SEMICOLON.widget.navTree(),
+                    SEMICOLON.widget.textRotator(),
+                    SEMICOLON.widget.carousel(),
+                    SEMICOLON.widget.linkScroll(),
+                    SEMICOLON.widget.ajaxForm(),
+                    SEMICOLON.widget.subscription(),
+                    SEMICOLON.widget.shapeDivider(),
+                    SEMICOLON.widget.stickySidebar(),
+                    SEMICOLON.widget.cookieNotify(),
+                    SEMICOLON.widget.cartQuantity(),
+                    SEMICOLON.widget.readmore(),
+                    SEMICOLON.widget.pricingSwitcher(),
+                    SEMICOLON.widget.extras()
             },
             parallax: function(e) {
                 let i = {
@@ -868,7 +1129,8 @@ var SEMICOLON = SEMICOLON || {};
                         trigger: "pluginCountdownReady",
                         class: "has-plugin-countdown"
                     };
-                SEMICOLON.initialize.functions(i), SEMICOLON.initialize.functions(n)
+                SEMICOLON.initialize.functions(i),
+                    SEMICOLON.initialize.functions(n)
             },
             gmap: function(e) {
                 let i = {
@@ -892,7 +1154,8 @@ var SEMICOLON = SEMICOLON || {};
                         trigger: "pluginGmapReady",
                         class: "has-plugin-gmap"
                     };
-                SEMICOLON.initialize.functions(i), SEMICOLON.initialize.functions(n)
+                SEMICOLON.initialize.functions(i),
+                    SEMICOLON.initialize.functions(n)
             },
             roundedSkill: function(e) {
                 let i = {
@@ -979,7 +1242,8 @@ var SEMICOLON = SEMICOLON || {};
                         trigger: "pluginImagesLoadedReady",
                         class: "has-plugin-imagesloaded"
                     };
-                SEMICOLON.initialize.functions(i), SEMICOLON.initialize.functions(n)
+                SEMICOLON.initialize.functions(i),
+                    SEMICOLON.initialize.functions(n)
             },
             navTree: function(e) {
                 let i = {
@@ -1079,7 +1343,8 @@ var SEMICOLON = SEMICOLON || {};
                         trigger: "pluginAjaxFormReady",
                         class: "has-plugin-ajaxform"
                     };
-                SEMICOLON.initialize.functions(i), SEMICOLON.initialize.functions(n)
+                SEMICOLON.initialize.functions(i),
+                    SEMICOLON.initialize.functions(n)
             },
             subscription: function(e) {
                 let i = {
@@ -1101,7 +1366,8 @@ var SEMICOLON = SEMICOLON || {};
                         trigger: "pluginSubscribeFormReady",
                         class: "has-plugin-subscribeform"
                     };
-                SEMICOLON.initialize.functions(i), SEMICOLON.initialize.functions(n)
+                SEMICOLON.initialize.functions(i),
+                    SEMICOLON.initialize.functions(n)
             },
             shapeDivider: function(e) {
                 let i = {
@@ -1190,18 +1456,27 @@ var SEMICOLON = SEMICOLON || {};
             },
             extras: function() {
                 e(window).on("pluginBootstrapReady", function() {
-                    e().tooltip ? e('[data-toggle="tooltip"]').tooltip({
-                        container: "body"
-                    }) : console.log("extras: Bootstrap Tooltip not defined."), e().popover ? e("[data-toggle=popover]").popover() : console.log("extras: Bootstrap Popover not defined.")
-                }), e(".style-msg").on("click", ".close", function(i) {
-                    e(this).parents(".style-msg").slideUp(), i.preventDefault()
-                }), e("#page-menu-trigger").off("click").on("click", function() {
-                    return o.toggleClass("top-search-open", !1), $.toggleClass("page-menu-open"), !1
-                }), $.find("nav").off("click").on("click", function(e) {
-                    o.toggleClass("top-search-open", !1), G.toggleClass("top-cart-open", !1)
-                }), SEMICOLON.isMobile.any() && o.addClass("device-touch")
+                        e().tooltip ? e('[data-toggle="tooltip"]').tooltip({
+                                container: "body"
+                            }) : console.log("extras: Bootstrap Tooltip not defined."),
+                            e().popover ? e("[data-toggle=popover]").popover() : console.log("extras: Bootstrap Popover not defined.")
+                    }),
+                    e(".style-msg").on("click", ".close", function(i) {
+                        e(this).parents(".style-msg").slideUp(),
+                            i.preventDefault()
+                    }),
+                    e("#page-menu-trigger").off("click").on("click", function() {
+                        return o.toggleClass("top-search-open", !1),
+                            $.toggleClass("page-menu-open"), !1
+                    }),
+                    $.find("nav").off("click").on("click", function(e) {
+                        o.toggleClass("top-search-open", !1),
+                            G.toggleClass("top-cart-open", !1)
+                    }),
+                    SEMICOLON.isMobile.any() && o.addClass("device-touch")
             }
-        }, SEMICOLON.isMobile = {
+        },
+        SEMICOLON.isMobile = {
             Android: function() {
                 return navigator.userAgent.match(/Android/i)
             },
@@ -1220,65 +1495,124 @@ var SEMICOLON = SEMICOLON || {};
             any: function() {
                 return SEMICOLON.isMobile.Android() || SEMICOLON.isMobile.BlackBerry() || SEMICOLON.isMobile.iOS() || SEMICOLON.isMobile.Opera() || SEMICOLON.isMobile.Windows()
             }
-        }, SEMICOLON.customization = {
+        },
+        SEMICOLON.customization = {
             onReady: function() {},
             onLoad: function() {},
             onResize: function() {}
-        }, SEMICOLON.documentOnResize = {
+        },
+        SEMICOLON.documentOnResize = {
             init: function() {
-                SEMICOLON.header.menufunctions(), SEMICOLON.header.fullWidthMenu(), SEMICOLON.header.stickyMenu(), SEMICOLON.initialize.dataResponsiveHeights(), SEMICOLON.initialize.stickFooterOnSmall(), SEMICOLON.slider.sliderDimensions(), SEMICOLON.widget.html5Video(), SEMICOLON.widget.masonryThumbs(), SEMICOLON.initialize.dataResponsiveClasses(), SEMICOLON.customization.onResize(), L = a.width()
+                SEMICOLON.header.menufunctions(),
+                    SEMICOLON.header.fullWidthMenu(),
+                    SEMICOLON.header.stickyMenu(),
+                    SEMICOLON.initialize.dataResponsiveHeights(),
+                    SEMICOLON.initialize.stickFooterOnSmall(),
+                    SEMICOLON.slider.sliderDimensions(),
+                    SEMICOLON.slider.sliderParallax(),
+                    SEMICOLON.widget.html5Video(),
+                    SEMICOLON.widget.masonryThumbs(),
+                    SEMICOLON.initialize.dataResponsiveClasses(),
+                    SEMICOLON.customization.onResize(),
+                    E = a.width(),
+                    e(window).trigger("scwWindowResize")
             }
-        }, SEMICOLON.documentOnReady = {
+        },
+        SEMICOLON.documentOnReady = {
             init: function() {
-                SEMICOLON.initialize.init(), SEMICOLON.header.init(), (W.length > 0 || Q.length > 0) && SEMICOLON.slider.init(), V.length > 0 && SEMICOLON.portfolio.init(), SEMICOLON.widget.init(), SEMICOLON.documentOnReady.windowscroll(), SEMICOLON.customization.onReady(), o.hasClass("adaptive-color-scheme") && (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && o.toggleClass("dark", !0), window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(e) {
-                    e.matches ? o.toggleClass("dark", !0) : o.toggleClass("dark", !1)
-                })), o.off("click").on("click", 'a[href*="#"]', function() {
-                    a.on("beforeunload", function() {
-                        a.scrollTop(0)
-                    })
-                });
+                SEMICOLON.initialize.init(),
+                    SEMICOLON.header.init(),
+                    (W.length > 0 || U.length > 0) && SEMICOLON.slider.init(),
+                    V.length > 0 && SEMICOLON.portfolio.init(),
+                    SEMICOLON.widget.init(),
+                    SEMICOLON.documentOnReady.windowscroll(),
+                    SEMICOLON.customization.onReady(),
+                    o.hasClass("adaptive-color-scheme") && (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && o.toggleClass("dark", !0),
+                        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(e) {
+                            e.matches ? o.toggleClass("dark", !0) : o.toggleClass("dark", !1)
+                        })),
+                    o.off("click").on("click", 'a[href*="#"]', function() {
+                        a.on("beforeunload", function() {
+                            a.scrollTop(0)
+                        })
+                    });
                 let i = location.hash;
                 e(i).length > 0 && e(".one-page-menu").find('[data-href="' + i + '"]').length > 0 && a.scrollTop(0)
             },
             windowscroll: function() {
-                d.length > 0 && (ne = d.offset().top, u.addClass("position-absolute"), te = u.offset().top, u.removeClass("position-absolute"));
+                d.length > 0 && (ne = d.offset().top,
+                    u.addClass("position-absolute"),
+                    te = u.offset().top,
+                    u.removeClass("position-absolute"));
                 let i = d.attr("data-sticky-offset");
                 if (void 0 !== i)
                     if ("full" == i) {
                         te = a.height();
                         let e = d.attr("data-sticky-offset-negative");
                         void 0 !== e && (te = te - e - 1)
-                    } else te = Number(i);
-                else "undefined" === te && (te = ne);
+                    } else
+                        te = Number(i);
+                else
+                    "undefined" === te && (te = ne);
                 $.find("#page-menu-wrap");
                 let n, t = u.outerHeight(),
                     s = document.head || document.getElementsByTagName("head")[0],
                     l = document.createElement("style");
                 $.length > 0 && (q.css({
-                    height: $.find("#page-menu-wrap").outerHeight()
-                }), setTimeout(function() {
-                    d.length > 0 && !d.hasClass("no-sticky") && (o.hasClass("device-xl") || o.hasClass("device-lg") || "true" == p) ? (se = $.offset().top - u.outerHeight(), s.appendChild(l), n = "#page-menu.sticky-page-menu:not(.dots-menu) #page-menu-wrap { top: " + t + "px; }", l.type = "text/css", l.appendChild(document.createTextNode(n))) : se = $.offset().top
-                }, 1e3)), SEMICOLON.header.stickyMenu(te), SEMICOLON.header.stickyPageMenu(se), window.addEventListener("scroll", function() {
-                    SEMICOLON.initialize.goToTopScroll(), e("body.open-header.close-header-on-scroll").removeClass("side-header-open"), SEMICOLON.header.stickyMenu(te), SEMICOLON.header.stickyPageMenu(se), SEMICOLON.header.logo()
-                }), window.addEventListener("DOMContentLoaded", onScrollSliderParallax, !1), a.scrollEnd(function() {
-                    let e = u.outerHeight();
-                    y.length > 0 && e > y.outerHeight() && (y.css({
-                        height: e
-                    }), (o.hasClass("device-xl") || o.hasClass("device-lg")) && SEMICOLON.header.includeOffset()), $.length > 0 && d.length > 0 && !d.hasClass("no-sticky") && (o.hasClass("device-xl") || o.hasClass("device-lg")) && $.filter(".sticky-page-menu:not(.dots-menu,.no-sticky)").find(B).css({
-                        top: e + "px"
-                    })
-                }, 500), window.onfocus = function() {
-                    let e = u.outerHeight();
-                    y.length > 0 && e > y.outerHeight() && y.css({
-                        height: e
-                    })
-                }
+                            height: $.find("#page-menu-wrap").outerHeight()
+                        }),
+                        setTimeout(function() {
+                            d.length > 0 && !d.hasClass("no-sticky") && (o.hasClass("device-xl") || o.hasClass("device-lg") || "true" == p) ? (se = $.offset().top - u.outerHeight(),
+                                s.appendChild(l),
+                                n = "#page-menu.sticky-page-menu:not(.dots-menu) #page-menu-wrap { top: " + t + "px; }",
+                                l.type = "text/css",
+                                l.appendChild(document.createTextNode(n))) : se = $.offset().top
+                        }, 1e3)),
+                    SEMICOLON.header.stickyMenu(te),
+                    SEMICOLON.header.stickyPageMenu(se),
+                    window.addEventListener("scroll", function() {
+                        SEMICOLON.initialize.goToTopScroll(),
+                            e("body.open-header.close-header-on-scroll").removeClass("side-header-open"),
+                            SEMICOLON.header.stickyMenu(te),
+                            SEMICOLON.header.stickyPageMenu(se),
+                            SEMICOLON.header.logo()
+                    }),
+                    window.addEventListener("DOMContentLoaded", onScrollSliderParallax, !1),
+                    a.scrollEnd(function() {
+                        let e = u.outerHeight();
+                        y.length > 0 && e > y.outerHeight() && (y.css({
+                                    height: e
+                                }),
+                                (o.hasClass("device-xl") || o.hasClass("device-lg")) && SEMICOLON.header.includeOffset()),
+                            $.length > 0 && d.length > 0 && !d.hasClass("no-sticky") && (o.hasClass("device-xl") || o.hasClass("device-lg")) && $.filter(".sticky-page-menu:not(.dots-menu,.no-sticky)").find(B).css({
+                                top: e + "px"
+                            })
+                    }, 500),
+                    window.onfocus = function() {
+                        let e = u.outerHeight();
+                        y.length > 0 && e > y.outerHeight() && y.css({
+                            height: e
+                        })
+                    }
             }
-        }, SEMICOLON.documentOnLoad = {
+        },
+        SEMICOLON.documentOnLoad = {
             init: function() {
-                SEMICOLON.slider.swiperSliderMenu(!0), SEMICOLON.slider.revolutionSliderMenu(!0), SEMICOLON.initialize.stickFooterOnSmall(), SEMICOLON.widget.gridInit(), a.on("pluginIsotopeReady", function() {
-                    SEMICOLON.widget.filterInit(), SEMICOLON.widget.masonryThumbs()
-                }), SEMICOLON.widget.parallax(), SEMICOLON.widget.loadFlexSlider(), SEMICOLON.widget.html5Video(), SEMICOLON.widget.ticker(), SEMICOLON.header.responsiveMenuClass(), SEMICOLON.initialize.modal(), SEMICOLON.customization.onLoad()
+                SEMICOLON.slider.swiperSliderMenu(!0),
+                    SEMICOLON.slider.revolutionSliderMenu(!0),
+                    SEMICOLON.initialize.stickFooterOnSmall(),
+                    SEMICOLON.widget.gridInit(),
+                    a.on("pluginIsotopeReady", function() {
+                        SEMICOLON.widget.filterInit(),
+                            SEMICOLON.widget.masonryThumbs()
+                    }),
+                    SEMICOLON.widget.parallax(),
+                    SEMICOLON.widget.loadFlexSlider(),
+                    SEMICOLON.widget.html5Video(),
+                    SEMICOLON.widget.ticker(),
+                    SEMICOLON.header.responsiveMenuClass(),
+                    SEMICOLON.initialize.modal(),
+                    SEMICOLON.customization.onLoad()
             }
         };
     let i, n, t, s, l, a = e(window),
@@ -1288,10 +1622,11 @@ var SEMICOLON = SEMICOLON || {};
         u = e("#header-wrap"),
         c = e(".include-header"),
         g = d.attr("data-logo-height") || 100,
-        f = d.attr("data-sticky-logo-height") || 30,
+        f = d.attr("data-sticky-logo-height") || 60,
         p = d.attr("data-mobile-sticky") || "false",
         m = d.attr("data-mobile-logo-height") || Number(g),
-        h = (d.attr("data-mobile-sticky-logo-height") || Number(f), d.attr("data-menu-padding") || 39),
+        h = (d.attr("data-mobile-sticky-logo-height") || Number(f),
+            d.attr("data-menu-padding") || 39),
         O = d.attr("data-sticky-menu-padding") || 19,
         C = !(d.hasClass("header-size-lg") || d.hasClass("header-size-md") || d.hasClass("header-size-sm") || d.hasClass("header-size-custom")),
         S = d.attr("data-sticky-shrink") || "true",
@@ -1299,15 +1634,19 @@ var SEMICOLON = SEMICOLON || {};
         M = e(".primary-menu"),
         b = M.find(".menu-container:not(mobile-primary-menu):not(.custom-spacing)").children(".menu-item").children(".menu-link"),
         y = "",
-        N = (u.outerHeight(), u.find(".header-row:eq(0)"), e("#content"), e("#footer")),
-        L = a.width(),
-        E = d.attr("class"),
+        N = (u.outerHeight(),
+            u.find(".header-row:eq(0)"),
+            e("#content"),
+            e("#footer")),
+        E = a.width(),
+        L = d.attr("class"),
         v = u.attr("class"),
         k = d.attr("data-sticky-class"),
         w = d.attr("data-responsive-class"),
         x = e("#logo"),
         j = x.find(".standard-logo"),
-        P = (j.find("img").outerWidth(), x.find(".retina-logo")),
+        P = (j.find("img").outerWidth(),
+            x.find(".retina-logo")),
         z = j.find("img").attr("src"),
         R = P.find("img").attr("src"),
         T = j.attr("data-dark-logo"),
@@ -1319,14 +1658,17 @@ var SEMICOLON = SEMICOLON || {};
         $ = e("#page-menu"),
         q = "",
         B = $.find("#page-menu-wrap"),
-        V = (e(".one-page-menu"), e(".portfolio")),
-        W = (e(".shop"), e("#slider")),
-        U = e(".slider-parallax"),
-        Q = e(".slider-element"),
+        V = (e(".one-page-menu"),
+            e(".portfolio")),
+        W = (e(".shop"),
+            e("#slider")),
+        Q = e(".slider-parallax"),
+        U = e(".slider-element"),
         J = e("#page-title"),
         Y = e(".top-search-form"),
         G = e("#top-cart"),
-        X = (e("#top-social").find("li"), e("#gotoTop")),
+        X = (e("#top-social").find("li"),
+            e("#gotoTop")),
         K = "YOUR-API-KEY",
         Z = document.querySelector(".slider-parallax"),
         ee = document.querySelector(".slider-parallax .slider-caption"),
@@ -1334,30 +1676,63 @@ var SEMICOLON = SEMICOLON || {};
         ne = 0,
         te = 0,
         se = 0;
-    e(document).ready(SEMICOLON.documentOnReady.init), a.on("load", SEMICOLON.documentOnLoad.init), a.on("resize", function() {
-        let i = e(this);
-        clearTimeout(l), l = setTimeout(function() {
-            i.width() !== L && SEMICOLON.documentOnResize.init()
-        }, 250)
-    })
+    e(document).ready(SEMICOLON.documentOnReady.init),
+        a.on("load", SEMICOLON.documentOnLoad.init),
+        a.on("resize", function() {
+            let i = e(this);
+            clearTimeout(l),
+                l = setTimeout(function() {
+                    i.width() !== E && SEMICOLON.documentOnResize.init()
+                }, 250)
+        })
 }(jQuery),
 jQuery(document).ready(function() {
-    jQuery(".disable-pagetransition").on("click", function() {
-        return jQuery("body").addClass("no-transition"), jQuery(".page-transition-wrap").fadeOut(400, function() {
-            jQuery(this).remove()
-        }), !1
-    })
-});
+        jQuery(".disable-pagetransition").on("click", function() {
+            return jQuery("body").addClass("no-transition"),
+                jQuery(".page-transition-wrap").fadeOut(400, function() {
+                    jQuery(this).remove()
+                }), !1
+        })
+    }),
+    jQuery(".scw-trigger").on("click", function() {
+        jQuery(".scw-switcher-wrap").toggleClass("scw-switcher-open")
+    }),
+    jQuery(document).on("click", function(e) {
+        jQuery(e.target).closest(".scw-switcher-wrap").length || jQuery(".scw-switcher-wrap").toggleClass("scw-switcher-open", !1)
+    });
 jQuery(document).one("ajaxComplete", function() {
     jQuery(".preloader-demo").on("click", function(s) {
         var i = jQuery(this),
             d = jQuery(".preloader-demo"),
             v = i.attr("data-loader");
-        d.prop("disabled", !0), "1" == v ? css3Loader = '<div class="css3-spinner-bounce1"></div><div class="css3-spinner-bounce2"></div><div class="css3-spinner-bounce3"></div>' : "2" == v ? css3Loader = '<div class="css3-spinner-flipper"></div>' : "3" == v ? css3Loader = '<div class="css3-spinner-double-bounce1"></div><div class="css3-spinner-double-bounce2"></div>' : "4" == v ? css3Loader = '<div class="css3-spinner-rect1"></div><div class="css3-spinner-rect2"></div><div class="css3-spinner-rect3"></div><div class="css3-spinner-rect4"></div><div class="css3-spinner-rect5"></div>' : "5" == v ? css3Loader = '<div class="css3-spinner-cube1"></div><div class="css3-spinner-cube2"></div>' : "6" == v ? css3Loader = '<div class="css3-spinner-scaler"></div>' : "7" == v ? css3Loader = '<div class="css3-spinner-grid-pulse"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' : "8" == v ? css3Loader = '<div class="css3-spinner-clip-rotate"><div></div></div>' : "9" == v ? css3Loader = '<div class="css3-spinner-ball-rotate"><div></div><div></div><div></div></div>' : "10" == v ? css3Loader = '<div class="css3-spinner-zig-zag"><div></div><div></div></div>' : "11" == v ? css3Loader = '<div class="css3-spinner-triangle-path"><div></div><div></div><div></div></div>' : "12" == v ? css3Loader = '<div class="css3-spinner-ball-scale-multiple"><div></div><div></div><div></div></div>' : "13" == v ? css3Loader = '<div class="css3-spinner-ball-pulse-sync"><div></div><div></div><div></div></div>' : "14" == v && (css3Loader = '<div class="css3-spinner-scale-ripple"><div></div><div></div><div></div></div>'), jQuery("body").append('<div class="page-transition-wrap"><div class="css3-spinner"></div></div>'), jQuery(".css3-spinner").html(css3Loader), setTimeout(function() {
-            jQuery(".page-transition-wrap").fadeOut("400", function() {
-                jQuery(this).remove(), d.prop("disabled", !1)
-            })
-        }, 2e3), s.preventDefault()
+        d.prop("disabled", !0),
+            "1" == v ? css3Loader = '<div class="css3-spinner-bounce1"></div><div class="css3-spinner-bounce2"></div><div class="css3-spinner-bounce3"></div>' : "2" == v ? css3Loader = '<div class="css3-spinner-flipper"></div>' : "3" == v ? css3Loader = '<div class="css3-spinner-double-bounce1"></div><div class="css3-spinner-double-bounce2"></div>' : "4" == v ? css3Loader = '<div class="css3-spinner-rect1"></div><div class="css3-spinner-rect2"></div><div class="css3-spinner-rect3"></div><div class="css3-spinner-rect4"></div><div class="css3-spinner-rect5"></div>' : "5" == v ? css3Loader = '<div class="css3-spinner-cube1"></div><div class="css3-spinner-cube2"></div>' : "6" == v ? css3Loader = '<div class="css3-spinner-scaler"></div>' : "7" == v ? css3Loader = '<div class="css3-spinner-grid-pulse"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' : "8" == v ? css3Loader = '<div class="css3-spinner-clip-rotate"><div></div></div>' : "9" == v ? css3Loader = '<div class="css3-spinner-ball-rotate"><div></div><div></div><div></div></div>' : "10" == v ? css3Loader = '<div class="css3-spinner-zig-zag"><div></div><div></div></div>' : "11" == v ? css3Loader = '<div class="css3-spinner-triangle-path"><div></div><div></div><div></div></div>' : "12" == v ? css3Loader = '<div class="css3-spinner-ball-scale-multiple"><div></div><div></div><div></div></div>' : "13" == v ? css3Loader = '<div class="css3-spinner-ball-pulse-sync"><div></div><div></div><div></div></div>' : "14" == v && (css3Loader = '<div class="css3-spinner-scale-ripple"><div></div><div></div><div></div></div>'),
+            jQuery("body").append('<div class="page-transition-wrap"><div class="css3-spinner"></div></div>'),
+            jQuery(".css3-spinner").html(css3Loader),
+            setTimeout(function() {
+                jQuery(".page-transition-wrap").fadeOut("400", function() {
+                    jQuery(this).remove(),
+                        d.prop("disabled", !1)
+                })
+            }, 2e3),
+            s.preventDefault()
     })
 });
-jQuery('[href="lazy-loading.html"],[href="item-overlays.html"],[href="shape-dividers.html"],[href="gdpr.html"],[href="hover-animations.html"],[href="read-more.html"],[href="gradients.html"],[href="pricing.html"]').parent('.menu-item').addClass('menu-item-important');
+jQuery('[href="lazy-loading.html"],[href="item-overlays.html"],[href="shape-dividers.html"],[href="gdpr.html"],[href="hover-animations.html"],[href="read-more.html"],[href="gradients.html"],[href="pricing.html"],[href="social-icons.html"],[href="icons.html"]').parent('.menu-item').addClass('menu-item-important');
+
+function semicolonweb_loadScriptAsync(a, o) {
+    if ("function" != typeof o)
+        throw new Error("Not a valid callback for async script load");
+    var n = document.createElement("script");
+    n.onload = o,
+        n.src = a,
+        document.head.appendChild(n)
+}
+semicolonweb_loadScriptAsync("https://www.googletagmanager.com/gtag/js?id=G-H74KY38NCR", function() {
+    function a() {
+        dataLayer.push(arguments)
+    }
+    window.dataLayer = window.dataLayer || [],
+        a("js", new Date),
+        a("config", "G-H74KY38NCR")
+});
