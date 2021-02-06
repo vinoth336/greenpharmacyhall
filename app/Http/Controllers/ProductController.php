@@ -234,7 +234,7 @@ class ProductController extends Controller
 
     public function import(Request $request)
     {
-
+        ini_set('max_execution_time', 180);
         DB::beginTransaction();
 
         try {

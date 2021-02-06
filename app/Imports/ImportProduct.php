@@ -25,7 +25,7 @@ class ImportProduct implements ToModel, WithHeadingRow
         $product->sub_category_id = null;
         $product->price = (float) $row['mrp'];
         $product->discount_amount = (float) ( $row['mrp'] == $row['price'] ? 0 : $row['price'] );
-        $product->sequence = Product::count() + 1;
+        $product->sequence = 1;
         $product->save();
         $category = Services::firstOrCreate(
             [
@@ -36,7 +36,7 @@ class ImportProduct implements ToModel, WithHeadingRow
                 'category' => 1,
                 'category_type_id' => 'be5c6581-c281-4622-8483-8022af05f75b',
                 'description' => ucfirst(strtolower($row['category'])),
-                'sequence' => Services::count() + 1
+                'sequence' => 1
             ]
         );
         $product->services()->sync($category->id);
