@@ -16,11 +16,6 @@ class ImportProduct implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-        print_r($row);
-
-        exit;
-
-
-      return $row;
+        return $row;
     }
 }

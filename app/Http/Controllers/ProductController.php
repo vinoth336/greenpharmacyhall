@@ -242,7 +242,11 @@ class ProductController extends Controller
             echo request()->file('product_list');
             echo "<br>";
 
-            Excel::import(new ImportProduct, request()->file('product_list'));
+           $data =  Excel::import(new ImportProduct, request()->file('product_list'));
+
+           print_r($data);
+           exit;
+
 
             DB::commit();
         } catch (Exception $e) {
