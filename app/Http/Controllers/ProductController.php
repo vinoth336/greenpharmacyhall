@@ -264,7 +264,7 @@ class ProductController extends Controller
             $n = 0;
             $temp = [];
 
-            die($productImages->count());
+            die("count " . count($productImages));
             foreach ($productImages as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
                 $product = Product::where('product_code', $fileInfo['filename'])->first();
