@@ -286,7 +286,7 @@ class ProductController extends Controller
 
            DB::commit();
 
-            return redirect()->route('product.import_image')
+            return redirect()->route('product.import', ['type' => 'product_image'])
             ->with('status', 'Imported Image Successfully Successfully, Not Matched record ' . $n . " - " . implode(",", $temp) );
         } catch (Exception $e) {
             DB::rollback();
