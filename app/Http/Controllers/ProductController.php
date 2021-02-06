@@ -71,14 +71,18 @@ class ProductController extends Controller
         }
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function import_product()
+    public function import_product(Request $request)
     {
-        return view('product.import');
+        if($request->get('type') == 'product') {
+            return view('product.import');
+        } else {
+            return view('product.import_image');
+        }
     }
 
     /**
@@ -242,8 +246,40 @@ class ProductController extends Controller
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
-           die($e->getMessage());
+            die($e->getMessage());
             response(['status' => 'Cannot Import File'], 500);
+        }
+
+        return redirect()->route('product.index')->with('status', 'Imported Product List Successfully Successfully');
+    }
+
+
+
+    public function import_image(Request $request)
+    {
+        ini_set('max_execution_time', 1800);
+        DB::beginTransaction();
+        try {
+            $productImages = $request->file("product_images");
+            foreach ($productImages as $image) {
+                $fileInfo = pathinfo($image->getClientOriginalName());
+                $product = Product::where('product_code', $fileInfo['filename'])->first();
+                if($product) {
+                    $portfolioImageCount = $product->ProductImages()->count() + 1;
+                    $ProductImage = new ProductImage();
+                    $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
+                    $ProductImage->sequence = $portfolioImageCount++;
+                    $product->ProductImages()->save($ProductImage);
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('product.index')->with('status', 'Imported Image Successfully Successfully');
+        } catch (Exception $e) {
+            DB::rollback();
+            die($e->getMessage());
+            response(['status' => 'Cannot Import Images'], 500);
         }
 
         DB::commit();

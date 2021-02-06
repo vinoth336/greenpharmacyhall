@@ -39,11 +39,20 @@ $(document).ready(function() {
                     <div class="card-header card-header-primary">
                         <h4 class="card-title float-left">{{ __('product') }}</h4>
                         <a href="{{ route('product.create') }}" class="btn btn-success float-right"><i class="material-icons">add</i></a>
-                        <a href="{{ route('product.import') }}" class="btn btn-warning float-right">Import</a>
+                        <div class="btn-group float-right" role="group" aria-label="Button group with nested dropdown">
+                            <div class="btn-group" role="group">
+                              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Import
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="{{ route('product.import') }}?type=product">Import Product</a>
+                                <a class="dropdown-item" href="{{ route('product.import') }}?type=product_image">Import Image</a>
+                              </div>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="card-body ">
-
                         <ul class="accordion" id="sortable">
                             @foreach ($products as $product )
                             @if(!empty($product))
