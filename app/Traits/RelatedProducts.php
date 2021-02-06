@@ -7,7 +7,7 @@ use App\Product;
 trait RelatedProducts {
 
     public function getRelatedProducts($limit = 10) {
-        $relatedProducts = $this->getRandomProductList($limit);
+        $relatedProducts = $this->getRelatedProductList($limit);
 
         return $relatedProducts;
     }
