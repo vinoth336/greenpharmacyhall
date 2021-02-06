@@ -270,6 +270,7 @@ class ProductController extends Controller
                     $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
                     $ProductImage->sequence = $portfolioImageCount++;
                     $product->ProductImages()->save($ProductImage);
+                    sleep(2);
                 }
             }
 
