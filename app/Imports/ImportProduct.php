@@ -36,6 +36,7 @@ class ImportProduct implements ToModel, WithHeadingRow
                 'slug' => str_slug($row['category'])
             ],
             [
+                'slug' => str_slug($row['category']),
                 'name' => ucfirst(strtolower($row['category'])),
                 'category' => 1,
                 'category_type_id' => 'be5c6581-c281-4622-8483-8022af05f75b',
@@ -44,8 +45,6 @@ class ImportProduct implements ToModel, WithHeadingRow
             ]
         );
         $product->services()->sync($category->id);
-
-        $product->touch(); // This will help to add in cache
 
         return $product;
     }

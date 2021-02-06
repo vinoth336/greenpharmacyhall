@@ -52,11 +52,15 @@ class Product extends Model
         parent::boot();
 
         static::saved(function($model){
-            setSiteMenuValueInCache(getSiteMenus());
+            if($model->brand_id) {
+                setSiteMenuValueInCache(getSiteMenus());
+            }
         });
 
         static::updated(function($model){
-            setSiteMenuValueInCache(getSiteMenus());
+            if($model->brand_id) {
+                setSiteMenuValueInCache(getSiteMenus());
+            }
         });
 
         static::deleted(function($model){
