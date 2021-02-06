@@ -5,6 +5,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @if($errors->any())
+                        {!! implode('', $errors->all('<div class="text-danger">:message</div>')) !!}
+                    @endif
                     <form method="post" action="{{ route('product.import_image') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                         @method('post')

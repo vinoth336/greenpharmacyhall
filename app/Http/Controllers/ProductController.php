@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Http\Requests\CreateServiceRequest;
 use App\Http\Requests\GetSlugNameRequest;
+use App\Http\Requests\ImportProductImageRequest;
 use App\Imports\ImportProduct;
 use App\Product;
 use App\ProductImage;
@@ -255,7 +256,7 @@ class ProductController extends Controller
 
 
 
-    public function import_image(Request $request)
+    public function import_image(ImportProductImageRequest $request)
     {
         ini_set('max_execution_time', 1800);
         DB::beginTransaction();
@@ -263,8 +264,6 @@ class ProductController extends Controller
             $productImages = $request->file("product_images");
             $n = 0;
             $temp = [];
-
-            die("count " . count($productImages));
             foreach ($productImages as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
                 $product = Product::where('product_code', $fileInfo['filename'])->first();
