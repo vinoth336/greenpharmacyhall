@@ -261,30 +261,38 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             $productImages = $request->file("product_images");
+            $n = 0;
+            $temp = [];
             foreach ($productImages as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
                 $product = Product::where('product_code', $fileInfo['filename'])->first();
                 if($product) {
+                    foreach ($product->ProductImages as $ProductImage) {
+                        $ProductImage->unlinkImage($ProductImage->image);
+                    }
                     $portfolioImageCount = $product->ProductImages()->count() + 1;
                     $ProductImage = new ProductImage();
                     $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
                     $ProductImage->sequence = $portfolioImageCount++;
                     $product->ProductImages()->save($ProductImage);
-                    sleep(2);
+                    usleep(1000);
+                } else {
+                    $temp[] = $fileInfo['filename'];
+                    info("Product Not Found " . $fileInfo['filename']);
+                    $n++;
                 }
+
             }
 
-            DB::commit();
+           DB::commit();
 
-            return redirect()->route('product.index')->with('status', 'Imported Image Successfully Successfully');
+            return redirect()->route('product.import_image')
+            ->with('status', 'Imported Image Successfully Successfully, Not Matched record ' . $n . " - " . implode(",", $temp) );
         } catch (Exception $e) {
             DB::rollback();
             die($e->getMessage());
-            response(['status' => 'Cannot Import Images'], 500);
+            return response(['status' => 'Cannot Import Images'], 500);
         }
 
-        DB::commit();
-
-        return 'test';
     }
 }
