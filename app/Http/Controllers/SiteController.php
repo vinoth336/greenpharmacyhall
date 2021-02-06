@@ -92,7 +92,7 @@ class SiteController extends Controller
         $relatedProducts = $product->getRelatedProducts();
 
         return view('site.view_single_product')
-        ->with('product', $product)
+        ->with('productDetail', $product)
         ->with('relatedProducts', $relatedProducts)
         ;
     }

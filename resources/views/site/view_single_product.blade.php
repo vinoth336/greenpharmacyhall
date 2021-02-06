@@ -7,7 +7,7 @@
                 <div class="row gutter-40 col-mb-80">
                     <div class="postcontent col-lg-9 order-lg-last">
                         <div class="single-product">
-                            <div class="product" id="product_{{ $product->slug }}">
+                            <div class="product" id="product_{{ $productDetail->slug }}">
                                 <div class="row gutter-40">
                                     <div class="col-md-6">
 
@@ -15,10 +15,10 @@
                                             <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
                                                 <div class="flexslider">
                                                     <div class="slider-wrap" data-lightbox="gallery">
-                                                        @foreach($product->productImages as $productImage)
+                                                        @foreach($productDetail->productImages as $productImage)
                                                             <div class="slide" data-thumb="{{ asset('web/images/product_images/thumbnails/' . $productImage->image)}}">
-                                                                <a href="{{ asset('web/images/product_images/' . $productImage->image)}}" title="{{ $product->name }}" data-lightbox="gallery-item">
-                                                                    <img class="product_image" src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $product->name }}">
+                                                                <a href="{{ asset('web/images/product_images/' . $productImage->image)}}" title="{{ $productDetail->name }}" data-lightbox="gallery-item">
+                                                                    <img class="product_image" src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $productDetail->name }}">
                                                                 </a>
                                                             </div>
                                                         @endforeach
@@ -29,38 +29,38 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 product-desc">
-                                        <h3>{{ $product->name }}</h3>
+                                        <h3>{{ $productDetail->name }}</h3>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="product-price">
-                                                <input type="hidden" class="product_price" value="{{ $product->actual_price }}" />
-                                                <input type="hidden" class="product_name" value="{{ $product->name }}" />
-                                                @if($product->discount_amount > 0)
-                                                <del>₹ {{ $product->price }}</del>
-                                                <ins>₹ {{ $product->discount_amount }}</ins>
+                                                <input type="hidden" class="product_price" value="{{ $productDetail->actual_price }}" />
+                                                <input type="hidden" class="product_name" value="{{ $productDetail->name }}" />
+                                                @if($productDetail->discount_amount > 0)
+                                                <del>₹ {{ $productDetail->price }}</del>
+                                                <ins>₹ {{ $productDetail->discount_amount }}</ins>
                                             @else
-                                                <ins>₹ {{ $product->price }}</ins>
+                                                <ins>₹ {{ $productDetail->price }}</ins>
                                             @endif
                                             </div>
                                         </div>
                                         <div class="quantity display-inline-block">
-                                            <input type="hidden" id="productName" value="{{ $product->slug }}" />
+                                            <input type="hidden" id="productName" value="{{ $productDetail->slug }}" />
                                             <input type="button" value="-" class="minus">
-                                            <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="product_qty_{{ $product->slug }}" data-productid="{{ $product->slug }}" value="1" title="Qty"
+                                            <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="product_qty_{{ $productDetail->slug }}" data-productid="{{ $productDetail->slug }}" value="1" title="Qty"
                                                 class="qty" />
                                             <input type="button" value="+" class="plus">
                                         </div>
-                                        <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_qty_{{ $product->slug }}').val())" data-productid="{{ $product->slug }}">Add to cart</button>
+                                        <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_qty_{{ $productDetail->slug }}').val())" data-productid="{{ $productDetail->slug }}">Add to cart</button>
                                         <div class="line"></div>
-                                        {!! $product->description !!}
+                                        {!! $productDetail->description !!}
                                         <div
                                             class="si-share border-0 d-flex justify-content-between align-items-center mt-4">
                                             <span>Share:</span>
                                             <div>
-                                                <a target="_blank" class="social-icon si-borderless si-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ $product->productUrl }}" >
+                                                <a target="_blank" class="social-icon si-borderless si-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ $productDetail->productUrl }}" >
                                                     <i class="icon-facebook"></i>
                                                     <i class="icon-facebook"></i>
                                                 </a>
-                                                <a target="_blank" class="social-icon si-borderless si-whatsapp" href="https://web.whatsapp.com/send?text={{ $product->productUrl }}">
+                                                <a target="_blank" class="social-icon si-borderless si-whatsapp" href="https://web.whatsapp.com/send?text={{ $productDetail->productUrl }}">
                                                     <i class="icon-whatsapp"></i>
                                                     <i class="icon-whatsapp"></i>
                                                 </a>

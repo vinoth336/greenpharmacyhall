@@ -4,11 +4,9 @@
 
     @php
         $isHomePage = $page ?? false;
-        $product = $product ?? null;
-        $product = $isHomePage ? null : $product;
-        $description = $product->description ?? $siteInformation->meta_description;
+        $description = $productDetail->description ?? $siteInformation->meta_description;
         $description = strip_tags(Str::substr($description, 0, 200));
-        $productImages = $product->productImages ?? null;
+        $productImages = $productDetail->productImages ?? null;
         if($productImages == null) {
             $image = asset('web/images/logo/' . $siteInformation->logo);
         } else {
@@ -21,9 +19,9 @@
     <link rel="canonical" href="{{ env('APP_URL') }}" />
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ $product->name ?? $siteInformation->site_name }}">
+    <meta property="og:title" content="{{ $productDetail->name ?? $siteInformation->site_name }}">
     <meta property="og:description" content="{{  $description  }}">
-    <meta property="og:url" content="{{ $product->productUrl ?? env('APP_URL') }}">
+    <meta property="og:url" content="{{ $productDetail->productUrl ?? env('APP_URL') }}">
     <meta property="og:site_name" content="{{ $siteInformation->site_name }}">
     <meta property="og:image" content="{{ $image }}" >
     <meta property="og:type" content="website" >
