@@ -77,7 +77,7 @@ class Product extends Model
 
     public function getProductUrlAttribute()
     {
-        return env('APP_URL') . $this->slug;
+        return env('APP_URL') . "/product/" . $this->slug;
     }
 
 }
