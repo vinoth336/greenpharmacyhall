@@ -16,13 +16,13 @@ class ImportProduct implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        $product = new Product();
+        $product = Product::firstOrCreate(
+            ['slug' => str_slug($row['product_name'])],
+            ['name' => ucfirst(strtolower($row['product_name'])), 'description' => '']
+        );
         $product->product_code = $row['product_code'];
-        $product->name = $row['product_name'];
-        $product->slug = str_slug($row['product_name']);
         $product->brand_id = null;
         $product->sub_category_id = null;
-        $product->description = 'import';
         $product->price = (float) $row['mrp'];
         $product->discount_amount = (float) ( $row['mrp'] == $row['price'] ? 0 : $row['price'] );
         $product->sequence = Product::count() + 1;
