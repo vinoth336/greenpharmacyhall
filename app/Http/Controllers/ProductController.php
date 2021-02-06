@@ -239,11 +239,9 @@ class ProductController extends Controller
 
         try {
 
-            $request->validate([
-                'product_list' => 'required'
-            ]);
+            $data = Excel::import(new ImportProduct, request()->file('product_list'));
 
-            Excel::import(new ImportProduct, request()->file('product_list'));
+            dd($data);
 
             DB::commit();
         } catch (Exception $e) {

@@ -16,10 +16,6 @@ class ImportProduct implements ToModel
     {
 
 
-        info($row);
-
-        return new Product([
-            //
-        ]);
+      return $row;
     }
 }
