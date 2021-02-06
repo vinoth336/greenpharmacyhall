@@ -32,7 +32,6 @@ class SiteController extends Controller
         $services = Services::orderBy('sequence');
         $servicesForEnquiries = Services::orderBy('sequence')->get();
         $allProducts = Product::with('ProductImages')->limit(50)->orderBy('sequence')->get();
-
         return view('site.home', [
             'siteInformation' => $siteInformation,
             'sliders' => $sliders,
@@ -41,7 +40,8 @@ class SiteController extends Controller
             'boxBanners' => $boxBanners,
             'verticalBanner' => $verticalBanner ?? new Banners(),
             'verticalWideBanner' => $verticalWideBanner ?? new Banners(),
-            'allProducts' => $allProducts
+            'allProducts' => $allProducts,
+            'page' => 'home'
         ]);
     }
 

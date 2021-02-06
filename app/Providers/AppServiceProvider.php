@@ -32,18 +32,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        DB::listen(
-            function ($query) {
-                Log::info(
-                    [
-                        "Query" => $query->sql,
-                        "Bindings" => $query->bindings,
-                        "Time" => $query->time
-                    ]
-                );
-            }
-        );
-
+        if(env('APP_ENV') != 'production') {
+            DB::listen(
+                function ($query) {
+                    Log::info(
+                        [
+                            "Query" => $query->sql,
+                            "Bindings" => $query->bindings,
+                            "Time" => $query->time
+                        ]
+                    );
+                });
+        }
 
 
         View::composer('*', function ($view) {

@@ -3,11 +3,17 @@
 <head>
 
     @php
-        $description = $product->description ?? null;
-        if($description == null) {
-            $description = $siteInformation->meta_description;
-        }
+        $isHomePage = $page ?? false;
+        $product = $product ?? null;
+        $product = $isHomePage ? null : $product;
+        $description = $product->description ?? $siteInformation->meta_description;
         $description = strip_tags(Str::substr($description, 0, 200));
+        $productImages = $product->productImages ?? null;
+        if($productImages == null) {
+            $image = asset('web/images/logo/' . $siteInformation->logo);
+        } else {
+            $image = asset('web/images/product_images/' . $productImages->first()->image );
+        }
     @endphp
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="{{ $siteInformation->site_name }}" />
@@ -19,6 +25,8 @@
     <meta property="og:description" content="{{  $description  }}">
     <meta property="og:url" content="{{ $product->productUrl ?? env('APP_URL') }}">
     <meta property="og:site_name" content="{{ $siteInformation->site_name }}">
+    <meta property="og:image" content="{{ $image }}" >
+    <meta property="og:type" content="website" >
     <meta property="article:publisher" content="">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@GreenPharmacyHall">
