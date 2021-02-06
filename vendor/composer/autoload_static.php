@@ -711,6 +711,7 @@ class ComposerStaticInitf3b2714cf71ef5b5bc9a9f113bb2d005
         'App\\Http\\Requests\\UserRegistrationRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRegistrationRequest.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Http\\Resources\\CartItemListResponse' => __DIR__ . '/../..' . '/app/Http/Resources/CartItemListResponse.php',
+        'App\\Imports\\ImportProduct' => __DIR__ . '/../..' . '/app/Imports/ImportProduct.php',
         'App\\Mail\\SendRegistrationEmailVerification' => __DIR__ . '/../..' . '/app/Mail/SendRegistrationEmailVerification.php',
         'App\\OrderStatus' => __DIR__ . '/../..' . '/app/OrderStatus.php',
         'App\\OrderedItem' => __DIR__ . '/../..' . '/app/OrderedItem.php',

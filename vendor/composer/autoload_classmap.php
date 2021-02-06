@@ -79,6 +79,7 @@ return array(
     'App\\Http\\Requests\\UserRegistrationRequest' => $baseDir . '/app/Http/Requests/UserRegistrationRequest.php',
     'App\\Http\\Requests\\UserRequest' => $baseDir . '/app/Http/Requests/UserRequest.php',
     'App\\Http\\Resources\\CartItemListResponse' => $baseDir . '/app/Http/Resources/CartItemListResponse.php',
+    'App\\Imports\\ImportProduct' => $baseDir . '/app/Imports/ImportProduct.php',
     'App\\Mail\\SendRegistrationEmailVerification' => $baseDir . '/app/Mail/SendRegistrationEmailVerification.php',
     'App\\OrderStatus' => $baseDir . '/app/OrderStatus.php',
     'App\\OrderedItem' => $baseDir . '/app/OrderedItem.php',
