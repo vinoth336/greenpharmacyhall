@@ -21,7 +21,7 @@
     <link rel="canonical" href="{{ env('APP_URL') }}" />
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ $product->slug ?? $siteInformation->site_name }}">
+    <meta property="og:title" content="{{ $product->name ?? $siteInformation->site_name }}">
     <meta property="og:description" content="{{  $description  }}">
     <meta property="og:url" content="{{ $product->productUrl ?? env('APP_URL') }}">
     <meta property="og:site_name" content="{{ $siteInformation->site_name }}">
