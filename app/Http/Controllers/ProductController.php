@@ -238,6 +238,10 @@ class ProductController extends Controller
         DB::beginTransaction();
 
         try {
+
+            echo request()->file('product_list');
+            echo "<br>";
+
             Excel::import(new ImportProduct, request()->file('product_list'));
 
             DB::commit();
