@@ -60,7 +60,7 @@
                                                     <i class="icon-facebook"></i>
                                                     <i class="icon-facebook"></i>
                                                 </a>
-                                                <a target="_blank" class="social-icon si-borderless si-whatsapp" href="https://web.whatsapp.com/send?text={{ $productDetail->productUrl }}">
+                                                <a target="_blank" class="social-icon si-borderless si-whatsapp" href="https://wa.me/?text={{ $productDetail->productUrl }}">
                                                     <i class="icon-whatsapp"></i>
                                                     <i class="icon-whatsapp"></i>
                                                 </a>
