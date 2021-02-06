@@ -236,13 +236,10 @@ class ProductController extends Controller
     {
 
         DB::beginTransaction();
+        $data = Excel::import(new ImportProduct, request()->file('product_list'));
+        dd($data);
 
         try {
-
-            $data = Excel::import(new ImportProduct, request()->file('product_list'));
-
-            dd($data);
-
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
