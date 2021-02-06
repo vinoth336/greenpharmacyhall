@@ -37,6 +37,7 @@ class SiteInformationController extends Controller
      */
     public function store(Request $request)
     {
+
         $siteInformation = SiteInformation::first();
         $siteInformation->site_name = $request->input('site_name');
         $siteInformation->meta_description = $request->input('meta_description');
@@ -53,7 +54,7 @@ class SiteInformationController extends Controller
         $siteInformation->storeImage($image);
 
         $siteInformation->save();
-
+        setSiteInformationInCache();
 
         return redirect()->route('site_information.index');
 

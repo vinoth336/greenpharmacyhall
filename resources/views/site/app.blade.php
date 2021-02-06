@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
+    @php
+        $description = $product->description ?? null;
+        if($description == null) {
+            $description = $siteInformation->meta_description;
+        }
+        $description = strip_tags(Str::substr($description, 0, 200));
+    @endphp
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="{{ $siteInformation->site_name }}" />
-    <meta name="description" content="{{ $siteInformation->meta_description }}" />
-    <link rel="canonical" href="https://www.greenpharmacyhall.com" />
+    <meta name="description" content="{{ $description }}" />
+    <link rel="canonical" href="{{ env('APP_URL') }}" />
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="">
-    <meta property="og:description" content="">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="">
+    <meta property="og:title" content="{{ $product->slug ?? $siteInformation->site_name }}">
+    <meta property="og:description" content="{{  $description  }}">
+    <meta property="og:url" content="{{ $product->productUrl ?? env('APP_URL') }}">
+    <meta property="og:site_name" content="{{ $siteInformation->site_name }}">
     <meta property="article:publisher" content="">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@GreenPharmacyHall">
