@@ -261,10 +261,10 @@ class ProductController extends Controller
         ini_set('max_execution_time', 1800);
         DB::beginTransaction();
         try {
-            $productImages = $request->file("product_images");
+            $images = $request->file("product_images");
             $n = 0;
             $temp = [];
-            foreach ($productImages as $image) {
+            foreach ($images as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
                 $product = Product::where('product_code', $fileInfo['filename'])->first();
                 if($product) {
