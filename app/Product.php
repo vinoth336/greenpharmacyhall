@@ -23,7 +23,7 @@ class Product extends Model
 
     protected $table = 'products';
 
-    protected $fillable = ['name', 'description', 'sequence', 'background_image'];
+    protected $fillable = ['name', 'description', 'sequence', 'background_image', 'slug'];
 
 
     public function ProductImages()
