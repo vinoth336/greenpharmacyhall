@@ -81,11 +81,11 @@
                                             @else
                                                 <ins>₹ {{ $product->price }}</ins>
                                             @endif
-                                            <input type="hidden" class="product_price" value="{{ $product->price }}" />
+                                            <input type="hidden" class="product_price" value="{{ $product->actual_price }}" />
                                             <input type="hidden" class="product_name" value="{{ $product->name }}" />
                                         </div>
                                     </div>
-                                    <div class="text-right">
+                                    <div class="text-center">
                                         <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
                                             class="text-info" style="font-weight: 300 !important; font-size:18px;"
                                             class="" href="Javascript:void(0)">

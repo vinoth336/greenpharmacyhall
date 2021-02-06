@@ -47,9 +47,8 @@
                                                 @else
                                                     <ins>₹ {{ $product->price }}</ins>
                                                 @endif
-                                                <input type="hidden" class="product_price" value="{{ $product->price }}" />
+                                                <input type="hidden" class="product_price" value="{{ $product->actual_price }}" />
                                                 <input type="hidden" class="product_name" value="{{ $product->name }}" />
-
                                             </div>
 
                                         </div>

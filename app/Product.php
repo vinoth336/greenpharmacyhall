@@ -75,4 +75,9 @@ class Product extends Model
         return $this->discount_amount > 0 ? $this->discount_amount : $this->price;
     }
 
+    public function getProductUrlAttribute()
+    {
+        return env('APP_URL') . $this->slug;
+    }
+
 }

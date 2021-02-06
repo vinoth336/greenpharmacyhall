@@ -1,4 +1,5 @@
 var CURRENCY_DECIMAL_PLACES = 2;
+const MIN_ORDER_AMOUNT = $("#MIN_ORDER_AMOUNT").val();
 const CURRENCY_FORMATER = new Intl.NumberFormat('en-IN', {
     style: 'decimal',
     currency: 'IND',
@@ -47,7 +48,6 @@ var Cart = {
             "success": function(data) {
                 Cart.addCartItemsFromServerToLocatStorage(data);
                 Cart.refreshCartItems();
-
             },
             "error": function(jqXHR, exception) {
                 if (jqXHR.status == 401) {
@@ -147,9 +147,10 @@ var Cart = {
             };
         });
         Cart.setItemInLocalStorage(data);
-        if (Cart.isCheckoutPage()) {
-            Cart.refreshCartItems();
-        }
+        Cart.refreshCartItems();
+        // if (Cart.isCheckoutPage()) {
+        //     Cart.refreshCartItems();
+        // }
     },
     addInLocalStorage: function(productId, qty) {
         var container = $("#product_" + productId);
@@ -303,6 +304,7 @@ var Cart = {
                 totalItem++;
             }
         });
+
         Cart.updateOrderSummaryContent(content);
         Cart.updateActiveCartItemTotal('order_summary_amount');
     },
@@ -362,6 +364,14 @@ var Cart = {
     updateOrderSummaryContent: function(totalItem) {
         $("#order_summary").html(totalItem);
     },
+    updateSingleProductQty: function(productId) {
+        var cart = Cart.getItemFromLocalStorage();
+
+        if (typeof cart[productId] != 'undefined') {
+            var productInfo = cart[productId];
+            $("#product_" + productId).val(productInfo['qty']);
+        }
+    },
     updateItemList: function(content) {
         if (content == '') {
             content = "<p align='center'>Cart Is Empty</p>";
@@ -408,7 +418,7 @@ var OrderConfirmListTemplate = `<div class="top-cart-item" id="order_confirm_ite
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
-                                        <a href="product/summary/PRODUCT_ID" data-lightbox="ajax">
+                                        <a href="product/product/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
                                         <span class="top-cart-item-price d-block float-left">
@@ -433,7 +443,7 @@ var ItemListTemplate = `<div class="top-cart-item" id="order_item_PRODUCT_ID">
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
-                                        <a href="product/summary/PRODUCT_ID" data-lightbox="ajax">
+                                        <a href="product/product/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
                                         <div class="quantity clearfix">
@@ -468,7 +478,7 @@ var cartItemListTemplate = `<div class="top-cart-item" id="cart_item_PRODUCT_ID"
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
-                                        <a href="product/summary/PRODUCT_ID" data-lightbox="ajax">
+                                        <a href="product/product/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
                                         <span class="top-cart-item-price d-block float-left">

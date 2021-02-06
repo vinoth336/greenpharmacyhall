@@ -74,9 +74,7 @@
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left"><strong>Call:</strong> {{ $siteInformation->phone_no }} |
-							<strong>Email:</strong> <a href="http://themes.semicolonweb.com/cdn-cgi/l/email-protection"
-								class="__cf_email__"
-								data-cfemail="0960676f66496a68677f687a276a6664">{{ $siteInformation->email_id }}</a></p>
+							<strong>Email:</strong> <a href="mail_to:{{ $siteInformation->email_id }}">{{ $siteInformation->email_id }}</a></p>
 					</div>
 					<div class="col-12 col-md-auto">
 					</div>
@@ -93,19 +91,19 @@
                                 data-dark-logo="{{ asset('web/images/logo/' . $siteInformation->logo) }}">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}"
 									alt="{{ config('app.name') }}" ></a>
-							<a href="index.html" class="retina-logo" data-dark-logo="">
+							<a href="{{ route('home') }}" class="retina-logo" data-dark-logo="">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" alt="{{ config('app.name') }}" style="height: 37px !important;"></a>
                         </div>
                         <div style="clear:both"></div>
 						<div class="header-misc mobile-ml-auto">
                             @guest
                             <div style="margin-right: 10px" class="header-misc-icon d-sm-block d-md-none d-lg-none">
-								<a href="#" class="menu-link" data-toggle="modal" data-target=".show-login-modal" style="width: 56px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
+								<a href="#" class="menu-link user_login" data-toggle="modal" data-target=".show-login-modal" style="width: 56px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
                                     Login
                                 </a>
 							</div>
                             @endguest
-                            <div id="top-search" class="header-misc-icon d-none">
+                            <div id="top-search" class="header-misc-icon">
 								<a href="#" id="top-search-trigger">
                                     <i class="icon-line-search"></i>
                                     <i class="icon-line-cross"></i>

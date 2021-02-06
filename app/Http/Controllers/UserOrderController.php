@@ -44,6 +44,11 @@ class UserOrderController extends Controller
             $userOrder->total_amount = $sum;
             $userOrder->save();
 
+            if($sum < MIN_ORDER_AMOUNT) {
+                    DB::rollback();
+                    return response("MIN ORDER AMOUNT SHOULD BE " . number_format(MIN_ORDER_AMOUNT, 2) , NOT_ACCEPTABLE);
+            }
+
             DB::commit();
 
             return CartItemListResponse::collection($this->getCartItems());
@@ -51,7 +56,7 @@ class UserOrderController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             info($e->getMessage());
-            return response("Can't Process, Please Contact Admin", 500);
+            return response("Can't Process, Please Contact Admin", SERVER_ERROR);
         }
 
         return response(['status' => true, "message" => 'Successfully Ordered Placed']);

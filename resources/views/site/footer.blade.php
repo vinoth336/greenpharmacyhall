@@ -17,6 +17,13 @@
                         aria-hidden="true">&times;</button>
                             <form id="login_form" class="mt-5 floating-group" method="post" action="{{ route('public.login') }}">
                                 @csrf
+
+                                @if(session()->has('login_failed'))
+                                    <p class="text-danger">
+                                        {{ session()->get('login_failed') }}
+                                    </p>
+                                @endif
+
                                 <input type="hidden" name="redirectTo" value="{{ $redirectTo ?? 'dashboard' }}" />
 								<div class="form-group">
 									<label for="exampleInputEmail1">Phone No</label>
@@ -85,13 +92,22 @@
     </div>
 </footer>
 </div>
-
+<div id="fb-root"></div>
 <div id="gotoTop" class="icon-angle-up"></div>
-
+<input type="hidden" id="MIN_ORDER_AMOUNT" value="{{ MIN_ORDER_AMOUNT }}" />
 <script src="{{ asset('web/js/plugins.min.js') }}"></script>
 <script src="{{ asset('web/js/functions.js') }}"></script>
 <script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v={{ $version }}"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=721958557824359&autoLogAppEvents=1" nonce="lNPiivbw"></script>
 @stack('js')
+
+@if(session()->has('login_failed'))
+    <script>
+        $(document).ready(function() {
+            $(".user_login:first").trigger('click');
+        });
+    </script>
+@endif
 
 <a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="float"
     target="_blank">

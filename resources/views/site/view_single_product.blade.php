@@ -3,10 +3,10 @@
 @section('content')
     <section id="content">
         <div class="content-wrap">
-            <div class="container-fluid px-5 clearfix">
+            <div class="container-fluid clearfix">
                 <div class="row gutter-40 col-mb-80">
                     <div class="postcontent col-lg-9 order-lg-last">
-                        <div class="single-product" id="product_{{ $product->slug }}">
+                        <div class="single-product">
                             <div class="product">
                                 <div class="row gutter-40">
                                     <div class="col-md-6">
@@ -32,7 +32,7 @@
                                         <h3>{{ $product->name }}</h3>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="product-price">
-                                                <input type="hidden" class="product_price" value="{{ $product->price }}" />
+                                                <input type="hidden" class="product_price" value="{{ $product->actual_price }}" />
                                                 <input type="hidden" class="product_name" value="{{ $product->name }}" />
                                                 @if($product->discount_amount > 0)
                                                 <del>₹ {{ $product->price }}</del>
@@ -42,29 +42,25 @@
                                             @endif
                                             </div>
                                         </div>
-                                        <div class="line"></div>
-
-                                        <div class="quantity clearfix">
+                                        <div class="quantity display-inline-block">
+                                            <input type="hidden" id="productName" value="{{ $product->slug }}" />
                                             <input type="button" value="-" class="minus">
-                                            <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="checkout_row_{{ $product->slug }}" data-productid="{{ $product->slug }}" value="1" title="Qty"
+                                            <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="product_{{ $product->slug }}" data-productid="{{ $product->slug }}" value="1" title="Qty"
                                                 class="qty" />
                                             <input type="button" value="+" class="plus">
                                         </div>
-                                        <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this)" data-productid="{{ $product->slug }}">Add to cart</button>
+                                        <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_{{ $product->slug }}').val())" data-productid="{{ $product->slug }}">Add to cart</button>
                                         <div class="line"></div>
                                         {!! $product->description !!}
-
-
-
                                         <div
                                             class="si-share border-0 d-flex justify-content-between align-items-center mt-4">
                                             <span>Share:</span>
                                             <div>
-                                                <a href="#" class="social-icon si-borderless si-facebook">
+                                                <a target="_blank" class="social-icon si-borderless si-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ $product->productUrl }}" >
                                                     <i class="icon-facebook"></i>
                                                     <i class="icon-facebook"></i>
                                                 </a>
-                                                <a href="#" class="social-icon si-borderless si-whatsapp">
+                                                <a target="_blank" class="social-icon si-borderless si-whatsapp" href="https://web.whatsapp.com/send?text={{ $product->productUrl }}">
                                                     <i class="icon-whatsapp"></i>
                                                     <i class="icon-whatsapp"></i>
                                                 </a>
@@ -138,5 +134,12 @@
             </div>
         </div>
     </section>
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                Cart.updateSingleProductQty($("#productName").val());
+            });
+        </script>
+    @endpush
 
 @endsection

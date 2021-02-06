@@ -47,7 +47,7 @@ class UserLoginController extends Controller
         return redirect()
             ->back()
             ->withInput()
-            ->with('error','Login failed, please try again!');
+            ->with('login_failed','Login failed, please try again!');
     }
 
     private function validator(Request $request)

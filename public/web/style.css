@@ -9675,6 +9675,11 @@ body:not(.device-touch) .social-icon i {
     background-color: #3b5998!important
 }
 
+.si-colored.si-whatsapp,
+.si-whatsapp:hover {
+    background-color: #41a846!important
+}
+
 .si-colored.si-delicious,
 .si-delicious:hover {
     background-color: #205cc0!important

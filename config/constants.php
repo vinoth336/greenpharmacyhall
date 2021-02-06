@@ -12,5 +12,10 @@ define('ORDER_STATUS', [
     9 => 'Order Cancelled By Admin'
 ]);
 
+define("SERVER_ERROR", 500);
+define('NOT_ACCEPTABLE', 406);
+define('SUCCESS', 200);
+
+define("MIN_ORDER_AMOUNT", 500);
 
 ?>

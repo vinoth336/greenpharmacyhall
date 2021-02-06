@@ -18,7 +18,6 @@
     <section id="content">
         <div class="content-wrap">
             <div class="container clearfix">
-
                 @if($errors->any())
                     <h4 class="text-danger m-auto text-center">Please Fix the Following Errors</h4>
                     <ul class="error card m-auto">
