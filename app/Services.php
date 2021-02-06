@@ -24,7 +24,7 @@ class Services extends Model
 
     protected $table="services";
 
-    protected $fillable = ['name', 'description', 'icon', 'banner', 'sequence'];
+    protected $fillable = ['name', 'description', 'icon', 'banner', 'sequence', 'slug'];
 
     public $timestamps = true;
 

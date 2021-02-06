@@ -238,16 +238,7 @@ class ProductController extends Controller
         DB::beginTransaction();
 
         try {
-
-            echo request()->file('product_list');
-            echo "<br>";
-
-           $data =  Excel::import(new ImportProduct, request()->file('product_list'));
-
-           print_r($data);
-           exit;
-
-
+            Excel::import(new ImportProduct, request()->file('product_list'));
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
