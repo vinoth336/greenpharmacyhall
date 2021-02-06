@@ -263,6 +263,8 @@ class ProductController extends Controller
             $productImages = $request->file("product_images");
             $n = 0;
             $temp = [];
+
+            die($productImages->count());
             foreach ($productImages as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
                 $product = Product::where('product_code', $fileInfo['filename'])->first();
