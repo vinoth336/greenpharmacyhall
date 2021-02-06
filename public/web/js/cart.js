@@ -90,6 +90,7 @@ var Cart = {
             "error": function(jqXHR, exception) {
                 if (jqXHR.status == 401) {
                     Cart.updateInLocalStorage(container, productId, qty);
+                    Cart.refreshCartItems();
                 }
             }
         });
@@ -369,7 +370,7 @@ var Cart = {
 
         if (typeof cart[productId] != 'undefined') {
             var productInfo = cart[productId];
-            $("#product_" + productId).val(productInfo['qty']);
+            $("#product_qty_" + productId).val(productInfo['qty']);
         }
     },
     updateItemList: function(content) {
@@ -414,11 +415,10 @@ var OrderConfirmListTemplate = `<div class="top-cart-item" id="order_confirm_ite
                                         <img src="IMG_SRC"
                                             alt="PRODUCT_NAME" />
                                     </a>
-
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
-                                        <a href="product/product/PRODUCT_ID" data-lightbox="ajax">
+                                        <a href="/product/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
                                         <span class="top-cart-item-price d-block float-left">
@@ -443,7 +443,7 @@ var ItemListTemplate = `<div class="top-cart-item" id="order_item_PRODUCT_ID">
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
-                                        <a href="product/product/PRODUCT_ID" data-lightbox="ajax">
+                                        <a href="/product/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
                                         <div class="quantity clearfix">
@@ -478,7 +478,7 @@ var cartItemListTemplate = `<div class="top-cart-item" id="cart_item_PRODUCT_ID"
                                 </div>
                                 <div class="top-cart-item-desc">
                                     <div class="top-cart-item-desc-title">
-                                        <a href="product/product/PRODUCT_ID" data-lightbox="ajax">
+                                        <a href="/product/PRODUCT_ID" data-lightbox="ajax">
                                             PRODUCT_NAME
                                         </a>
                                         <span class="top-cart-item-price d-block float-left">
