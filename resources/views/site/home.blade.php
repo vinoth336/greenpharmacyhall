@@ -59,13 +59,19 @@
                         <div class="product col-lg-3 col-md-3 col-sm-6" style="margin-bottom: 2rem" id="product_{{ $product->slug }}">
                             <div class="grid-inner">
                                 <div class="product-image">
-                                    @foreach ($product->productImages as $productImage)
+                                    @forelse ($product->productImages as $productImage)
                                         <a href="{{ route('view_product', $product->slug) }}">
                                             <img class="product_image"
                                                 src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
                                                 alt="{{ $product->name }}">
                                         </a>
-                                    @endforeach
+                                    @empty
+                                        <a href="{{ route('view_product', $product->slug) }}">
+                                            <img class="product_image"
+                                                src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
+                                                alt="{{ $product->name }}">
+                                        </a>
+                                    @endforelse
                                     <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">Sale!</div>
                                 </div>
                                 <div class="product-desc">
