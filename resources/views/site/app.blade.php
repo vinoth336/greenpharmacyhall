@@ -10,7 +10,11 @@
         if($productImages == null) {
             $image = asset('web/images/logo/' . $siteInformation->logo);
         } else {
-            $image = asset('web/images/product_images/' . $productImages->first()->image );
+            if($productImages->count() > 0) {
+                $image = asset('web/images/product_images/' . $productImages->first()->image);
+            } else {
+                $image = asset('web/images/logo/' . $siteInformation->logo);
+            }
         }
     @endphp
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />

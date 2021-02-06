@@ -10,19 +10,18 @@
                             <div class="product" id="product_{{ $productDetail->slug }}">
                                 <div class="row gutter-40">
                                     <div class="col-md-6">
-
                                         <div class="product-image">
                                             <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
                                                 <div class="flexslider">
                                                     <div class="slider-wrap" data-lightbox="gallery">
-                                                        @if($productDetail->productImages ?? false)
-                                                        @foreach($productDetail->productImages as $productImage)
-                                                            <div class="slide" data-thumb="{{ asset('web/images/product_images/thumbnails/' . $productImage->image)}}">
-                                                                <a href="{{ asset('web/images/product_images/' . $productImage->image)}}" title="{{ $productDetail->name }}" data-lightbox="gallery-item">
-                                                                    <img class="product_image" src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $productDetail->name }}">
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
+                                                        @if($productDetail->productImages->count())
+                                                            @foreach($productDetail->productImages as $productImage)
+                                                                <div class="slide" data-thumb="{{ asset('web/images/product_images/thumbnails/' . $productImage->image)}}">
+                                                                    <a href="{{ asset('web/images/product_images/' . $productImage->image)}}" title="{{ $productDetail->name }}" data-lightbox="gallery-item">
+                                                                        <img class="product_image" src="{{ asset('web/images/product_images/' . $productImage->image)}}" alt="{{ $productDetail->name }}">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
                                                         @else
                                                             <div class="slide" data-thumb="{{ asset('web/images/product_images/thumbnails/no_image.png')}}">
                                                                 <a href="{{ asset('web/images/product_images/no_image.png')}}" title="{{ $productDetail->name }}" data-lightbox="gallery-item">
