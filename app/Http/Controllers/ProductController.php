@@ -79,7 +79,7 @@ class ProductController extends Controller
      */
     public function import_product(Request $request)
     {
-        if($request->get('type') == 'product') {
+        if ($request->get('type') == 'product') {
             return view('product.import');
         } else {
             return view('product.import_image');
@@ -267,9 +267,12 @@ class ProductController extends Controller
             foreach ($images as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
                 $product = Product::where('product_code', $fileInfo['filename'])->first();
-                if($product) {
-                    foreach ($product->ProductImages as $ProductImage) {
-                        $ProductImage->unlinkImage($ProductImage->image);
+                if ($product) {
+                    if ($product->ProductImages()->count() > 0) {
+                        foreach ($product->ProductImages as $ProductImage) {
+                            $ProductImage->unlinkImage($ProductImage->image);
+                        }
+                        $product->ProductImages()->delete();
                     }
                     $portfolioImageCount = $product->ProductImages()->count() + 1;
                     $ProductImage = new ProductImage();
@@ -282,18 +285,16 @@ class ProductController extends Controller
                     info("Product Not Found " . $fileInfo['filename']);
                     $n++;
                 }
-
             }
 
-           DB::commit();
+            DB::commit();
 
             return redirect()->route('product.import', ['type' => 'product_image'])
-            ->with('status', 'Imported Image Successfully Successfully, Not Matched record ' . $n . " - " . implode(",", $temp) );
+                ->with('status', 'Imported Image Successfully Successfully, Not Matched record ' . $n . " - " . implode(",", $temp));
         } catch (Exception $e) {
             DB::rollback();
             die($e->getMessage());
             return response(['status' => 'Cannot Import Images'], 500);
         }
-
     }
 }
