@@ -39,6 +39,8 @@ $(document).ready(function() {
                     <div class="card-header card-header-primary">
                         <h4 class="card-title float-left">{{ __('product') }}</h4>
                         <a href="{{ route('product.create') }}" class="btn btn-success float-right"><i class="material-icons">add</i></a>
+                        <a href="{{ route('product.import') }}" class="btn btn-warning float-right">Import</a>
+
                     </div>
                     <div class="card-body ">
 

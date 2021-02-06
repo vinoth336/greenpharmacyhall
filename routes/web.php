@@ -92,6 +92,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('product/update_sequence', 'ProductController@updateSequence')->name('product.update_sequence');
         Route::post('product/get_slug_name', 'ProductController@getSlugName')->name('product.get_slug_name');
 
+        Route::get('product/import_product', 'ProductController@import_product')->name('product.import');
+        Route::post('product/import_product', 'ProductController@import');
         Route::resource('product', 'ProductController');
 
         Route::put('product_images/update_sequence', 'PortfolioImageController@updateSequence')->name('product_images.update_sequence');

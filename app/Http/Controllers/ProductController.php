@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Http\Requests\CreateServiceRequest;
 use App\Http\Requests\GetSlugNameRequest;
+use App\Imports\ImportProduct;
 use App\Product;
 use App\ProductImage;
 use App\Services;
@@ -13,6 +14,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use Psy\Util\Str;
 
 class ProductController extends Controller
@@ -55,31 +57,28 @@ class ProductController extends Controller
     {
 
         DB::beginTransaction();
-        try{
+        try {
 
             $this->savePortfolio(new Product(), $request);
 
             DB::commit();
 
             return redirect()->route('product.index')->with('status', 'Created Successfully');
-
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             return response(['status' => "Can't Store Data", "message" => $e->getMessage()], 500);
         }
-
     }
 
-    /**
-     * Display the specified resource.
+     /**
+     * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function import_product()
     {
-        //
+        return view('product.import');
     }
 
     /**
@@ -100,7 +99,7 @@ class ProductController extends Controller
             'services' => $services,
             'brands' => $brands,
             'subCategories' => $subCategories
-            ]);
+        ]);
     }
 
     /**
@@ -113,20 +112,18 @@ class ProductController extends Controller
     public function update(CreateServiceRequest $request, Product $product)
     {
         DB::beginTransaction();
-        try{
+        try {
 
             $this->savePortfolio($product, $request);
 
             DB::commit();
 
             return redirect()->route('product.index')->with('status', 'Created Successfully');
-
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             return response(['status' => "Can't Store Data"], 500);
         }
-
     }
 
     /**
@@ -139,10 +136,10 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
 
-        try{
+        try {
 
-            foreach($product->ProductImages as $ProductImage){
-                    $ProductImage->unlinkImage($ProductImage->image);
+            foreach ($product->ProductImages as $ProductImage) {
+                $ProductImage->unlinkImage($ProductImage->image);
             }
 
             $product->ProductImages()->delete();
@@ -152,13 +149,11 @@ class ProductController extends Controller
             DB::commit();
 
             return redirect()->route('product.index')->with('status', 'Removed Successfully');
-
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             return response(['status' => "Can't Delete Data"], 500);
         }
-
     }
 
     public function updateSequence(Request $request)
@@ -166,14 +161,13 @@ class ProductController extends Controller
 
         DB::beginTransaction();
 
-        try
-        {
-            foreach($request->input('sequence') as $sequence => $id) {
+        try {
+            foreach ($request->input('sequence') as $sequence => $id) {
                 $product = Product::find($id);
                 $product->sequence = $sequence + 1;
                 $product->save();
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
             Log::error($e->getMessage());
             response(['status' => 'Cannot Update Sequence'], 500);
@@ -185,7 +179,7 @@ class ProductController extends Controller
     }
 
 
-     /**
+    /**
      * Create or Update the Product in storage
      *
      * @param PortfolioImageRequest $request
@@ -196,7 +190,7 @@ class ProductController extends Controller
     {
 
         $portfolioBanner = $request->file('portfolio_banner_image') ?? null;
-        $product->storeImage($portfolioBanner, ['width' => 161 , 'height' => 161]);
+        $product->storeImage($portfolioBanner, ['width' => 161, 'height' => 161]);
         $product->name = $request->input('name');
         $product->slug = str_slug($request->input('name'));
         $product->brand_id = $request->input('brand');
@@ -209,12 +203,12 @@ class ProductController extends Controller
         $product->save();
         $product->services()->sync($request->input('services'));
         $product->touch(); // This will help to add in cache
-        if($request->has('product_images')) {
+        if ($request->has('product_images')) {
             $portfolioImageCount = $product->ProductImages()->count() + 1;
             $images = $request->file('product_images');
-            foreach($images as $image){
+            foreach ($images as $image) {
                 $ProductImage = new ProductImage();
-                $ProductImage->storeImage($image, ['width' => 230 , 'height' => 230]);
+                $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
                 $ProductImage->sequence = $portfolioImageCount++;
                 $product->ProductImages()->save($ProductImage);
             }
@@ -225,7 +219,7 @@ class ProductController extends Controller
 
     public function getSlugName(GetSlugNameRequest $request)
     {
-        if($request->has('name')) {
+        if ($request->has('name')) {
             return ['slug_name' => str_slug($request->input('name'))];
         }
 
@@ -238,5 +232,28 @@ class ProductController extends Controller
         return new Services;
     }
 
+    public function import(Request $request)
+    {
 
+        DB::beginTransaction();
+
+        try {
+
+            $request->validate([
+                'product_list' => 'required'
+            ]);
+
+            Excel::import(new ImportProduct, request()->file('product_list'));
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+            response(['status' => 'Cannot Import File'], 500);
+        }
+
+        DB::commit();
+
+        return 'test';
+    }
 }
