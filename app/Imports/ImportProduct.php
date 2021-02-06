@@ -10,21 +10,25 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class ImportProduct implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         $product = Product::firstOrCreate(
             ['slug' => str_slug($row['product_name'])],
-            ['name' => ucfirst(strtolower($row['product_name'])), 'description' => '']
+            [
+                'slug' => str_slug($row['product_name']),
+                'name' => ucfirst(strtolower($row['product_name'])),
+                'description' => ''
+            ]
         );
         $product->product_code = $row['product_code'];
         $product->brand_id = null;
         $product->sub_category_id = null;
         $product->price = (float) $row['mrp'];
-        $product->discount_amount = (float) ( $row['mrp'] == $row['price'] ? 0 : $row['price'] );
+        $product->discount_amount = (float) ($row['mrp'] == $row['price'] ? 0 : $row['price']);
         $product->sequence = 1;
         $product->save();
         $category = Services::firstOrCreate(
@@ -45,5 +49,4 @@ class ImportProduct implements ToModel, WithHeadingRow
 
         return $product;
     }
-
 }
