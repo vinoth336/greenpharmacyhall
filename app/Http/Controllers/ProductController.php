@@ -12,6 +12,7 @@ use App\ProductImage;
 use App\Services;
 use App\SubCategory;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +28,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $ProductImages = Product::with('brand')->OrderBy('sequence')->get();
+        $ProductImages = Product::with('brand')->OrderBy('name')->get();
 
         return view('product.list', ['products' => $ProductImages]);
     }
@@ -143,21 +144,26 @@ class ProductController extends Controller
 
         try {
 
-            foreach ($product->ProductImages as $ProductImage) {
-                $ProductImage->unlinkImage($ProductImage->image);
+            if($product->ProductImages()->count() > 0) {
+                foreach ($product->ProductImages as $ProductImage) {
+                    $ProductImage->unlinkImage($ProductImage->image);
+                }
+                $product->ProductImages()->delete();
             }
-
-            $product->ProductImages()->delete();
             $product->services()->detach();
             $product->delete();
 
             DB::commit();
 
-            return redirect()->route('product.index')->with('status', 'Removed Successfully');
+            return response(['status' => true, "message" => "Removed Successfully"], 200);
+        } catch(ModelNotFoundException $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return response(['status' => false, "message" => $e->getMessage()], 404);
         } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
-            return response(['status' => "Can't Delete Data"], 500);
+            return response(['status' => false, "message" => $e->getMessage()], 500);
         }
     }
 

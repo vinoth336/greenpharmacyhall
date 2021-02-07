@@ -79,11 +79,6 @@ var Cart = {
                 "qty": qty
             },
             "success": function(items) {
-
-                console.log(" Update qty start");
-                console.log(items.data)
-                console.log(" Update qty ended");
-
                 Cart.addCartItemsFromServerToLocatStorage(items);
                 Cart.updateInLocalStorage(container, productId, qty);
             },
@@ -327,8 +322,7 @@ var Cart = {
                 },
                 "error": function(jqXHR, exception) {
                     $(elm).attr('disabled', false);
-                    var response = jqXHR.responseJSON;
-                    toastr.error(response.message);
+                    toastr.error(jqXHR.responseText);
                 }
             });
         }

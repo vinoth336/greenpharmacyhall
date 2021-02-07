@@ -92,18 +92,21 @@
 
 
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="com-md-4">
                                         @if(auth()->guard('web')->check())
                                             @include('site.user_address_info')
                                         @endif
-
                                         <h6 style="font-weight:bolder;margin-top: 10px;">Payment Type</h6>
                                         <i class="fas fa-money-bill-wave"></i>Cash On Delivery
                                     </div>
                                 </div>
                                     <div   class="text-right" style="padding-top:20px;margin-top: 40px; margin-bottom: 40px; border-top: 1px solid #ccc">
                                             Total Amount : <span style="font-weight: bold" id="order_summary_amount"></span>
+                                            <p>
+                                                <i style="font-size: 12px">Note : Minimum Order Amount Should Be Rs <span class="text-danger">{{ number_format(MIN_ORDER_AMOUNT, 2) }}</span></i>
+                                            </p>
                                     </div>
                                     <button type="button" class="btn btn-success float-right" onclick="Cart.checkout(this)">
                                         Place Order

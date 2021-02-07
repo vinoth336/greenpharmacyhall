@@ -58,7 +58,9 @@
                                         </div>
                                         <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_qty_{{ $productDetail->slug }}').val())" data-productid="{{ $productDetail->slug }}">Add to cart</button>
                                         <div class="line"></div>
-                                        {!! $productDetail->description !!}
+                                        <div class="product_description">
+                                            {!! $productDetail->description !!}
+                                        </div>
                                         <div
                                             class="si-share border-0 d-flex justify-content-between align-items-center mt-4">
                                             <span>Share:</span>

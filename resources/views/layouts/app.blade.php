@@ -15,6 +15,8 @@
     <!-- CSS Files -->
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <link href="{{ asset('material') }}/css/material-dashboard.min.css?v=2.1.1" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
 
@@ -84,6 +86,7 @@
         <script src="{{ asset('material') }}/js/settings.js"></script>
         <!-- <script src="{{ asset('material') }}/js/material-dashboard.min.js?v=2.1.1" rel="stylesheet"></script> -->
         <script type="text/javascript" src="{{ asset('material') }}/js/helpers.js"></script>
+        <script src="{{ asset('web/js/plugins.min.js') }}"></script>
         @stack('js')
     </body>
 </html>
