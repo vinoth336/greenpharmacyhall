@@ -49,17 +49,10 @@ class SiteController extends Controller
     {
         $siteInformation = SiteInformation::first();
         $services = Services::orderBy('sequence')->get();
-
-
         try {
-
-
             if ($slug) {
-
                 $service = Services::where('slug', $slug)->first();
-
                 if ($service) {
-
                     return view('site.service_single', [
                         'siteInformation' => $siteInformation,
                         'service' => $service
@@ -100,7 +93,6 @@ class SiteController extends Controller
 
     public function product()
     {
-
         $siteInformation = SiteInformation::first();
         $products = Product::orderBy('sequence')->get();
 
@@ -111,14 +103,6 @@ class SiteController extends Controller
                 'siteInformation' => $siteInformation
             ]
         );
-    }
-
-    public function testimonial()
-    {
-    }
-
-    public function howWeWork()
-    {
     }
 
     public function faqs()

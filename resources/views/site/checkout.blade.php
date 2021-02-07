@@ -27,6 +27,7 @@
 
                 <div class="row col-mb-30 gutter-50 mb-4">
                     <div class="col-lg-9 m-auto">
+
                         <div class="accordion clearfix">
                             <div class="accordion-header">
                                 <div class="accordion-icon">

@@ -161,7 +161,12 @@
 								</path>
 							</svg>
 						</div>
-
+                        <div class="top-search-form" style="width: 100%;">
+                            <form method="get" action="/search" >
+                            <input type="text" name="q" id="product_search_box" class="" value=""
+                            placeholder="Type &amp; Hit Enter.." autocomplete="off">
+                            </form>
+						</div>
 						@include('site.navbar')
 					</div>
 				</div>

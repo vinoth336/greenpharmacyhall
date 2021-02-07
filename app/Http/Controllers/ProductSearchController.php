@@ -23,9 +23,7 @@ class ProductSearchController extends Controller
         $subCategories = SubCategory::get();
         $brands = Brand::get();
         $input = $request->all();
-
         $products = $this->getProducts($request, $renderPage = false);
-
 
         return view('site.product_list')
             ->with('categories', $categories)
@@ -50,6 +48,13 @@ class ProductSearchController extends Controller
 
     public function addWhereCondition($request, $products)
     {
+
+        if($request->has('q')) {
+            $searchQuery = $request->get('q');
+            $products->where('name', 'like' , "%{$searchQuery}%")
+            ->orWhere('slug', $searchQuery)
+            ->orWhere('description', 'like', "%{$searchQuery}%");
+        }
 
         if($request->has('categories')) {
             $products->join('product_services', function($join) use($request, $products){
@@ -100,5 +105,25 @@ class ProductSearchController extends Controller
 
         return $products;
 
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $searchQuery = $request->get('q');
+
+        if($searchQuery) {
+            $products = Product::where('name', 'like' , "%{$searchQuery}%")
+            ->orWhere('description', 'like', "%{$searchQuery}%")
+            ->limit(10)->get();
+        } else {
+            $products = Product::limit(10)->orderBy('name')->get();
+        }
+
+        $response = [];
+        foreach($products as $product) {
+            $response[] = array('value' => $product->slug, 'label' => ucwords($product->name));
+        }
+
+        return response()->json($response);
     }
 }

@@ -99,6 +99,8 @@
 <script src="{{ asset('web/js/functions.js') }}"></script>
 <script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v={{ $version }}"></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=721958557824359&autoLogAppEvents=1" nonce="lNPiivbw"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 @stack('js')
 
 @if(session()->has('login_failed'))
@@ -108,6 +110,43 @@
         });
     </script>
 @endif
+
+<script>
+
+$(function() {
+    function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#product_search_box" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/search_product",
+          dataType: "json",
+          data: {
+            q: request.term
+          },
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+          console.log("am inside " + ui.item.label);
+          window.location.href="/search?q=" + ui.item.value;
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+  });
+
+</script>
 
 <a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="float"
     target="_blank">
