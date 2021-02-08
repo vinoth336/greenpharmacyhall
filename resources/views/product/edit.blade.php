@@ -217,6 +217,22 @@ $(document).ready(function() {
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Status') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('status') ? ' has-danger' : '' }} text-left">
+                                            <input style="width: 62px;"
+                                                class="form-control {{ $errors->has('status') ? ' is-invalid' : '' }}"
+                                                name="status" id="input-status" type="checkbox" value="1"
+                                                @if(old('status', $product->status) == 1) checked @endif
+                                                 aria-required="true" />
+                                            @if ($errors->has('status'))
+                                                <span id="status-error" class="error text-danger"
+                                                    for="input-status">{{ $errors->first('status') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <h2 class="col-sm-2 col-form-label ">
                                         Product Images
                                     </h2>

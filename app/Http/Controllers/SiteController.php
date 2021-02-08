@@ -31,7 +31,7 @@ class SiteController extends Controller
         $verticalWideBanner = Banners::where('banner_size', 8)->orderBy('sequence', 'asc')->first();
         $services = Services::orderBy('sequence');
         $servicesForEnquiries = Services::orderBy('sequence')->get();
-        $allProducts = Product::with('ProductImages')->limit(50)->orderBy('sequence')->get();
+        $allProducts = Product::activeProject()->with('ProductImages')->limit(50)->orderBy('sequence')->get();
         return view('site.home', [
             'siteInformation' => $siteInformation,
             'sliders' => $sliders,
@@ -94,7 +94,7 @@ class SiteController extends Controller
     public function product()
     {
         $siteInformation = SiteInformation::first();
-        $products = Product::orderBy('sequence')->get();
+        $products = Product::activeProject()->orderBy('sequence')->get();
 
         return view(
             'site.product',

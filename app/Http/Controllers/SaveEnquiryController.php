@@ -20,9 +20,9 @@ class SaveEnquiryController extends Controller
             Enquiries::create(
                 [
                     'name' => $request->input("name"),
-                    'service_id' => $request->input('service'),
+                    'service_id' => null,
                     'email' => $request->input("email"),
-                    'phone_no' => $request->input("phone_no"),
+                    'phone_no' => $request->input("user_phone_no"),
                     'subject' => $request->input("subject"),
                     'message' => $request->input("message"),
                     'status' => 'Pending',
@@ -31,7 +31,7 @@ class SaveEnquiryController extends Controller
 
             DB::commit();
 
-            return redirect($request->header('referer'))->with(['status' => 'Updated Successfully, We Will Contact You Soon']);
+            return redirect($request->header('referer'))->with(['enquiry_status' => 'Updated Successfully, We Will Contact You Soon']);
 
         } catch( Exception $e) {
             Log::error('Enquiry Form Error ' . $e->getMessage() );

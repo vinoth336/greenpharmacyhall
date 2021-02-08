@@ -169,9 +169,9 @@
 						</div>
 						@include('site.navbar')
 					</div>
-				</div>
+                </div>
 			</div>
-			<div class="header-wrap-clone"></div>
+            <div class="header-wrap-clone"></div>
         </header>
 
         @yield('content')

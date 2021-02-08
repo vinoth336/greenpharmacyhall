@@ -38,7 +38,7 @@ class ProductSearchController extends Controller
 
     public function getProducts(Request $request, $renderPage = true)
     {
-        $products = Product::with(['brand', 'services']);
+        $products = Product::activeProject()->with(['brand', 'services']);
         $products = $this->addWhereCondition($request, $products);
         $sortBy = $request->input('sort_by') == 'low_to_high' ? 'asc' : 'desc';
 
@@ -112,11 +112,11 @@ class ProductSearchController extends Controller
         $searchQuery = $request->get('q');
 
         if($searchQuery) {
-            $products = Product::where('name', 'like' , "%{$searchQuery}%")
+            $products = Product::activeProject()->where('name', 'like' , "%{$searchQuery}%")
             ->orWhere('description', 'like', "%{$searchQuery}%")
             ->limit(10)->get();
         } else {
-            $products = Product::limit(10)->orderBy('name')->get();
+            $products = Product::activeProject()->limit(10)->orderBy('name')->get();
         }
 
         $response = [];

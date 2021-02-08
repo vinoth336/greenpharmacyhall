@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomerChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerForgotPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
+use App\User;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserLoginController extends Controller
 {
@@ -19,14 +25,12 @@ class UserLoginController extends Controller
     {
         if (Auth::guard('web')->attempt($request->only('phone_no', 'password'), $request->filled('remember'))) {
             //Authentication passed...
-
             $redirectTo = route('home');
             if($request->has('redirectTo')) {
                 if($request->get('redirectTo') == 'checkout') {
                     $redirectTo = route('public.cart.checkout');
                 }
             }
-
             return redirect()
                  ->intended($redirectTo);
         }
@@ -48,6 +52,38 @@ class UserLoginController extends Controller
             ->back()
             ->withInput()
             ->with('login_failed','Login failed, please try again!');
+    }
+
+    public function forgotPassword(CustomerForgotPasswordRequest $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = User::where('phone_no', $request->get('forgot_password_phone_no'))->first();
+            $changePasswordRequest = new CustomerChangePasswordRequest();
+            $changePasswordRequest->user_id = $user->id;
+            $changePasswordRequest->status = 'pending';
+            $changePasswordRequest->request_type = 'change_password';
+            $changePasswordRequest->save();
+
+            DB::commit();
+
+            return redirect()
+            ->route('home')
+            ->withInput()
+            ->with('login_success','Your Request Submitted Successfully');
+
+        } catch(Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+
+            die('error' . $e->getMessage());
+            return redirect()
+            ->route('home')
+            ->with(['login_failed' => "Can't Process Request"], SERVER_ERROR);
+        }
+
+
     }
 
     private function validator(Request $request)

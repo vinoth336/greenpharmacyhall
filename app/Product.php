@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\RelatedProducts;
 use App\Traits\StoreImage;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Jamesh\Uuid\HasUuid;
 
@@ -66,6 +67,7 @@ class Product extends Model
         static::deleted(function($model){
             setSiteMenuValueInCache(getSiteMenus());
         });
+
     }
 
     public function getRouteKeyName()
@@ -82,6 +84,11 @@ class Product extends Model
     public function getProductUrlAttribute()
     {
         return env('APP_URL') . "product/" . $this->slug;
+    }
+
+    public static function scopeActiveProject($query)
+    {
+        return $query->where('products.status', 1);
     }
 
 }

@@ -211,6 +211,7 @@ class ProductController extends Controller
         $product->price = (float) $request->input('price');
         $product->discount_amount = (float) $request->input('discount_amount');
         $product->sequence = $product->sequence ?? Product::count() + 1;
+        $product->status = $request->has('status') ? 1 : 0;
         $product->save();
         $product->services()->sync($request->input('services'));
         $product->touch(); // This will help to add in cache

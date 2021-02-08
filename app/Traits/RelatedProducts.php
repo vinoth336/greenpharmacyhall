@@ -15,7 +15,7 @@ trait RelatedProducts {
 
     public function getRelatedProductList($limit)
     {
-        $query = Product::with(['brand', 'services']);
+        $query = Product::activeProject()->with(['brand', 'services']);
         $query = $this->addWhereCondition($query);
 
         return $query->select('products.*')->limit($limit)->inRandomOrder()->get();
@@ -23,7 +23,7 @@ trait RelatedProducts {
 
     public function getRandomProductList($limit)
     {
-        $query = Product::with(['brand', 'services']);
+        $query = Product::activeProject()->with(['brand', 'services']);
         $query->where('products.id', '!=', $this->id);
         return $query->select('products.*')->limit($limit)->inRandomOrder()->get();
     }

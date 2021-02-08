@@ -17,25 +17,38 @@
                         aria-hidden="true">&times;</button>
                             <form id="login_form" class="mt-5 floating-group" method="post" action="{{ route('public.login') }}">
                                 @csrf
-
+                                @method('POST');
                                 @if(session()->has('login_failed'))
                                     <p class="text-danger">
                                         {{ session()->get('login_failed') }}
                                     </p>
                                 @endif
-
+                                @if(session()->has('login_success'))
+                                    <p class="text-success">
+                                        {{ session()->get('login_success') }}
+                                    </p>
+                                @endif
                                 <input type="hidden" name="redirectTo" value="{{ $redirectTo ?? 'dashboard' }}" />
 								<div class="form-group">
 									<label for="exampleInputEmail1">Phone No</label>
 									<input type="number" class="form-control" name="phone_no" min="10" placeholder="Phone No">
+                                    @if($errors->has('phone_no'))
+                                        <span class="text-danger"> {{ $errors->first('phone_no') }} </span>
+                                    @endif
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">Password</label>
-									<input type="password" class="form-control" name="password" placeholder="Password">
+									<input type="password" class="form-control" name="password" placeholder="Password"> <br>
+                                    <a style="margin-left: 10px;" href="Javascript:void(0);" onclick="showForgotPasswordForm()">
+                                        Forgot Password ?
+                                    </a>
+                                    @if($errors->has('password'))
+                                        <span class="text-danger"> {{ $errors->first('password') }} </span>
+                                    @endif
 								</div>
 								<div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1">
-									<label class="form-check-label" for="exampleCheck1">Check me out</label>
+									<input type="checkbox" class="form-check-input" id="remember" name="remember" value="1">
+									<label class="form-check-label" for="exampleCheck1">Remember Me</label>
                                 </div>
 
                                 <div class="m-auto text-center">
@@ -44,7 +57,29 @@
                                 </button>
                                 </div>
                             </form>
-
+                            <form method="post" action="{{ route('public.forgot_password') }}" id="show_forgot_password" class="d-none">
+                                @csrf
+                                <h2 style="margin-top: 55px">Forgot Password</h2>
+                                <p style="line-height: 25px;color: #333">
+                                    Don't Worry We Will Help You To Restore Password, Kindly Submit Your
+                                    Password, Our Support Team will contact you to resolve it.
+                                </p>
+                                <div class="form-group">
+									<label for="exampleInputEmail1">Phone No</label>
+									<input type="number" class="form-control" name="forgot_password_phone_no" min="10" placeholder="Phone No">
+                                    @if($errors->has('forgot_password_phone_no'))
+                                        <span class="text-danger"> {{ $errors->first('forgot_password_phone_no') }} </span>
+                                    @endif
+								</div>
+                                <div class="m-auto text-right">
+                                    <a style="margin-left: 10px;" href="Javascript:void(0);" onclick="showLoginForm()">
+                                       Cancel
+                                    </a>
+                                    <button type="submit" class="btn btn-warning text-white" style="background-color: #fb641b; padding-left: 10%; padding-right:10%">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
                             <div class="mt-5 text-center mb-5">
                                 <a href="{{ route('public.registration') }}">
                                     New User ? Create an account
@@ -57,9 +92,6 @@
         </div>
     </div>
 </div>
-
-
-
 <footer id="footer" class="dark">
     <div id="copyrights">
         <div class="container">
@@ -102,23 +134,21 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 @stack('js')
-
-@if(session()->has('login_failed'))
-    <script>
-        $(document).ready(function() {
-            $(".user_login:first").trigger('click');
-        });
-    </script>
-@endif
-
 <script>
+$(document).ready(function() {
+    @if(session()->has('login_failed') || session()->has('login_success'))
+                $(".user_login:first").trigger('click');
+    @endif
+    @if($errors->has('phone_no') || $errors->has('password') )
+                $(".user_login:first").trigger('click');
+    @endif
+    @if($errors->has('forgot_password_phone_no'))
+                $(".user_login:first").trigger('click');
+                showForgotPasswordForm();
+    @endif
+});
 
 $(function() {
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
-
     $( "#product_search_box" ).autocomplete({
       source: function( request, response ) {
         $.ajax({
@@ -134,8 +164,11 @@ $(function() {
       },
       minLength: 3,
       select: function( event, ui ) {
-          console.log("am inside " + ui.item.label);
+        if(typeof ui.item.value != 'undefined') {
+            window.location.href="/product/" + ui.item.value;
+        } else {
           window.location.href="/search?q=" + ui.item.value;
+        }
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -145,6 +178,18 @@ $(function() {
       }
     });
   });
+
+  function showForgotPasswordForm()
+  {
+      $("#login_form").addClass('d-none');
+      $("#show_forgot_password").removeClass('d-none');
+  }
+
+  function showLoginForm()
+  {
+      $("#login_form").removeClass('d-none');
+      $("#show_forgot_password").addClass('d-none');
+  }
 
 </script>
 

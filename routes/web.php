@@ -37,6 +37,7 @@ Route::post('/email/resend', 'UserRegistrationController@resendEmailVerification
 Route::get('/login', 'UserLoginController@showLoginForm')->name('public.login');
 Route::post('/login', 'UserLoginController@login');
 Route::post('/logout', 'UserLoginController@logout')->name('public.logout');
+Route::post('/forgot_password', 'UserLoginController@forgotPassword')->name('public.forgot_password')->middleware('throttle:5,1');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
@@ -44,6 +45,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('/cart/checkout/', 'CartController@checkout')->name('public.cart.checkout');
 Route::group(['middleware' => 'auth:web'], function() {
     Route::get('dashboard', 'UserController@dashboard')->name('public.dashboard');
+    Route::get('change_password', 'UserController@changePassword')->name('public.change_password');
+    Route::post('change_password', 'UserController@updatePassword');
     Route::put('profile', 'UserController@update')->name('public.update_profile');
     Route::get('pharma_create_order', 'PharmaOrderController@index')->name('public.pharma_purchase_order');
     Route::post('pharma_create_order', 'PharmaOrderController@create');
@@ -89,6 +92,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('slider', 'SliderController');
         Route::resource('banner', 'BannerController');
         Route::resource('enquiries', 'EnquiriesController')->except('store');
+        Route::resource('change_password_request', 'ChangePasswordRequestController')->except('store');
+
         Route::resource('testimonials', 'TestimonialController');
         Route::put('product/update_sequence', 'ProductController@updateSequence')->name('product.update_sequence');
         Route::post('product/get_slug_name', 'ProductController@getSlugName')->name('product.get_slug_name');

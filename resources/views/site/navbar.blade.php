@@ -68,6 +68,9 @@
                     <a  class="menu-link" href="{{ route('public.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="menu-item">
+                    <a  class="menu-link" href="{{ route('public.change_password') }}">Change Password</a>
+                </li>
+                <li class="menu-item">
                     <a  class="menu-link" href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                 </li>
             </ul>

@@ -58,4 +58,9 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class, 'user_id', 'id');
     }
 
+    public function change_password()
+    {
+        return $this->hasOne(CustomerChangePasswordRequest::class, 'user_id', 'id');
+    }
+
 }

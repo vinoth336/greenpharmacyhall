@@ -1,26 +1,21 @@
-@if($errors->count() || session('status'))
-<script>
-    $(document).ready(function() {
-        $([document.documentElement, document.body]).animate({
-        scrollTop: $("#enquiry_form_section").offset().top - 300
-        }, 200);
-    });
+@if(session('enquiry_status'))
+    <script>
+        $(document).ready(function() {
+            $([document.documentElement, document.body]).animate({
+            scrollTop: $("#enquiry_form_section").offset().top - 300
+            }, 200);
+        });
+    </script>
 
-</script>
+    <div class="col-md-12">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+            <span>{{ session('enquiry_status') }}</span>
+        </div>
+    </div>
 @endif
-
-@if (session('status'))
-
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="material-icons">close</i>
-                    </button>
-                    <span>{{ session('status') }}</span>
-                </div>
-            </div>
-
-    @endif
 
 <div class="form-widget1" id="enquiry_form_section">
     <div class="form-result"></div>
@@ -51,27 +46,13 @@
         </div>
         <div class="{{ $enquiry_form_class }}  form-group">
             <label for="template-contactform-phone">Phone</label>
-            <input type="number" id="template-contactform-phone" name="phone_no" value="{{ old('phone_no') }}"
+            <input type="number" id="template-contactform-phone" name="user_phone_no" value="{{ old('user_phone_no') }}"
                 class="sm-form-control" required />
-                @if ($errors->has('phone_no'))
-                <span id="phone_no-error" class="error text-danger" for="input-phone_no">{{ $errors->first('phone_no') }}</span>
+                @if ($errors->has('user_phone_no'))
+                <span id="user_phone_no-error" class="error text-danger" for="input-user_phone_no">{{ $errors->first('user_phone_no') }}</span>
             @endif
         </div>
         <div class="w-100"></div>
-        <div class="{{ $enquiry_form_class }}  form-group">
-            <label for="template-contactform-email">Services <small>*</small></label>
-            <select name="service" class="required email sm-form-control" >
-                @foreach ($services as $service )
-                    <option value="{{ $service->id }}"
-                        @if($service->id == old('service')) selected @endif>
-                            {{ strtoupper($service->name) }}
-                    </option>
-                @endforeach
-            </select>
-            @if ($errors->has('service'))
-                <span id="service-error" class="error text-danger" for="input-service">{{ $errors->first('service') }}</span>
-            @endif
-        </div>
         <div class="col-md-8 form-group">
             <label for="template-contactform-subject">Subject <small>*</small></label>
             <input type="text" id="template-contactform-subject" name="subject" value="{{ old('subject') }}"

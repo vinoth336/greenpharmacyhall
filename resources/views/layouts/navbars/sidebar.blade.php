@@ -84,6 +84,12 @@
             <p>{{ __('Enquiries') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'forgot_password' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('change_password_request.index') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Change Password Request') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'faqs' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('faqs.index') }}">
           <i class="material-icons">content_paste</i>

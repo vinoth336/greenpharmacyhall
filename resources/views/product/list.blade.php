@@ -46,6 +46,8 @@
                                         <th>Brand</th>
                                         <th>Price</th>
                                         <th>Discount Price</th>
+                                        <th>Image Status</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -69,6 +71,8 @@
                                                 <td>{{ $product->brand ?  $product->brand->name : null }}</td>
                                                 <td>{{ number_format($product->price, 2) }}</td>
                                                 <td>{{ number_format($product->discount_amount, 2) }}</td>
+                                                <td></td>
+                                                <td>{{ $product->status ? 'Active' : 'Not Active' }}</td>
                                                 <td>
                                                     <a href="{{ route('product.edit', $product->slug) }}" class="text-success" data-original-title title><i class="material-icons">edit</i></a>
                                                     <a href="Javascript:void(0);" onclick="Product.removeProduct('{{ $product->slug }}')" class="text-danger" data-product-name="{{ ucwords($product->name) }}">
