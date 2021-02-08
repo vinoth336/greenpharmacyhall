@@ -1,13 +1,11 @@
 var Filter = {
 
     init: function() {
-        this.listionFilter();
+        //this.listionFilter();
     },
 
     listionFilter: function() {
-        $('.input_filter').on('change', function() {
-            Filter.fetchDatas();
-        });
+        window.location.href = "/search?" + $(".input_filter").find("input, select").serialize();
     },
 
     fetchDatas: function() {
