@@ -11,7 +11,7 @@ var Filter = {
     },
 
     fetchDatas: function() {
-        window.location.href = "/search?" + $(".sidebar").find("input, select").serialize();
+        window.location.href = "/search?" + $(".mobile_sidebar").find("input, select").serialize();
     },
     resetFilter: function() {
         window.location.href = "/search";

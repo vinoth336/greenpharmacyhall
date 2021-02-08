@@ -41,7 +41,7 @@
         </div>
         <div class="col-lg-12 mb-3">
             <h6>Sort By</h6>
-            <select class="selectpicker " name="sort_by" id="sort_by">
+            <select class="selectpicker" name="sort_by" id="sort_by">
                 <option value="low_to_high">Low To High</option>
                 <option value="high_to_low">High To Low</option>
             </select>
