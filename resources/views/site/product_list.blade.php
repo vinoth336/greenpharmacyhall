@@ -81,7 +81,7 @@
         </div>
         </div>
         </div>
-        <div class="scw-switcher-wrap d-md-none d-lg-none">
+        <div class="scw-switcher-wrap d-md-none d-lg-none mobile_sidebar">
             <button type="button" class="scw-trigger-icon scw-trigger">
                 <i class="icon-filter1"></i>
                 <i class="icon-line-cross"></i>
