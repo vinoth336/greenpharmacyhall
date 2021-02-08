@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h6>Select Category</h6>
-            <select class="selectpicker input_filter" name="categories[]" id="categories" multiple>
+            <select class="selectpicker " name="categories[]" id="categories" multiple>
                 <option value="">All</option>
                     @foreach ($categories as $category )
                         <option value="{{ $category->slug }}"
@@ -15,7 +15,7 @@
         </div>
         <div class="col-lg-12">
             <h6>Sub Category</h6>
-            <select class="selectpicker input_filter" name="sub_categories[]" id="sub_categories" multiple>
+            <select class="selectpicker " name="sub_categories[]" id="sub_categories" multiple>
                 <option value="">All</option>
                     @foreach ($subCategories as $subCategory )
                         <option value="{{ $subCategory->slug_name }}"
@@ -28,7 +28,7 @@
         </div>
         <div class="col-lg-12">
             <h6>Select Brand</h6>
-            <select class="selectpicker input_filter" name="brands[]" id="brands" multiple>
+            <select class="selectpicker" name="brands[]" id="brands" multiple>
                 <option value="">All</option>
                     @foreach ($brands as $brand )
                         <option value="{{ $brand->slug }}"
@@ -41,7 +41,7 @@
         </div>
         <div class="col-lg-12 mb-3">
             <h6>Sort By</h6>
-            <select class="selectpicker input_filter" name="sort_by" id="sort_by">
+            <select class="selectpicker " name="sort_by" id="sort_by">
                 <option value="low_to_high">Low To High</option>
                 <option value="high_to_low">High To Low</option>
             </select>
@@ -52,6 +52,6 @@
         <a href="Javascript:void(0)" class="btn btn-danger"  id="reset" onclick="Filter.resetFilter()">
         Reset
         </a>
-        <a href="Javascript:void(0)" class="btn btn-success"  id="reset" onclick="Filter.resetFilter()">Search</a>
+        <a href="Javascript:void(0)" class="btn btn-success"  id="reset" onclick="Filter.fetchDatas()">Search</a>
     </div>
 </div>
