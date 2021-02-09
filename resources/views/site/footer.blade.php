@@ -193,7 +193,7 @@ $(function() {
 
 </script>
 
-<a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="float"
+<a href="https://wa.me/91{{ $siteInformation->phone_no }}?text=Hi {{ $siteInformation->site_name }}," class="ws_float"
     target="_blank">
     <i class="fa icon-whatsapp my-float"></i>
 </a>

@@ -65,7 +65,7 @@
 
 <body class="stretched">
     <style>
-        .float{
+        .ws_float{
 	position:fixed;
 	width:60px;
 	height:60px;
@@ -104,38 +104,45 @@
 			</div>
 		</div>
 		<header id="header" class="full-header" data-logo-height="60" data-mobile-sticky=true data-mobile-sticky-logo-height="30" data-sticky-logo-height="30" data-menu-padding="32">
-			<div id="header-wrap">
+			<div id="header-wrap" class="">
 				<div class="container">
-					<div class="header-row">
+					<div class="header-row top-search-parent">
 
+						<!-- Logo
+						============================================= -->
 						<div id="logo" class="mobile-width-100" style="border:none" >
 							<a  href="{{ route('home') }}" class="standard-logo"
                                 data-dark-logo="{{ asset('web/images/logo/' . $siteInformation->logo) }}">
                                 <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}"
-									alt="{{ config('app.name') }}" ></a>
+									alt="{{ config('app.name') }}" >
+                            </a>
 							<a href="{{ route('home') }}" class="retina-logo" data-dark-logo="">
-                                <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" alt="{{ config('app.name') }}" style="height: 37px !important;"></a>
+                                <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" alt="{{ config('app.name') }}" style="height: 37px !important;">
+                            </a>
                         </div>
-                        <div style="clear:both"></div>
+
 						<div class="header-misc mobile-ml-auto">
+
                             @guest
-                            <div style="margin-right: 10px" class="header-misc-icon d-sm-block d-md-none d-lg-none">
-								<a href="#" class="menu-link user_login" data-toggle="modal" data-target=".show-login-modal" style="width: 56px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
+                            <div class="header-misc-icon d-sm-block d-md-none d-lg-none">
+								<a href="#" class="menu-link user_login" data-toggle="modal" data-target=".show-login-modal" style="width: 96px;margin-top: -14px;font-weight: 480;text-transform: none;color: #27680e">
                                     Login
                                 </a>
 							</div>
                             @endguest
-                            <div id="top-search" class="header-misc-icon">
-								<a href="#" id="top-search-trigger">
-                                    <i class="icon-line-search"></i>
-                                    <i class="icon-line-cross"></i>
 
-                                </a>
-							</div>
+							<!-- Top Search
+							============================================= -->
+							<div id="top-search" class="header-misc-icon">
+								<a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
+							</div><!-- #top-search end -->
 
-							<div id="top-cart" class="header-misc-icon">
+							<!-- Top Cart
+							============================================= -->
+							<div id="top-cart" class="header-misc-icon d-sm-block">
 								<a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span
-										class="top-cart-number" id="top-cart-number"></span></a>
+                                    class="top-cart-number" id="top-cart-number"></span>
+                                </a>
 								<div class="top-cart-content">
 									<div class="top-cart-title">
 										<h4>Cart</h4>
@@ -148,32 +155,28 @@
 										<a href="{{ route('public.cart.checkout') }}" class="button button-3d button-small m-0">Checkout</a>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div id="primary-menu-trigger">
-							<svg class="svg-trigger" viewBox="0 0 100 100">
-								<path
-									d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20">
-								</path>
-								<path d="m 30,50 h 40"></path>
-								<path
-									d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20">
-								</path>
-							</svg>
-						</div>
-                        <div class="top-search-form" style="width: 100%;">
-                            <form method="get" action="/search" >
-                            <input type="text" name="q" id="product_search_box" class="" value=""
-                            placeholder="Type &amp; Hit Enter.." autocomplete="off">
-                            </form>
-						</div>
-						@include('site.navbar')
-					</div>
-                </div>
-			</div>
-            <div class="header-wrap-clone"></div>
-        </header>
+							</div><!-- #top-cart end -->
 
+						</div>
+
+						<div id="primary-menu-trigger">
+							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						@include('site.navbar')
+                        <!-- #primary-menu end -->
+
+						<form class="top-search-form" action="search.html" method="get" style="width: 290px;">
+							<input type="text" name="q" id="product_search_box" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone" style="height: 100px;"></div>
+		</header>
         @yield('content')
 
         @include('site.footer')
