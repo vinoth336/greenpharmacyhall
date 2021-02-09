@@ -168,7 +168,7 @@
 						@include('site.navbar')
                         <!-- #primary-menu end -->
 
-						<form class="top-search-form" action="search.html" method="get" style="width: 290px;">
+						<form class="top-search-form" action="/search" method="get" style="width: 250px;">
 							<input type="text" name="q" id="product_search_box" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
 						</form>
 
