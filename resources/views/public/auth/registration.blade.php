@@ -34,11 +34,33 @@
                                 @enderror
                             </span>
                         </div>
-                        <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="inputAddress2">Phone No</label>
                             <input type="text" class="form-control" id="phone" placeholder="----------" min="10" max="10" name="phone_no" value="{{ old('phone_no') }}">
                             <span id="first_nameMsg" class="error">
                                 @error('phone_no')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" min="6">
+                            <span id="first_nameMsg" class="error">
+                                @error('password')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email Id</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email Id" name="email" value="{{ old('email') }}">
+                            <span id="first_nameMsg" class="error">
+                                @error('email')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -82,26 +104,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ old('email') }}">
-                            <span id="first_nameMsg" class="error">
-                                @error('email')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" min="6">
-                            <span id="first_nameMsg" class="error">
-                                @error('password')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
-                    </div>
+
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
             </div>
