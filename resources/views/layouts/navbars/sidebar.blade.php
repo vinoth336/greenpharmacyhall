@@ -75,7 +75,13 @@
       <li class="nav-item{{ $activePage == 'pharma_orders' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('pharma_orders.index') }}">
           <i class="material-icons">content_paste</i>
-            <p>{{ __('Pharma - View Orders') }}</p>
+            <p>{{ __('Pharma - Orders') }}</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'user_orders' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('user_orders.index') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Non Pharma - Orders') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'enquiries' ? ' active' : '' }}">

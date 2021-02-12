@@ -107,7 +107,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('product_images/{portfolio_image}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
 
         Route::resource('pharma_orders', 'PharmaOrderAdminController')->except(['store', 'create', 'edit']);
-
+        Route::resource('user_orders', 'UserOrderAdminController')->except(['store', 'create', 'edit']);
 
         Route::group(['middleware' => 'auth'], function () {
             Route::resource('user', 'UserController', ['except' => ['show']]);
