@@ -37,7 +37,7 @@
             <button class="sub-menu-trigger icon-chevron-right"></button>
 		</li>
 		<li class="menu-item">
-			<a class="menu-link" href="{{ route('service') }}">
+			<a class="menu-link" href="Javascript:void(0)">
 				<div>Pharma</div>
             </a>
             <ul class="sub-menu-container">
