@@ -7,29 +7,30 @@
             <div class="mega-menu-content mega-menu-style-2" style="width: 1291px;">
                 <div class="container" style="">
                     <div class="row">
-                        <ul class="sub-menu-container mega-menu-column col-lg-3" style="">
-
                             @foreach($categories as $category)
                             @if($category->products->count() ?? null)
-                            <li class="menu-item mega-menu-title sub-menu" style="">
-                                <a class="menu-link" href="{{ route('public.product_list') }}?categories[]={{ $category->slug }}"><div>{{ ucfirst($category->name) }}</div></a>
-                                <ul class="sub-menu-container" style="">
-                                    @php
-                                        $products = $category->products;
-                                        $subCategories = $products->whereNotNull('sub_category.name')->pluck('sub_category.name', 'sub_category.slug_name') ?? null;
-                                    @endphp
-                                    @foreach($subCategories as $subCategorySlugName => $subCategoryName)
-                                    <li class="menu-item" style="">
-                                        <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&sub_categories[]={{ $subCategorySlugName }}">
-                                            <div>{{ $subCategoryName }}</div>
-                                        </a>
-                                    </li>
-                                    @endforeach
+                                <ul class="sub-menu-container mega-menu-column col-lg-3" style="">
+                                        <li class="menu-item mega-menu-title sub-menu" style="">
+                                            <a class="menu-link" href="{{ route('public.product_list') }}?categories[]={{ $category->slug }}">
+                                                <div>{{ ucfirst($category->name) }}</div>
+                                            </a>
+                                            <ul class="sub-menu-container" style="">
+                                                @php
+                                                    $products = $category->products;
+                                                    $subCategories = $products->whereNotNull('sub_category.name')->pluck('sub_category.name', 'sub_category.slug_name') ?? null;
+                                                @endphp
+                                                @foreach($subCategories as $subCategorySlugName => $subCategoryName)
+                                                <li class="menu-item" style="">
+                                                    <a class="menu-link" href="{{ route('public.product_list') }}?category={{ $category->slug }}&sub_categories[]={{ $subCategorySlugName }}">
+                                                        <div>{{ $subCategoryName }}</div>
+                                                    </a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
                                 </ul>
-                            </li>
                             @endif
                             @endforeach
-                        </ul>
                     </div>
                 </div>
             </div>
