@@ -24,8 +24,8 @@ class ImportProductImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_images.*' => 'image|mimes:png,jpg,jpeg|max:6048',
-            'product_images' => 'max:20'
+            'product_images.*' => 'image|max:6048',
+            'product_images' => 'max:2000'
         ];
     }
 }
