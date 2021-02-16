@@ -269,7 +269,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             $images = $request->file("product_images");
-            die(count($images));
+            die("Image count " . count($images));
             $n = 0;
             $temp = [];
             foreach ($images as $image) {
