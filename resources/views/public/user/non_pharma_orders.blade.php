@@ -25,7 +25,7 @@
                                     <a href="#">
                                         {{ info($orderedItem->product_id) }}
                                         @if($orderedItem->product->productImage ?? false)
-                                        <img src="{{ $orderedItem->product->productImages->first()->productImage }}"
+                                        <img src="{{ asset('web/images/product_images/thumbnails/' . $orderedItem->product->productImage->first()->image) }}"
                                             alt="{{ $orderedItem->product->name }}" />
                                         @else
                                         <img src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
