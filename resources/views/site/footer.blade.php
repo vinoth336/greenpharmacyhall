@@ -132,8 +132,29 @@
 <script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v={{ $version }}"></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=721958557824359&autoLogAppEvents=1" nonce="lNPiivbw"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    // cookie policy
+    $(document).ready(function() {
+
+      if (document.cookie.indexOf("accepted_cookies=") < 0) {
+        $('.cookie-overlay').removeClass('d-none').addClass('d-block');
+      }
+
+      $('.accept-cookies').on('click', function() {
+        document.cookie = "accepted_cookies=yes;"
+        $('.cookie-overlay').removeClass('d-block').addClass('d-none');
+      })
+
+      // expand depending on your needs
+      $('.close-cookies').on('click', function() {
+        $('.cookie-overlay').removeClass('d-block').addClass('d-none');
+      })
+    })
+
+    </script>
 
 @stack('js')
+
 <script>
 $(document).ready(function() {
     @if(session()->has('login_failed') || session()->has('login_success'))
@@ -197,6 +218,17 @@ $(function() {
     target="_blank">
     <i class="fa icon-whatsapp my-float"></i>
 </a>
+
+<div class="cookie-overlay p-4 d-none">
+    <div class="d-flex">
+      <div class="mr-3">
+        Allow permission to Read and Write Cookies,<br>
+        <i style="font-size: 10px; color: red">Please Note we d't read other site information</i>
+      </div>
+    </div>
+    <button class="btn btn-primary mt-3 accept-cookies">Allow</button>
+  </div>
+
 
 </body>
 

@@ -143,8 +143,7 @@
     <div class="modal fade" id="updateOrderStatus" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="POST" action="{{ route('pharma_orders.index') }}" onsubmit="return updateStatus()">
-                    <input type="hidden" id="order_id" value="" />
+                <form method="POST" action="{{ route('user_orders.index') }}" onsubmit="return updateStatus()">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" id="contact_person_name"></h4>
@@ -184,16 +183,15 @@
 
         function updateStatus() {
             $.ajax({
-                url: "/admin/user_order/" + $("#order_id").val(),
+                url: "/admin/user_orders/" + $("#updateOrderStatus").find("#order_id").val(),
                 type: 'put',
                 dataType: 'json',
                 "data": {
-                    'order_status': $("#orderStatus").val(),
-                    'comment': $("#order_comment").val()
+                    'order_status': $("#updateOrderStatus").find("#orderStatus").val(),
+                    'comment': $("#updateOrderStatus").find("#orderComment").val()
                 },
                 success: function(data) {
                     alert('Updated Successfully');
-
                     var order_block = $("#order_status_block_" + $("#order_id").val());
                     order_block.html($("#orderStatus").find("option:selected").text().toUpperCase());
                     $("#updateOrderStatus").modal('hide');
@@ -220,6 +218,7 @@
                 success: function(data) {
                     $("#updateOrderStatus").find('.modal-body').html(data);
                     $("#updateOrderStatus").modal('show');
+                    $("#updateOrderStatus").find('.selectpicker').selectpicker();
                 },
                 error: function(jqXHR, exception) {
                     alert('Something Went Wrong')

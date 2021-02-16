@@ -265,10 +265,11 @@ class ProductController extends Controller
 
     public function import_image(ImportProductImageRequest $request)
     {
-        ini_set('max_execution_time', 1800);
+
         DB::beginTransaction();
         try {
             $images = $request->file("product_images");
+            die(count($images));
             $n = 0;
             $temp = [];
             foreach ($images as $image) {

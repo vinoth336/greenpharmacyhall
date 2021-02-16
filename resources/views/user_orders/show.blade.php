@@ -1,16 +1,19 @@
+<input type="hidden" id="order_id" value="{{ $order->id }}" />
 <div class="content" >
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-5">
+        <div class="col-lg-5">
+                <p>
                 {{ $userInfo->name }},<br>
                 {{ $userInfo->address }},<br>
                 Karur - {{ $userInfo->zipcode }},<br>Tamil Nadu<br>
                 {{ $userInfo->phone_no }}
-            </div>
-            <div class="col-md-5">
-                Order Date :<br>
-                {{ $order->created_at }}
-            </div>
+                </p>
+        </div>
+        <div class="col-lg-5">
+            <p class="text-right">
+            Order Date :<br>
+            {{ $order->created_at }}
+            </p>
         </div>
     </div>
     <div class="row">
@@ -48,6 +51,33 @@
                     </td>
                 </tr>
             </tfoot>
+        </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td >
+                        <p>
+                        <b>Order Status</b>
+                        <select id="orderStatus" name="order_status" class="selectpicker">
+                            @foreach ($orderStatus as $value)
+                                <option value="{{ $value->id }}"
+                                    @if($value->id == $order->order_status_id)
+                                    selected
+                                    @endif
+                                >
+                                    {{ $value->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                        </p>
+                        <br>
+                        <p>
+                        <b>Comment : </b>
+                        <textarea class="form-control" id="orderComment" >{{ $order->comment }}</textarea>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

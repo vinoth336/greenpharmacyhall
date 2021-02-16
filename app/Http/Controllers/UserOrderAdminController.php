@@ -63,10 +63,12 @@ class UserOrderAdminController extends Controller
                 $query->with('ProductImages');
             }]);
         }, 'user', 'order_status']);
+        $orderStatus = OrderStatus::orderBy('sequence')->get();
 
         return view('user_orders.show')->with([
             'userInfo' => $order->user,
             'orderItems' => $order->ordered_items,
+            'orderStatus' => $orderStatus,
             'order' => $order
         ]);
     }
@@ -89,10 +91,11 @@ class UserOrderAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePharmaOrderStatusRequest $request, UserOrder $pharma_order)
+    public function update(UpdatePharmaOrderStatusRequest $request, UserOrder $userOrder)
     {
-        $pharma_order->order_status_id = $request->input('order_status');
-        $pharma_order->save();
+        $userOrder->order_status_id = $request->input('order_status');
+        $userOrder->comment = $request->input('comment');
+        $userOrder->save();
 
         return response(['message' => 'Updated Successfully'], 200);
     }
@@ -103,7 +106,7 @@ class UserOrderAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserOrder $pharma_order)
+    public function destroy(UserOrder $userOrder)
     {
         return redirect()->route('user_orders.index')->with('status', 'Removed Successfully');
     }
