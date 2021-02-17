@@ -4,7 +4,12 @@
 
     @php
         $isHomePage = $page ?? false;
-        $description = $productDetail->description ?? $siteInformation->meta_description;
+
+        if($productDetail ?? false ) {
+            $description = $productDetail->description ?? $productDetail->name . " Rs " . number_format($productDetail->actual_price, 2) ;
+        } else {
+            $description = $siteInformation->meta_description;
+        }
         $description = strip_tags(Str::substr($description, 0, 200));
         $productImages = $productDetail->productImages ?? null;
         if($productImages == null) {
