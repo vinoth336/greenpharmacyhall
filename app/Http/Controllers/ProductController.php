@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $ProductImages = Product::with('brand')->OrderBy('name')->get();
+        $ProductImages = Product::with('brand', 'productImages')->OrderBy('name')->get();
 
         return view('product.list', ['products' => $ProductImages]);
     }

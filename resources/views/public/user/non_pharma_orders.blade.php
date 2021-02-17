@@ -23,9 +23,8 @@
                             <div class="top-cart-item">
                                 <div class="top-cart-item-image">
                                     <a href="#">
-                                        {{ info($orderedItem->product_id) }}
-                                        @if($orderedItem->product->productImage ?? false)
-                                        <img src="{{ asset('web/images/product_images/thumbnails/' . $orderedItem->product->productImage->first()->image) }}"
+                                        @if($orderedItem->product->productImages->count() ?? false)
+                                        <img src="{{ asset('web/images/product_images/thumbnails/' . $orderedItem->product->productImages->first()->image) }}"
                                             alt="{{ $orderedItem->product->name }}" />
                                         @else
                                         <img src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"

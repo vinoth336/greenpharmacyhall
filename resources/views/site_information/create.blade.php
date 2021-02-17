@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'siteInformations', 'titlePage' => __('Create siteInformations')])
+@extends('layouts.app', ['activePage' => 'site_information', 'titlePage' => __('Update Site Informations')])
 
 @section('content')
     <div class="content">
@@ -12,7 +12,7 @@
 
                         <div class="card ">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">{{ __('Create siteInformations') }}</h4>
+                                <h4 class="card-title">{{ __('Update Site Informations') }}</h4>
 
                             </div>
                             <div class="card-body ">

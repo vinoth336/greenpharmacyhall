@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'typography', 'titlePage' => __('Typography')])
+@extends('layouts.app', ['activePage' => 'typography', 'titlePage' => __('Site Information')])
 
 @section('content')
 <div class="content">
@@ -12,7 +12,7 @@
             <div class="card ">
               <div class="card-header card-header-primary">
                 <h4 class="card-title">{{ __('Site Information') }}</h4>
-                
+
               </div>
               <div class="card-body ">
                 @if (session('status'))

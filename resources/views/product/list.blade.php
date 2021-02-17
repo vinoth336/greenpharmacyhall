@@ -71,7 +71,13 @@
                                                 <td>{{ $product->brand ?  $product->brand->name : null }}</td>
                                                 <td>{{ number_format($product->price, 2) }}</td>
                                                 <td>{{ number_format($product->discount_amount, 2) }}</td>
-                                                <td></td>
+                                                <td>
+                                                    @if($product->productImages->count() > 0)
+                                                        Had Image
+                                                    @else
+                                                        No Image
+                                                    @endif
+                                                </td>
                                                 <td>{{ $product->status ? 'Active' : 'Not Active' }}</td>
                                                 <td>
                                                     <a href="{{ route('product.edit', $product->slug) }}" class="text-success" data-original-title title><i class="material-icons">edit</i></a>

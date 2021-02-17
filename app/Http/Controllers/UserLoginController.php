@@ -25,6 +25,13 @@ class UserLoginController extends Controller
     {
         if (Auth::guard('web')->attempt($request->only('phone_no', 'password'), $request->filled('remember'))) {
             //Authentication passed...
+
+           if(!auth()->user()->isActiveUser()) {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                return $this->loginFailed('Your Account was Deactive, Please Contact Admin To Activate Your Account');
+           }
+
             $redirectTo = route('home');
             if($request->has('redirectTo')) {
                 if($request->get('redirectTo') == 'checkout') {
@@ -47,11 +54,11 @@ class UserLoginController extends Controller
             ->route('home');
     }
 
-    private function loginFailed(){
+    private function loginFailed($msg = 'Login failed, please try again!'){
         return redirect()
             ->back()
             ->withInput()
-            ->with('login_failed','Login failed, please try again!');
+            ->with('login_failed', $msg);
     }
 
     public function forgotPassword(CustomerForgotPasswordRequest $request)

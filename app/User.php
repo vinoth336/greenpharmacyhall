@@ -63,4 +63,9 @@ class User extends Authenticatable
         return $this->hasOne(CustomerChangePasswordRequest::class, 'user_id', 'id');
     }
 
+    public function isActiveUser()
+    {
+        return $this->is_active ? true : false;
+    }
+
 }
