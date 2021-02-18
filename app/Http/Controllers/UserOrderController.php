@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CartItemListResponse;
+use App\Mail\NewOrderSendNotificationToAdmin;
 use App\UserOrder;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class UserOrderController extends Controller
 {
@@ -48,6 +50,10 @@ class UserOrderController extends Controller
                     DB::rollback();
                     return response("MIN ORDER AMOUNT SHOULD BE " . number_format(MIN_ORDER_AMOUNT, 2) , NOT_ACCEPTABLE);
             }
+
+
+
+            Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
 
             DB::commit();
 
