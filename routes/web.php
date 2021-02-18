@@ -104,7 +104,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('product', 'ProductController');
 
         Route::put('product_images/update_sequence', 'PortfolioImageController@updateSequence')->name('product_images.update_sequence');
-        Route::delete('product_images/{portfolio_image}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
+        Route::delete('product_images/{productImage}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
 
         Route::resource('pharma_orders', 'PharmaOrderAdminController')->except(['store', 'create', 'edit']);
         Route::resource('user_orders', 'UserOrderAdminController')->except(['store', 'create', 'edit']);

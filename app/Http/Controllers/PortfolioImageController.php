@@ -21,15 +21,13 @@ class PortfolioImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductImage $ProductImage)
+    public function destroy(ProductImage $productImage)
     {
         DB::beginTransaction();
 
         try{
-
-            $ProductImage->unlinkImage($ProductImage->image);
-
-            $ProductImage->delete();
+            $productImage->unlinkImage($productImage->image);
+            $productImage->delete();
 
             DB::commit();
 

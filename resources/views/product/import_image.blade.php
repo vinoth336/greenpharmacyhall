@@ -41,6 +41,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="text-center">
+                                            <label class="col-form-label">{{ __('Action') }}</label>
+                                            <input type="radio" name="action" value="override_update" checked>&nbsp;Replace and Add New Content <br>
+                                            <input type="radio" name="action" value="update">&nbsp;Add New Content Only <br>
+                                            @if ($errors->has('action'))
+                                                <span id="action-error" class="error text-danger"
+                                                    for="input-action">{{ $errors->first('action') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
                                 <a href="{{ route('product.index') }}" class="btn btn-info">{{ __('Cancel') }}</a>

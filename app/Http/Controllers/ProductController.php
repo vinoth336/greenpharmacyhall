@@ -269,27 +269,33 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             $images = $request->file("product_images");
+            $action = $request->input('action');
             $n = 0;
             $temp = [];
+            $productProcessed = [];
             foreach ($images as $image) {
                 $fileInfo = pathinfo($image->getClientOriginalName());
-                $product = Product::where('product_code', $fileInfo['filename'])->first();
+                $fileDetail = explode("_",  $fileInfo['filename']);
+                $productCode = $fileDetail[0]; //Product Code
+                $product = Product::where('product_code', $productCode)->first();
                 if ($product) {
                     if ($product->ProductImages()->count() > 0) {
-                        foreach ($product->ProductImages as $ProductImage) {
-                            $ProductImage->unlinkImage($ProductImage->image);
+                        if(in_array($action, ['override', 'override_update']) && !isset($productProcessed[$productCode])) {
+                            foreach ($product->ProductImages as $ProductImage) {
+                                $ProductImage->unlinkImage($ProductImage->image);
+                            }
+                            $productProcessed[$productCode] = 1;
+                            $product->ProductImages()->delete();
                         }
-                        $product->ProductImages()->delete();
                     }
                     $portfolioImageCount = $product->ProductImages()->count() + 1;
                     $ProductImage = new ProductImage();
                     $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
                     $ProductImage->sequence = $portfolioImageCount++;
                     $product->ProductImages()->save($ProductImage);
-                    usleep(1000);
+                    usleep(300);
                 } else {
-                    $temp[] = $fileInfo['filename'];
-                    info("Product Not Found " . $fileInfo['filename']);
+                    $temp[] = $productCode;
                     $n++;
                 }
             }
