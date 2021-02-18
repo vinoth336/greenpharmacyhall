@@ -271,6 +271,7 @@ class ProductController extends Controller
             $images = $request->file("product_images");
             $action = $request->input('action');
             $n = 0;
+            $imp = 0;
             $temp = [];
             $productProcessed = [];
             foreach ($images as $image) {
@@ -301,6 +302,7 @@ class ProductController extends Controller
                         $ProductImage->sequence = $portfolioImageCount++;
                         $product->ProductImages()->save($ProductImage);
                         usleep(300);
+                        $imp++;
                     } else {
                         $temp[] = $productCode;
                         $n++;
@@ -314,7 +316,7 @@ class ProductController extends Controller
             DB::commit();
 
             return redirect()->route('product.import', ['type' => 'product_image'])
-                ->with('status', 'Imported Image Successfully Successfully, Not Matched record ' . $n . " - " . implode(",", $temp));
+                ->with('status', 'Total Record : ' . count($images) . ',  Imported Image : ' . $imp . ', Not Matched record ' . $n . " - " . implode(",", $temp));
         } catch (Exception $e) {
             DB::rollback();
             die($e->getMessage());

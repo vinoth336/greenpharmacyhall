@@ -26,6 +26,7 @@ class Product extends Model
 
     protected $fillable = ['name', 'description', 'sequence', 'background_image', 'slug'];
 
+    protected $resizeImage = ['width' => '800', 'height' => '800'];
 
     public function ProductImages()
     {
