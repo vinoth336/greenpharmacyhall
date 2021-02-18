@@ -26,7 +26,7 @@ class ImportProductImageRequest extends FormRequest
         return [
             'product_images.*' => 'image|mimes:png,jpg,jpeg|max:6048',
             'product_images' => 'max:700',
-            'action' => 'required|in:override,update,override_update,insert'
+            'action' => 'required|in:override,update,override_update,insert,insert_for_no_image_record'
         ];
     }
 }

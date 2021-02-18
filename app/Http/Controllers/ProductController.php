@@ -288,12 +288,23 @@ class ProductController extends Controller
                             $product->ProductImages()->delete();
                         }
                     }
-                    $portfolioImageCount = $product->ProductImages()->count() + 1;
-                    $ProductImage = new ProductImage();
-                    $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
-                    $ProductImage->sequence = $portfolioImageCount++;
-                    $product->ProductImages()->save($ProductImage);
-                    usleep(300);
+                    $insertFlag = 0;
+                    if($action == 'insert_for_no_image_record' && $product->ProductImages()->count() == 0) {
+                        $insertFlag = 1;
+                    } elseif($action != 'insert_for_no_image_record') {
+                        $insertFlag = 1;
+                    }
+                    if($insertFlag) {
+                        $portfolioImageCount = $product->ProductImages()->count() + 1;
+                        $ProductImage = new ProductImage();
+                        $ProductImage->storeImage($image, ['width' => 230, 'height' => 230]);
+                        $ProductImage->sequence = $portfolioImageCount++;
+                        $product->ProductImages()->save($ProductImage);
+                        usleep(300);
+                    } else {
+                        $temp[] = $productCode;
+                        $n++;
+                    }
                 } else {
                     $temp[] = $productCode;
                     $n++;

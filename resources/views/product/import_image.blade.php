@@ -5,10 +5,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    @if($errors->any())
+                    @if ($errors->any())
                         {!! implode('', $errors->all('<div class="text-danger">:message</div>')) !!}
                     @endif
-                    <form method="post" action="{{ route('product.import_image') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('product.import_image') }}" autocomplete="off"
+                        class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                         @method('post')
 
@@ -33,7 +34,7 @@
                                     <div class="col-sm-12">
                                         <div class="text-center">
                                             <label class="col-form-label">{{ __('Import Image') }}</label>
-                                            <input name="product_images[]"  type="file" multiple />
+                                            <input name="product_images[]" type="file" multiple required />
                                             @if ($errors->has('product_list'))
                                                 <span id="product_list-error" class="error text-danger"
                                                     for="input-product_list">{{ $errors->first('product_list') }}</span>
@@ -42,11 +43,36 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="text-center">
-                                            <label class="col-form-label">{{ __('Action') }}</label>
-                                            <input type="radio" name="action" value="override_update" checked>&nbsp;Replace and Add New Content <br>
-                                            <input type="radio" name="action" value="update">&nbsp;Add New Content Only <br>
+                                    <div class="col-md-4 m-auto">
+                                        <div>
+                                            <label class="col-form-label text-center">{{ __('Action') }}</label>
+                                            <table >
+                                                <tr>
+                                                    <td>
+                                                        <input class="col-form-label" type="radio" name="action"
+                                                            value="override_update" checked>
+                                                    </td>
+                                                    <td>
+                                                        Delete and Add New Content
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input class="col-form-label" type="radio" name="action"
+                                                            value="insert">
+                                                    </td>
+                                                    <td>New Content Only</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input class="col-form-label" type="radio" name="action"
+                                                            value="insert_for_no_image_record">
+                                                    </td>
+                                                    <td>
+                                                        Only For Which Having No Images
+                                                    </td>
+                                                </tr>
+                                            </table>
                                             @if ($errors->has('action'))
                                                 <span id="action-error" class="error text-danger"
                                                     for="input-action">{{ $errors->first('action') }}</span>
