@@ -33,7 +33,7 @@ class NewOrderSendNotificationToAdmin extends Mailable
     public function build()
     {
 
-        return $this->to('sales@greenpharmacyhall.com')
+        return $this->to('greenpharmacyhall@gmail.com')
              ->view('mail.admin_new_order')
              ->with('user', $this->user)
              ->with('order', $this->userOrder)
