@@ -4563,7 +4563,9 @@ body:not(.top-search-open) .top-search-parent .primary-menu {
         z-index: auto;
         -webkit-transition: opacity .5s ease, top .4s ease;
         -o-transition: opacity .5s ease, top .4s ease;
-        transition: opacity .5s ease, top .4s ease
+        transition: opacity .5s ease, top .4s ease;
+        max-height: 82vh;
+        overflow-y: auto;
     }
     #top-cart.on-hover:hover .top-cart-content,
     .top-cart-open .top-cart-content {

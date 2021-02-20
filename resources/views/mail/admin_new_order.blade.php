@@ -144,7 +144,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4" class="text-right" style="text-align: right">
+                <td colspan="5" class="text-right" style="text-align: right">
                     <b>Grand Total</b>
                 </td>
                 <td class="text-right" style="text-align: right">
