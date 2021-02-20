@@ -28,16 +28,22 @@ trait StoreImage {
 
                 $storagePath = public_path('web/images/' . $this->storagePath);
 
+
                 $this->makeFolder($storagePath);
 
                 if(!empty($thumbnailSize)) {
                     $this->saveThumbnails($image, $thumbnailSize, $name);
                 }
 
+
                 if($this->resizeImage ?? false ){
                     $this->resize($image, $this->resizeValue, $name, $storagePath);
                 } else {
-                    $image->move($storagePath, $name);
+                    $img = Image::make($image->getRealPath(), function($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    $img->save($storagePath . "/".  $name);
                 }
             }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePharmaOrderRequest;
 use App\Mail\PharmaNewOrderSendNotificationToAdmin;
+use App\Mail\SendOrderNotificationToAdmin;
 use App\OrderStatus;
 use App\PharmaPrescription;
 use Exception;
@@ -26,15 +27,14 @@ class PharmaOrderController extends Controller
         try {
             $user = auth()->user();
             $createOrder = new PharmaPrescription();
-            $image = $request->has('prescription') ? $request->file('prescription') : null;
+            $prescription = $request->has('prescription') ? $request->file('prescription') : null;
             $createOrder->comment_text = $request->input('comment_text');
             $createOrder->user_id = $user->id;
             $createOrder->order_status_id = OrderStatus::where('slug_name', 'pending')->first()->id;
-            $createOrder->storeImage($image);
+            $createOrder->storeImage($prescription);
             $createOrder->save();
             $order = PharmaPrescription::find($createOrder->id);
-            Mail::send(new PharmaNewOrderSendNotificationToAdmin($user, $order));
-
+            Mail::send(new PharmaNewOrderSendNotificationToAdmin($user, $createOrder));
             DB::commit();
 
             return redirect()->route('public.order_list');

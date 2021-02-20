@@ -18,7 +18,6 @@ class PharmaNewOrderSendNotificationToAdmin extends Mailable
      */
     public $user;
     public $userOrder;
-
     public function __construct($user, $userOrder)
     {
         $this->user = $user;
@@ -33,6 +32,7 @@ class PharmaNewOrderSendNotificationToAdmin extends Mailable
     public function build()
     {
         return $this->to(SEND_NEW_ORDER_PHARMA_NOTIFICATION_TO_ADMIN)
+        ->subject("New Pharma Order")
         ->view('mail.admin_pharma_order')
         ->with('user', $this->user)
         ->with('userOrder', $this->userOrder);

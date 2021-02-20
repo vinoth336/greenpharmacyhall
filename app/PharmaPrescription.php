@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Mail\SendOrderNotificationToAdmin;
 use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Mail;
 use Jamesh\Uuid\HasUuid;
 
 class PharmaPrescription extends Model
@@ -46,5 +48,10 @@ class PharmaPrescription extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

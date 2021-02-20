@@ -116,6 +116,43 @@
         <b>Order Date</b> :<br>{{ $userOrder->created_at }}
     </div>
     <h4><ul>Order Details</ul></h4>
-
+    <table border="1" cellpadding="0" cellspacing="0" style="margin: auto; width:80%">
+        <tbody>
+            <tr>
+                <th style="background-color: #eee; text-align: center">Created On</th>
+                <td id="order_created_on">{{ $userOrder->created_at }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #eee; text-align: center">Name</th>
+                <td id="order_user_name">{{ $user->name }}</td>
+            </tr>
+            <tr>
+                <th style="background-color: #eee; text-align: center">Prescription</th>
+                <td id="order_prescription" style="text-align: justify; line-height:12px">
+                        <a href="{{ asset('web/images/prescriptions/' . $userOrder->image) }}" id="order_prescription_url" target="_blank">
+                            View
+                        </a>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color: #eee; text-align: center">Phone No</th>
+                <td id="order_user_phone_no">
+                    <a href="tel:{{ $user->phone_no }}">{{ $user->phone_no }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color: #eee; text-align: center">Email Id</th>
+                <td id="order_user_email_id">
+                    <a href="mail:{{ $user->email }}">{{ $user->email }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color: #eee; text-align: center">Comment</th>
+                <td id="order_user_comment_text" style="text-align: justify; line-height:18px">
+                   {{ $userOrder->comment_text }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
