@@ -4414,6 +4414,8 @@ body:not(.top-search-open) .top-search-parent .primary-menu {
     top: 0;
     left: auto;
     width: 260px;
+    max-height: 82vh;
+    overflow-y: auto;
     background-color: #fff;
     border-left: 1px solid #eee;
     box-shadow: 0 20px 50px 10px rgba(0, 0, 0, .05);

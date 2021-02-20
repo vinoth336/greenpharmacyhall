@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories', $categories);
             $view->with('siteInformation', $siteInformation);
             $view->with('user', $user);
-            $view->with('version', '1.0.12');
+            $view->with('version', '1.0.13');
             $view->with('subCategories', $subCategories);
             $view->with('brands', $brands);
             $view->with('input', $input);
