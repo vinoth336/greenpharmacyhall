@@ -121,6 +121,7 @@
             <tr>
                 <td style="text-align: center;font-weight: bold">S NO</td>
                 <td style="text-align: center;font-weight: bold">Product</td>
+                <td style="text-align: center;font-weight: bold">Product Code</td>
                 <td style="text-align: center;font-weight: bold">Qty</td>
                 <td style="text-align: center;font-weight: bold">Price</td>
                 <td style="text-align: center;font-weight: bold">Total</td>
@@ -134,6 +135,7 @@
                 <tr>
                     <td style="text-align: center" class="text-left">{{ $sno++ }}</td>
                     <td style="text-align: center">{{ $orderItem->product->name }}</td>
+                    <td style="text-align: center">{{ $orderItem->product->product_code }}</td>
                     <td style="text-align: center" class="center">{{ $orderItem->qty }}</td>
                     <td style="text-align: right" class="text-right">{{ $orderItem->price }}</td>
                     <td style="text-align: right" class="text-right">{{ number_format($orderItem->qty * $orderItem->price, 2) }}</td>
