@@ -36,6 +36,11 @@
                                                     for="input-product_list">{{ $errors->first('product_list') }}</span>
                                             @endif
                                         </div>
+                                        <div class="text-center" style="margin-top: 10px">
+                                            <a href="{{ asset('admin/import_product.xlsx') }}" target="_blank">
+                                                Sample File
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

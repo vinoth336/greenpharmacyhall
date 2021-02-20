@@ -35,10 +35,26 @@
                                                 class="form-control{{ $errors->has('contact_person') ? ' is-invalid' : '' }}"
                                                 name="name" id="input-contact_person" type="text"
                                                 placeholder="{{ __('Service Name') }}" value="{{ old('name', $service->name) }}"
-                                                required="true" aria-required="true" />
+                                                required="true" aria-required="true" onfocusOut='getSlugName($(this).val())'  />
                                             @if ($errors->has('name'))
                                                 <span id="name-error" class="error text-danger"
                                                     for="input-contact_person">{{ $errors->first('name') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Slug Name') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('slug_name') ? ' has-danger' : '' }}">
+                                            <input
+                                                class="form-control{{ $errors->has('slug_name') ? ' is-invalid' : '' }}"
+                                                name="slug_name" id="input-slug_name" type="text"
+                                                placeholder="{{ __('Slug Name') }}" value="{{ old('slug_name', $service->slug) }}"
+                                                required="true" aria-required="true" readonly />
+                                            @if ($errors->has('slug_name'))
+                                                <span id="name-error" class="error text-danger"
+                                                    for="input-slug_name">{{ $errors->first('slug_name') }}</span>
                                             @endif
                                         </div>
                                     </div>

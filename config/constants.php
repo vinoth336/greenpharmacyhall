@@ -18,4 +18,8 @@ define('SUCCESS', 200);
 
 define("MIN_ORDER_AMOUNT", 500);
 
+define("SEND_NEW_ORDER_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
+define("SEND_NEW_ORDER_PHARMA_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
+
+
 ?>

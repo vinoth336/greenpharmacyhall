@@ -24,7 +24,7 @@ class Brand extends Model
 
     protected $table="brands";
 
-    protected $fillable = ['name', 'status', 'logo', 'sequence'];
+    protected $fillable = ['name', 'status', 'logo', 'sequence', 'slug'];
 
     public $timestamps = true;
 

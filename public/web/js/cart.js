@@ -320,7 +320,7 @@ var Cart = {
                     Cart.refreshCartItems();
                     Cart.CartDetail();
 
-                    window.location.href = "/dashboard";
+                    window.location.href = "/orders";
 
                 },
                 "error": function(jqXHR, exception) {

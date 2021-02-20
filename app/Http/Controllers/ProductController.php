@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Exports\ExportProductData;
 use App\Http\Requests\CreateServiceRequest;
 use App\Http\Requests\GetSlugNameRequest;
 use App\Http\Requests\ImportProductImageRequest;
@@ -258,7 +259,7 @@ class ProductController extends Controller
             response(['status' => 'Cannot Import File'], 500);
         }
 
-        return redirect()->route('product.index')->with('status', 'Imported Product List Successfully Successfully');
+        return redirect()->route('product.index')->with('status', 'Imported Product List Successfully');
     }
 
 
@@ -322,5 +323,12 @@ class ProductController extends Controller
             die($e->getMessage());
             return response(['status' => 'Cannot Import Images'], 500);
         }
+    }
+
+
+    function export()
+    {
+        return Excel::download(new ExportProductData, 'products.xlsx');
+
     }
 }

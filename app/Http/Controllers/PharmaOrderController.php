@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePharmaOrderRequest;
+use App\Mail\PharmaNewOrderSendNotificationToAdmin;
 use App\OrderStatus;
 use App\PharmaPrescription;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class PharmaOrderController extends Controller
 {
@@ -22,22 +24,24 @@ class PharmaOrderController extends Controller
         DB::beginTransaction();
 
         try {
+            $user = auth()->user();
             $createOrder = new PharmaPrescription();
             $image = $request->has('prescription') ? $request->file('prescription') : null;
             $createOrder->comment_text = $request->input('comment_text');
-            $createOrder->user_id = auth()->user()->id;
+            $createOrder->user_id = $user->id;
             $createOrder->order_status_id = OrderStatus::where('slug_name', 'pending')->first()->id;
             $createOrder->storeImage($image);
             $createOrder->save();
+            $order = PharmaPrescription::find($createOrder->id);
+            Mail::send(new PharmaNewOrderSendNotificationToAdmin($user, $order));
 
             DB::commit();
 
             return redirect()->route('public.order_list');
-
         } catch (Exception $e) {
             DB::rollback();
             Log::error('Error Occurred in UserController@update - ' . $e->getMessage());
-            echo 'Cant process';
+            echo $e->getMessage();
             exit;
         }
 

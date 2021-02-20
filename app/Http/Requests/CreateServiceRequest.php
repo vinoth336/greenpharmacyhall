@@ -25,7 +25,8 @@ class CreateServiceRequest extends FormRequest
     {
         $serviceId = $this->service->id ?? null;
         return [
-            'name' => "required|unique:services,slug,{$serviceId},id",
+            'name' => "required|string",
+            'slug_name' => "required|unique:services,slug,{$serviceId},id",
             'description' => 'nullable',
             'banner' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048'
         ];
