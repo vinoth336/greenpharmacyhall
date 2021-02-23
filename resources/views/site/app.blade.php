@@ -92,7 +92,22 @@
 
 	<div id="wrapper" class="clearfix">
 
-
+        <div id="top-bar">
+			<div class="container">
+				<div class="row justify-content-between align-items-center">
+					<div class="col-12 col-md-auto">
+                        <p class="mb-0 py-2 text-center text-md-left"><strong>Call:</strong>
+                            <a href="tel:{{ $siteInformation->phone_no }}">
+                                {{ $siteInformation->phone_no }}
+                            </a>
+                                |
+							<strong>Email:</strong> <a href="mailto:{{ $siteInformation->email_id }}">{{ $siteInformation->email_id }}</a></p>
+					</div>
+					<div class="col-12 col-md-auto">
+					</div>
+				</div>
+			</div>
+		</div>
 		<header id="header" class="full-header" data-logo-height="60" data-mobile-sticky=true data-mobile-sticky-logo-height="30" data-sticky-logo-height="30" data-menu-padding="32">
 			<div id="header-wrap" class="">
 				<div class="container">
