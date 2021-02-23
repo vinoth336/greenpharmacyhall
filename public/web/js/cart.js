@@ -15,13 +15,14 @@ $(document).ready(function() {
 
 var Cart = {
     init: function() {
-
-        //if (navigator.cookieEnabled) {
-        this.syncCartItems();
-        this.syncCartValues();
-        this.refreshCartItems();
-        this.showOrderSummaryBlock();
-        //}
+        if (navigator.cookieEnabled) {
+            this.syncCartItems();
+            this.syncCartValues();
+            this.refreshCartItems();
+            this.showOrderSummaryBlock();
+        } else {
+            alert("Your browser is not supported some features, please use latest version or try in another browser");
+        }
     },
     syncCartValues: function() {
         var items = Cart.getItemFromLocalStorage();
@@ -157,7 +158,6 @@ var Cart = {
         var productPrice = container.find('.product_price').val();
         var productName = container.find('.product_name').val();
         var data = {};
-        alert('am inside');
         if (localStorage.cart) {
             data = Cart.getItemFromLocalStorage();
             data[productId] = {
@@ -389,11 +389,7 @@ var Cart = {
         Cart.OrderSummaryDetail()
     },
     setItemInLocalStorage: function(data) {
-        alert('setting item in local storage');
-        alert('data ' + JSON.stringify(data));
-        var cart = localStorage.setItem('cart', JSON.stringify(data));
-        alert('item added successfully');
-        return cart;
+        return localStorage.setItem('cart', JSON.stringify(data));
     },
     getItemFromLocalStorage: function(data) {
         if (localStorage.cart) {
