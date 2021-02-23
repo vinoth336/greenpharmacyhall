@@ -63,13 +63,13 @@
                                         <a href="{{ route('view_product', $product->slug) }}">
                                             <img class="product_image"
                                                 src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
-                                                alt="{{ $product->name }}" loading="lazy">
+                                                alt="{{ $product->name }}" >
                                         </a>
                                     @empty
                                         <a href="{{ route('view_product', $product->slug) }}">
                                             <img class="product_image"
                                                 src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
-                                                alt="{{ $product->name }}" loading="lazy">
+                                                alt="{{ $product->name }}">
                                         </a>
                                     @endforelse
                                     <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">Sale!</div>
