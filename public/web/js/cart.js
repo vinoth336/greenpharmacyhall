@@ -16,12 +16,12 @@ $(document).ready(function() {
 var Cart = {
     init: function() {
 
-        if (navigator.cookieEnabled) {
-            this.syncCartItems();
-            this.syncCartValues();
-            this.refreshCartItems();
-            this.showOrderSummaryBlock();
-        }
+        //if (navigator.cookieEnabled) {
+        this.syncCartItems();
+        this.syncCartValues();
+        this.refreshCartItems();
+        this.showOrderSummaryBlock();
+        //}
     },
     syncCartValues: function() {
         var items = Cart.getItemFromLocalStorage();

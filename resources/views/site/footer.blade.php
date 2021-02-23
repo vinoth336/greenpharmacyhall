@@ -142,7 +142,11 @@
 
       $('.accept-cookies').on('click', function() {
         document.cookie = "accepted_cookies=yes;"
-        $('.cookie-overlay').removeClass('d-block').addClass('d-none');
+        if(document.cookie.indexOf("accepted_cookies=") < 0) {
+            alert("We can't Process your request, please change the cookies setting Browser Level");
+        } else {
+            $('.cookie-overlay').removeClass('d-block').addClass('d-none');
+        }
       })
 
       // expand depending on your needs

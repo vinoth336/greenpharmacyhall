@@ -31,11 +31,13 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Banner Size') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('banner_size') ? ' has-danger' : '' }}">
-
+                                            @php
+                                            $size = [3 => '436x224', 6 => '730x192', 8 => '380x382'];
+                                            @endphp
                                             <select name="banner_size">
-                                                    @for($i=3; $i<=12; $i++)
-                                                        <option value="{{ $i }}" @if($i == old('banner_size', $banner->banner_size)) selected @endif>Size {{ $i }}</option>
-                                                    @endfor
+                                                    @foreach(BANNER_SIZE as $value => $label)
+                                                        <option value="{{ $value }}" @if($value == old('banner_size', $banner->banner_size)) selected @endif>Size {{ $label }} </option>
+                                                    @endforeach
                                             </select>
                                             @if ($errors->has('banner_size'))
                                                 <span id="banner_size-error" class="error text-danger"

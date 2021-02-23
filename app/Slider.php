@@ -27,6 +27,6 @@ class Slider extends Model
 
     protected $resizeImage = true;
 
-    protected $resizeValue = ['width' => 1440, 'height' => 650];
+    protected $resizeValue = ['width' => 1200, 'height' => 450];
 
 }

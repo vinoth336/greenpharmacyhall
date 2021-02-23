@@ -78,6 +78,8 @@
                                                 <span id="name-error" class="error text-danger"
                                                     for="input-contact_person">{{ $errors->first('slider') }}</span>
                                           @endif
+                                          <p>
+                                            Size : 1200x450
                                     </div>
                                 </div>
                             </div>

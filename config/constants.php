@@ -20,6 +20,7 @@ define("MIN_ORDER_AMOUNT", 500);
 
 define("SEND_NEW_ORDER_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
 define("SEND_NEW_ORDER_PHARMA_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
+define("BANNER_SIZE", [3 => '380x192', 6 => '760x192', 8 => '380x383']);
 
 
 ?>
