@@ -3774,7 +3774,7 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
     .sub-title .menu-container>.menu-item>.menu-link {
         position: relative;
         line-height: 14px;
-        padding: 32px 22px;
+        padding: 32px 20px;
         text-transform: uppercase
     }
     .sub-title .menu-container>.menu-item:not(:first-child)>.menu-link::before {
