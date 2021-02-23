@@ -157,6 +157,7 @@ var Cart = {
         var productPrice = container.find('.product_price').val();
         var productName = container.find('.product_name').val();
         var data = {};
+        alert('am inside');
         if (localStorage.cart) {
             data = Cart.getItemFromLocalStorage();
             data[productId] = {
@@ -388,7 +389,11 @@ var Cart = {
         Cart.OrderSummaryDetail()
     },
     setItemInLocalStorage: function(data) {
-        return localStorage.setItem('cart', JSON.stringify(data));
+        alert('setting item in local storage');
+        alert('data ' + JSON.stringify(data));
+        var cart = localStorage.setItem('cart', JSON.stringify(data));
+        alert('item added successfully');
+        return cart;
     },
     getItemFromLocalStorage: function(data) {
         if (localStorage.cart) {
