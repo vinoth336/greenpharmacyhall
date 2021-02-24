@@ -1,7 +1,7 @@
 <nav class="primary-menu sub-title">
 	<ul class="menu-container">
-		<li class="menu-item mega-menu sub-menu">
-			<a class="menu-link" href="{{ route('home') }}">
+		<li class="menu-item sub-menu">
+			<a class="menu-link" href="#">
 				<div>Categories</div>
             </a>
             <div class="mega-menu-content mega-menu-style-2" style="width: 1291px;">
@@ -37,7 +37,7 @@
             <button class="sub-menu-trigger icon-chevron-right"></button>
 		</li>
 		<li class="menu-item">
-			<a class="menu-link" href="Javascript:void(0)">
+			<a class="menu-link" href="#">
 				<div>Pharma</div>
             </a>
             <ul class="sub-menu-container">
