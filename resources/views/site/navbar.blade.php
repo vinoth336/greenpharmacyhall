@@ -66,7 +66,7 @@
             </form>
             <ul class="sub-menu-container">
                 <li class="menu-item">
-                    <a  class="menu-link" href="{{ route('public.dashboard') }}">Dashboard</a>
+                    <a  class="menu-link" href="{{ route('public.order_list') }}">Dashboard</a>
                 </li>
                 <li class="menu-item">
                     <a  class="menu-link" href="{{ route('public.change_password') }}">Change Password</a>

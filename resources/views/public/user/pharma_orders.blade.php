@@ -1,7 +1,7 @@
 
         <div class="postcontent col-lg-12">
             <h4>Pharma Orders</h4>
-            <div class="">
+            <div class="table-responsive">
                 <table class="table table-bordered" >
                     <thead>
                         <tr>

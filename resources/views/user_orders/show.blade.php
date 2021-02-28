@@ -52,7 +52,7 @@
                 </tr>
             </tfoot>
         </table>
-        <table class="table">
+        <table class="table " id="update_order_status">
             <tbody>
                 <tr>
                     <td >

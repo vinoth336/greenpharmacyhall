@@ -115,13 +115,13 @@
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>
                                                     <a id="order_status_block_{{ $order->id }}"
-                                                        style="cursor:pointer; color: #9c27b0" class="view_order"
-                                                        data-recordid="{{ $order->id }}">
+                                                        style="cursor:pointer; color: #9c27b0" >
                                                         {{ strtoupper(optional($order->order_status)->name) }}
                                                     </a>
                                                 </td>
                                                 <td class="text-center ">
-                                                        <a href="#" class="btn btn-link btn-warning btn-just-icon show"><i
+                                                        <a href="#" class="btn btn-link btn-warning btn-just-icon show view_order"
+                                                        data-recordid="{{ $order->id }}"><i
                                                                 class="material-icons">visibility</i></a>
                                                 </td>
                                             </tr>
@@ -152,6 +152,7 @@
 
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="printOrder()">Print</button>&nbsp;
                         <button type="submit" class="btn btn-primary" id="save_status">Save</button>&nbsp;
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -225,6 +226,21 @@
                 }
             })
         });
+
+        function printOrder()
+        {
+
+            var mywindow = window.open('', 'Print Order', 'height=400,width=600');
+            mywindow.document.write('<html><head><title></title>');
+            mywindow.document.write('<link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />');
+            mywindow.document.write('</head><body>');
+            mywindow.document.write('<style> #update_order_status { display: none } body { padding: 5px;} </style>');
+            mywindow.document.write($("#updateOrderStatus").find(".modal-body").html());
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+            mywindow.print();
+        }
+
 
     </script>
 

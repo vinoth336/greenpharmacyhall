@@ -167,7 +167,7 @@
                                     <th>Name</th>
                                     <td id="order_user_name"></td>
                                 </tr>
-                                <tr>
+                                <tr id="prescription_section">
                                     <th>Prescription</th>
                                     <td id="order_prescription" style="text-align: justify; line-height:12px">
                                             <a href="" id="order_prescription_url" target="_blank">
@@ -176,6 +176,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>Address</th>
+                                    <td id="order_user_address">
+                                    </td>
+                                <tr>
                                     <th>Phone No</th>
                                     <td id="order_user_phone_no"></td>
                                 </tr>
@@ -183,7 +187,7 @@
                                     <th>Email Id</th>
                                     <td id="order_user_email_id"></td>
                                 </tr>
-                                <tr>
+                                <tr id="update_order_status">
                                     <th>Status</th>
                                     <td>
                                         <select id="orderStatus" name="order_status" class="selectpicker">
@@ -203,6 +207,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="printOrder()">Print</button>&nbsp;
                         <button type="submit" class="btn btn-primary" id="save_status">Save</button>&nbsp;
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -273,6 +278,7 @@
                     $("#order_id").val(data.id);
                     $("#order_user_name").html(data.user.name);
                     $("#order_created_on").html(data.created_at);
+                    $("#order_user_address").html(data.user.address);
                     $("#order_user_phone_no").html(data.user.phone_no);
                     $("#order_User_email_id").html(data.user.email);
                     $("#order_prescription_url").attr('href', "" + imageUrl + data.image);
@@ -288,6 +294,20 @@
                 }
             })
         });
+
+        function printOrder()
+        {
+
+            var mywindow = window.open('', 'Print Order', 'height=400,width=600');
+            mywindow.document.write('<html><head><title></title>');
+            mywindow.document.write('<link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />');
+            mywindow.document.write('</head><body>');
+            mywindow.document.write('<style> #update_order_status, #prescription_section { display: none } body { padding: 5px;} </style>');
+            mywindow.document.write($("#updateOrderStatus").find(".modal-body").html());
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+            mywindow.print();
+        }
 
     </script>
 
