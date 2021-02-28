@@ -1,6 +1,6 @@
 <nav class="primary-menu sub-title">
 	<ul class="menu-container">
-		<li class="menu-item sub-menu">
+		<li class="menu-item mega-menu sub-menu">
 			<a class="menu-link" href="#">
 				<div>Categories</div>
             </a>

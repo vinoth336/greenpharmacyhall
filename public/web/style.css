@@ -7610,8 +7610,13 @@ body:not(.device-touch):not(.device-sm):not(.device-xs) .product-image>a {
 }
 
 .product-title h3 {
+    width: 100%;
     margin: 0;
-    font-size: 1.25rem
+    font-size: 1.10rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-title h3 a,
@@ -7628,7 +7633,8 @@ body:not(.device-touch):not(.device-sm):not(.device-xs) .product-image>a {
     font-size: 1.125rem;
     font-weight: 700;
     color: #444;
-    margin-bottom: 4px
+    margin-bottom: 4px;
+    text-align: center;
 }
 
 .product-price del {

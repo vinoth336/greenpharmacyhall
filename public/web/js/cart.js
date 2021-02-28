@@ -481,7 +481,7 @@ var cartItemListTemplate = `<div class="top-cart-item" id="cart_item_PRODUCT_ID"
                                         </a>
                                         <span class="top-cart-item-price d-block float-left">
                                            <input type="hidden" class="product_price" value="PRODUCT_PRICE" />
-                                           <input onkeyup="Cart.updateQty('.top-cart-item', this)" id="cart_row_PRODUCT_ID" data-productid="PRODUCT_ID" type="number" min="1" style="width:35px;margin-right:5px" value="QTY" /> * PRODUCT_PRICE
+                                           <input onkeyup="Cart.updateQty('.top-cart-item', this)" oninput="Cart.updateQty('.top-cart-item', this)" id="cart_row_PRODUCT_ID" data-productid="PRODUCT_ID" type="number" min="1" style="width:35px;margin-right:5px" value="QTY" /> * PRODUCT_PRICE
                                         </span>
                                         <span class="top-cart-item-price top-cart-item-price-total d-block float-right">
                                             <b>TOTAL_AMOUNT</b>

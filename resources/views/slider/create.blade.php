@@ -80,6 +80,7 @@
                                           @endif
                                           <p>
                                             Size : 1200x450
+                                          </p>
                                     </div>
                                 </div>
                             </div>

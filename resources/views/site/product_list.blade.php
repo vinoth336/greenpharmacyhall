@@ -17,15 +17,15 @@
                                         <div class="product-image">
                                             @forelse ($product->productImages as $productImage)
                                                 <a href="{{ route('view_product', $product->slug) }}">
-                                                    <img class="product_image"
-                                                        src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
-                                                        alt="{{ $product->name }}" loading="lazy">
+                                                    <img class="product_image lazy"
+                                                        data-src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
+                                                        alt="{{ $product->name }}" >
                                                 </a>
                                             @empty
                                                 <a href="{{ route('view_product', $product->slug) }}">
-                                                    <img class="product_image"
-                                                        src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
-                                                        alt="{{ $product->name }}" loading="lazy">
+                                                    <img class="product_image lazy"
+                                                        data-src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
+                                                        alt="{{ $product->name }}" >
                                                 </a>
                             @endforelse
                             <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
@@ -44,12 +44,12 @@
 
                         <div class="product-desc">
                             <div class="product-title min-h-30">
-                                <h3><a data-code="{{ $product->product_code }}"
+                                <h3><a title="{{ $product->name }}" data-code="{{ $product->product_code }}"
                                         href="{{ route('view_product', $product->slug) }}">{{ $product->name }}</a>
                                 </h3>
                             </div>
                             <div class="product-price">
-                                <div class="float-left">
+                                <div class="">
                                     @if ($product->discount_amount > 0)
                                         <del>₹ {{ $product->price }}</del>
                                         <ins>₹ {{ $product->discount_amount }}</ins>

@@ -27,6 +27,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>Address</th>
+                    <td>
+                        {{ ucfirst($siteUser->address) }}<br>
+                        City : {{ $siteUser->city }} <br>
+                        State : {{ $siteUser->state }} <br>
+                        PinCode : {{  $siteUser->zipcode }}
+                    </td>
+                </tr>
+                <tr>
                     <th>Is Active</th>
                     <td>
                         <input type="checkbox" id="site_user_status" onchange="updateStatus('{{ $siteUser->phone_no }}')" value="active"  {{ $siteUser->isActiveUser() ? 'checked' : '' }} />

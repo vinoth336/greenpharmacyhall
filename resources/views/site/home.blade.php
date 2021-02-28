@@ -61,15 +61,15 @@
                                 <div class="product-image">
                                     @forelse ($product->productImages as $productImage)
                                         <a href="{{ route('view_product', $product->slug) }}">
-                                            <img class="product_image"
-                                                src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
-                                                alt="{{ $product->name }}" >
+                                            <img class="product_image lazy"
+                                                data-src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
+                                                alt="{{ $product->name }}" loading="lazy">
                                         </a>
                                     @empty
                                         <a href="{{ route('view_product', $product->slug) }}">
-                                            <img class="product_image"
-                                                src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
-                                                alt="{{ $product->name }}">
+                                            <img class="product_image lazy"
+                                                data-src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
+                                                alt="{{ $product->name }}" loading="lazy">
                                         </a>
                                     @endforelse
                                     <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">Sale!</div>
@@ -80,7 +80,7 @@
                                                >{{ $product->name }}</a></h3>
                                     </div>
                                     <div class="product-price">
-                                        <div class="text-left">
+                                        <div class="text-center">
                                             @if ($product->discount_amount > 0)
                                                 <del>₹ {{ $product->price }}</del>
                                                 <ins>₹ {{ $product->discount_amount }}</ins>

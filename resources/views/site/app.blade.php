@@ -45,7 +45,6 @@
         rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('web/style.css') }}?v={{ $version }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('web/css/dark.css') }}" type="text/css">
 	<link rel="stylesheet" href="{{ asset('web/css/bootstrap.css') }}?v={{ $version }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('web/css/font-icons.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('web/css/animate.css') }}" type="text/css" />

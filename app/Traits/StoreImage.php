@@ -107,8 +107,8 @@ trait StoreImage {
         $this->makeFolder($thumbnailpath);
 
         $img = Image::make($image->getRealPath())->resize($thumbnailSize['width'], $thumbnailSize['height'], function($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
+            //$constraint->aspectRatio();
+            //$constraint->upsize();
         });
         $img->save($thumbnailpath . '/' . $name);
     }

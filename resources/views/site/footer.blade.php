@@ -124,13 +124,11 @@
     </div>
 </footer>
 </div>
-<div id="fb-root"></div>
-<div id="gotoTop" class="icon-angle-up"></div>
 <input type="hidden" id="MIN_ORDER_AMOUNT" value="{{ MIN_ORDER_AMOUNT }}" />
-<script src="{{ asset('web/js/plugins.min.js') }}"></script>
-<script src="{{ asset('web/js/functions.js') }}"></script>
+<script src="{{ asset('web/js/plugins.min.js') }}?v={{ $version }}"></script>
+<script src="{{ asset('web/js/functions.js') }}?v={{ $version }}"></script>
+<script src="{{ asset('web/js/lozad.min.js') }}?v={{ $version }}"></script>
 <script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v={{ $version }}"></script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=721958557824359&autoLogAppEvents=1" nonce="lNPiivbw"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     // cookie policy
@@ -171,6 +169,12 @@ $(document).ready(function() {
                 $(".user_login:first").trigger('click');
                 showForgotPasswordForm();
     @endif
+
+    @guest
+        setTimeout(function() {
+            $(".user_login:first").trigger('click');
+        }, 2000);
+    @endguest
 });
 
 $(function() {
