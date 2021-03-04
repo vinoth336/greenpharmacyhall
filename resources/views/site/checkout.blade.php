@@ -106,7 +106,7 @@
                                     <div   class="text-right" style="padding-top:20px;margin-top: 40px; margin-bottom: 40px; border-top: 1px solid #ccc">
                                             Total Amount : <span style="font-weight: bold" id="order_summary_amount"></span>
                                             <p>
-                                                <i style="font-size: 12px">Note : Minimum Order Amount Should Be Rs <span class="text-danger">{{ number_format(MIN_ORDER_AMOUNT, 2) }}</span></i>
+                                                <i style="font-size: 12px;display: none">Note : Minimum Order Amount Should Be Rs <span class="text-danger">{{ number_format(MIN_ORDER_AMOUNT, 2) }}</span></i>
                                             </p>
                                     </div>
                                     <button type="button" class="btn btn-success float-right" onclick="Cart.checkout(this)">

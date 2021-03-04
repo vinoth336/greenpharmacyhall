@@ -16,7 +16,7 @@ define("SERVER_ERROR", 500);
 define('NOT_ACCEPTABLE', 406);
 define('SUCCESS', 200);
 
-define("MIN_ORDER_AMOUNT", 500);
+define("MIN_ORDER_AMOUNT", 0);
 
 define("SEND_NEW_ORDER_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
 define("SEND_NEW_ORDER_PHARMA_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
