@@ -18074,3 +18074,7 @@ label.radio {
 .accept-cookies {
     float: right
 }
+
+.error {
+    color: red !important;
+}

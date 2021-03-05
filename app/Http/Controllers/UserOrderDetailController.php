@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderStatus;
 use App\UserOrder;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -27,6 +28,35 @@ class UserOrderDetailController extends Controller
         ->with('pharmaOrders', $pharmaOrders)
         ->with('nonPharmaOrders', $nonPharmaOrders)
         ;
+    }
+
+    public function orderCancel(Request $request, UserOrder $order)
+    {
+        DB::beginTransaction();
+        try {
+
+            if($order->order_status->slug_name == 'pending') {
+                $order->order_status_id = OrderStatus::where('slug_name', 'cancel')->first()->id;
+                $order->save();
+
+                DB::commit();
+
+                return response(['status' => true, 'message' => 'Cancelled Successfully'], 200);
+            } else {
+                return response(['status' => false, 'message' => "Can't Cancelled Order, Please Contact Admin"], 406);
+            }
+
+        } catch(ModelNotFoundException $e) {
+            DB::rollback();
+            info($e->getMessage());
+            return response(['status' => false, 'message' => 'Invalid Request'], 404);
+        }
+        catch (Exception $e) {
+            DB::rollback();
+            info($e->getMessage());
+
+            return response("Can't Process, Please Contact Admin", 500);
+        }
     }
 
     public function delete(Request $request, UserOrder $order)

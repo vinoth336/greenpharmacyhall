@@ -54,7 +54,32 @@ class PharmaOrderController extends Controller
         $orders = $user->pharma_orders()->with('order_status')->orderBy('created_at', 'desc')->get();
 
         return view('public.user.pharma_orders')
-        ->with('orders', $orders);
+            ->with('orders', $orders);
+    }
+
+    public function OrderCancel(Request $request, PharmaPrescription $order)
+    {
+        DB::beginTransaction();
+
+        try {
+            if ($order->order_status->slug_name == 'pending') {
+                $order->order_status_id = OrderStatus::where('slug_name', 'cancel')->first()->id;
+                $order->save();
+
+                DB::commit();
+
+                return redirect()->route('public.order_list');
+            } else {
+                return response(['status' => false, 'message' => "Can't Cancelled Order, Please Contact Admin"], 406);
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+            info($e->getMessage());
+
+            return response("Can't Process, Please Contact Admin", 500);
+        }
+
+        return redirect()->route('public.pharma_purchase_order');
     }
 
     public function deleteOrder(Request $request, PharmaPrescription $order)
@@ -62,13 +87,12 @@ class PharmaOrderController extends Controller
         DB::beginTransaction();
 
         try {
-            $order->unlinkImage($order->image);
-            $order->delete();
+            $order->order_status_id = OrderStatus::where('slug_name', 'cancel')->first()->id;
+            $order->save();
 
             DB::commit();
 
             return redirect()->route('public.order_list');
-
         } catch (Exception $e) {
             DB::rollback();
             Log::error('Error Occurred in UserController@update - ' . $e->getMessage());
@@ -78,5 +102,4 @@ class PharmaOrderController extends Controller
 
         return redirect()->route('public.pharma_purchase_order');
     }
-
 }

@@ -11,9 +11,12 @@
                             &nbsp;
                             @if($order->order_status->slug_name == 'pending' )
                             <a href="Javascript:void(0)" class="text-danger float-right"  onclick="Order.removeOrder('{{ $order->id }}')" data-productid="PRODUCT_ID">
-                                <i class="icon-trash"></i>
+                                Cancel
                             </a>
                             @endif
+                            <a href="Javascript:void(0)" class="text-danger float-right"  onclick="Order.removeOrder('{{ $order->id }}')" data-productid="PRODUCT_ID">
+                                ReOrder
+                            </a>
                             <div class="clearfix"></div>
                             <i>{{ $order->created_at }}</i>
                             <div class="clearfix"></div>

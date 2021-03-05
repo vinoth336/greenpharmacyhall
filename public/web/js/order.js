@@ -2,7 +2,7 @@ var Order = {
 
     removeOrder: function(orderId) {
 
-        if (!confirm('Are You Sure, Want To Delete This Order ?')) {
+        if (!confirm('Are You Sure, Want To Cancel This Order ?')) {
             return false;
         }
 

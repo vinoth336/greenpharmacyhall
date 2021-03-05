@@ -51,7 +51,7 @@
         </li>
         @if(auth()->guard('web')->check())
         <li class="menu-item sub-menu">
-			<a class="menu-link" >
+			<a class="menu-link" href="#">
 				<div>
                     <i class="icon-user-alt"></i>
                     @if(strlen(auth()->user()->name) <= 15 )
@@ -66,7 +66,10 @@
             </form>
             <ul class="sub-menu-container">
                 <li class="menu-item">
-                    <a  class="menu-link" href="{{ route('public.order_list') }}">Dashboard</a>
+                    <a  class="menu-link" href="{{ route('public.order_list') }}">My Orders</a>
+                </li>
+                <li class="menu-item">
+                    <a  class="menu-link" href="{{ route('public.update_profile') }}">Profie</a>
                 </li>
                 <li class="menu-item">
                     <a  class="menu-link" href="{{ route('public.change_password') }}">Change Password</a>

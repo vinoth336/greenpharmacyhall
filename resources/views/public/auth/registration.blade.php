@@ -15,21 +15,21 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <label for="inputAddress2">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" id="user_" placeholder="Name" name="user_name" value="{{ old('user_name') }}">
                             <span id="first_nameMsg" class="error">
-                                @error('name')
+                                @error('user_')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputAddress2">Sex</label>
-                            <select name="sex" class="form-control">
-                                <option value="male" @if(old('sex') == 'male') selected @endif>Male</option>
-                                <option value="female" @if(old('sex') == 'female') selected @endif>FeMale</option>
+                            <select name="user_sex" class="form-control">
+                                <option value="male" @if(old('user_sex') == 'male') selected @endif>Male</option>
+                                <option value="female" @if(old('user_sex') == 'female') selected @endif>FeMale</option>
                             </select>
                             <span id="first_nameMsg" class="error">
-                                @error('sex')
+                                @error('user_sex')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -38,18 +38,18 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputAddress2">Phone No</label>
-                            <input type="text" class="form-control" id="phone" placeholder="----------" min="10" max="10" name="phone_no" value="{{ old('phone_no') }}">
+                            <input type="text" class="form-control" id="user_phone" placeholder="----------" min="10" max="10" name="user_phone_no" value="{{ old('user_phone_no') }}">
                             <span id="first_nameMsg" class="error">
-                                @error('phone_no')
+                                @error('user_phone_no')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" min="6">
+                            <input type="password" class="form-control" id="user_password" placeholder="Password" name="user_password" min="6">
                             <span id="first_nameMsg" class="error">
-                                @error('password')
+                                @error('user_password')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -58,9 +58,9 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email Id</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email Id" name="email" value="{{ old('email') }}">
+                            <input type="email" class="form-control" id="user_email" placeholder="Email Id" name="user_email" value="{{ old('user_email') }}">
                             <span id="first_nameMsg" class="error">
-                                @error('email')
+                                @error('user_email')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -68,9 +68,9 @@
                     </div>
                     <div class="form-group">
                         <label for="inputAddress">Address</label>
-                        <textarea class="form-control" id="address" name="address">{{ old('address') }}</textarea>
+                        <textarea class="form-control" id="user_address" name="user_address">{{ old('user_address') }}</textarea>
                         <span id="first_nameMsg" class="error">
-                            @error('address')
+                            @error('user_address')
                                 {{ $message }}
                             @enderror
                         </span>
@@ -78,27 +78,27 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="city" name="city" value="Karur">
+                            <input type="text" class="form-control" id="user_city" name="user_city" value="Karur">
                             <span id="first_nameMsg" class="error">
-                                @error('city')
+                                @error('user_city')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
-                            <input type="text" class="form-control" id="state" name="state" value="Tamil Nadu">
+                            <input type="text" class="form-control" id="user_state" name="user_state" value="Tamil Nadu">
                             <span id="first_nameMsg" class="error">
-                                @error('state')
+                                @error('user_state')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="zip" name="zipcode" min="6" max="6" value="{{ old('zipcode') }}">
+                            <input type="text" class="form-control" id="user_zip" name="user_zipcode" min="6" max="6" value="{{ old('user_zipcode') }}">
                             <span id="first_nameMsg" class="error">
-                                @error('zipcode')
+                                @error('user_zipcode')
                                     {{ $message }}
                                 @enderror
                             </span>

@@ -159,23 +159,39 @@
 
 <script>
 $(document).ready(function() {
+    var showLoginFormPopup = false;
     @if(session()->has('login_failed') || session()->has('login_success'))
-                $(".user_login:first").trigger('click');
+    showLoginFormPopup = true;
     @endif
     @if($errors->has('phone_no') || $errors->has('password') )
-                $(".user_login:first").trigger('click');
+    showLoginFormPopup = true;
     @endif
     @if($errors->has('forgot_password_phone_no'))
-                $(".user_login:first").trigger('click');
+    showLoginFormPopup = true;
                 showForgotPasswordForm();
     @endif
-
     @guest
-        setTimeout(function() {
-            $(".user_login:first").trigger('click');
-        }, 2000);
+            var nw = new Date();
+            if((localStorage.showLoginForm == null || localStorage.showLoginForm <= nw.getTime())) {
+                var dt = new Date();
+                dt.setMinutes( dt.getMinutes() + 1 ); //Show login form for every 3 mins
+                localStorage.showLoginForm = dt.getTime();
+                if(!showLoginFormPopup) {
+                    setTimeout(function() {
+                            triggerLoginForm()
+                    }, 2000);
+                }
+            }
     @endguest
+    if(showLoginFormPopup) {
+        triggerLoginForm()
+    }
 });
+
+function triggerLoginForm()
+{
+    $(".user_login:first").trigger('click');
+}
 
 $(function() {
     $( "#product_search_box" ).autocomplete({

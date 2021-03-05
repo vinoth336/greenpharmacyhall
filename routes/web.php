@@ -52,8 +52,8 @@ Route::group(['middleware' => 'auth:web'], function() {
     Route::post('pharma_create_order', 'PharmaOrderController@create');
     Route::get('orders', 'UserOrderDetailController@orderList')->name('public.order_list');
 
-    Route::delete('pharma_order_delete/{order}', 'PharmaOrderController@deleteOrder')->name('public.pharma_order_delete');
-    Route::delete('order/{order}/removeOrder', 'UserOrderDetailController@delete')->name('public.order_delete');
+    Route::delete('pharma_order_delete/{order}', 'PharmaOrderController@orderCancel')->name('public.pharma_order_delete');
+    Route::delete('order/{order}/removeOrder', 'UserOrderDetailController@orderCancel')->name('public.order_delete');
 
     //Cart
     Route::get('/cart/', 'CartController@list');

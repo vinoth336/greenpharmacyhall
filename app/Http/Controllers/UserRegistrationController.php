@@ -32,15 +32,15 @@ class UserRegistrationController extends Controller
         try {
             $user = User::create([
             'id' => Str::uuid(),
-            'name' => $request->input('name'),
-            'sex' => $request->input('sex'),
-            'phone_no' => $request->input('phone_no'),
-            'address' => $request->input('address'),
+            'name' => $request->input('user_name'),
+            'sex' => $request->input('user_sex'),
+            'phone_no' => $request->input('user_phone_no'),
+            'address' => $request->input('user_address'),
             'city_id' => 1,
             'state_id' => 2,
-            'zipcode' => $request->input('zipcode'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
+            'zipcode' => $request->input('user_zipcode'),
+            'email' => $request->input('user_email'),
+            'password' => Hash::make($request->input('user_password'))
             ]);
 
             DB::commit();

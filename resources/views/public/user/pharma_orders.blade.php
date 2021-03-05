@@ -19,18 +19,18 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $order->created_at }}</td>
-                                <td><a href="{{ $order->image_url }}" target="_blank">View</a></td>
+                                <td><a href="{{ $order->image_url }}" data-lightbox="image">View</a></td>
                                 <td>{{ $order->comment_text }}</td>
                                 <td>{{ optional($order->order_status)->name }}</td>
                                 <td>
                                     @if($order->order_status->slug_name == 'pending')
                                         <form method="POST" action="{{ route('public.pharma_order_delete', $order->id) }}"
-                                            onsubmit="return confirm('Are You Sure Want Delete This Order ?');"
+                                            onsubmit="return confirm('Are You Sure Want Cancel This Order ?');"
                                             >
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">
-                                            <i class="icon-trash"></i>
+                                            Cancel
                                         </button>
                                         </form>
                                     @endif
