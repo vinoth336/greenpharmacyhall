@@ -14,9 +14,6 @@
                                 Cancel
                             </a>
                             @endif
-                            <a href="Javascript:void(0)" class="text-danger float-right"  onclick="Order.removeOrder('{{ $order->id }}')" data-productid="PRODUCT_ID">
-                                ReOrder
-                            </a>
                             <div class="clearfix"></div>
                             <i>{{ $order->created_at }}</i>
                             <div class="clearfix"></div>
