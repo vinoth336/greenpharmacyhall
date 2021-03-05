@@ -54,7 +54,11 @@ class AppServiceProvider extends ServiceProvider
             if (!Cache::has('site_menu_items')) {
                 setSiteMenuValueInCache(getSiteMenus());
             }
+            if (!Cache::has('cart_settings')) {
+                setCartSettings(getCartSettings());
+            }
             $siteInformation = Cache::get('site_information');
+            $cart_settings = Cache::get('cart_settings');
             $categories = Cache::get('site_menu_items');
             $subCategories = SubCategory::get();
             $brands = Brand::get();
@@ -62,8 +66,9 @@ class AppServiceProvider extends ServiceProvider
             $user = auth()->user() ?? null;
             $view->with('categories', $categories);
             $view->with('siteInformation', $siteInformation);
+            $view->with('cart_settings', $cart_settings);
             $view->with('user', $user);
-            $view->with('version', '1.0.19');
+            $view->with('version', '1.0.20');
             $view->with('subCategories', $subCategories);
             $view->with('brands', $brands);
             $view->with('input', $input);

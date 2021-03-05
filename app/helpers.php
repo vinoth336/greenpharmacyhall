@@ -1,5 +1,6 @@
 <?php
 
+use App\CartSettings;
 use App\Services;
 use App\SiteInformation;
 use App\UserOrder;
@@ -12,6 +13,16 @@ function getSiteMenus()
                 }])->get();
 
     return $categories;
+}
+
+function getCartSettings()
+{
+    $cart_settings = CartSettings::first();
+
+    return  [
+        'free_deliver_min_amt' => $cart_settings->min_home_delivery_order_amount,
+        'shop_pickup_min_amt' => $cart_settings->min_shop_pickup_order_amount
+    ];
 }
 
 function setSiteMenuValueInCache($categories, $ttl=5000)
@@ -54,4 +65,10 @@ function filterRemoveEmptyValues($input)
     }
 
     return $newValues;
+}
+
+function setCartSettings($values, $ttl=5000)
+{
+    Cache::forget('cart_settings');
+    Cache::add('cart_settings', $values, $ttl);
 }

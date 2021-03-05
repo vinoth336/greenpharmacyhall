@@ -315,6 +315,9 @@ var Cart = {
                 "url": "/cart/checkout",
                 "type": "post",
                 "dataType": "json",
+                "data": {
+                    "delivery_type": $("#delivery_type:checked").val()
+                },
                 "success": function(items) {
                     toastr.success("Order Placed Successfully");
                     Cart.addCartItemsFromServerToLocatStorage(items);
@@ -350,6 +353,15 @@ var Cart = {
             }
         });
         $("#" + id).html(CURRENCY_FORMATER.format(sum));
+
+        console.log(sum + " --------------- " + $("#min_amount_for_free_delivery").val());
+
+        if (sum >= $("#min_amount_for_free_delivery").val()) {
+            $("#delivery_door_delivery").attr('checked', true);
+        } else {
+            $("#delivery_shop_pickup").attr('checked', true);
+        }
+
     },
     updateTotalCartAmount: function(sum) {
         $("#top-checkout-price").html(CURRENCY_FORMATER.format(sum));

@@ -88,6 +88,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('services', 'ServicesController');
         Route::get('site_information', 'SiteInformationController@index')->name('site_information.index');
         Route::post('site_information', 'SiteInformationController@store')->name('site_information.store');
+        Route::get('cart_settings', 'CartSettingController@index')->name('cart_settings.index');
+        Route::post('cart_settings', 'CartSettingController@store')->name('cart_settings.store');
         Route::put('slider/update_sequence', 'SliderController@updateSequence')->name('slider.update_sequence');
         Route::resource('slider', 'SliderController');
         Route::resource('banner', 'BannerController');

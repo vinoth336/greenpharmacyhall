@@ -101,13 +101,14 @@
                                         @endif
                                         <h6 style="font-weight:bolder;margin-top: 10px;">Payment Type</h6>
                                         <i class="fas fa-money-bill-wave"></i>Cash On Delivery
+                                        <hr>
+                                        <h6>Delivery Type</h6>
+                                        <input type="radio" id="delivery_delivery_type" name="delivery_type" checked value="door_delivery" />&nbsp;Door Delivery - <i class="text-danger"  style="font-size: 12px;"> Min Order - {{  number_format($cart_settings['free_deliver_min_amt'], 2) }}</i><br>
+                                        <input type="radio" id="delivery_shop_pickup" name="delivery_type" value="shop_pickup" />&nbsp;Shop Pickup - <i class="text-danger" style="font-size: 12px;"> Min Order - {{  number_format($cart_settings['shop_pickup_min_amt'], 2) }}</i> <br>
                                     </div>
                                 </div>
                                     <div   class="text-right" style="padding-top:20px;margin-top: 40px; margin-bottom: 40px; border-top: 1px solid #ccc">
                                             Total Amount : <span style="font-weight: bold" id="order_summary_amount"></span>
-                                            <p>
-                                                <i style="font-size: 12px;display: none">Note : Minimum Order Amount Should Be Rs <span class="text-danger">{{ number_format(MIN_ORDER_AMOUNT, 2) }}</span></i>
-                                            </p>
                                     </div>
                                     <button type="button" class="btn btn-success float-right" onclick="Cart.checkout(this)">
                                         Place Order
@@ -123,6 +124,9 @@
             </div>
         </div>
         <input type="hidden" id="page" value="checkout" />
+        <input type="hidden" id="min_amount_for_free_delivery" value="{{ $cart_settings['free_deliver_min_amt'] }}" />
+        <input type="hidden" id="min_amount_for_shop_pickup" value="{{ $cart_settings['shop_pickup_min_amt'] }}" />
+
     </section>
     @if(auth()->guard('web')->check())
         </form>

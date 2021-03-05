@@ -38,6 +38,12 @@
                         <p>{{ __('Site Information') }}</p>
                     </a>
                 </li>
+                <li class="nav-item{{ $activePage == 'cart_settings' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('cart_settings.index') }}">
+                      <i class="material-icons">content_paste</i>
+                        <p>{{ __('Cart Settings') }}</p>
+                    </a>
+                </li>
                 <li class="nav-item{{ $activePage == 'slider' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('slider.index') }}">
                     <i class="material-icons">content_paste</i>

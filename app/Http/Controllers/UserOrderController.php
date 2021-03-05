@@ -7,6 +7,7 @@ use App\Mail\NewOrderSendNotificationToAdmin;
 use App\UserOrder;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -44,14 +45,18 @@ class UserOrderController extends Controller
             }
 
             $userOrder->total_amount = $sum;
+            $userOrder->delivery_type = $request->input('delivery_type') == 'door_delivery' ? 1 : 2;
             $userOrder->save();
+            $delivery_type = $request->input("delivery_type");
+            $cartSettings = Cache::get('cart_settings');
 
-            if($sum < MIN_ORDER_AMOUNT) {
-                    DB::rollback();
-                    return response("MIN ORDER AMOUNT SHOULD BE " . number_format(MIN_ORDER_AMOUNT, 2) , NOT_ACCEPTABLE);
+            if($delivery_type == 'door_delivery' && $sum < $cartSettings['free_deliver_min_amt'] ) {
+                DB::rollback();
+                return response("MIN ORDER AMOUNT For Free Delivery Is " . number_format($cartSettings['free_deliver_min_amt'], 2) , NOT_ACCEPTABLE);
+            } elseif($sum < $cartSettings['shop_pickup_min_amt'] ) {
+                DB::rollback();
+                return response("MIN ORDER AMOUNT For Shop Pickup Is " . number_format($cartSettings['shop_pickup_min_amt'], 2) , NOT_ACCEPTABLE);
             }
-
-
 
             Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
 
