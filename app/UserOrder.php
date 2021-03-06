@@ -29,4 +29,9 @@ class UserOrder extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function getDeliveryTypeAttribute()
+    {
+        return DELIVERY_TYPE[$this->attributes['delivery_type']] ?? null;
+    }
 }

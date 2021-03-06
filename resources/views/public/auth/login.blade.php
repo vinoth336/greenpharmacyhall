@@ -22,6 +22,10 @@
                                 {{ $message }}
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember" value="1" checked>
+						<label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
                     <div class="m-auto text-center">
                     <button type="submit" class="btn btn-warning text-white" style="background-color: #fb641b; padding-left: 10%; padding-right:10%">
                         Login

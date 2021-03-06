@@ -113,7 +113,9 @@
             {{ $user->address }}
         </p>
         <br>
-        <b>Order Date</b> :<br>{{ $order->created_at }}
+        <b>Order Date</b> :<br>{{ $order->created_at }}<br>
+        <b>Delivery Type</b> : <br>
+        {{ $order->delivery_type }}
     </div>
     <h4><ul>Order Details</ul></h4>
     <table border="1" cellpadding="0" cellspacing="0" style="margin: auto; width:80%">
