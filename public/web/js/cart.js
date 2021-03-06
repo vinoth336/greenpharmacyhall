@@ -316,7 +316,7 @@ var Cart = {
                 "type": "post",
                 "dataType": "json",
                 "data": {
-                    "delivery_type": $("#delivery_type:checked").val()
+                    "delivery_type": $("[name='delivery_type']:checked").val()
                 },
                 "success": function(items) {
                     toastr.success("Order Placed Successfully");
