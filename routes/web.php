@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:web'], function() {
     Route::put('profile', 'UserController@update')->name('public.update_profile');
     Route::get('pharma_create_order', 'PharmaOrderController@index')->name('public.pharma_purchase_order');
     Route::post('pharma_create_order', 'PharmaOrderController@create');
+    Route::get('orders/{order}/download_invoice', 'UserOrderDetailController@download_invoice')->name('public.download_non_pharma_invoice');
     Route::get('orders', 'UserOrderDetailController@orderList')->name('public.order_list');
 
     Route::delete('pharma_order_delete/{order}', 'PharmaOrderController@orderCancel')->name('public.pharma_order_delete');
@@ -90,6 +91,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('site_information', 'SiteInformationController@store')->name('site_information.store');
         Route::get('cart_settings', 'CartSettingController@index')->name('cart_settings.index');
         Route::post('cart_settings', 'CartSettingController@store')->name('cart_settings.store');
+        Route::get('notification_manager', 'NotificationManagerController@index')->name('notification_manager.index');
+        Route::post('notification_manager', 'NotificationManagerController@store')->name('notification_manager.store');
         Route::put('slider/update_sequence', 'SliderController@updateSequence')->name('slider.update_sequence');
         Route::resource('slider', 'SliderController');
         Route::resource('banner', 'BannerController');
@@ -110,6 +113,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('product_images/{productImage}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
 
         Route::resource('pharma_orders', 'PharmaOrderAdminController')->except(['store', 'create', 'edit']);
+        Route::get('orders/{order}/download_invoice', 'UserOrderAdminController@download_invoice')->name('user_orders.download_non_pharma_invoice');
         Route::resource('user_orders', 'UserOrderAdminController')->except(['store', 'create', 'edit']);
 
         Route::group(['middleware' => 'auth'], function () {
@@ -118,6 +122,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
             Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
         });
+        Route::get('users/export', 'UserControllerAdmin@export')->name('users.export');
         Route::resource('users', 'UserControllerAdmin')->except(['store', 'create', 'edit']);
 
 

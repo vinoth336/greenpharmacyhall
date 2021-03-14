@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportUserList;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserControllerAdmin extends Controller
 {
@@ -103,5 +105,11 @@ class UserControllerAdmin extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function export()
+    {
+        return Excel::download(new ExportUserList, 'users.xlsx');
+
     }
 }

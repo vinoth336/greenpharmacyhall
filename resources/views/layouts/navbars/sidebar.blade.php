@@ -44,6 +44,12 @@
                         <p>{{ __('Cart Settings') }}</p>
                     </a>
                 </li>
+                <li class="nav-item{{ $activePage == 'notification_manager' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('notification_manager.index') }}">
+                      <i class="material-icons">content_paste</i>
+                        <p>{{ __('Notification Manager') }}</p>
+                    </a>
+                </li>
                 <li class="nav-item{{ $activePage == 'slider' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('slider.index') }}">
                     <i class="material-icons">content_paste</i>

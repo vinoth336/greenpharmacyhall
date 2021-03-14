@@ -26,6 +26,9 @@
                     <div class="card ">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title float-left">{{ __('Users') }}</h4>
+                            <a href="{{ route('users.export') }}" class="btn btn-info float-right" style="margin-right: 10px;margin-top: 5px !important;">
+                                Export Xls
+                            </a>
                         </div>
                         <?php $sno = 1; ?>
                         <div class="card-body ">

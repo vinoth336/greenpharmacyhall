@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OrderStatus;
 use App\UserOrder;
+use PDF;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -86,5 +87,16 @@ class UserOrderDetailController extends Controller
         }
     }
 
+    public function download_invoice(Request $request, $order)
+    {
+        $order = UserOrder::where('order_status_id', 1)->where('id', $order)->firstOrFail();
+        $user = auth()->user();
+
+        //return view('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
+        $pdf = PDF::loadView('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
+
+        return $pdf->download('Invoice_' . $order->order_no . '.pdf');
+
+    }
 
 }

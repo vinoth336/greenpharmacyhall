@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdatePharmaOrderStatusRequest;
 use App\OrderStatus;
 use App\UserOrder;
+use PDF;
 use Illuminate\Http\Request;
 
 class UserOrderAdminController extends Controller
@@ -110,4 +111,17 @@ class UserOrderAdminController extends Controller
     {
         return redirect()->route('user_orders.index')->with('status', 'Removed Successfully');
     }
+
+    public function download_invoice(Request $request, $order)
+    {
+        $order = UserOrder::where('order_status_id', 1)->where('id', $order)->firstOrFail();
+        $user = auth()->user();
+
+        //return view('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
+        $pdf = PDF::loadView('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
+
+        return $pdf->download('Invoice_' . $order->order_no . '.pdf');
+
+    }
+
 }

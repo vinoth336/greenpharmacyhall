@@ -87,6 +87,9 @@
                                             S NO
                                         </th>
                                         <th>
+                                            Order No
+                                        </th>
+                                        <th>
                                             Name
                                         </th>
                                         <th>
@@ -109,6 +112,7 @@
                                         @foreach ($orders as $order)
                                             <tr id="order_{{ $order->id }}">
                                                 <td>{{ $sno++ }}</td>
+                                                <td>{{ $order->order_no }}</td>
                                                 <td>{{ $order->user->name }}</td>
                                                 <td><a href="tel:{{ $order->user->phone_no }}">{{ $order->user->phone_no }}</a></td>
                                                 <td><a href="mail:{{ $order->user->email }}">{{ $order->user->email }}</a></td>
@@ -123,6 +127,10 @@
                                                         <a href="#" class="btn btn-link btn-warning btn-just-icon show view_order"
                                                         data-recordid="{{ $order->id }}"><i
                                                                 class="material-icons">visibility</i></a>
+                                                        <a title="Download Invoice" href="{{ route('user_orders.download_non_pharma_invoice', $order->id) }}" class="btn btn-link btn-info btn-just-icon show view_invoice_btn"
+                                                                data-recordid="{{ $order->id }}">
+                                                            <i class="material-icons">download</i>
+                                                        </a>
                                                 </td>
                                             </tr>
 
