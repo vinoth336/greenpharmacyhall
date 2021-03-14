@@ -113,7 +113,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('product_images/{productImage}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
 
         Route::resource('pharma_orders', 'PharmaOrderAdminController')->except(['store', 'create', 'edit']);
-        Route::get('orders/{order}/download_invoice', 'UserOrderAdminController@download_invoice')->name('user_orders.download_non_pharma_invoice');
+        Route::get('user_orders/{order}/download_invoice', 'UserOrderAdminController@download_invoice')->name('user_orders.download_non_pharma_invoice');
         Route::resource('user_orders', 'UserOrderAdminController')->except(['store', 'create', 'edit']);
 
         Route::group(['middleware' => 'auth'], function () {

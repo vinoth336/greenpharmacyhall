@@ -43,6 +43,7 @@ class NotificationManagerController extends Controller
         $NotificationManager->order_create = $request->input('order_create');
         $NotificationManager->order_cancel = $request->input('order_cancel');
         $NotificationManager->save();
+        setMailNotificationDetailsInCache();
 
         return redirect()->route('notification_manager.index');
 

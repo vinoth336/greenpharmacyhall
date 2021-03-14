@@ -183,15 +183,15 @@ body {
                         <div class="company-details">
                             <h4 class="name">
                                 <a target="_blank" href="Javascript:void(0)">
-                                {{ ucfirst($user->name) }}
+                                {{ ucfirst($userDetail->name) }}
                                 </a>
                             </h4>
-                                {!! ucfirst(implode( "<br>", explode(",", $user->address))) !!}<br>
-                                Karur - {{ $user->zipcode }}<br>
+                                {!! ucfirst(implode( "<br>", explode(",", $userDetail->address))) !!}<br>
+                                Karur - {{ $userDetail->zipcode }}<br>
                                 Tamil Nadu<br>
-                                {{ $user->phone_no }}<br>
-                            @if($user->email)
-                                {{ $user->email }}<br>
+                                {{ $userDetail->phone_no }}<br>
+                            @if($userDetail->email)
+                                {{ $userDetail->email }}<br>
                             @endif
                         </div>
                     </div>

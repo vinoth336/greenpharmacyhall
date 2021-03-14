@@ -57,6 +57,7 @@ class UserOrderController extends Controller
                 DB::rollback();
                 return response("MIN ORDER AMOUNT For Shop Pickup Is " . number_format($cartSettings['shop_pickup_min_amt'], 2) , NOT_ACCEPTABLE);
             }
+            $userOrder->load('order_status');
 
             Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
 

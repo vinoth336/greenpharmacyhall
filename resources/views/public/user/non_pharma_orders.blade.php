@@ -10,16 +10,16 @@
                             Order No : GH{{ $order->order_no }}
                             &nbsp;
                             @if($order->order_status->slug_name == 'approved' )
-                                <a href="{{ route('public.download_non_pharma_invoice', $order->id) }}" class="text-info" data-productid="PRODUCT_ID">
+                                <a href="{{ route('public.download_non_pharma_invoice', $order->order_no) }}" class="text-info" data-productid="PRODUCT_ID">
                                     Invoice
                                 </a>
                             @endif
                             @if($order->order_status->slug_name == 'pending' )
-                                <a href="Javascript:void(0)" class="text-danger float-right"  onclick="Order.removeOrder('{{ $order->id }}')" data-productid="PRODUCT_ID">
+                                <a href="Javascript:void(0)" class="text-danger float-right"  onclick="Order.removeOrder('{{ $order->order_no }}')" data-productid="PRODUCT_ID">
                                     Cancel
                                 </a>
                             @endif
-                            <a href="Javascript:void(0)" style="display: none" class="text-success float-right rightmargin-sm"  onclick="Order.removeOrder('{{ $order->id }}')" data-productid="PRODUCT_ID">
+                            <a href="Javascript:void(0)" style="display: none" class="text-success float-right rightmargin-sm"  onclick="Order.removeOrder('{{ $order->order_no }}')" data-productid="PRODUCT_ID">
                                 Reorder
                             </a>
                             <div class="clearfix"></div>

@@ -34,4 +34,9 @@ class UserOrder extends Model
     {
         return DELIVERY_TYPE[$this->attributes['delivery_type']] ?? null;
     }
+
+    public function scopeAuthUser($query)
+    {
+        return $query->where('user_id', auth()->user()->id);
+    }
 }

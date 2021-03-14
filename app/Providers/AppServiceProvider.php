@@ -57,10 +57,14 @@ class AppServiceProvider extends ServiceProvider
             if (!Cache::has('cart_settings')) {
                 setCartSettings(getCartSettings());
             }
+            if (!Cache::has('email_notification')) {
+                setMailNotificationDetailsInCache();
+            }
             $siteInformation = Cache::get('site_information');
             $cart_settings = Cache::get('cart_settings');
             $categories = Cache::get('site_menu_items');
             $subCategories = SubCategory::get();
+            $emailNotification = Cache::get('email_notification');
             $brands = Brand::get();
             $input = request()->all();
             $user = auth()->user() ?? null;
@@ -72,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('subCategories', $subCategories);
             $view->with('brands', $brands);
             $view->with('input', $input);
+            $view->with('emailNotification', $emailNotification);
         });
     }
 }

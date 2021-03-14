@@ -113,6 +113,15 @@
             {{ $user->address }}
         </p>
         <br>
+        <b>Order Status</b> :<br>
+        <span
+                @if(in_array(optional($order->order_status)->slug, ['cancel']))
+                    style="color:red"
+                @endif
+            >
+            {{ strtoupper(optional($order->order_status)->name) }}
+        </span>
+        <br>
         <b>Order Date</b> :<br>{{ $order->created_at }}<br>
         <b>Delivery Type</b> : <br>
         {{ $order->delivery_type }}

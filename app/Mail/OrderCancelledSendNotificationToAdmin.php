@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 
-class NewOrderSendNotificationToAdmin extends Mailable
+class OrderCancelledSendNotificationToAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,8 +35,8 @@ class NewOrderSendNotificationToAdmin extends Mailable
     {
         $emailNotification = Cache::get('email_notification');
 
-        return $this->to($emailNotification['order_create'])
-             ->subject('New Non-Pharma Order')
+        return $this->to($emailNotification['order_cancel'])
+             ->subject('Non-Pharma - Order Cancelled')
              ->view('mail.admin_new_order')
              ->with('user', $this->user)
              ->with('order', $this->userOrder)

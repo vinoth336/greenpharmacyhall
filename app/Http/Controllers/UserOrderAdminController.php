@@ -114,11 +114,11 @@ class UserOrderAdminController extends Controller
 
     public function download_invoice(Request $request, $order)
     {
-        $order = UserOrder::where('order_status_id', 1)->where('id', $order)->firstOrFail();
-        $user = auth()->user();
+        $order = UserOrder::where('id', $order)->firstOrFail();
+        $user = $order->user()->first();
 
         //return view('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
-        $pdf = PDF::loadView('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
+        $pdf = PDF::loadView('public.user.non_pharma_order_invoice', ['userDetail' => $user, 'order' => $order]);
 
         return $pdf->download('Invoice_' . $order->order_no . '.pdf');
 
