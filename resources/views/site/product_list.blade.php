@@ -3,13 +3,10 @@
 @section('content')
     <section id="content">
         <div class="content-wrap">
-            <div class="container-fluid px-5 clearfix">
+            <div class="container-fluid clearfix">
                 <div class="row gutter-40 col-mb-80">
-
                     <div class="postcontent col-lg-9 order-lg-last">
-
                         <div id="shop" class="shop row grid-container gutter-20">
-
                             @foreach ($products as $product)
                                 <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm"
                                     id="product_{{ $product->slug }}">
