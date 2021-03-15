@@ -36,7 +36,7 @@ class NewOrderSendNotificationToAdmin extends Mailable
         $emailNotification = Cache::get('email_notification');
 
         return $this->to($emailNotification['order_create'])
-             ->subject('New Non-Pharma Order')
+             ->subject('Non-Pharma - New Order')
              ->view('mail.admin_new_order')
              ->with('user', $this->user)
              ->with('order', $this->userOrder)

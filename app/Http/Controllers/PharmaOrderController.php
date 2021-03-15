@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePharmaOrderRequest;
 use App\Mail\PharmaNewOrderSendNotificationToAdmin;
+use App\Mail\PharmaOrderCancelledSendNotificationToAdmin;
 use App\Mail\SendOrderNotificationToAdmin;
 use App\OrderStatus;
 use App\PharmaPrescription;
@@ -65,6 +66,10 @@ class PharmaOrderController extends Controller
             if ($order->order_status->slug_name == 'pending') {
                 $order->order_status_id = OrderStatus::where('slug_name', 'cancel')->first()->id;
                 $order->save();
+                $order->load('order_status');
+                $user = auth()->user();
+
+                Mail::send(new PharmaOrderCancelledSendNotificationToAdmin($user, $order));
 
                 DB::commit();
 

@@ -69,7 +69,7 @@
                     <a  class="menu-link" href="{{ route('public.order_list') }}">My Orders</a>
                 </li>
                 <li class="menu-item">
-                    <a  class="menu-link" href="{{ route('public.update_profile') }}">Profie</a>
+                    <a  class="menu-link" href="{{ route('public.dashboard') }}">Profie</a>
                 </li>
                 <li class="menu-item">
                     <a  class="menu-link" href="{{ route('public.change_password') }}">Change Password</a>
