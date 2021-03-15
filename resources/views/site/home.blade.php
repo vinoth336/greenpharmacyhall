@@ -56,7 +56,7 @@
 
                 <div id="shop" class="shop row grid-container " data-layout="fitRows" style="margin-top:10px;">
                     @foreach ($allProducts as $product)
-                        <div class="product col-lg-3 col-md-3 col-sm-6" style="margin-bottom: 2rem;" id="product_{{ $product->slug }}">
+                        <div class="product col-lg-3 col-md-3 col-sm-6" id="product_{{ $product->slug }}">
                             <div class="grid-inner">
                                 <div class="product-image">
                                     @forelse ($product->productImages as $productImage)

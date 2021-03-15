@@ -11,7 +11,7 @@
                         <div id="shop" class="shop row grid-container gutter-20">
 
                             @foreach ($products as $product)
-                                <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm" style="margin-bottom: 2rem"
+                                <div class="product col-lg-3 col-md-3 col-sm-6 col-12 col-sm"
                                     id="product_{{ $product->slug }}">
                                     <div class="grid-inner">
                                         <div class="product-image">
