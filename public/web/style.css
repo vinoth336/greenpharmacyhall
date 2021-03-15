@@ -7571,7 +7571,8 @@ p.wp-caption-text {
 
 .product .product-image {
     position: relative;
-    overflow: hidden
+    overflow: hidden;
+    min-height: 90px;
 }
 
 .product-image .slide a,

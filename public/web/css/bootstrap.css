@@ -2095,7 +2095,7 @@ pre code {
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
-        border-bottom: 0px solid #eaeaea;
+        border-bottom: .5px solid #d4d5d9;
         border-right: .5px solid #d4d5d9;
         margin-bottom: 0.1rem;
     }
