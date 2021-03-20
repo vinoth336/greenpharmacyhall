@@ -16,7 +16,7 @@ $(document).ready(function() {
 var Cart = {
     init: function() {
         if (navigator.cookieEnabled) {
-            this.syncCartItems();
+            this.syncCartItems()
             this.syncCartValues();
             this.refreshCartItems();
             this.showOrderSummaryBlock();

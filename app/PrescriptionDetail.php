@@ -2,16 +2,13 @@
 
 namespace App;
 
-use App\Mail\SendOrderNotificationToAdmin;
 use App\Traits\StoreImage;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Mail;
 use Jamesh\Uuid\HasUuid;
 
-class PharmaPrescription extends Model
+class PrescriptionDetail extends Model
 {
-    use StoreImage, SoftDeletes, HasUuid;
+    use StoreImage, HasUuid;
 
     protected $fileParamName = 'prescription';
 
@@ -24,7 +21,6 @@ class PharmaPrescription extends Model
     protected $imageFieldName = 'image';
 
     public $resize = false;
-
 
     public function getCreatedAtAttribute($value)
     {
@@ -40,23 +36,5 @@ class PharmaPrescription extends Model
         return null;
     }
 
-    public function order_status()
-    {
-        return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
-    }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    public function prescription_details()
-    {
-        return $this->hasMany(PrescriptionDetail::class, 'pharma_prescriptions_id', 'id');
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-    }
 }

@@ -19,7 +19,17 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $order->created_at }}</td>
-                                <td><a href="{{ $order->image_url }}" data-lightbox="image">View</a></td>
+                                <td>
+                                    @php $i=1; @endphp
+                                    @foreach ($order->prescription_details as $prescription )
+                                        <a href="{{ $prescription->image_url }}" data-lightbox="image">
+                                            View Prescription{{ $i == 1 ? '' : " - " . $i }}<br>
+                                        </a>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                    @endforeach
+                                </td>
                                 <td>{{ $order->comment_text }}</td>
                                 <td>{{ optional($order->order_status)->name }}</td>
                                 <td>

@@ -138,9 +138,15 @@
             <tr>
                 <th style="background-color: #eee; text-align: center">Prescription</th>
                 <td id="order_prescription" style="text-align: justify; line-height:12px">
-                        <a href="{{ asset('web/images/prescriptions/' . $userOrder->image) }}" id="order_prescription_url" target="_blank">
-                            View
-                        </a>
+                        @php $i=1; @endphp
+                        @foreach ($userOrder->prescription_details as $prescription )
+                            <a href="{{ asset('web/images/prescriptions/' . $prescription->image) }}" id="order_prescription_url" target="_blank">
+                                View Prescription{{ $i == 1 ? '' : " - " . $i }}
+                            </a>
+                            @php
+                                $i++;
+                            @endphp
+                        @endforeach
                 </td>
             </tr>
             <tr>

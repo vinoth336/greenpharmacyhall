@@ -20,12 +20,17 @@
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="inputAddress2">Upload Prescription</label>
-                            <input type="file" class="form-control" placeholder="Prescription" name="prescription"  accept="image/x-png,image/jpg,image/jpeg">
+                            <input type="file" class="form-control" placeholder="Prescription" name="prescription[]" multiple  accept="image/x-png,image/jpg,image/jpeg">
                             <span id="first_nameMsg" class="error">
-                                @error('prescription')
-                                    {{ $message }}
-                                @enderror
+                                <ul class="error">
+                                    @if ($errors->has('prescription'))
+                                        @foreach ($errors->get('prescription') as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    @endif
+                                </ul>
                             </span>
+                            <i class="text-primary">Note : we accepting multiple prescription</i>
                         </div>
                     </div>
                     <div class="form-row">

@@ -92,51 +92,52 @@
                     <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false"
                         data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="3"
                         data-items-xl="4">
-
                             @foreach ($relatedProducts as $product)
                             <div class="oc-item">
-                            <div class="product" id="product_{{ $product->slug }}">
-                                    <div class="product-image">
-                                        @foreach ($product->productImages as $productImage)
-                                            <a href="{{ route('view_product', $product->slug) }}">
-                                                <img class="product_image"
-                                                    src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
-                                                    alt="{{ $product->name }}">
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                    <div class="product-desc">
-                                        <div class="product-title min-h-30">
-                                            <h3><a href="{{ route('view_product', $product->slug) }}"
-                                                   >{{ $product->name }}</a></h3>
+                                <div class="product" id="product_{{ $product->slug }}">
+                                        <div class="product-image">
+                                            @foreach ($product->productImages as $productImage)
+                                                <a href="{{ route('view_product', $product->slug) }}">
+                                                    <img class="product_image"
+                                                        src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
+                                                        alt="{{ $product->name }}">
+                                                </a>
+                                            @endforeach
                                         </div>
-                                        <div class="product-price">
-                                            <div class="text-left">
-                                                @if ($product->discount_amount > 0)
-                                                    <del>₹ {{ $product->price }}</del>
-                                                    <ins>₹ {{ $product->discount_amount }}</ins>
-                                                @else
-                                                    <ins>₹ {{ $product->price }}</ins>
-                                                @endif
-                                                <input type="hidden" class="product_price" value="{{ $product->price }}" />
-                                                <input type="hidden" class="product_name" value="{{ $product->name }}" />
+                                        <div class="product-desc">
+                                            <div class="product-title min-h-30">
+                                                <h3><a href="{{ route('view_product', $product->slug) }}"
+                                                    >{{ $product->name }}</a></h3>
+                                            </div>
+                                            <div class="product-price">
+                                                <div class="text-left">
+                                                    @if ($product->discount_amount > 0)
+                                                        <del>₹ {{ $product->price }}</del>
+                                                        <ins>₹ {{ $product->discount_amount }}</ins>
+                                                    @else
+                                                        <ins>₹ {{ $product->price }}</ins>
+                                                    @endif
+                                                    <input type="hidden" class="product_price" value="{{ $product->price }}" />
+                                                    <input type="hidden" class="product_name" value="{{ $product->name }}" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
-                                            class="text-info" style="font-weight: 300 !important; font-size:18px;"
-                                            class="" href="Javascript:void(0)">
-                                            <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
-                                            <span class="add_cart_label">Add To Cart</span>
-                                            <i class="icon-shopping-cart"></i>
-                                            </p>
-                                        </a>
-                                    </div>
+                                        <div class="text-right">
+                                            <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                                class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                                class="" href="Javascript:void(0)">
+                                                <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                                <span class="add_cart_label">Add To Cart</span>
+                                                <i class="icon-shopping-cart"></i>
+                                                </p>
+                                            </a>
+                                        </div>
+                                </div>
                             </div>
-                        </div>
                             @endforeach
-
+                            <div class="oc-item">
+                                <a href="/search?sub_categories[]={{ $product->sub_category->slug_name }}">More</a>
+                            </div>
                     </div>
                 </div>
 

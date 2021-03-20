@@ -135,7 +135,7 @@
     $(document).ready(function() {
 
       if (document.cookie.indexOf("accepted_cookies=") < 0) {
-        $('.cookie-overlay').removeClass('d-none').addClass('d-block');
+        //$('.cookie-overlay').removeClass('d-none').addClass('d-block');
       }
 
       $('.accept-cookies').on('click', function() {
@@ -143,13 +143,13 @@
         if(document.cookie.indexOf("accepted_cookies=") < 0) {
             alert("We can't Process your request, please change the cookies setting Browser Level");
         } else {
-            $('.cookie-overlay').removeClass('d-block').addClass('d-none');
+            //$('.cookie-overlay').removeClass('d-block').addClass('d-none');
         }
       })
 
       // expand depending on your needs
       $('.close-cookies').on('click', function() {
-        $('.cookie-overlay').removeClass('d-block').addClass('d-none');
+        //$('.cookie-overlay').removeClass('d-block').addClass('d-none');
       })
     })
 
@@ -245,15 +245,12 @@ $(function() {
 
 <div class="cookie-overlay p-4 d-none">
     <div class="d-flex">
-      <div class="mr-3">
+    <div class="mr-3">
         Allow permission to Read and Write Cookies,<br>
         <i style="font-size: 10px; color: red">Please Note we d't read other site information</i>
-      </div>
+    </div>
     </div>
     <button class="btn btn-primary mt-3 accept-cookies">Allow</button>
-  </div>
-
-
+</div>
 </body>
-
 </html>

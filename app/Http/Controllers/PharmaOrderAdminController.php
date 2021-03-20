@@ -55,7 +55,7 @@ class PharmaOrderAdminController extends Controller
      */
     public function show(PharmaPrescription $pharma_order)
     {
-        $pharma_order = $pharma_order->load(['user', 'order_status']);
+        $pharma_order = $pharma_order->load(['user', 'order_status', 'prescription_details']);
         return $pharma_order;
     }
 

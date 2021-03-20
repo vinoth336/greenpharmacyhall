@@ -170,9 +170,7 @@
                                 <tr id="prescription_section">
                                     <th>Prescription</th>
                                     <td id="order_prescription" style="text-align: justify; line-height:12px">
-                                            <a href="" id="order_prescription_url" target="_blank">
-                                                View
-                                            </a>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -281,7 +279,14 @@
                     $("#order_user_address").html(data.user.address);
                     $("#order_user_phone_no").html(data.user.phone_no);
                     $("#order_User_email_id").html(data.user.email);
-                    $("#order_prescription_url").attr('href', "" + imageUrl + data.image);
+                    var prescriptionDetails = data.prescription_details;
+                    var attachments = '';
+                    var i=1;
+                    $.each(prescriptionDetails, function(key, prescriptionAttachment) {
+                                attachments += "<a href='/web/images/prescriptions/" + prescriptionAttachment.image + "' target='_blank'>View Prescrition" + (i==1 ? '' : ' - ' + i) +" </a>&nbsp;";
+                                i++;
+                    });
+                    $("#order_prescription").html(attachments);
                     $("#orderStatus").val(data.order_status_id);
                     $("#orderStatus").trigger('change');
                     $("#order_user_comment").html(data.comment);
