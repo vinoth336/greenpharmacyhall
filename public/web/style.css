@@ -12318,7 +12318,7 @@ blockquote.float-right {
 
 .owl-carousel .owl-item img {
     display: block;
-    width: 100%;
+    width: 60%;
     -webkit-transform-style: preserve-3d
 }
 

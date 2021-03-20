@@ -96,13 +96,19 @@
                             <div class="oc-item">
                                 <div class="product" id="product_{{ $product->slug }}">
                                         <div class="product-image">
-                                            @foreach ($product->productImages as $productImage)
+                                            @forelse ($product->productImages as $productImage)
                                                 <a href="{{ route('view_product', $product->slug) }}">
                                                     <img class="product_image"
                                                         src="{{ asset('web/images/product_images/thumbnails/' . $productImage->image) }}"
                                                         alt="{{ $product->name }}">
                                                 </a>
-                                            @endforeach
+                                                @empty
+                                                <a href="{{ route('view_product', $product->slug) }}">
+                                                    <img class="product_image lazy"
+                                                        data-src="{{ asset('web/images/product_images/thumbnails/no_image.png') }}"
+                                                        alt="{{ $product->name }}" >
+                                                </a>
+                                            @endforelse
                                         </div>
                                         <div class="product-desc">
                                             <div class="product-title min-h-30">
@@ -110,7 +116,7 @@
                                                     >{{ $product->name }}</a></h3>
                                             </div>
                                             <div class="product-price">
-                                                <div class="text-left">
+                                                <div class="text-center">
                                                     @if ($product->discount_amount > 0)
                                                         <del>₹ {{ $product->price }}</del>
                                                         <ins>₹ {{ $product->discount_amount }}</ins>
@@ -122,7 +128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-right">
+                                        <div class="text-center">
                                             <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
                                                 class="text-info" style="font-weight: 300 !important; font-size:18px;"
                                                 class="" href="Javascript:void(0)">
