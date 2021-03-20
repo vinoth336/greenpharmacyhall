@@ -136,7 +136,7 @@
                             </div>
                             @endforeach
                             <div class="oc-item">
-                                <a href="/search?sub_categories[]={{ $productDetail->sub_category->slug_name }}">More</a>
+                                <a href="/search?sub_categories[]={{ optional($productDetail->sub_category)->slug_name }}">More</a>
                             </div>
                     </div>
                 </div>
