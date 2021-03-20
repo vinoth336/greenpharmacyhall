@@ -83,10 +83,15 @@ class SiteController extends Controller
     {
         $product->load('ProductImages')->orderBy('sequence')->first();
         $relatedProducts = $product->getRelatedProducts();
+        $relatedCategories = [];
+        foreach($product->services()->pluck('slug')->toArray() as $cat) {
+            $relatedCategories[] = "categories[]=" . $cat;
+        }
 
         return view('site.view_single_product')
         ->with('productDetail', $product)
         ->with('relatedProducts', $relatedProducts)
+        ->with('relatedCategories', implode("&", $relatedCategories))
         ;
     }
 
