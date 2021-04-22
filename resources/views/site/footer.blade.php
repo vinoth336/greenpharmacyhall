@@ -92,12 +92,13 @@
         </div>
     </div>
 </div>
-<footer id="footer" class="dark">
-    <div id="copyrights">
+<footer id="footer" class="dark text-white" >
+    <div id="copyrights" style="background: url('{{ asset('site_images/footer-bg.jpg') }}') repeat; background-size: cover;">
         <div class="container">
             <div class="row col-mb-30">
                 <div class="col-md-6 text-center text-md-left">
-                    Copyrights &copy; {{ date('Y') }} All Rights Reserved by {{ $siteInformation->site_name }}.<br>
+                    Copyrights &copy; {{ date('Y') }} {{ $siteInformation->site_name }}.<br>
+                    All rights reserved. In compliance with Drugs and Cosmetics Act, 1940 and Drugs and Cosmetics Rules, 1945, we don't process requests for Schedule X and other habit forming drugs.
                 </div>
                 <div class="col-md-6 text-center text-md-right">
                     <div class="d-flex justify-content-center justify-content-md-end">
