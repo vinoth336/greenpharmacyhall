@@ -238,7 +238,7 @@
                 </div>
                 <div class="row col-mb-50">
                     <div class="col-sm-6 col-lg-3" style="cursor: pointer"
-                        onclick="window.open('https://goo.gl/maps/u86ebsZ7AeX54e7g9', '_blank')">
+                        onclick="window.open('https://goo.gl/maps/12tyEdUZqGAfksbWA', '_blank')">
                         <div class="feature-box fbox-center fbox-bg fbox-plain">
                             <div class="fbox-icon">
                                 <a href="#"><i class="icon-map-marker2"></i></a>
