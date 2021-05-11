@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-4 min-vh-50">
                         <a href="#" class="grid-inner d-block h-100"
-                            style="background-image: url('{{ asset('web/images/banners/' . $verticalWideBanner->banner ?? null) }}'); background-position: center top;"></a>
+                            style="background-image: url('{{ asset('web/images/banners/' . $verticalWideBanner->banner ?? null) }}'); background-size: contain;"></a>
                     </div>
                 </div>
                 <!-- Banner Section Ended-->
