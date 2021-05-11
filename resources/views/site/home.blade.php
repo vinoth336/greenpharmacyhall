@@ -5,8 +5,10 @@
         <div class="slider-inner">
             <div class="swiper-container swiper-parent">
                 <div class="swiper-wrapper">
-                    @foreach ($sliders as $slider)
-                        <div class="swiper-slide dark">
+                    @foreach ($sliders as $key => $slider)
+                        <div class="swiper-slide dark" @if ($key == 0)
+                         style="cursor: pointer"   onclick="window.location.href='https://www.greenpharmacyhall.com/product/pulse-oximeter'"
+                        @endif>
                             <div class="container">
                                 @if ($slider->description)
                                     <div class="slider-caption slider-caption-center text-white">
@@ -46,7 +48,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 min-vh-50">
-                        <a href="#" class="grid-inner d-block h-100"
+                        <a href="https://www.greenpharmacyhall.com/product/pulse-oximeter" class="grid-inner d-block h-100"
                             style="background-image: url('{{ asset('web/images/banners/' . $verticalWideBanner->banner ?? null) }}'); background-size: contain;"></a>
                     </div>
                 </div>
