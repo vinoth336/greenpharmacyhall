@@ -38,7 +38,7 @@
                         <h3>Best Offers</h3>
                     </div>
                 </div>
-                <div class="col-md-12" style="margin-bottom: 10px">
+                <div class="col-md-12" style="margin-bottom: 10px;padding-left:40px;padding-right:40px;">
                     <div id="oc-products" class="owl-carousel products-carousel carousel-widget" data-pagi="false"
                         data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
                         @foreach($bestOffer->products as $product)
@@ -162,7 +162,7 @@
                 <div class="clear bottommargin-sm"></div>
             </div>
             <div class="text-center mb-0">
-                <a href="{{ route('public.search_product') }}" class="text-white margin-auto btn btn-success">
+                <a href="{{ route('public.product_list') }}" class="text-white margin-auto btn btn-success">
                     View More
                 </a>
             </div>
