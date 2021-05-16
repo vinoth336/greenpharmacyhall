@@ -57,8 +57,8 @@
                                         <h3><a href="{{ route('view_product', $product->slug) }}">{{ substr($product->name,0, 20) }}</a></h3>
                                     </div>
                                     <div class="product-price">
-                                        <del>{{ $product->discount_amount }}</del>
-                                        <ins>{{ $product->price }}</ins>
+                                        <del>{{ $product->price }}</del>
+                                        <ins>{{ $product->discount_amount }}</ins>
                                         <input type="hidden" class="product_price" value="{{ $product->actual_price }}" />
                                         <input type="hidden" class="product_name" value="{{ $product->name }}" />
                                     </div>
