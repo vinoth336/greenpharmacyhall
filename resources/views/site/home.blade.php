@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="col-md-12" style="margin-bottom: 10px;padding-left:40px;padding-right:40px;">
-                    <div id="oc-products" class="owl-carousel products-carousel carousel-widget" data-pagi="false"
-                        data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+                    <div id="oc-products" class="owl-carousel products-carousel carousel-widget " data-pagi="true"
+                        data-items-xs="1" data-items-sm="2" data-items-md="3" data-nav="true" data-items-lg="4">
                         @foreach($bestOffer->products as $product)
                         <div class="oc-item" style="padding-top: 20px; padding-bottom:20px">
                             <div class="product" id="product_{{ $product->slug }}">
