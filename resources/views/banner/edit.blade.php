@@ -28,20 +28,18 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Banner Size') }}</label>
+                                    <label class="col-sm-2 col-form-label">{{ __('Url') }}</label>
                                     <div class="col-sm-7">
-                                        <div class="form-group{{ $errors->has('banner_size') ? ' has-danger' : '' }}">
-                                            @php
-                                            $size = [3 => '436x224', 6 => '730x192', 8 => '380x382'];
-                                            @endphp
-                                            <select name="banner_size">
-                                                    @foreach(BANNER_SIZE as $value => $label)
-                                                        <option value="{{ $value }}" @if($value == old('banner_size', $banner->banner_size)) selected @endif>Size {{ $label }} </option>
-                                                    @endforeach
-                                            </select>
-                                            @if ($errors->has('banner_size'))
-                                                <span id="banner_size-error" class="error text-danger"
-                                                    for="input-banner_size">{{ $errors->first('banner_size') }}</span>
+                                        <div class="form-group{{ $errors->has('url') ? ' has-danger' : '' }}">
+
+                                            <input
+                                                class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"
+                                                name="url" id="input-name" type="text"
+                                                placeholder="{{ __('Url') }}" value="{{ old('url', $banner->url) }}"
+                                                required="true" aria-required="true" />
+                                            @if ($errors->has('url'))
+                                                <span id="name-error" class="error text-danger"
+                                                    for="input-url">{{ $errors->first('url') }}</span>
                                             @endif
                                         </div>
                                     </div>
@@ -72,6 +70,22 @@
                                                 <span id="name-error" class="error text-danger"
                                                     for="input-contact_person">{{ $errors->first('banner') }}</span>
                                           @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">{{ __('Status') }}</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group{{ $errors->has('status') ? ' has-danger' : '' }} text-left">
+                                        <input style="width: 62px;"
+                                            class="form-control {{ $errors->has('status') ? ' is-invalid' : '' }}"
+                                            name="status" id="input-status" type="checkbox" value="1"
+                                            @if(old('status', $banner->status) == 1) checked @endif
+                                             aria-required="true" />
+                                        @if ($errors->has('status'))
+                                            <span id="status-error" class="error text-danger"
+                                                for="input-status">{{ $errors->first('status') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

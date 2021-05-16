@@ -17,6 +17,7 @@ define('NOT_ACCEPTABLE', 406);
 define('SUCCESS', 200);
 
 define("MIN_ORDER_AMOUNT", 0);
+define("STATUS_ACTIVE", 1);
 
 define("SEND_NEW_ORDER_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');
 define("SEND_NEW_ORDER_PHARMA_NOTIFICATION_TO_ADMIN", 'greenpharmacyhall@gmail.com');

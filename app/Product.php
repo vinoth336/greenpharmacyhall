@@ -48,6 +48,10 @@ class Product extends Model
         return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
     }
 
+    public function product_tags()
+    {
+        return $this->belongsToMany(Tag::class,'product_tag', 'product_id', 'tag_id')->withTimestamps();
+    }
 
     public static function boot()
     {

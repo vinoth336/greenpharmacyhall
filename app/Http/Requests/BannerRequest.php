@@ -24,7 +24,7 @@ class BannerRequest extends FormRequest
     public function rules()
     {
         return [
-            'banner_size' => 'required|numeric|between:3,12',
+            'url' => 'nullable|url',
             'banner' => 'image|sometimes|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }

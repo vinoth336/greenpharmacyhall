@@ -28,34 +28,79 @@
         </div>
     </section>
 
+    @if($bestOffer->products->count() > 0)
+
+    <section id="content" style="padding:8px;">
+        <div class="content-wrap" style="padding: 10px 0px 0px 0px">
+            <div class="row justify-content-center">
+                <div class="col-md-12" style="margin-bottom: 10px">
+                    <div class="fancy-title title-center title-border">
+                        <h3>Best Offers</h3>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom: 10px">
+                    <div id="oc-products" class="owl-carousel products-carousel carousel-widget" data-pagi="false"
+                        data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+                        @foreach($bestOffer->products as $product)
+                        <div class="oc-item" style="background-color: wheat; padding-top: 20px; padding-bottom:20px">
+                            <div class="product">
+                                <div class="product-image">
+                                    @php
+                                    $productImage = $product->productImages->first();
+                                    $productImage = $productImage->image ?? 'no_image.png';
+                                @endphp
+                                    <a href="#"><img src="{{ asset('web/images/product_images/thumbnails/' . $productImage ) }}" alt="Checked Short Dress"></a>
+                                    <div class="sale-flash badge badge-success p-2">Flat {{ $product->price - $product->discount_amount }} Off*</div>
+                                </div>
+                                <div class="product-desc center">
+                                    <div class="product-title">
+                                        <h3><a href="{{ route('view_product', $product->slug) }}">{{ substr($product->name,0, 20) }}</a></h3>
+                                    </div>
+                                    <div class="product-price"><del>{{ $product->discount_amount }}</del> <ins>{{ $product->price }}</ins></div>
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                        class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                        class="" href="Javascript:void(0)">
+                                        <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                        <span class="add_cart_label">Add To Cart</span>
+                                        <i class="icon-shopping-cart"></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    @if($banners->count() > 0)
+    <section id="content" style="padding:8px;margin-top: 20px; padding-top: 10px;">
+        <div class="content-wrap" style="padding: 0px;" >
+            <div class="row align-items-stretch banner_row_section_bg" >
+                @foreach ($banners as $banner )
+                     <div class="col-md-3" style="margin-top: 20px; marging-bottom:20px;">
+                        <a href="#" class="grid-inner d-block" style="height: 300px; background: url('{{ asset('web/images/banners/' . $banner->banner) }}');background-size: cover">
+                        </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
     <section id="content">
         <div class="content-wrap" style="padding-top: 0px">
             <div class="container clearfix">
-                <!-- Banner Section-->
-                <div class="row align-items-stretch min-vh-60 d-none d-md-flex d-lg-flex my-sm-6">
-                    <div class="col-md-8">
-                        <div class="row align-items-stretch h-100">
-                            @foreach ($boxBanners as $boxBanner)
-                                <div class="col-md-6 min-vh-25 min-vh-md-0">
-                                    <a href="#" class="grid-inner d-block h-100"
-                                        style="background-image: url('{{ asset('web/images/banners/' . $boxBanner->banner) }}');"></a>
-                                </div>
-                            @endforeach
-                            <div class="col-md-12 min-vh-25 min-vh-md-0 pb-md-0">
-                                <a href="#" class="grid-inner d-block h-100"
-                                    style="background-image: url('{{ asset('web/images/banners/' . $verticalBanner->banner ?? null) }}');"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 min-vh-50">
-                        <a href="https://www.greenpharmacyhall.com/product/pulse-oximeter" class="grid-inner d-block h-100"
-                            style="background-image: url('{{ asset('web/images/banners/' . $verticalWideBanner->banner ?? null) }}'); background-size: contain;"></a>
+
+                <div class="col-md-12" style="margin-bottom: 10px">
+                    <div class="fancy-title title-center title-border">
+                        <h3>Our Products</h3>
                     </div>
                 </div>
-                <!-- Banner Section Ended-->
-                <div class="clear"></div>
-                <!-- Shop Details started-->
-
                 <div id="shop" class="shop row grid-container " data-layout="fitRows" style="margin-top:10px;">
                     @foreach ($allProducts as $product)
                         <div class="product col-lg-3 col-md-3 col-sm-6" id="product_{{ $product->slug }}">
@@ -108,11 +153,13 @@
                         </div>
                     @endforeach
                 </div>
-
                 <!-- Shop Details ended-->
                 <div class="clear bottommargin-sm"></div>
-
-
+            </div>
+            <div class="text-center mb-0">
+                <a href="{{ route('public.search_product') }}" class="text-white margin-auto btn btn-success">
+                    View More
+                </a>
             </div>
             <div class="section mb-0">
                 <div class="container">

@@ -9,6 +9,7 @@ use App\ProductImage;
 use App\Services;
 use App\SiteInformation;
 use App\Slider;
+use App\Tag;
 use App\Testimonial;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -26,21 +27,26 @@ class SiteController extends Controller
     {
         $siteInformation = SiteInformation::first();
         $sliders = Slider::orderBy('sequence')->get();
-        $boxBanners = Banners::where('banner_size', 3)->orderBy('sequence', 'asc')->get();
-        $verticalBanner = Banners::where('banner_size', 6)->orderBy('sequence', 'asc')->first();
-        $verticalWideBanner = Banners::where('banner_size', 8)->orderBy('sequence', 'asc')->first();
+        $banners = Banners::where('status', STATUS_ACTIVE)->orderBy('sequence', 'asc')->get();
         $services = Services::orderBy('sequence');
         $servicesForEnquiries = Services::orderBy('sequence')->get();
         $allProducts = Product::activeProject()->with('ProductImages')->limit(50)->orderBy('sequence')->get();
+        $bestOffer = Tag::with([ 'products' => function($query) {
+            $query->with(['productImages' => function($productImageQuery) {
+                $productImageQuery->orderBy('sequence');
+            }]);
+            $query->where('products.status', 1);
+            $query->orderBy('products.name');
+        }])->where('slug_name', 'best-offer')->first();
+
         return view('site.home', [
             'siteInformation' => $siteInformation,
             'sliders' => $sliders,
             'services' => $services,
             'servicesForEnquiries' => $servicesForEnquiries,
-            'boxBanners' => $boxBanners,
-            'verticalBanner' => $verticalBanner ?? new Banners(),
-            'verticalWideBanner' => $verticalWideBanner ?? new Banners(),
+            'banners' => $banners,
             'allProducts' => $allProducts,
+            'bestOffer' => $bestOffer,
             'page' => 'home'
         ]);
     }

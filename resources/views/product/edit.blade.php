@@ -165,6 +165,29 @@ $(document).ready(function() {
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Tags') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('tag') ? ' has-danger' : '' }}">
+                                            @php
+                                                $selectedTags = $product->product_tags()->pluck('tags.id')->toArray();
+                                            @endphp
+                                            <select
+                                                class="form-control{{ $errors->has('tag') ? ' is-invalid' : '' }}"
+                                                name="tags[]" id="input-tags"
+                                                placeholder="{{ __('Tags') }}" multiple="multiple">
+                                                @foreach($tags as $tag)
+                                                    <option data-value="{{ $tag->name }}" value="{{ $tag->name }}" @if(in_array($tag->id, $selectedTags)) selected @endif >{{ $tag->name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                            @if ($errors->has('tags'))
+                                                <span id="tags-error" class="error text-danger"
+                                                    for="input-tags">{{ $errors->first('tags') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Description') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
@@ -294,9 +317,15 @@ $(document).ready(function() {
     </div>
 
     @push('js')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
 
         CKEDITOR.replace('description');
+        $("#input-tags").select2({
+                tags: true,
+                tokenSeparators: [',']
+            });
 
         function updateSequence()
         {

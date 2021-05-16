@@ -12,6 +12,7 @@ use App\Product;
 use App\ProductImage;
 use App\Services;
 use App\SubCategory;
+use App\Tag;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -44,10 +45,10 @@ class ProductController extends Controller
 
         $services = $this->getServices()->orderBy('sequence')->get();
         $subCategories = SubCategory::orderBy('sequence')->get();
-
+        $tags = Tag::get();
         $brands = Brand::get();
 
-        return view('product.create', ['services' => $services, 'brands' => $brands, 'subCategories' => $subCategories]);
+        return view('product.create', ['services' => $services, 'brands' => $brands, 'subCategories' => $subCategories, 'tags' => $tags]);
     }
 
     /**
@@ -99,13 +100,14 @@ class ProductController extends Controller
         $services = $this->getServices()->orderBy('sequence')->get();
         $subCategories = SubCategory::orderBy('sequence')->get();
         $brands = Brand::get();
-
+        $tags = Tag::get();
 
         return view('product.edit')->with([
             'product' => $product,
             'services' => $services,
             'brands' => $brands,
-            'subCategories' => $subCategories
+            'subCategories' => $subCategories,
+            'tags' => $tags
         ]);
     }
 
@@ -215,6 +217,8 @@ class ProductController extends Controller
         $product->status = $request->has('status') ? 1 : 0;
         $product->save();
         $product->services()->sync($request->input('services'));
+        $tagIds = $this->findOrCreateTags($request->tags ?? []);
+        $product->product_tags()->sync($tagIds);
         $product->touch(); // This will help to add in cache
         if ($request->has('product_images')) {
             $portfolioImageCount = $product->ProductImages()->count() + 1;
@@ -325,6 +329,18 @@ class ProductController extends Controller
         }
     }
 
+    public function findOrCreateTags($tags)
+    {
+        $tagIds = [];
+        foreach ($tags as $tag)
+        {
+            $data = Tag::firstOrCreate(['name' => $tag]);
+            $tagIds[] = (string) $data->id;
+        }
+
+
+        return $tagIds;
+    }
 
     function export()
     {

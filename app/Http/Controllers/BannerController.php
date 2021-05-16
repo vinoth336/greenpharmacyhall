@@ -170,9 +170,11 @@ class BannerController extends Controller
     public function saveBanner(Banners $service, $request)
     {
         $image = $request->has('banner') ? $request->file('banner') : null;
-        $service->storeImage($image);
+        $service->storeImage($image, ['width' => 637, 'height' => 637]);
         $service->sequence = $service->sequence ?? Banners::count() + 1;
         $service->banner_size = $request->input('banner_size');
+        $service->status = $request->input('status') ? 1 : 0;
+        $service->url = $request->input('url');
         $service->save();
         return $service;
     }
