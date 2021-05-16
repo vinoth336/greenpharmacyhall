@@ -42,14 +42,14 @@
                     <div id="oc-products" class="owl-carousel products-carousel carousel-widget" data-pagi="false"
                         data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
                         @foreach($bestOffer->products as $product)
-                        <div class="oc-item" style="background-color: wheat; padding-top: 20px; padding-bottom:20px">
+                        <div class="oc-item" style="padding-top: 20px; padding-bottom:20px">
                             <div class="product" id="product_{{ $product->slug }}">
                                 <div class="product-image">
                                     @php
                                     $productImage = $product->productImages->first();
                                     $productImage = $productImage->image ?? 'no_image.png';
                                 @endphp
-                                    <a href="#"><img class="product_image" src="{{ asset('web/images/product_images/thumbnails/' . $productImage ) }}" alt="Checked Short Dress"></a>
+                                    <a href="{{ route('view_product', $product->slug) }}"><img class="product_image" src="{{ asset('web/images/product_images/thumbnails/' . $productImage ) }}" alt="Checked Short Dress"></a>
                                     <div class="sale-flash badge badge-success p-2">Flat {{ $product->price - $product->discount_amount }} Off*</div>
                                 </div>
                                 <div class="product-desc center">
@@ -89,7 +89,7 @@
             <div class="row align-items-stretch banner_row_section_bg" >
                 @foreach ($banners as $banner )
                      <div class="col-md-3" style="margin-top: 20px; marging-bottom:20px;">
-                        <a href="#" class="grid-inner d-block" style="height: 300px; background: url('{{ asset('web/images/banners/' . $banner->banner) }}');background-size: cover">
+                        <a href="{{ $banner->url }}" class="grid-inner d-block" style="height: 300px; background: url('{{ asset('web/images/banners/' . $banner->banner) }}');background-size: cover">
                         </a>
                 </div>
                 @endforeach
