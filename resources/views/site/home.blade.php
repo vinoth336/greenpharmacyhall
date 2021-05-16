@@ -43,20 +43,25 @@
                         data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
                         @foreach($bestOffer->products as $product)
                         <div class="oc-item" style="background-color: wheat; padding-top: 20px; padding-bottom:20px">
-                            <div class="product">
+                            <div class="product" id="product_{{ $product->slug }}">
                                 <div class="product-image">
                                     @php
                                     $productImage = $product->productImages->first();
                                     $productImage = $productImage->image ?? 'no_image.png';
                                 @endphp
-                                    <a href="#"><img src="{{ asset('web/images/product_images/thumbnails/' . $productImage ) }}" alt="Checked Short Dress"></a>
+                                    <a href="#"><img class="product_image" src="{{ asset('web/images/product_images/thumbnails/' . $productImage ) }}" alt="Checked Short Dress"></a>
                                     <div class="sale-flash badge badge-success p-2">Flat {{ $product->price - $product->discount_amount }} Off*</div>
                                 </div>
                                 <div class="product-desc center">
                                     <div class="product-title">
                                         <h3><a href="{{ route('view_product', $product->slug) }}">{{ substr($product->name,0, 20) }}</a></h3>
                                     </div>
-                                    <div class="product-price"><del>{{ $product->discount_amount }}</del> <ins>{{ $product->price }}</ins></div>
+                                    <div class="product-price">
+                                        <del>{{ $product->discount_amount }}</del>
+                                        <ins>{{ $product->price }}</ins>
+                                        <input type="hidden" class="product_price" value="{{ $product->actual_price }}" />
+                                        <input type="hidden" class="product_name" value="{{ $product->name }}" />
+                                    </div>
                                 </div>
                                 <div class="text-center">
                                     <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
