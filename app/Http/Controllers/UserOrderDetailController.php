@@ -102,7 +102,7 @@ class UserOrderDetailController extends Controller
         $order = UserOrder::authUser()->where('order_status_id', 2)->where('order_no', $order)->firstOrFail();
         $user = auth()->user();
 
-        //return view('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
+        return view('public.user.non_pharma_order_invoice', ['user' => $user, 'order' => $order]);
         $pdf = PDF::loadView('public.user.non_pharma_order_invoice', ['userDetail' => $user, 'order' => $order]);
 
         return $pdf->download('Invoice_' . $order->order_no . '.pdf');
