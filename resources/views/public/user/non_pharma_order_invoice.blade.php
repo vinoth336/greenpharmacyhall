@@ -177,8 +177,8 @@ body {
                     <div class="row">
                         <div class="col">
                             <a target="_blank" href="{{ env('APP_URL') }}">
-                                <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" data-holder-rendered="true" style="width:300px" />
-                                </a>
+                                <img src="{{ asset('web/images/logo/' . $siteInformation->logo) }}" style="width:300px" />
+                            </a>
                         </div>
                         <div class="company-details">
                             <h4 class="name">

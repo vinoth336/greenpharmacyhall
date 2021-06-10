@@ -105,6 +105,7 @@
     <!-- HIDDEN PREHEADER TEXT -->
     <div style="text-align: left; line-height: 20p">
         New Order was placed by <br>
+        Order No : <b>{{ $order->order_no }}</b> <br>
         Customer Name : <b>{{ ucfirst($user->name) }}</b> <br>
         Phone No : <a href="tel:{{ $user->phone_no }}">{{ $user->phone_no }}</a><br>
         Email Id : <a href="mail:{{ $user->email }}">{{ $user->email }}</a><br>
