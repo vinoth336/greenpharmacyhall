@@ -98,7 +98,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('banner', 'BannerController');
         Route::resource('enquiries', 'EnquiriesController')->except('store');
         Route::resource('change_password_request', 'ChangePasswordRequestController')->except('store');
-
+        
         Route::resource('testimonials', 'TestimonialController');
         Route::put('product/update_sequence', 'ProductController@updateSequence')->name('product.update_sequence');
         Route::post('product/get_slug_name', 'ProductController@getSlugName')->name('product.get_slug_name');
@@ -108,6 +108,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('product/import_image', 'ProductController@import_image')->name('product.import_image');
         Route::get('product/export', 'ProductController@export')->name('product.export');
         Route::resource('product', 'ProductController');
+
+        /**
+         * Pincode Master Routing
+         */
+        Route::resource('pincode','PincodeController')->except(['show']);
+
+        Route::get('pincode/import_pincode','PincodeController@import_pincode')->name('pincode.import_pincode');
+        Route::post('pincode/import_pincode', 'PincodeController@import')->name('pincode.import');
+
 
         Route::put('product_images/update_sequence', 'PortfolioImageController@updateSequence')->name('product_images.update_sequence');
         Route::delete('product_images/{productImage}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');
