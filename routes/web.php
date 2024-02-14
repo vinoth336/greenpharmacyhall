@@ -25,6 +25,7 @@ Route::get('/search_product', 'ProductSearchController@searchProduct')->name('pu
 Route::get('/search', 'ProductSearchController@index')->name('public.product_list');
 
 
+Route::get('/delivery-est','PincodeController@getEstimate');
 
 Route::get('/registration', 'UserRegistrationController@index')->name('public.registration');
 Route::post('/registration', 'UserRegistrationController@create');
@@ -66,8 +67,10 @@ Route::group(['middleware' => 'auth:web'], function() {
     Route::put('/cart/{product}/update_status', 'CartController@updateStatus');
     Route::post('/cart/checkout', 'UserOrderController@checkout')->name('public.cart.checkout')
     ->middleware('throttle:5,1');
-});
 
+    
+});
+//Delivery Estimation Based on pincode
 Route::group(['prefix' => 'admin'], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');

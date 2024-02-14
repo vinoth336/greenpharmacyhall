@@ -24,6 +24,33 @@ var Cart = {
             alert("Your browser is not supported some features, please use latest version or try in another browser");
         }
     },
+    /**
+     * Pincode Validation
+     */
+    isValidPincode:function(pincode){
+        const pcode=pincode.target.value;
+        if(pcode.length==6){
+            $.ajax({
+                "url": "/delivery-est",
+                "type": "get",
+                "data":{
+                    pincode:pcode
+                },
+                "dataType": "json",
+                success: function(items) {
+                    console.log(items['message']);
+                    $('#estimate_delivery_data').html(items['message']).data('isvalid', 'true');
+                    $('.add-to-cart').show();
+                },
+                error: function(jqXHR, exception) {
+    if(jqXHR.status){
+        $('.add-to-cart').hide();
+    }$('#estimate_delivery_data').html(jqXHR.responseJSON['message']).data('isvalid', 'false');
+    console.log(jqXHR)
+                }
+            });
+        } 
+    },
     syncCartValues: function() {
         var items = Cart.getItemFromLocalStorage();
         $.ajax({

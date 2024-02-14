@@ -10,6 +10,6 @@ class Pincode extends Model
     protected $table='pincodes';
 
     public function DeliveryEstimations(){
-        return $this->hasMany(DeliveryEstimation::class, 'pincode_id', 'id' );
+        return $this->hasOne(DeliveryEstimation::class, 'pincode_id', 'id' );
     }
 }
