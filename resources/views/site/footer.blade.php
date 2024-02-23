@@ -36,25 +36,30 @@
                                         <span class="text-danger"> {{ $errors->first('phone_no') }} </span>
                                     @endif
 								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">Password</label>
-									<input type="password" class="form-control" name="password" placeholder="Password"> <br>
-                                    <a style="margin-left: 10px;" href="Javascript:void(0);" onclick="showForgotPasswordForm()">
-                                        Forgot Password ?
-                                    </a>
+								<div class="form-group" id= "otp-block" style="display:none">
+									<label for="exampleInputPassword1">One Time Password (OTP)</label>
+									<input type="text" class="form-control" name="otp" placeholder="OTP" /> <br>
+          
                                     @if($errors->has('password'))
                                         <span class="text-danger"> {{ $errors->first('password') }} </span>
                                     @endif
 								</div>
-								<div class="form-check">
-									<input type="checkbox" class="form-check-input" id="remember" name="remember" value="1" checked>
-									<label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                                </div>
-
+                                <!-- Regenerate OTP -->
+                      
+                                <a  id="regenerate_otp" class="btn-link " style="color: #fb641b;cursor:pointer">
+                                    Regenerate OTP
+</a>
+                                
                                 <div class="m-auto text-center">
-								<button type="submit" class="btn btn-warning text-white" style="background-color: #fb641b; padding-left: 10%; padding-right:10%">
-                                    Login
+								<button type="button" id="request_otp" class="btn btn-warning text-white" style="color: #fb641b; padding-left: 10%; padding-right:10%">
+                                    Request OTP
                                 </button>
+                                <button type="button" id="verify_otp" class="btn btn-warning text-white" style="display:none;background-color: #fb641b; padding-left: 10%; padding-right:10%">
+                                    Verify OTP
+                                </button>
+                                </div>
+                                <div class="m-auto text-center" id="error_block_div" style="display:none">
+                                    <span id="error_msg" style="color:black"></span>
                                 </div>
                             </form>
                             <form method="post" action="{{ route('public.forgot_password') }}" id="show_forgot_password" class="d-none">
@@ -132,6 +137,59 @@
 <script type="text/javascript" src="{{ asset('web/js/cart.js') }}?v={{ $version }}"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#request_otp').click(function() {
+            // Gather form data
+            var formData = $('#login_form').serialize();
+            // Send AJAX request
+            $.ajax({
+                url: "{{ route('public.login') }}",
+                method: "POST",
+                data: formData,
+                success: function(response) {
+                    // Handle success response
+                    $('#login_form').find('#verify_otp,#otp-block').css({'display':'block'});
+                    $('#login_form').find('#request_otp').css({'display':'none'});
+                    $('#error_block_div').css({'display':'none'});
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    $('#error_block_div').css({'display':'block'});
+                    $('#error_msg').html(xhr.responseText['error']);
+                }
+            });
+        });
+        $('#verify_otp').click(function(){
+            var formData = $('#login_form').serialize();
+            // Send AJAX request
+            $.ajax({
+                url: "/verify_otp",
+                method: "POST",
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                    // Handle success response
+                    
+                        window.location.href=response.route;
+              
+                    //$('#verify_otp','.otp-block').css({'display':'block'});
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr);
+                    $('#error_block_div').css({'display':'block'});
+                    $('#error_msg').html(xhr.responseJSON['error']);
+                }
+            });
+        });
+        $('#regenerate_otp').click(function(){
+            try {
+                alert('Regenerate OTP')
+            } catch (error) {
+                
+            }
+        });
+    });
     // cookie policy
     $(document).ready(function() {
 

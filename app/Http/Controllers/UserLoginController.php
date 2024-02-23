@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerForgotPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\User;
+use App\Otps;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -21,31 +22,33 @@ class UserLoginController extends Controller
         return view('public.auth.login');
     }
 
-    public function login(UserLoginRequest $request)
-    {
-        if (Auth::guard('web')->attempt($request->only('phone_no', 'password'), $request->filled('remember'))) {
-            //Authentication passed...
-
-           if(!auth()->user()->isActiveUser()) {
-                Auth::guard('web')->logout();
-                $request->session()->invalidate();
-                return $this->loginFailed('Your Account was Deactive, Please Contact Admin To Activate Your Account');
-           }
-
-            $redirectTo = route('home');
-            if($request->has('redirectTo')) {
-                if($request->get('redirectTo') == 'checkout') {
-                    $redirectTo = route('public.cart.checkout');
-                }
-            }
-            return redirect()
-                 ->intended($redirectTo);
+    public function login(UserLoginRequest $request){
+        $user = User::where('phone_no', $request->input('phone_no'))->first();
+        if ($user) {
+            $otp=$this->generateOtp($request->input('phone_no'));
+            Otps::sendSMS($request->input('phone_no'),$otp);
+            return response()->json(['msg' => 'OTP Send Successfully'], 200);
+        } else {
+            return response()->json(['msg' => 'User not found'], 404);
         }
-
-        //Authentication failed...
-        return $this->loginFailed();
     }
-
+    public function verifyOtp(Request $request){
+        $otp=Otps::where('phone_number',$request->get('phone_no'))->first();
+        if(!$otp || $otp->otp!==$request->get('otp') || $otp->expires_at<now()){
+            return response()->json(['error' => 'Invalid OTP'], 401);
+        }else{
+            $user = User::where('phone_no', $request->input('phone_no'))->first();
+              Auth::login($user);            
+        $otp->delete();
+        $redirectTo = '/';
+        if($request->has('redirectTo')) {
+            if($request->get('redirectTo') == 'checkout') {
+                $redirectTo = '/cart/checkout/';
+            }
+        }
+        return response()->json(['route'=>$redirectTo],200);
+    }
+    }
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();
@@ -103,5 +106,17 @@ class UserLoginController extends Controller
 
         //validate the request.
         $request->validate($rules);
+    }
+    public function generateOtp($phoneNumber){
+    // Generate OTP
+    $otpNumber=mt_rand(100000,999999);
+    $otpsModel=Otps::firstOrCreate(
+        [
+           'phone_number'=>$phoneNumber,
+           'otp'=>$otpNumber,
+           'expires_at'=>now()->addMinutes(5)
+        ]
+    );
+    return $otpNumber;
     }
 }

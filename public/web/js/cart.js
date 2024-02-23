@@ -40,13 +40,9 @@ var Cart = {
                 success: function(items) {
                     console.log(items['message']);
                     $('#estimate_delivery_data').html(items['message']).data('isvalid', 'true');
-                    $('.add-to-cart').show();
                 },
                 error: function(jqXHR, exception) {
-    if(jqXHR.status){
-        $('.add-to-cart').hide();
-    }$('#estimate_delivery_data').html(jqXHR.responseJSON['message']).data('isvalid', 'false');
-    console.log(jqXHR)
+                    $('#estimate_delivery_data').html(jqXHR.responseJSON['message']).data('isvalid', 'false');
                 }
             });
         } 
