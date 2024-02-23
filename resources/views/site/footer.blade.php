@@ -184,9 +184,27 @@
         });
         $('#regenerate_otp').click(function(){
             try {
-                alert('Regenerate OTP')
+                  // Gather form data
+            var formData = $('#login_form').serialize();
+            // Send AJAX request
+            $.ajax({
+                url: "/regenerate_otp",
+                method: "POST",
+                data: formData,
+                success: function(response) {
+                    // Handle success response
+                    $('#login_form').find('#verify_otp,#otp-block').css({'display':'block'});
+                    $('#login_form').find('#request_otp').css({'display':'none'});
+                    $('#error_block_div').css({'display':'none'});
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    $('#error_block_div').css({'display':'block'});
+                    $('#error_msg').html(xhr.responseText['error']);
+                }
+            });
             } catch (error) {
-                
+                console.log(error);
             }
         });
     });

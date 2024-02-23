@@ -37,6 +37,7 @@ Route::post('/email/resend', 'UserRegistrationController@resendEmailVerification
 
 Route::get('/login', 'UserLoginController@showLoginForm')->name('public.login');
 Route::post('/verify_otp', 'UserLoginController@verifyOtp');
+Route::post('/regenerate_otp','UserLoginController@regenerateOtp');
 Route::post('/login', 'UserLoginController@login');
 Route::post('/logout', 'UserLoginController@logout')->name('public.logout');
 Route::post('/forgot_password', 'UserLoginController@forgotPassword')->name('public.forgot_password')->middleware('throttle:5,1');

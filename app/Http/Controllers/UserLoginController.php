@@ -32,6 +32,15 @@ class UserLoginController extends Controller
             return response()->json(['msg' => 'User not found'], 404);
         }
     }
+    public function regenerateOtp(UserLoginRequest $request){
+        //Remove the otp
+        $otp=Otps::where('phone_number',$request->get('phone_no'))->first();
+        $otp->delete();
+        // Regenerate OTP
+        $otp=$this->generateOtp($request->input('phone_no'));
+        Otps::sendSMS($request->input('phone_no'),$otp);
+        return response()->json(['msg' => 'OTP Send Successfully'], 200);
+    }
     public function verifyOtp(Request $request){
         $otp=Otps::where('phone_number',$request->get('phone_no'))->first();
         if(!$otp || $otp->otp!==$request->get('otp') || $otp->expires_at<now()){
