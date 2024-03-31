@@ -40,12 +40,12 @@ class UserRegistrationController extends Controller
             'state_id' => 2,
             'zipcode' => $request->input('user_zipcode'),
             'email' => $request->input('user_email'),
-            'password' => Hash::make($request->input('user_password'))
+            'password' => Hash::make(now())
             ]);
 
             DB::commit();
 
-            Auth::guard('web')->loginUsingId($user->phone_no);
+            //Auth::guard('web')->loginUsingId($user->phone_no);
             $redirectTo = route('public.dashboard');
             $message = ['status' => 'You are Logged in Successfully!'];
             if($request->has('redirectTo')) {

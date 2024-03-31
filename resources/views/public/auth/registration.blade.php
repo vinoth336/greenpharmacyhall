@@ -46,17 +46,6 @@
                             </span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="user_password" placeholder="Password" name="user_password" min="6">
-                            <span id="first_nameMsg" class="error">
-                                @error('user_password')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
                             <label for="inputEmail4">Email Id</label>
                             <input type="email" class="form-control" id="user_email" placeholder="Email Id" name="user_email" value="{{ old('user_email') }}">
                             <span id="first_nameMsg" class="error">

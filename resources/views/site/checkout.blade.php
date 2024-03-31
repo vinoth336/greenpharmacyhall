@@ -113,6 +113,7 @@
                                     <button type="button" class="btn btn-success float-right" onclick="Cart.checkout(this)">
                                         Place Order
                                     </button>
+                             
                                 </div>
                                 @else
                                     Please SignUp to complete your order
@@ -131,7 +132,15 @@
     @if(auth()->guard('web')->check())
         </form>
     @endif
+    <form action="{{url('/payment-complete')}}" method="POST" name="razorpayform">
+    <input type="hidden" value="{{csrf_token()}}" name="_token" />
 
+<input type="hidden" class="form-control" id="amount" name="amount">
+<input type="hidden" class="form-control" id="rzp_paymentid" name="rzp_paymentid">
+<input type="hidden" class="form-control" id="rzp_orderid" name="rzp_orderid">
+<input type="hidden" class="form-control" id="rzp_signature" name="rzp_signature">
+</form>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         $(document).ready(function() {
             Cart.CartDetail();

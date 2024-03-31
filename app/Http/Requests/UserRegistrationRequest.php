@@ -30,7 +30,7 @@ class UserRegistrationRequest extends FormRequest
             'user_address' => 'required|string|max:500',
             'user_zipcode' => 'required|regex:/[0-9]{6}/',
             'user_email' => 'nullable|email:rfc,dns|unique:users,email',
-            'user_password' => 'required|min:6'
+            //'user_password' => 'nullable|min:6'
         ];
     }
 }

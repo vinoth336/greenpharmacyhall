@@ -69,8 +69,11 @@ Route::group(['middleware' => 'auth:web'], function() {
     Route::put('/cart/{product}/update_status', 'CartController@updateStatus');
     Route::post('/cart/checkout', 'UserOrderController@checkout')->name('public.cart.checkout')
     ->middleware('throttle:5,1');
+    Route::get('razorpay-payment', 'RazorPayController@index');
 
-    
+    Route::post('razorpay-payment','RazorPayController@store')->name('razorpay.payment.store');
+    Route::post('razorpay-payment-order','RazorPayController@createOrder')->name('order.checkout');
+    Route::post('payment-complete','RazorPayController@paymentComplete');
 });
 //Delivery Estimation Based on pincode
 Route::group(['prefix' => 'admin'], function () {
