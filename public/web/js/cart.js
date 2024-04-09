@@ -334,27 +334,31 @@ var Cart = {
     checkout: function(elm) {
         if (localStorage.cart) {
             $(elm).attr('disabled', true);
-            $.ajax({
+        $.ajax({
                 "url": "/cart/checkout",
                 "type": "post",
                 "dataType": "json",
                 "data": {
                     "delivery_type": $("[name='delivery_type']:checked").val()
-                },
+            },
                 "success": function(items) {
-                    toastr.success("Order Placed Successfully");
-                    Cart.addCartItemsFromServerToLocatStorage(items);
-                    Cart.refreshCartItems();
-                    Cart.CartDetail();
 
-                    window.location.href = "/orders";
-
-                },
+                    var options=items[0];
+                    options.handler=function(response){
+                        document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
+                        document.getElementById('rzp_orderid').value = response.razorpay_order_id;
+                        document.getElementById('rzp_signature').value = response.razorpay_signature;
+                        document.getElementById('amount').value = options['amount'];
+                        document.razorpayform.submit();
+                    };
+                    var rzp=new Razorpay(options);
+                    rzp.open();
+    },
                 "error": function(jqXHR, exception) {
                     $(elm).attr('disabled', false);
                     toastr.error(jqXHR.responseText);
-                }
-            });
+            }
+        });
         }
     },
     isProductExistsInCart: function(productId) {
