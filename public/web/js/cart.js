@@ -45,7 +45,7 @@ var Cart = {
                     $('#estimate_delivery_data').html(jqXHR.responseJSON['message']).data('isvalid', 'false');
                 }
             });
-        } 
+        }
     },
     syncCartValues: function() {
         var items = Cart.getItemFromLocalStorage();
