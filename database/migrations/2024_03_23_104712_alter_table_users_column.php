@@ -14,8 +14,8 @@ class AlterTableUsersColumn extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('phone_no_verified_at')->nullable();
-            $table->string('password')->nullable();
+            $table->timestamp('phone_no_verified_at')->nullable()->after('zipcode');
+            $table->string('password')->nullable()->change();
         });
     }
 
