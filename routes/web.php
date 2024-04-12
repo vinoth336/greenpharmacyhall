@@ -25,6 +25,7 @@ Route::get('/search_product', 'ProductSearchController@searchProduct')->name('pu
 Route::get('/search', 'ProductSearchController@index')->name('public.product_list');
 
 
+Route::get('/delivery-est','PincodeController@getEstimate');
 
 Route::get('/registration', 'UserRegistrationController@index')->name('public.registration');
 Route::post('/registration', 'UserRegistrationController@create');
@@ -35,6 +36,8 @@ Route::post('/email/resend', 'UserRegistrationController@resendEmailVerification
          ->name('public.resend_email_verify');
 
 Route::get('/login', 'UserLoginController@showLoginForm')->name('public.login');
+Route::post('/verify_otp', 'UserLoginController@verifyOtp');
+Route::post('/regenerate_otp','UserLoginController@regenerateOtp');
 Route::post('/login', 'UserLoginController@login');
 Route::post('/logout', 'UserLoginController@logout')->name('public.logout');
 Route::post('/forgot_password', 'UserLoginController@forgotPassword')->name('public.forgot_password')->middleware('throttle:5,1');
@@ -66,8 +69,13 @@ Route::group(['middleware' => 'auth:web'], function() {
     Route::put('/cart/{product}/update_status', 'CartController@updateStatus');
     Route::post('/cart/checkout', 'UserOrderController@checkout')->name('public.cart.checkout')
     ->middleware('throttle:5,1');
-});
+    Route::get('razorpay-payment', 'RazorPayController@index');
 
+    Route::post('razorpay-payment','RazorPayController@store')->name('razorpay.payment.store');
+    //Route::post('razorpay-payment-order','RazorPayController@createOrder')->name('order.checkout');
+    Route::post('payment-complete','RazorPayController@paymentComplete');
+});
+//Delivery Estimation Based on pincode
 Route::group(['prefix' => 'admin'], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
@@ -108,6 +116,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('product/import_image', 'ProductController@import_image')->name('product.import_image');
         Route::get('product/export', 'ProductController@export')->name('product.export');
         Route::resource('product', 'ProductController');
+
+        /**
+         * Pincode Master Routing
+         */
+        Route::resource('pincode','PincodeController')->except(['show']);
+
+        Route::get('pincode/import_pincode','PincodeController@import_pincode')->name('pincode.import_pincode');
+        Route::post('pincode/import_pincode', 'PincodeController@import')->name('pincode.import');
+
 
         Route::put('product_images/update_sequence', 'PortfolioImageController@updateSequence')->name('product_images.update_sequence');
         Route::delete('product_images/{productImage}', 'PortfolioImageController@destroy')->name('portfolio_image.delete');

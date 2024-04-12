@@ -12,7 +12,7 @@
 
   @php
     $siteControllerPages = array('site_information', 'slider', 'banner', 'faqs', 'testimonials');
-    $masterPages = array('category_types', 'sub_categories', 'services', 'brands', 'product');
+    $masterPages = array('category_types', 'sub_categories', 'services', 'brands', 'product','pincode');
     $orderPages = array('pharma_orders', 'user_orders');
 
   @endphp
@@ -102,6 +102,7 @@
                     <i class="material-icons">content_paste</i>
                         <p>{{ __('Sub Categories Types') }}</p>
                     </a>
+                    
                 </li>
                 <li class="nav-item{{ $activePage == 'services' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('services.index') }}">
@@ -119,6 +120,12 @@
                     <a class="nav-link" href="{{ route('product.index') }}">
                     <i class="material-icons">content_paste</i>
                         <p>{{ __('Product') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item{{ $activePage == 'pincode' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('pincode.index') }}">
+                    <i class="material-icons">content_paste</i>
+                        <p>{{ __('PinCode') }}</p>
                     </a>
                 </li>
             </ul>

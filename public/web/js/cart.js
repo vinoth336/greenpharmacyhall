@@ -24,6 +24,29 @@ var Cart = {
             alert("Your browser is not supported some features, please use latest version or try in another browser");
         }
     },
+    /**
+     * Pincode Validation
+     */
+    isValidPincode:function(pincode){
+        const pcode=pincode.target.value;
+        if(pcode.length==6){
+            $.ajax({
+                "url": "/delivery-est",
+                "type": "get",
+                "data":{
+                    pincode:pcode
+                },
+                "dataType": "json",
+                success: function(items) {
+                    console.log(items['message']);
+                    $('#estimate_delivery_data').html(items['message']).data('isvalid', 'true');
+                },
+                error: function(jqXHR, exception) {
+                    $('#estimate_delivery_data').html(jqXHR.responseJSON['message']).data('isvalid', 'false');
+                }
+            });
+        }
+    },
     syncCartValues: function() {
         var items = Cart.getItemFromLocalStorage();
         $.ajax({
@@ -311,27 +334,31 @@ var Cart = {
     checkout: function(elm) {
         if (localStorage.cart) {
             $(elm).attr('disabled', true);
-            $.ajax({
+        $.ajax({
                 "url": "/cart/checkout",
                 "type": "post",
                 "dataType": "json",
                 "data": {
                     "delivery_type": $("[name='delivery_type']:checked").val()
-                },
+            },
                 "success": function(items) {
-                    toastr.success("Order Placed Successfully");
-                    Cart.addCartItemsFromServerToLocatStorage(items);
-                    Cart.refreshCartItems();
-                    Cart.CartDetail();
 
-                    window.location.href = "/orders";
-
-                },
+                    var options=items[0];
+                    options.handler=function(response){
+                        document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
+                        document.getElementById('rzp_orderid').value = response.razorpay_order_id;
+                        document.getElementById('rzp_signature').value = response.razorpay_signature;
+                        document.getElementById('amount').value = options['amount'];
+                        document.razorpayform.submit();
+                    };
+                    var rzp=new Razorpay(options);
+                    rzp.open();
+    },
                 "error": function(jqXHR, exception) {
                     $(elm).attr('disabled', false);
                     toastr.error(jqXHR.responseText);
-                }
-            });
+            }
+        });
         }
     },
     isProductExistsInCart: function(productId) {
