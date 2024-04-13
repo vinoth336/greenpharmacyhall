@@ -111,19 +111,19 @@
                         <ul class="list-unstyled">
                             <li class="">
                                 <a href="{{ route("site.terms_and_conditions") }}"
-                                   class="text-white" target="_blank">
+                                   class="text-white">
                                     Terms & Conditions
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route("site.privacy_policy") }}"
-                                   class="text-white" target="_blank">
+                                   class="text-white">
                                     Privacy Policy
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route("site.shipping_policy") }}"
-                                   class="text-white" target="_blank">
+                                   class="text-white">
                                     Shipping Policy
                                 </a>
                             </li>
