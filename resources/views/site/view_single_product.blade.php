@@ -57,7 +57,7 @@
                                             <input type="button" value="+" class="plus">
                                         </div>
                                         <div class="pt-1 pb-2 d-flex align-items-start " style="flex-direction:column;gap:0.5rem">
-                                            <input type="text" name="pincode" id="pincode" placeholder="Enter the delivery Pincode" onkeyup="Cart.isValidPincode(event)">
+                                            <input type="text" name="pincode" class="form-control" id="pincode" placeholder="Enter the delivery Pincode" onkeyup="Cart.isValidPincode(event)" style="width: 250px">
                                             <span id="estimate_delivery_data" data-isvalid=""></span>
                                         </div>
                                         <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_qty_{{ $productDetail->slug }}').val())" data-productid="{{ $productDetail->slug }}">Add to cart</button>

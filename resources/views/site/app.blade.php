@@ -135,12 +135,6 @@
 							</div>
                             @endguest
 
-							<!-- Top Search
-							============================================= -->
-							<div id="top-search" class="header-misc-icon">
-								<a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
-							</div><!-- #top-search end -->
-
 							<!-- Top Cart
 							============================================= -->
 							<div id="top-cart" class="header-misc-icon d-sm-block">
@@ -161,6 +155,7 @@
 								</div>
 							</div><!-- #top-cart end -->
 
+
 						</div>
 
 						<div id="primary-menu-trigger">
@@ -171,12 +166,12 @@
 						============================================= -->
 						@include('site.navbar')
                         <!-- #primary-menu end -->
-
-						<form class="top-search-form" action="/search" method="get" style="width: 250px !important;">
-							<input type="text" name="q" id="product_search_box" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
-						</form>
-
 					</div>
+                    <div class="mt-3">
+                        <form class="" action="/search" method="get" style="width: 100% !important;">
+                            <input type="text" name="q" id="product_search_box" class="form-control" value="" placeholder="Search.." autocomplete="off">
+                        </form>
+                    </div>
 				</div>
 			</div>
 			<div class="header-wrap-clone" style="height: 100px;"></div>
