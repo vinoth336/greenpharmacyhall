@@ -39,17 +39,17 @@
 								<div class="form-group" id= "otp-block" style="display:none">
 									<label for="exampleInputPassword1">One Time Password (OTP)</label>
 									<input type="text" class="form-control" name="otp" placeholder="OTP" /> <br>
-          
+
                                     @if($errors->has('password'))
                                         <span class="text-danger"> {{ $errors->first('password') }} </span>
                                     @endif
 								</div>
                                 <!-- Regenerate OTP -->
-                      
+
                                 <a  id="regenerate_otp" class="btn-link " style="color: #fb641b;cursor:pointer">
                                     Regenerate OTP
 </a>
-                                
+
                                 <div class="m-auto text-center">
 								<button type="button" id="request_otp" class="btn btn-warning text-white" style="color: #fb641b; padding-left: 10%; padding-right:10%">
                                     Request OTP
@@ -101,11 +101,42 @@
     <div id="copyrights" style="background: url('{{ asset('site_images/footer-bg.jpg') }}') repeat; background-size: cover;">
         <div class="container">
             <div class="row col-mb-30">
-                <div class="col-md-6 text-center text-md-left">
+                <div class="col-md-4 text-center text-md-left">
                     Copyrights &copy; {{ date('Y') }} {{ $siteInformation->site_name }}.<br>
                     All rights reserved. In compliance with Drugs and Cosmetics Act, 1940 and Drugs and Cosmetics Rules, 1945, we don't process requests for Schedule X and other habit forming drugs.
                 </div>
-                <div class="col-md-6 text-center text-md-right">
+                <div class="col-md-4 text-md-right">
+                    <div class="justify-content-center">
+
+                        <ul class="list-unstyled">
+                            <li class="">
+                                <a href="{{ route("site.terms_and_conditions") }}"
+                                   class="text-white" target="_blank">
+                                    Terms & Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route("site.privacy_policy") }}"
+                                   class="text-white" target="_blank">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route("site.shipping_policy") }}"
+                                   class="text-white" target="_blank">
+                                    Shipping Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route("site.return_policy") }}"
+                                   class="text-white">
+                                    Return Policy
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center text-md-right">
                     <div class="d-flex justify-content-center justify-content-md-end">
                         <a href="https://www.facebook.com/{{ $siteInformation->facebook_id }}"
                             class="social-icon si-small si-borderless si-facebook" target="_blank">
@@ -169,9 +200,9 @@
                 success: function(response) {
                     console.log(response);
                     // Handle success response
-                    
+
                         window.location.href=response.route;
-              
+
                     //$('#verify_otp','.otp-block').css({'display':'block'});
                 },
                 error: function(xhr, status, error) {

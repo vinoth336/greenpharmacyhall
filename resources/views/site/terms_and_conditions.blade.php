@@ -4,8 +4,7 @@
 
     <section id="page-title">
         <div class="container clearfix">
-            <h1>Shipping Policy</h1>
-            <span>All your Questions answered in one place</span>
+            <h1>Terms And Conditions</h1>
         </div>
     </section>
 

@@ -46,6 +46,12 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 Route::get('/cart/checkout/', 'CartController@checkout')->name('public.cart.checkout');
+Route::get('/terms_and_conditions', 'SiteController@termsAndConditions')->name('site.terms_and_conditions');
+Route::get('/privacy_policy', 'SiteController@privacyPolicy')->name('site.privacy_policy');
+Route::get('/shipping_policy', 'SiteController@shippingPolicy')->name('site.shipping_policy');
+Route::get('/return_policy', 'SiteController@returnPolicy')->name('site.return_policy');
+
+
 Route::group(['middleware' => 'auth:web'], function() {
     Route::get('dashboard', 'UserController@dashboard')->name('public.dashboard');
     Route::get('change_password', 'UserController@changePassword')->name('public.change_password');

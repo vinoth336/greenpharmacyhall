@@ -127,4 +127,25 @@ class SiteController extends Controller
     public function saveEnquiry()
     {
     }
+
+    public function termsAndConditions()
+    {
+        return view('site.terms_and_conditions');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('site.privacy_policy');
+    }
+
+    public function shippingPolicy()
+    {
+        return view('site.shipping_policy');
+    }
+
+    public function returnPolicy()
+    {
+        return view('site.return_policy');
+    }
+
 }
