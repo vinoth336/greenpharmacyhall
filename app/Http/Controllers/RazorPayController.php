@@ -102,7 +102,7 @@ class RazorPayController extends Controller
             Cart::where('user_id', $user->id)->update([
                 'status' => 0
             ]);
-            return redirect()->route('public.order_list');
+            return redirect()->route('public.order_list')->with(["message" => 'Order Placed Successfully', 'clear_cart' => true]);
         } else {
             // You can create this page
             Payment::create([

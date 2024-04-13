@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Http\Resources\CartItemListResponse;
 use App\Mail\NewOrderSendNotificationToAdmin;
 use App\UserOrder;
@@ -47,8 +48,9 @@ class UserOrderController extends Controller
 
             $userOrder->total_amount = $sum;
             $userOrder->delivery_type = $request->input('delivery_type') == 'door_delivery' ? 1 : 2;
+            $userOrder->payment_type = $request->input('payment_type') == 'online' ? 'online' : 'cod';
             $userOrder->save();
-            // Check online or offline call payment 
+            // Check online or offline call payment
             $paymentData=[
                 'amount'=>$sum,
                 'prefill'=>[
@@ -58,6 +60,15 @@ class UserOrderController extends Controller
                 ],
                 'receipt'=>strtotime(time())
             ];
+
+            if ($request->input('payment_type') == 'online') {
+                $paymentOrders=$this->initiatePayment($paymentData);
+            } else {
+                $paymentOrders = [];
+                Cart::where('user_id', $user->id)->update([
+                    'status' => 0
+                ]);
+            }
             $paymentOrders=$this->initiatePayment($paymentData);
             $delivery_type = $request->input("delivery_type");
             $cartSettings = Cache::get('cart_settings');
@@ -71,11 +82,17 @@ class UserOrderController extends Controller
             }
             $userOrder->load('order_status');
 
-        //    Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
-
             DB::commit();
-           // dd($paymentOrders);
-            return response()->json([$paymentOrders]);
+
+            //Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
+
+            if ($request->input('payment_type') == 'cod') {
+
+                return response(['status' => true, "message" => 'Successfully Ordered Placed']);
+            } else {
+
+                return response()->json([$paymentOrders]);
+            }
 
         } catch (Exception $e) {
             dd($e);
@@ -83,8 +100,6 @@ class UserOrderController extends Controller
             info($e->getMessage());
             return response("Can't Process, Please Contact Admin", SERVER_ERROR);
         }
-
-        return response(['status' => true, "message" => 'Successfully Ordered Placed']);
     }
 
     public function getCartItems()
@@ -97,13 +112,13 @@ class UserOrderController extends Controller
         return $items;
     }
     private function initiatePayment($paymentData){
-       
+
         $api = new Api(config('services.razorpay.key'),config('services.razorpay.secret'));
 
         $results=$api->order->create(array('receipt' => (string)$paymentData['receipt'], 'amount' => (int) ($paymentData['amount']*100), 'currency' => 'INR', 'notes'=> array('key1'=> 'value3','key2'=> 'value2')));
      $options = [
             "key"=> config('services.razorpay.key'),
-            "amount"=> (int)($paymentData['amount']*100), 
+            "amount"=> (int)($paymentData['amount']*100),
             "currency"=> "INR",
             "name"=> "Green Pharamacy Hall",
             "description"=> "Test Transaction",

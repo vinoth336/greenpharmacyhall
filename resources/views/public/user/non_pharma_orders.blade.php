@@ -7,7 +7,12 @@
                 <div class="col-md-12" style="margin-bottom: 30px;">
                     <div class="">
                         <div class="top-cart-item-desc1 clearfix">
-                            Order No : GH{{ $order->order_no }}
+                            Order No : GH{{ $order->order_no }} / Status : <b>{{ $order->order_status->name }}</b><br>
+                            <i>Created At : ({{ $order->created_at }})</i>
+
+                            <div>Delivery Type : {{ $order->delivery_type == 1 ? 'Door Delivery' : 'Shop PickUp' }}</div>
+                            <div>Payment Type : {{ $order->payment_type =='cod' ? 'COD' : 'Online' }}</div>
+
                             &nbsp;
                             @if($order->order_status->slug_name == 'approved' )
                                 <a href="{{ route('public.download_non_pharma_invoice', $order->order_no) }}" class="text-info" data-productid="PRODUCT_ID">
@@ -23,10 +28,9 @@
                                 Reorder
                             </a>
                             <div class="clearfix"></div>
-                            <i>{{ $order->created_at }}</i>
-                            <div class="clearfix"></div>
-                            <b>{{ $order->order_status->name }}</b>
+                            <b></b>
                         </div>
+                        <h5>Order Details</h5>
                         @foreach ($order->ordered_items as $orderedItem)
                             <div class="top-cart-item">
                                 <div class="top-cart-item-image">

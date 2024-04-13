@@ -137,7 +137,7 @@ var Cart = {
     },
     syncCartItems: function() {
         var items = Cart.getItemFromLocalStorage();
-        if (Object.keys(items).length == 0) {
+        if (items && Object.keys(items).length == 0) {
             return false;
         }
 
@@ -339,20 +339,25 @@ var Cart = {
                 "type": "post",
                 "dataType": "json",
                 "data": {
-                    "delivery_type": $("[name='delivery_type']:checked").val()
+                    "delivery_type": $("[name='delivery_type']:checked").val(),
+                    "payment_type": $("[name='payment_type']:checked").val()
             },
                 "success": function(items) {
-
-                    var options=items[0];
-                    options.handler=function(response){
-                        document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
-                        document.getElementById('rzp_orderid').value = response.razorpay_order_id;
-                        document.getElementById('rzp_signature').value = response.razorpay_signature;
-                        document.getElementById('amount').value = options['amount'];
-                        document.razorpayform.submit();
-                    };
-                    var rzp=new Razorpay(options);
-                    rzp.open();
+                    if ($("[name='payment_type']:checked").val() == 'online') {
+                        var options = items[0];
+                        options.handler = function (response) {
+                            document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
+                            document.getElementById('rzp_orderid').value = response.razorpay_order_id;
+                            document.getElementById('rzp_signature').value = response.razorpay_signature;
+                            document.getElementById('amount').value = options['amount'];
+                            document.razorpayform.submit();
+                        };
+                        var rzp = new Razorpay(options);
+                        rzp.open();
+                    } else {
+                        Cart.clearCart();
+                        window.location.href = "/orders";
+                    }
     },
                 "error": function(jqXHR, exception) {
                     $(elm).attr('disabled', false);
@@ -444,6 +449,10 @@ var Cart = {
         }
         return false;
     },
+    clearCart : function() {
+        localStorage.cart = null;
+        this.refreshCartItems();
+    }
 };
 
 var OrderConfirmListTemplate = `<div class="top-cart-item" id="order_confirm_item_PRODUCT_ID">

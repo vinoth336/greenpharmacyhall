@@ -88,19 +88,20 @@
                             <div class="accordion-content clearfix">
                                 @if(auth()->guard('web')->check())
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <div id="order_summary">
-
-
                                         </div>
                                         <br>
                                     </div>
-                                    <div class="com-md-4">
+                                    <div class="com-md-12">
                                         @if(auth()->guard('web')->check())
                                             @include('site.user_address_info')
                                         @endif
                                         <h6 style="font-weight:bolder;margin-top: 10px;">Payment Type</h6>
-                                        <i class="fas fa-money-bill-wave"></i>Cash On Delivery
+                                            <input type="radio" name="payment_type" value="cod"/>
+                                            Cash On Delivery<br>
+                                            <input type="radio" name="payment_type" value="online" checked/>
+                                            Online Payment
                                         <hr>
                                         <h6>Delivery Type</h6>
                                         <input type="radio" id="delivery_delivery_type" name="delivery_type" checked value="door_delivery" />&nbsp;Door Delivery - <i class="text-danger"  style="font-size: 12px;"> Min Order - {{  number_format($cart_settings['free_deliver_min_amt'], 2) }}</i><br>
@@ -113,7 +114,7 @@
                                     <button type="button" class="btn btn-success float-right" onclick="Cart.checkout(this)">
                                         Place Order
                                     </button>
-                             
+
                                 </div>
                                 @else
                                     Please SignUp to complete your order

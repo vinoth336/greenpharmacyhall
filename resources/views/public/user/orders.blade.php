@@ -28,5 +28,9 @@
 </section>
 @push('js')
 <script type="text/javascript" src="{{ asset('web/js/order.js') }}"></script>
+    @if(session()->get('clear_cart'))
+        alert("hi");
+        Cart.clearCart();
+    @endif
 @endpush
 @endsection
