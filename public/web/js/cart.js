@@ -19,6 +19,7 @@ var Cart = {
             this.syncCartItems()
             this.syncCartValues();
             this.refreshCartItems();
+            this.showAddPrescriptionBlock();
             this.showOrderSummaryBlock();
         } else {
             alert("Your browser is not supported some features, please use latest version or try in another browser");
@@ -334,15 +335,31 @@ var Cart = {
     checkout: function(elm) {
         if (localStorage.cart) {
             $(elm).attr('disabled', true);
+
+
+            var formData = new FormData();
+            if ($(".prescription_attachment").length) {
+                $(".prescription_attachment").each(function(key, obj){
+                    $.each(obj.files, function(i, file) {
+                        formData.append(`prescription_attachments[${key}]`, file);
+                    });
+                });
+            }
+            formData.append("delivery_type", $("[name='delivery_type']:checked").val());
+            formData.append("payment_type", $("[name='payment_type']:checked").val());
+
         $.ajax({
                 "url": "/cart/checkout",
                 "type": "post",
                 "dataType": "json",
-                "data": {
-                    "delivery_type": $("[name='delivery_type']:checked").val(),
-                    "payment_type": $("[name='payment_type']:checked").val()
-            },
-                "success": function(items) {
+                "contentType": false,
+                "processData": false,
+                "data": formData,
+                "success": function(items,  textStatus, xhr) {
+
+
+
+
                     if ($("[name='payment_type']:checked").val() == 'online') {
                         var options = items[0];
                         options.handler = function (response) {
@@ -361,7 +378,7 @@ var Cart = {
     },
                 "error": function(jqXHR, exception) {
                     $(elm).attr('disabled', false);
-                    toastr.error(jqXHR.responseText);
+                    toastr.error(jqXHR.responseJSON.message);
             }
         });
         }
@@ -385,8 +402,6 @@ var Cart = {
             }
         });
         $("#" + id).html(CURRENCY_FORMATER.format(sum));
-
-        console.log(sum + " --------------- " + $("#min_amount_for_free_delivery").val());
 
         if (sum >= $("#min_amount_for_free_delivery").val()) {
             $("#delivery_door_delivery").attr('checked', true);
@@ -428,6 +443,9 @@ var Cart = {
     showAddressInfoBlock: function() {
         $("#account_and_delivery_address_info").click();
     },
+    showAddPrescriptionBlock: function() {
+        $("#adding_prescription_attachment").click();
+    },
     showOrderSummaryBlock: function() {
         $("#order_summary_details").click();
         Cart.OrderSummaryDetail()
@@ -452,6 +470,26 @@ var Cart = {
     clearCart : function() {
         localStorage.cart = null;
         this.refreshCartItems();
+    },
+    addPrescriptionAttachment : function() {
+
+        var html = `<tr class="">
+                            <td>
+                            <input type="file" class="prescription_attachment" name="prescription_attachments[]">
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-danger remove-file" onclick="Cart.removePrescriptionAttachment($(this))">Remove</button>
+</td>
+
+</tr>`;
+        $("#add_prescription tbody").append(html);
+    },
+    removePrescriptionAttachment: function(removeRow) {
+        if ($(".prescription_attachment").length >= 2) {
+            removeRow.closest('tr').remove();
+        } else {
+            alert("Prescription is required for this order, so cant allow this action, kindly upload the prescription.");
+        }
     }
 };
 

@@ -15,7 +15,6 @@
     <div class="row gutter-40 col-mb-80">
         <div class="col-lg-9">
             <div class="row">
-        @include('public.user.pharma_orders')
         @include('public.user.non_pharma_orders')
             </div>
         </div>

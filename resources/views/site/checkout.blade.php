@@ -41,8 +41,6 @@
                             <div class="accordion-content clearfix">
                                 <div class="table-responsive">
                                     <div id="order_details">
-
-
                                     </div>
                                     <div   class="text-right" style="padding-top:20px;margin-top: 40px; margin-bottom: 40px; border-top: 1px solid #ccc">
                                             Total Amount : <span style="font-weight: bold" id="order_amount"></span>
@@ -67,7 +65,9 @@
                                         <div class="clear"></div>
                                         @if(auth()->guard('web')->check())
                                             @include('site.user_address_info')
-                                            <button onclick="Cart.showOrderSummaryBlock()" type="button" class="btn btn-success float-right">
+
+
+                                            <button onclick="Cart.showAddPrescriptionBlock()" type="button" class="btn btn-success float-right">
                                                 Next
                                             </button>
                                         @else
@@ -76,6 +76,69 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="accordion-header" id="adding_prescription_attachment">
+                                <div class="accordion-icon">
+                                    <i class="accordion-closed icon-line-minus"></i>
+                                    <i class="accordion-open icon-line-check"></i>
+                                </div>
+                                <div class="accordion-title" onclick="Cart.showAddPrescriptionBlock()">
+                                    Upload Prescription
+                                </div>
+                            </div>
+                            <div class="accordion-content clearfix">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p class="justify-content-center alert-danger">
+                                            Prescription is required when the cart contain the pharma item otherwise no need to upload the prescription.
+                                            You can add more than one prescription attachment when the items are mentioned in the different prescriptions.
+                                            <br>
+                                            Thank You
+                                        </p>
+                                        @if(auth()->guard('web')->check())
+                                            <table class="table table-bordered" id="add_prescription">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center">Prescription</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="2" class="text-right">
+                                                        <button type="button" class="btn btn-sm btn-success"
+                                                                onclick="Cart.addPrescriptionAttachment()">
+                                                            Add More Prescription
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="file" class="prescription_attachment"
+                                                               name="prescription_attachments[]">
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-danger remove-file"
+                                                                onclick="Cart.removePrescriptionAttachment($(this))">
+                                                            Remove
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        @else
+                                            Adding Prescription will enable after login.
+                                        @endif
+
+                                        <div class="clear"></div>
+                                        <button onclick="Cart.showOrderSummaryBlock()" type="button"
+                                                class="btn btn-success float-right">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="accordion-header" id="order_summary_details">
                                 <div class="accordion-icon">
                                     <i class="accordion-closed icon-line-minus"></i>

@@ -24,6 +24,8 @@ class Product extends Model
 
     protected $table = 'products';
 
+    protected $guarded = '';
+
     protected $fillable = ['name', 'description', 'sequence', 'background_image', 'slug'];
 
     protected $resizeImage = ['width' => '800', 'height' => '800'];
@@ -96,4 +98,37 @@ class Product extends Model
         return $query->where('products.status', 1);
     }
 
+    public function getReasonForNotSale()
+    {
+        if($this->isPharmaProduct()) {
+            return "Is Scheduled Product and its not for sale. Contact Us for more information.";
+        } else {
+            return "Currently the item is not available for the sale. Kindly check later";
+        }
+    }
+
+    public function isForSale()
+    {
+        if ($this->isPharmaProduct()) {
+
+            return $this->isPharmaProductForSale();
+        } else {
+
+            return $this->is_for_sales;
+        }
+    }
+
+    public function isPharmaProduct()
+    {
+        return $this->is_pharma_product;
+    }
+
+    public function isPharmaProductForSale()
+    {
+        if (!$this->is_scheduled_drug && $this->is_for_sales) {
+            return true;
+        }
+
+        return false;
+    }
 }

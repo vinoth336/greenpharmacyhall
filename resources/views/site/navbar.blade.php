@@ -36,19 +36,6 @@
             </div>
             <button class="sub-menu-trigger icon-chevron-right"></button>
 		</li>
-		<li class="menu-item">
-			<a class="menu-link" href="#">
-				<div>Pharma</div>
-            </a>
-            <ul class="sub-menu-container">
-                <li class="menu-item" >
-                    <a href="{{ route('public.pharma_purchase_order') }}" class="menu-link">
-                        Create Order
-                    </a>
-                </li>
-
-            </ul>
-        </li>
         @if(auth()->guard('web')->check())
         <li class="menu-item sub-menu">
 			<a class="menu-link" href="#">

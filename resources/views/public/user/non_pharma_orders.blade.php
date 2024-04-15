@@ -13,6 +13,18 @@
                             <div>Delivery Type : {{ $order->delivery_type == 1 ? 'Door Delivery' : 'Shop PickUp' }}</div>
                             <div>Payment Type : {{ $order->payment_type =='cod' ? 'COD' : 'Online' }}</div>
 
+                            <div>
+                                @if ($order->hasMedia('prescription_details'))
+                                    <h4>Attachment's</h4>
+                                    @foreach($order->getMedia('prescription_details') as $key => $media)
+                                        <a href="{{ $media->getUrl('') }}" target="_blank" >
+                                            Attachment-{{ $key +1 }}
+                                        </a><br>
+                                    @endforeach
+                                @endif
+                            </div>
+
+
                             &nbsp;
                             @if($order->order_status->slug_name == 'approved' )
                                 <a href="{{ route('public.download_non_pharma_invoice', $order->order_no) }}" class="text-info" data-productid="PRODUCT_ID">

@@ -207,6 +207,56 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Is Pharma Product') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('is_pharma_product') ? ' has-danger' : '' }}">
+                                            <input style="width: 62px;"
+                                                   class="form-control{{ $errors->has('is_pharma_product') ? ' is-invalid' : '' }}"
+                                                   name="is_pharma_product" id="input-is_pharma_product" type="checkbox" value="1"
+                                                   @if(old('is_pharma_product') == 1) checked @endif
+                                                   aria-required="true" />
+                                            @if ($errors->has('is_pharma_product'))
+                                                <span id="is_pharma_product-error" class="error text-danger"
+                                                      for="input-is_pharma_product">{{ $errors->first('is_pharma_product') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Is Scheduled Drug') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('is_scheduled_drug') ? ' has-danger' : '' }}">
+                                            <input style="width: 62px;"
+                                                   class="form-control{{ $errors->has('is_scheduled_drug') ? ' is-invalid' : '' }}"
+                                                   name="is_scheduled_drug" id="input-is_scheduled_drug" type="checkbox" value="1"
+                                                   @if(old('is_scheduled_drug') == 1) checked @endif
+                                                   aria-required="true" />
+                                            @if ($errors->has('is_scheduled_drug'))
+                                                <span id="is_scheduled_drug-error" class="error text-danger"
+                                                      for="input-is_scheduled_drug">{{ $errors->first('is_scheduled_drug') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Is For Sales') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('is_for_sales') ? ' has-danger' : '' }}">
+                                            <input style="width: 62px;"
+                                                   class="form-control{{ $errors->has('is_for_sales') ? ' is-invalid' : '' }}"
+                                                   name="is_for_sales" id="input-status" type="checkbox" value="1"
+                                                   @if(old('is_for_sales') == 1) checked @endif
+                                                   aria-required="true" />
+                                            @if ($errors->has('is_for_sales'))
+                                                <span id="status-error" class="error text-danger"
+                                                      for="input-is_for_sales">{{ $errors->first('is_for_sales') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Status') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('status') ? ' has-danger' : '' }}">

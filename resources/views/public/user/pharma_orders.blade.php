@@ -10,6 +10,7 @@
                             <th>Prescription Details</th>
                             <th>Comment</th>
                             <th>Order Status</th>
+                            <th>Prescription</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -32,6 +33,17 @@
                                 </td>
                                 <td>{{ $order->comment_text }}</td>
                                 <td>{{ optional($order->order_status)->name }}</td>
+                                <td>
+                                    @if ($order->hasMedia('member_photo'))
+                                        @foreach($order->getMedia('prescription_details') as $media)
+                                            <a href="{{ $media->getUrl('') }}" target="_blank" >
+                                                View
+                                            </a>
+                                        @endforeach
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                                 <td>
                                     @if($order->order_status->slug_name == 'pending')
                                         <form method="POST" action="{{ route('public.pharma_order_delete', $order->id) }}"

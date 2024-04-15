@@ -47,7 +47,7 @@ class UserLoginController extends Controller
             return response()->json(['error' => 'Invalid OTP'], 401);
         }else{
             $user = User::where('phone_no', $request->input('phone_no'))->first();
-              Auth::login($user);            
+              Auth::login($user);
         $otp->delete();
         $redirectTo = '/';
         if($request->has('redirectTo')) {

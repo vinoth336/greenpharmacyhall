@@ -148,4 +148,18 @@ class SiteController extends Controller
         return view('site.return_policy');
     }
 
+    public function contactUs()
+    {
+        $siteInformation = SiteInformation::first();
+        $faqs = Faqs::orderBy('sequence')->get();
+        $services = Services::orderBy('sequence')->get();
+        return view('site.contact_us', ['siteInformation' => $siteInformation, 'faqs' => $faqs, 'services' => $services]);
+    }
+
+    public function aboutUs()
+    {
+        $siteInformation = SiteInformation::first();
+        return view('site.about_us', ['siteInformation' => $siteInformation]);
+    }
+
 }

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Http\Resources\CartItemListResponse;
 use App\Mail\NewOrderSendNotificationToAdmin;
+use App\Mail\PharmaNewOrderSendNotificationToAdmin;
+use App\PharmaPrescription;
+use App\PrescriptionDetail;
+use App\Product;
 use App\UserOrder;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,6 +30,10 @@ class UserOrderController extends Controller
 
             if ($items->count() <= 0) {
                return response(['status' => false, "message" => "Please confirm the selected items to process"], 400);
+            }
+
+            if ($this->checkPrescriptionRequiredForThisOrder() && !$request->has('prescription_attachments')) {
+                return response(['status' => false, "message" => "Prescription Required For this Order, Kindly Update it."], 400);
             }
 
             $userOrder = UserOrder::create([
@@ -50,6 +58,14 @@ class UserOrderController extends Controller
             $userOrder->delivery_type = $request->input('delivery_type') == 'door_delivery' ? 1 : 2;
             $userOrder->payment_type = $request->input('payment_type') == 'online' ? 'online' : 'cod';
             $userOrder->save();
+
+            //Update Prescription
+            if ($request->has('prescription_attachments')) {
+                foreach($request->file('prescription_attachments') as $attachment) {
+                    $userOrder->addMedia($attachment)->toMediaCollection('prescription_details', 'media');
+                }
+            }
+
             // Check online or offline call payment
             $paymentData=[
                 'amount'=>$sum,
@@ -95,7 +111,6 @@ class UserOrderController extends Controller
             }
 
         } catch (Exception $e) {
-            dd($e);
             DB::rollback();
             info($e->getMessage());
             return response("Can't Process, Please Contact Admin", SERVER_ERROR);
@@ -133,5 +148,21 @@ class UserOrderController extends Controller
             ]
         ];
         return $options;
+    }
+
+    public function checkPrescriptionRequiredForThisOrder()
+    {
+        $user = auth()->user();
+        $productAddedInCart =  $user->cart()->where('status', 1)->pluck('product_id');
+        if ($productAddedInCart) {
+            $products = Product::where(function ($query) {
+                $query->where('is_pharma_product', 1);
+                $query->where('is_for_sales', 1);
+            })->whereIn('id', $productAddedInCart)->where('status', 1)->get();
+
+            return $products->count();
+        }
+
+        return false;
     }
 }

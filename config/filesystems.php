@@ -65,6 +65,14 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'media' => [
+            'driver' => 'local',
+            'root' => public_path('web/images/media'),
+            'visibility' => 'public',
+            'url' => asset('/web/images/media'),
+            'throw' => false,
+        ],
+
     ],
 
     /*

@@ -17,6 +17,8 @@ Route::get('/', 'SiteController@index')->name('home');
 Route::get('/service/{slug?}', 'SiteController@services')->name('service');
 Route::get('/product/', 'SiteController@product')->name('product');
 Route::get('/faqs/', 'SiteController@faqs')->name('site_faqs');
+Route::get('/contact_us', 'SiteController@contactUs')->name('site.contact_us');
+Route::get('/about_us', 'SiteController@aboutUs')->name('site.about_us');
 Route::post('enquiry', 'SaveEnquiryController@store')->name('enquiry.store');
 Route::get('/product/summary/{product}', 'SiteController@viewProductSummary')->name('view_product_summary');
 Route::get('/product/{product}', 'SiteController@viewProduct')->name('view_product');

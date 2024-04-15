@@ -29,10 +29,18 @@
                                                                 </a>
                                                             </div>
                                                         @endif
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="sale-flash badge badge-success p-2">Sale!</div>
+                                            @if($productDetail->isForSale())
+                                                <div class="sale-flash badge badge-success p-2">Sale!</div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <label class="font-italic" style="font-size: 9px">
+                                                *Product images are for illustrative purposes only and may differ from the actual product.
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 product-desc">
@@ -49,18 +57,31 @@
                                             @endif
                                             </div>
                                         </div>
-                                        <div class="quantity display-inline-block">
-                                            <input type="hidden" id="productName" value="{{ $productDetail->slug }}" />
-                                            <input type="button" value="-" class="minus">
-                                            <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="product_qty_{{ $productDetail->slug }}" data-productid="{{ $productDetail->slug }}" value="1" title="Qty"
-                                                class="qty" />
-                                            <input type="button" value="+" class="plus">
-                                        </div>
-                                        <div class="pt-1 pb-2 d-flex align-items-start " style="flex-direction:column;gap:0.5rem">
-                                            <input type="text" name="pincode" class="form-control" id="pincode" placeholder="Enter the delivery Pincode" onkeyup="Cart.isValidPincode(event)" style="width: 250px">
-                                            <span id="estimate_delivery_data" data-isvalid=""></span>
-                                        </div>
-                                        <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_qty_{{ $productDetail->slug }}').val())" data-productid="{{ $productDetail->slug }}">Add to cart</button>
+                                        @if($productDetail->isForSale())
+                                            <div class="quantity display-inline-block">
+                                                <input type="hidden" id="productName" value="{{ $productDetail->slug }}" />
+                                                <input type="button" value="-" class="minus">
+                                                <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="product_qty_{{ $productDetail->slug }}" data-productid="{{ $productDetail->slug }}" value="1" title="Qty"
+                                                    class="qty" />
+                                                <input type="button" value="+" class="plus">
+                                            </div>
+
+                                            <div class="pt-1 pb-2 d-flex align-items-start " style="flex-direction:column;gap:0.5rem">
+                                                <input type="text" name="pincode" class="form-control" id="pincode" placeholder="Enter the delivery Pincode" onkeyup="Cart.isValidPincode(event)" style="width: 250px">
+                                                <span id="estimate_delivery_data" data-isvalid=""></span>
+                                            </div>
+
+                                            <button type="button" class="add-to-cart button m-0" onclick="Cart.add(this, $('#product_qty_{{ $productDetail->slug }}').val())" data-productid="{{ $productDetail->slug }}">
+                                                Add to cart
+                                            </button>
+                                        @else
+                                            <div class="alert-danger mt-5">
+                                                <label class="text-danger p-2">
+                                                    {{ $productDetail->getReasonForNotSale() }}
+                                                </label>
+                                            </div>
+
+                                        @endif
                                         <div class="line"></div>
                                         <div class="product_description">
                                             {!! $productDetail->description !!}
@@ -132,6 +153,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @if($product->isForSale())
                                         <div class="text-center">
                                             <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
                                                 class="text-info" style="font-weight: 300 !important; font-size:18px;"
@@ -142,6 +164,7 @@
                                                 </p>
                                             </a>
                                         </div>
+                                    @endif
                                 </div>
                             </div>
                             @endforeach

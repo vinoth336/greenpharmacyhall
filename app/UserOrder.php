@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Jamesh\Uuid\HasUuid;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class UserOrder extends Model
+class UserOrder extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasUuid;
     protected $fillable = ['user_id', 'order_no', 'order_status_id'];
 

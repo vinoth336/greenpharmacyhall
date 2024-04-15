@@ -27,10 +27,10 @@ class Otps extends Model
                     'numbers'=>$toNumber
                 ]
             );
-            Log::debug($response);    
+            Log::debug($response);
         } catch (\Throwable $th) {
             throw $th;
-            Log::debug($th);    
+            Log::debug($th);
 
         }
     }

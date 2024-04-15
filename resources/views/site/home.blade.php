@@ -63,16 +63,18 @@
                                         <input type="hidden" class="product_name" value="{{ $product->name }}" />
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
-                                        class="text-info" style="font-weight: 300 !important; font-size:18px;"
-                                        class="" href="Javascript:void(0)">
-                                        <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
-                                        <span class="add_cart_label">Add To Cart</span>
-                                        <i class="icon-shopping-cart"></i>
-                                        </p>
-                                    </a>
-                                </div>
+                                @if($product->isForSale())
+                                    <div class="text-center">
+                                        <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                            class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                            class="" href="Javascript:void(0)">
+                                            <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                            <span class="add_cart_label">Add To Cart</span>
+                                            <i class="icon-shopping-cart"></i>
+                                            </p>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         @endforeach
@@ -143,16 +145,18 @@
                                             <input type="hidden" class="product_name" value="{{ $product->name }}" />
                                         </div>
                                     </div>
-                                    <div class="text-center">
-                                        <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
-                                            class="text-info" style="font-weight: 300 !important; font-size:18px;"
-                                            class="" href="Javascript:void(0)">
-                                            <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
-                                            <span class="add_cart_label">Add To Cart</span>
-                                            <i class="icon-shopping-cart"></i>
-                                            </p>
-                                        </a>
-                                    </div>
+                                    @if($product->isForSale())
+                                        <div class="text-center">
+                                            <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                                class="text-info" style="font-weight: 300 !important; font-size:18px;"
+                                                class="" href="Javascript:void(0)">
+                                                <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                                <span class="add_cart_label">Add To Cart</span>
+                                                <i class="icon-shopping-cart"></i>
+                                                </p>
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

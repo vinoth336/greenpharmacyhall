@@ -133,6 +133,18 @@
                                     Return Policy
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route("site.about_us") }}"
+                                   class="text-white">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route("site.contact_us") }}"
+                                   class="text-white">
+                                    Contact Us
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -3516,8 +3516,8 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
     .primary-menu:not(.on-click) .menu-item:hover>.sub-menu-container {
         opacity: 1;
         visibility: visible;
-        margin-top: 0;
-        z-index: 399;
+        margin-top: -100px;
+        z-index: 999;
         pointer-events: auto
     }
     .primary-menu:not(.on-click) .menu-item:not(:hover)>.mega-menu-content>*,

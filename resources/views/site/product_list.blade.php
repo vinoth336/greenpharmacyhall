@@ -25,7 +25,9 @@
                                                         alt="{{ $product->name }}" >
                                                 </a>
                             @endforelse
-                            <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
+                            @if($product->isForSale())
+                                <div class="sale-flash badge badge-success p-2 text-uppercase">Sale!</div>
+                            @endif
                             <div class="bg-overlay d-none">
                                 <div class="bg-overlay-content align-items-end justify-content-between"
                                     data-hover-speed="400">
@@ -59,16 +61,18 @@
 
                             </div>
                         </div>
-                        <div class="text-center">
-                            <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
-                                class="text-info" style="font-weight: 300 !important; font-size:18px;" class=""
-                                href="Javascript:void(0)">
-                                <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
-                                    <span class="add_cart_label">Add To Cart</span>
-                                    <i class="icon-shopping-cart"></i>
-                                </p>
-                            </a>
-                        </div>
+                        @if($product->isForSale())
+                            <div class="text-center">
+                                <a class="btn btn-info" onclick="Cart.add(this)" data-productid="{{ $product->slug }}"
+                                    class="text-info" style="font-weight: 300 !important; font-size:18px;" class=""
+                                    href="Javascript:void(0)">
+                                    <p class="add_cart_container" style="margin-bottom: 1px; line-height: 1">
+                                        <span class="add_cart_label">Add To Cart</span>
+                                        <i class="icon-shopping-cart"></i>
+                                    </p>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
