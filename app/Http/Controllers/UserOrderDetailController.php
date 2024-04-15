@@ -24,8 +24,8 @@ class UserOrderDetailController extends Controller
         $nonPharmaOrders = $user->non_pharma_orders()->with(['ordered_items' => function($query) {
                 $query->with([ 'product' => function($query) {
                         $query->with('ProductImages');
-                }, 'media']);
-        }, 'order_status'])->orderBy('created_at', 'DESC')->get();
+                }]);
+        }, 'order_status', 'media'])->orderBy('created_at', 'DESC')->get();
 
 
         return view('public.user.orders')
