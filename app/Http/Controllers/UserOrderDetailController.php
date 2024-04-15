@@ -19,12 +19,12 @@ class UserOrderDetailController extends Controller
     public function orderList()
     {
         $user = auth()->user();
-        $pharmaOrders = $user->pharma_orders()->with(['order_status', 'media'])->orderBy('created_at', 'desc')->get();
+        $pharmaOrders = $user->pharma_orders()->with(['order_status'])->orderBy('created_at', 'desc')->get();
 
         $nonPharmaOrders = $user->non_pharma_orders()->with(['ordered_items' => function($query) {
                 $query->with([ 'product' => function($query) {
                         $query->with('ProductImages');
-                }]);
+                }, 'media']);
         }, 'order_status'])->orderBy('created_at', 'DESC')->get();
 
 
