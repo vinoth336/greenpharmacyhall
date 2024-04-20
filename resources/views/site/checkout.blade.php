@@ -96,7 +96,7 @@
                                             Thank You
                                         </p>
                                         @if(auth()->guard('web')->check())
-                                            <table class="table table-bordered" id="add_prescription">
+                                            <table class="table table-bordered table-responsive" id="add_prescription" style="width:100%">
                                                 <thead>
                                                 <tr>
                                                     <th class="text-center">Prescription</th>
