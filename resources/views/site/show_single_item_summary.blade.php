@@ -25,7 +25,11 @@
                 <div class="product-price">
                     @if($product->discount_amount > 0)
                         <del>₹ {{ $product->price }}</del>
-                        <ins>₹ {{ $product->discount_amount }}</ins>
+                        <ins>₹ {{ $product->discount_amount }}
+                            @if($product->discount_in_percentage > 0)
+                                ({{ $product->discount_in_percentage }} %)
+                            @endif
+                        </ins>
                     @else
                         <ins>₹ {{ $product->price }}</ins>
                     @endif

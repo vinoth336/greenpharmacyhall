@@ -32,10 +32,22 @@ class ImportProduct implements ToModel, WithHeadingRow
         $product->brand_id = null;
         $product->sub_category_id = null;
         $product->price = (float) $row['mrp'];
-        $product->discount_amount = (float) ($row['mrp'] == $row['price'] ? 0 : $row['price']);
+        $product->discount_in_percentage = $row['discount_in_percentage'] !='' ? $row['discount_in_percentage'] : 0 ;
+
+        if ($product->discount_in_percentage) {
+            $product->discount_amount =$row['mrp'] - (($product->discount_in_percentage / 100) * $row['mrp'] );
+        } else {
+            $product->discount_amount = (float) ($row['mrp'] == $row['price'] ? 0 : $row['price']);
+        }
+
         $product->sequence = 1;
         $product->sub_category_id = $this->getSubCategory($row);
         $product->brand_id = $this->getBrand($row);
+        $product->is_pharma_product = strtolower($row['is_pharma_product']) == 'no' ? 0 : 1;
+        $product->is_scheduled_drug = strtolower($row['is_scheduled_drug']) == 'no' ? 0 : 1;
+        $product->is_for_sales = strtolower($row['is_for_sales']) == 'no' ? 0 : 1;
+        $product->status = strtolower($row['is_active']) == 'no' ? 0 : 1;
+
         $product->save();
         if($categories = $this->getCategories($row)) {
             $product->services()->sync($categories);

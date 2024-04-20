@@ -50,7 +50,11 @@
                                     $productImage = $productImage->image ?? 'no_image.png';
                                 @endphp
                                     <a href="{{ route('view_product', $product->slug) }}"><img class="product_image" src="{{ asset('web/images/product_images/thumbnails/' . $productImage ) }}" alt="Checked Short Dress"></a>
-                                    <div class="sale-flash badge badge-success p-2">Flat {{ $product->price - $product->discount_amount }} Off*</div>
+                                    @if($product->discount_in_percentage > 0)
+                                        <div class="sale-flash badge badge-success p-2">Discount {{ $product->discount_in_percentage }} %</div>
+                                    @elseif($product->discount_amount)
+                                        <div class="sale-flash badge badge-success p-2">Flat {{ $product->price - $product->discount_amount }} Off*</div>
+                                    @endif
                                 </div>
                                 <div class="product-desc center">
                                     <div class="product-title">
@@ -126,7 +130,13 @@
                                                 alt="{{ $product->name }}" loading="lazy">
                                         </a>
                                     @endforelse
-                                    <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">Sale!</div>
+                                    @if($product->isForSale())
+                                        <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">
+                                            @if($product->discount_in_percentage > 0)
+                                                {{ $product->discount_in_percentage }} %
+                                            @endif Sale!
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="product-desc">
                                     <div class="product-title min-h-30 max-h-30" style="text-overflow: ellipsis">

@@ -91,10 +91,10 @@ class UserOrderController extends Controller
 
             if($delivery_type == 'door_delivery' && $sum < $cartSettings['free_deliver_min_amt'] ) {
                 DB::rollback();
-                return response("MIN ORDER AMOUNT For Free Delivery Is " . number_format($cartSettings['free_deliver_min_amt'], 2) , NOT_ACCEPTABLE);
+                return response(['status' => false, 'message' =>"MIN ORDER AMOUNT For Free Delivery Is " . number_format($cartSettings['free_deliver_min_amt'], 2)] , NOT_ACCEPTABLE);
             } elseif($sum < $cartSettings['shop_pickup_min_amt'] ) {
                 DB::rollback();
-                return response("MIN ORDER AMOUNT For Shop Pickup Is " . number_format($cartSettings['shop_pickup_min_amt'], 2) , NOT_ACCEPTABLE);
+                return response(['status' => false, 'message' => "MIN ORDER AMOUNT For Shop Pickup Is " . number_format($cartSettings['shop_pickup_min_amt'], 2)] , NOT_ACCEPTABLE);
             }
             $userOrder->load('order_status');
 

@@ -188,6 +188,20 @@ $(document).ready(function() {
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Qty Details') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('qty_details') ? ' has-danger' : '' }}">
+                                    <textarea
+                                        class="form-control{{ $errors->has('qty_details') ? ' is-invalid' : '' }}"
+                                        name="qty_details" id="qty_details" placeholder="{{ __('Qty Details') }}">{{ old('qty_details', $product->qty_details) }}</textarea>
+                                            @if ($errors->has('qty_details'))
+                                                <span id="qty_details-error" class="error text-danger"
+                                                      for="input-qty_details">{{ $errors->first('qty_details') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Description') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
@@ -219,7 +233,22 @@ $(document).ready(function() {
                                         </div>
                                     </div>
                                 </div>
-
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">{{ __('Discount In %') }}</label>
+                                        <div class="col-sm-7">
+                                            <div class="form-group{{ $errors->has('discount_in_percentage') ? ' has-danger' : '' }}">
+                                                <input
+                                                    class="form-control{{ $errors->has('discount_in_percentage') ? ' is-invalid' : '' }}"
+                                                    name="discount_in_percentage" id="input-discount_in_percentage" type="text"
+                                                    placeholder="{{ __('Discount In Percenate') }}" value="{{ old('discount_in_percentage', $product->discount_in_percentage) }}"
+                                                />
+                                                @if ($errors->has('discount_in_percentage'))
+                                                    <span id="discount_amount-error" class="error text-danger"
+                                                          for="input-discount_amount">{{ $errors->first('discount_in_percentage') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Discount Amount') }}</label>
                                     <div class="col-sm-7">
@@ -405,6 +434,17 @@ $(document).ready(function() {
             });
 
         }
+
+        $("#input-discount_in_percentage").on("keyup keydown", function() {
+            var price = $("#input-price").val();
+            var discountPer = $(this).val();
+            if (discountPer) {
+                value =  (price - ((discountPer/ 100) * price));
+                $("#input-discount_amount").val(value)
+            } else {
+                $("#input-discount_amount").val('0.00');
+            }
+        });
     </script>
     @endpush
 

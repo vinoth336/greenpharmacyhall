@@ -212,7 +212,9 @@ class ProductController extends Controller
         $product->product_code = $request->input('product_code');
         $product->description = $request->input('description');
         $product->price = (float) $request->input('price');
+        $product->discount_in_percentage = $request->input('discount_in_percentage') ?? 0;
         $product->discount_amount = (float) $request->input('discount_amount');
+        $product->qty_details = $request->input('qty_details');
         $product->sequence = $product->sequence ?? Product::count() + 1;
         $product->is_pharma_product = $request->has('is_pharma_product') ? 1 : 0;
         $product->is_scheduled_drug = $request->has('is_scheduled_drug') ? 1 : 0;

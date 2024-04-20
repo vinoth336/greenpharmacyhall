@@ -34,7 +34,11 @@
                                                 </div>
                                             </div>
                                             @if($productDetail->isForSale())
-                                                <div class="sale-flash badge badge-success p-2">Sale!</div>
+                                                <div class="sale-flash badge badge-success p-2">
+                                                    @if($productDetail->discount_in_percentage > 0)
+                                                        {{ $productDetail->discount_in_percentage }} %
+                                                    @endif Sale!
+                                                </div>
                                             @endif
                                         </div>
                                         <div>
@@ -64,6 +68,11 @@
                                                 <input type="number" step="1" min="1" onchange="Cart.updateQty('.single-product', this)" onkeyup="Cart.updateQty('.single-product', this)" id="product_qty_{{ $productDetail->slug }}" data-productid="{{ $productDetail->slug }}" value="1" title="Qty"
                                                     class="qty" />
                                                 <input type="button" value="+" class="plus">
+                                            </div>
+                                            <div class="text-justify mt-3 mb-3">
+                                                @if($productDetail->qty_details)
+                                                    Qty Detail : <i>{{ $productDetail->qty_details }}</i>
+                                                @endif
                                             </div>
 
                                             <div class="pt-1 pb-2 d-flex align-items-start " style="flex-direction:column;gap:0.5rem">
@@ -134,6 +143,11 @@
                                                         alt="{{ $product->name }}" >
                                                 </a>
                                             @endforelse
+                                            <div class="sale-flash badge badge-success p-2 text-uppercase d-md-inline-block d-lg-inline-block  d-none">
+                                                @if($product->discount_in_percentage > 0)
+                                                    {{ $product->discount_in_percentage }} %
+                                                @endif Sale!
+                                            </div>
                                         </div>
                                         <div class="product-desc">
                                             <div class="product-title min-h-30">
