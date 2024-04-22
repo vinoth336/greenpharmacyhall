@@ -46,9 +46,9 @@ class UserOrderDetailController extends Controller
                 $order->save();
                 $order->load('order_status');
 
-                Mail::send(new OrderCancelledSendNotificationToAdmin(auth()->user(), $order));
-
                 DB::commit();
+
+                Mail::send(new OrderCancelledSendNotificationToAdmin(auth()->user(), $order));
 
                 return response(['status' => true, 'message' => 'Cancelled Successfully'], 200);
             } else {

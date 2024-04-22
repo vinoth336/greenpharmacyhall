@@ -33,7 +33,7 @@ class UserOrderController extends Controller
             }
 
             if ($this->checkPrescriptionRequiredForThisOrder() && !$request->has('prescription_attachments')) {
-                return response(['status' => false, "message" => "Prescription Required For this Order, Kindly Update it."], 400);
+                return response(['status' => false, "message" => "Prescription Required For this Order, Kindly Update it.", "isPrescriptionRequired" => true], 400);
             }
 
             $userOrder = UserOrder::create([
@@ -100,7 +100,7 @@ class UserOrderController extends Controller
 
             DB::commit();
 
-            //Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
+            Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
 
             if ($request->input('payment_type') == 'cod') {
 

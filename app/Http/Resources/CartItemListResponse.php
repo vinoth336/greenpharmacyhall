@@ -23,6 +23,7 @@ class CartItemListResponse extends JsonResource
                     'price' => $this->product->actual_price,
                     'qty' => $this->qty,
                     'image' => $this->product->productImages->count() > 0 ? $this->product->productImages->first()->productImage : asset('web/images/product_images/thumbnails/no_image.png'),
+                    'is_pharma_product' => $this->product->isPharmaProduct(),
                     'status' => $this->status ? true : false
                     ];
 

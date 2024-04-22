@@ -39,7 +39,6 @@ var Cart = {
                 },
                 "dataType": "json",
                 success: function(items) {
-                    console.log(items['message']);
                     $('#estimate_delivery_data').html(items['message']).data('isvalid', 'true');
                 },
                 error: function(jqXHR, exception) {
@@ -167,6 +166,7 @@ var Cart = {
                 "productPrice": productInfo.price,
                 "productImage": productInfo.image,
                 "qty": productInfo.qty,
+                "is_pharma_product": productInfo.is_pharma_product,
                 "status": productInfo.status
             };
         });
@@ -189,6 +189,7 @@ var Cart = {
                 "productPrice": productPrice,
                 "productImage": productImage,
                 "qty": qty,
+                "is_pharma_product": null,
                 "status": true
             };
         }
@@ -197,6 +198,7 @@ var Cart = {
             "productPrice": productPrice,
             "productImage": productImage,
             "qty": qty,
+            "is_pharma_product": null,
             "status": true
         };
         Cart.setItemInLocalStorage(data);
@@ -285,6 +287,8 @@ var Cart = {
         var content = '';
         var totalItem = '';
         var template = '';
+        var cartHasPharmaItem = false;
+
         $.each(cart, function(productId, productInfo) {
             var totalAmount = productInfo.qty * productInfo.productPrice;
             var html = ItemListTemplate;
@@ -294,6 +298,10 @@ var Cart = {
             html = html.replace(/PRODUCT_PRICE/g, productInfo.productPrice);
             html = html.replace(/QTY/g, productInfo.qty);
             if (productInfo['status'] == true) {
+
+                if (productInfo['is_pharma_product'] == true && !cartHasPharmaItem) {
+                    cartHasPharmaItem = true;
+                }
                 html = html.replace(/IS_CHECKED/g, 'checked=true');
             } else {
                 html = html.replace(/IS_CHECKED/g, '');
@@ -306,6 +314,9 @@ var Cart = {
         Cart.updateOrderDetailsContent(content);
         Cart.updateActiveCartItemTotal('order_amount');
 
+        if(!cartHasPharmaItem) {
+            $("#adding_prescription_attachment").addClass('hide');
+        }
     },
     OrderSummaryDetail: function() {
         var cart = Cart.getItemFromLocalStorage();
@@ -379,6 +390,10 @@ var Cart = {
                 "error": function(jqXHR, exception) {
                     $(elm).attr('disabled', false);
                     toastr.error(jqXHR.responseJSON.message);
+                    if (typeof jqXHR.responseJSON.isPrescriptionRequired != 'undefined') {
+                        Cart.showAddPrescriptionBlock();
+                        $("#adding_prescription_attachment").focus();
+                    }
             }
         });
         }
@@ -396,8 +411,13 @@ var Cart = {
     updateActiveCartItemTotal: function(id = 'order_amount') {
         var cart = Cart.getItemFromLocalStorage();
         var sum = 0;
+        var cartHasPharmaItem = false;
         $.each(cart, function(productId, product) {
             if (product['status']) {
+                if (product['is_pharma_product'] == true && !cartHasPharmaItem) {
+                    cartHasPharmaItem = true;
+                }
+
                 sum += Number(product['qty'] * product['productPrice']);
             }
         });
@@ -408,7 +428,11 @@ var Cart = {
         } else {
             $("#delivery_shop_pickup").attr('checked', true);
         }
-
+        if(!cartHasPharmaItem) {
+            $("#adding_prescription_attachment").addClass('hide');
+        } else {
+            $("#adding_prescription_attachment").removeClass('hide');
+        }
     },
     updateTotalCartAmount: function(sum) {
         $("#top-checkout-price").html(CURRENCY_FORMATER.format(sum));
@@ -444,7 +468,11 @@ var Cart = {
         $("#account_and_delivery_address_info").click();
     },
     showAddPrescriptionBlock: function() {
-        $("#adding_prescription_attachment").click();
+        if ($("#adding_prescription_attachment").hasClass('hide')) {
+            Cart.showOrderSummaryBlock();
+        } else {
+            $("#adding_prescription_attachment").click();
+        }
     },
     showOrderSummaryBlock: function() {
         $("#order_summary_details").click();
