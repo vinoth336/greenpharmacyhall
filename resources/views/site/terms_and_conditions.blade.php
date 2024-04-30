@@ -20,7 +20,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 ">
-                                <p class="atag">Welcome to <a href="/" target="_blank"><span style="text-decoration: underline;">www.GreenPharmacyHall.com</span></a> ("GreenPharmacyHall.com", "GreenPharmacyHall", "Website", "Pharmacy", or "we"). This Website is owned and operated by Green Pharmacy Hally Private Limited, whose registered office is in Coimbatore, India.</p>
+                                <p class="atag">Welcome to <a href="/" target="_blank"><span style="text-decoration: underline;">www.GreenPharmacyHall.com</span></a> ("GreenPharmacyHall.com", "GreenPharmacyHall", "Website", "Pharmacy", or "we"). This Website is owned and operated by GreenPharmacyHall Private Limited, whose registered office is in Coimbatore, India.</p>
                             </div>
                             <div class="col-12">
                                 <div class="conditions">
