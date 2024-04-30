@@ -14,7 +14,8 @@ class PincodeController extends Controller
 {
     public function index()
     {
-        $pincodeList = Pincode::with('DeliveryEstimations')->get();
+        $pincodeList = Pincode::with('delivery_estimations')->get();
+
         return view('pincode.list',["pincodes"=>$pincodeList]);
     }
     public function import_pincode()
@@ -38,7 +39,7 @@ class PincodeController extends Controller
         $status=200;
         $pincode = Pincode::where('pincode', $request->get('pincode'))->first();
         if ($pincode) {
-            $estimationDelivery = $pincode->DeliveryEstimations;
+            $estimationDelivery = $pincode->delivery_estimations;
             if($estimationDelivery){
             if($estimationDelivery['min']==$estimationDelivery['max']){
                 $message.=$estimationDelivery['min'].' day';
@@ -47,7 +48,7 @@ class PincodeController extends Controller
             }
         } else {
             $status=404;
-            $message='Sorry! no delivery for this pincode ';        
+            $message='Sorry! no delivery for this pincode ';
         }
 } else {
     // Pincode not found

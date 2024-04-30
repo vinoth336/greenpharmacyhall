@@ -47,11 +47,9 @@
                                                 <td class="product_sequence_no">{{ $sno++ }}
                                                 <td>{{$pincode->pincode}}</td>
                                                 <td>
-                
-                                                    @foreach ($pincode->DeliveryEstimations as $object)
-                                                        <span>{{ $object->min }} Days - {{ $object->min }} Days</span>
-    <!-- Add more properties as needed -->
-@endforeach
+                                                    @foreach ($pincode->delivery_estimations as $object)
+                                                        <span>{{ optional($object)->min }} Days - {{ optional($object)->min }} Days</span>
+                                                    @endforeach
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('product.edit', $pincode->id) }}" class="text-success" data-original-title title><i class="material-icons">edit</i></a>

@@ -40,7 +40,7 @@
                                 <b>How to Request a Refund: </b><br>
                                 To request a refund, simply email us your order details, including the reason why you’re requesting a refund. We take customer feedback very seriously and use it to constantly improve our quality of service.
                                 <br>
-                                If you have any queries, do call our help desk at 9047300033, email us at sales@greenpharmacyhall.com, or contact our customer support executives through online chat. We're here for you!
+                                If you have any queries, do call our help desk at {{ $siteInformation->phone_no }}, email us at sales@greenpharmacyhall.com, or contact our customer support executives through online chat. We're here for you!
                             </p>
                             <p>
                                 <b>Return Policy: </b><br>
