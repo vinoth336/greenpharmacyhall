@@ -53,7 +53,7 @@
                                 <b>Return Policy Exceptions: </b><br>
                                 Please note that we are unable to offer replacements or exchanges for the following product categories: Injections, Health Monitor &amp; Equipments and Ortho Support. Also, greenpharmacyhall.com reserves the right to refuse returns (or refunds) for certain products, as marked in the respective product pages as "Note: This item cannot be returned for a refund or exchange."
                                 <br>
-                                Last updated Date: 16/11/2017
+                                Last updated Date: 01/05/2024
                             </p>
                         </div>
                     </div>
