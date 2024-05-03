@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="fbox-content">
                                     <h3>Payment Options</h3>
-                                    <p class="mt-0">We accept Visa, MasterCard and American Express.</p>
+                                    <p class="mt-0">We accept Visa, MasterCard and UPI.</p>
                                 </div>
                             </div>
                         </div>
@@ -212,18 +212,18 @@
                                 </div>
                                 <div class="fbox-content">
                                     <h3>Free Shipping</h3>
-                                    <p class="mt-0">Free Delivery to 100+ Locations on orders above $40.</p>
+                                    <p class="mt-0">Free Delivery to 100+ Locations on orders above.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-3">
                             <div class="feature-box fbox-plain fbox-dark fbox-sm">
                                 <div class="fbox-icon">
-                                    <i class="icon-undo"></i>
+                                    <i class="icon-hands-helping"></i>
                                 </div>
                                 <div class="fbox-content">
-                                    <h3>30-Days Returns</h3>
-                                    <p class="mt-0">Return or exchange items purchased within 30 days.</p>
+                                    <h3>COD</h3>
+                                    <p class="mt-0">We also accepting Cash On Delivery For the Order.</p>
                                 </div>
                             </div>
                         </div>
@@ -289,8 +289,6 @@
                         <div class="card topmargin overflow-hidden" style="border:none">
                             <div class="card-body">
                                 <h4>Opening Hours</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit reprehenderit
-                                    voluptates.</p>
                                 <ul class="iconlist mb-0">
                                     <li><i class="icon-time color"></i> <strong>Mondays-Fridays:</strong>
                                         {{ $siteInformation->working_hours_mon_fri }}</li>
@@ -309,7 +307,7 @@
                         onclick="window.open('https://goo.gl/maps/12tyEdUZqGAfksbWA', '_blank')">
                         <div class="feature-box fbox-center fbox-bg fbox-plain">
                             <div class="fbox-icon">
-                                <a href="#"><i class="icon-map-marker2"></i></a>
+                                <a href="https://maps.app.goo.gl/ir2rB1ka3fqagjzJ6" target="_blank"><i class="icon-map-marker2"></i></a>
                             </div>
                             <div class="fbox-content">
                                 <h3>Get Direction<span class="subtitle">Check In<br>Google Map</span></h3>
