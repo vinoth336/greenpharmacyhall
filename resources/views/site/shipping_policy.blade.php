@@ -53,7 +53,7 @@
                                 7. Cancellations
                             </li>
                             <li>
-                                If you change your mind before you have received your order, we are able to accept cancellations at any time before the order has been dispatched. If an order has already been dispatched, please refer to our refund policy.
+                                If you change your mind before you have received your order, we are able to accept cancellations at any time before the order has been dispatched. If an order has already been dispatched, please refer to our <a href="{{ route('site.return_policy') }}">refund policy</a>.
                             </li>
                             <li class="page-title-inline" style="font-size:16px;">
                                 8. Process for parcel damaged in-transit
@@ -71,7 +71,7 @@
                                 10. Customer service
                             </li>
                             <li>
-                                For all customer service inquiries, please <a href="support">contact us</a>
+                                For all customer service inquiries, please <a href="{{ route('site.contact_us') }}">contact us</a>
                             </li>
                         </ol>
                     </div>
