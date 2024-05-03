@@ -290,11 +290,11 @@
                             <div class="card-body">
                                 <h4>Opening Hours</h4>
                                 <ul class="iconlist mb-0">
-                                    <li><i class="icon-time color"></i> <strong>Mondays-Fridays:</strong>
+                                    <li><i class="icon-time color"></i> <strong>Monday-Friday:</strong>
                                         {{ $siteInformation->working_hours_mon_fri }}</li>
                                     <li><i class="icon-time color"></i> <strong>Saturdays:</strong>
                                         {{ $siteInformation->working_hours_sat }}</li>
-                                    <li><i class="icon-time text-danger"></i> <strong>Sundays:</strong>
+                                    <li><i class="icon-time color"></i> <strong>Sundays:</strong>
                                         {{ $siteInformation->working_hours_sun }}</li>
                                 </ul>
                                 <i class="icon-time bgicon"></i>
