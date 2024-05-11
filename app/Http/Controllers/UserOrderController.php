@@ -9,6 +9,7 @@ use App\Mail\PharmaNewOrderSendNotificationToAdmin;
 use App\PharmaPrescription;
 use App\PrescriptionDetail;
 use App\Product;
+use App\SiteInformation;
 use App\UserOrder;
 use Exception;
 use Illuminate\Http\Request;
@@ -65,27 +66,11 @@ class UserOrderController extends Controller
                     $userOrder->addMedia($attachment)->toMediaCollection('prescription_details', 'media');
                 }
             }
-
-            // Check online or offline call payment
-            $paymentData=[
-                'amount'=>$sum,
-                'prefill'=>[
-                    'name'=>$user->name,
-                    'email'=>$user->email,
-                    'contact'=>$user->phone_no
-                ],
-                'receipt'=>strtotime(time())
-            ];
-
-            if ($request->input('payment_type') == 'online') {
-                $paymentOrders=$this->initiatePayment($paymentData);
-            } else {
-                $paymentOrders = [];
+            if ($request->input('payment_type') == 'cod') {
                 Cart::where('user_id', $user->id)->update([
                     'status' => 0
                 ]);
             }
-            $paymentOrders=$this->initiatePayment($paymentData);
             $delivery_type = $request->input("delivery_type");
             $cartSettings = Cache::get('cart_settings');
 
@@ -106,6 +91,18 @@ class UserOrderController extends Controller
 
                 return response(['status' => true, "message" => 'Successfully Ordered Placed']);
             } else {
+                // Check online or offline call payment
+                $paymentData=[
+                    'amount'=>$sum,
+                    'prefill'=>[
+                        'name'=>$user->name,
+                        'email'=>$user->email,
+                        'contact'=>$user->phone_no
+                    ],
+                    'receipt'=> $userOrder->order_no
+                ];
+                $paymentOrders=$this->initiatePayment($paymentData, $userOrder);
+
 
                 return response()->json([$paymentOrders]);
             }
@@ -126,19 +123,21 @@ class UserOrderController extends Controller
 
         return $items;
     }
-    private function initiatePayment($paymentData){
+    private function initiatePayment($paymentData, $userOrder){
 
         $api = new Api(config('services.razorpay.key'),config('services.razorpay.secret'));
 
+        $siteInformation = SiteInformation::first();
         $results=$api->order->create(array('receipt' => (string)$paymentData['receipt'], 'amount' => (int) ($paymentData['amount']*100), 'currency' => 'INR', 'notes'=> array('key1'=> 'value3','key2'=> 'value2')));
      $options = [
             "key"=> config('services.razorpay.key'),
             "amount"=> (int)($paymentData['amount']*100),
             "currency"=> "INR",
             "name"=> "Green Pharamacy Hall",
-            "description"=> "Test Transaction",
-            "image"=> "https://example.com/your_logo",
+            "description"=> "Online Payment",
+            "image"=> asset('web/images/logo/' . $siteInformation->logo),
             "order_id"=> $results['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "user_order_no" => $userOrder->order_no,
             "prefill"=> $paymentData['prefill'],
             "notes"=> [
                 "address"=> "Razorpay Corporate Office"

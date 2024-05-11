@@ -198,11 +198,11 @@
     @endif
     <form action="{{url('/payment-complete')}}" method="POST" name="razorpayform">
     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-
-<input type="hidden" class="form-control" id="amount" name="amount">
-<input type="hidden" class="form-control" id="rzp_paymentid" name="rzp_paymentid">
-<input type="hidden" class="form-control" id="rzp_orderid" name="rzp_orderid">
-<input type="hidden" class="form-control" id="rzp_signature" name="rzp_signature">
+        <input type="hidden" class="form-control" id="amount" name="amount">
+        <input type="hidden" class="form-control" id="rzp_paymentid" name="rzp_paymentid">
+        <input type="hidden" class="form-control" id="rzp_orderid" name="rzp_orderid">
+        <input type="hidden" class="form-control" id="rzp_signature" name="rzp_signature">
+        <input type="hidden" class="form-control" id="rzp_user_order_no" name="rzp_user_order_no">
 </form>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>

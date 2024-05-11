@@ -144,16 +144,16 @@
                             <li class="list-head">Changes in the Privacy Policy:</li>
                             <li>
                                 <ol>
-                                    <li>GreenPharmacyHall &nbsp;may update this privacy policy at any time, with or without advance notice. In the event there are significant changes in the way GreenPharmacyHall &nbsp;treats User's personal information, GreenPharmacyHall &nbsp;will display a notice on the Website or send Users an email. If a User uses the Service after notice of changes have been sent to such User or published on the Mobile App and Website, such User hereby provides his/ her/ its consent to the changed practices.</li>
+                                    <li>GreenPharmacyHall &nbsp;may update this privacy policy at any time, with or without advance notice. In the event there are significant changes in the way GreenPharmacyHall &nbsp;treats User's personal information, GreenPharmacyHall &nbsp;will display a notice on the Website. If a User uses the Service after notice of changes have been sent to such User or published on the Mobile App and Website, such User hereby provides his/ her/ its consent to the changed practices.</li>
                                 </ol>
                             </li>
                             <li class="list-head">Contact information:</li>
                             <li>
                                 <ol>
                                     <li>
-                                        GreenPharmacyHall &nbsp;addresses any discrepancies and grievances of all Users with respect to processing of information in a time bound manner. For this purpose, GreenPharmacyHall &nbsp;has designated Mr. Maddy as the Grievance Officer, who will redress the grievances of the Users expeditiously but within one month from the date of receipt of grievance, and who can be reached by:<br><br>
                                         <ul>
                                             <li>Sending an email to <a href="mailto:sales@greenpharmacyhall.com">sales@greenpharmacyhall.com</a></li>
+                                            <li>Contact Us to <a href="tel:{{ $siteInformation->phone_no }}">{{ $siteInformation->phone_no }}</a></li>
                                         </ul>
                                     </li>
                                 </ol>

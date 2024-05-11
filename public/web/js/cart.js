@@ -367,19 +367,18 @@ var Cart = {
                 "processData": false,
                 "data": formData,
                 "success": function(items,  textStatus, xhr) {
-
-
-
-
                     if ($("[name='payment_type']:checked").val() == 'online') {
                         var options = items[0];
                         options.handler = function (response) {
+                            console.log(response);
                             document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
                             document.getElementById('rzp_orderid').value = response.razorpay_order_id;
                             document.getElementById('rzp_signature').value = response.razorpay_signature;
                             document.getElementById('amount').value = options['amount'];
                             document.razorpayform.submit();
                         };
+                        document.getElementById('rzp_user_order_no').value = options.user_order_no;
+
                         var rzp = new Razorpay(options);
                         rzp.open();
                     } else {

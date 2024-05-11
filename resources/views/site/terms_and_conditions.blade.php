@@ -30,7 +30,7 @@
                                     <br>
                                     <br> <b>1. Creating an Account</b>
                                     <br>
-                                    <br> 1.1 To use certain features of the Website (e.g., ordering Products, posting rating/reviews, receiving GreenPharmacyHall enewsletters), you must set up an account with GreenPharmacyHall.com ("GreenPharmacyHall Account") and provide certain information about yourself as prompted by the Customer Information form, including, your name, gender, email address, account password, mobile phone number and billing/shipping address. All of your registration information is protected by our <a href="/privacypolicy" target="_blank">Privacy Policy</a>.
+                                    <br> 1.1 To use certain features of the Website (e.g., ordering Products, posting rating/reviews, receiving GreenPharmacyHall enewsletters), you must set up an account with GreenPharmacyHall.com ("GreenPharmacyHall Account") and provide certain information about yourself as prompted by the Customer Information form, including, your name, gender, email address, account password, mobile phone number and billing/shipping address. All of your registration information is protected by our <a href="{{ route('site.privacy_policy') }}" target="_blank">Privacy Policy</a>.
                                     <br>
                                     <br> 1.2 You represent and warrant that the information you submit during registration is truthful and accurate and that you will maintain the accuracy of such information.
                                     <br>

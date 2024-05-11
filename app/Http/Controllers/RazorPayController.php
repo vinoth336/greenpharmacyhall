@@ -90,12 +90,22 @@ class RazorPayController extends Controller
         // If Signature status is true We will save the payment response in our database
         // In this tutorial we send the response to Success page if payment successfully made
         if ($signatureStatus == true) {
+
+            info("Signature status");
+
+            info(print_r($signatureStatus, true));
+
+            info("Payment capture");
+            $api = new Api (env('RZR_KEY_ID'), env('RZR_KEY_SECRET'));
+            $payment = $api->payment->fetch($request->all()['rzp_paymentid']);
+            info(print_r($payment, true));
             // You can create this page
             Payment::create([
                 'user_id' => $user->id,
                 'order_id' => $request->all()['rzp_orderid'],
                 'payment_id' => $request->all()['rzp_paymentid'],
                 'payment_signature' => $request->all()['rzp_signature'],
+                'user_order_no' => $request->all()['rzp_user_order_no'],
                 'amount' => $request->all()['amount'],
                 'status' => 'Paid'
             ]);
@@ -110,6 +120,7 @@ class RazorPayController extends Controller
                 'order_id' => $request->all()['rzp_orderid'],
                 'payment_id' => $request->all()['rzp_paymentid'],
                 'payment_signature' => $request->all()['rzp_signature'],
+                'user_order_no' => $request->all()['rzp_user_order_no'],
                 'amount' => $request->all()['amount'],
                 'status' => 'Failed'
             ]);
