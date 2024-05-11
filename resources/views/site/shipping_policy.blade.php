@@ -42,8 +42,7 @@
                                 authorities and only guarantees to hand over the consignment to the courier company or
                                 postal authorities within 1-2 days rom the date of the order
                                 and payment or as per the delivery date agreed at the time of order confirmation. Delivery
-                                of all orders will be to the address provided by the buyer. Delivery of our services will
-                                be confirmed on your mail ID as specified during registration. For any issues in utilizing
+                                of all orders will be to the address provided by the buyer. For any issues in utilizing
                                 our services you may contact our helpdesk on {{ $siteInformation->phone_no }}
                                 or sales@greenpharmacyhall.com
                             </li>
