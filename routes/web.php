@@ -54,6 +54,8 @@ Route::get('/shipping_policy', 'SiteController@shippingPolicy')->name('site.ship
 Route::get('/return_policy', 'SiteController@returnPolicy')->name('site.return_policy');
 
 
+Route::post('payment-complete','RazorPayController@paymentComplete')->name('razorpay.payment_complete');
+
 Route::group(['middleware' => 'auth:web'], function() {
     Route::get('dashboard', 'UserController@dashboard')->name('public.dashboard');
     Route::get('change_password', 'UserController@changePassword')->name('public.change_password');
@@ -81,7 +83,6 @@ Route::group(['middleware' => 'auth:web'], function() {
 
     Route::post('razorpay-payment','RazorPayController@store')->name('razorpay.payment.store');
     //Route::post('razorpay-payment-order','RazorPayController@createOrder')->name('order.checkout');
-    Route::get('payment-complete','RazorPayController@paymentComplete')->name('razorpay.payment_complete');
 });
 //Delivery Estimation Based on pincode
 Route::group(['prefix' => 'admin'], function () {

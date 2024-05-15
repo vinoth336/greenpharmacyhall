@@ -26,7 +26,12 @@ class UserLoginController extends Controller
         $user = User::where('phone_no', $request->input('phone_no'))->first();
         if ($user) {
             $otp=$this->generateOtp($request->input('phone_no'));
-            Otps::sendSMS($request->input('phone_no'),$otp);
+            if (env('APP_ENV') == 'production') {
+                $otp=$this->generateOtp($request->input('phone_no'));
+                Otps::sendSMS($request->input('phone_no'),$otp);
+            } else {
+                $otp=$this->generateOtp($request->input('phone_no'));
+            }
             return response()->json(['msg' => 'OTP Send Successfully'], 200);
         } else {
             return response()->json(['msg' => 'User not found'], 404);
@@ -118,7 +123,7 @@ class UserLoginController extends Controller
     }
     public function generateOtp($phoneNumber){
     // Generate OTP
-    $otpNumber=mt_rand(100000,999999);
+    $otpNumber= env('APP_ENV') == 'production' ? mt_rand(100000,999999) : '123456';
     $otpsModel=Otps::firstOrCreate(
         [
            'phone_number'=>$phoneNumber,

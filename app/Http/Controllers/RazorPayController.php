@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UserOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Razorpay\Api\Api;
@@ -80,7 +81,7 @@ class RazorPayController extends Controller
 
     public function paymentComplete(Request $request)
     {
-        $user = auth()->user();
+        //$user = auth()->user();
 // Now verify the signature is correct . We create the private function for verify the signature
         $signatureStatus = $this->SignatureVerify(
             $request->all()['rzp_signature'],
@@ -99,6 +100,8 @@ class RazorPayController extends Controller
             $api = new Api (env('RZR_KEY_ID'), env('RZR_KEY_SECRET'));
             $payment = $api->payment->fetch($request->all()['rzp_paymentid']);
             info(print_r($payment, true));
+            $userOrder = UserOrder::findOrFail($request->all()['rzp_user_order_no']);
+            $user = $userOrder->user;
             // You can create this page
             Payment::create([
                 'user_id' => $user->id,
