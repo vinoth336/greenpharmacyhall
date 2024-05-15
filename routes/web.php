@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth:web'], function() {
 
     Route::post('razorpay-payment','RazorPayController@store')->name('razorpay.payment.store');
     //Route::post('razorpay-payment-order','RazorPayController@createOrder')->name('order.checkout');
-    Route::post('payment-complete','RazorPayController@paymentComplete');
+    Route::post('payment-complete','RazorPayController@paymentComplete')->name('razorpay.payment_complete');
 });
 //Delivery Estimation Based on pincode
 Route::group(['prefix' => 'admin'], function () {
