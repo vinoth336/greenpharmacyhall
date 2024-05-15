@@ -134,6 +134,6 @@ class UserLoginController extends Controller
            'expires_at'=>now()->addMinutes(5)
         ]
     );
-    return $otpNumber;
+    return $otpsModel->otp;
     }
 }
