@@ -83,15 +83,7 @@ class UserOrderController extends Controller
             }
             $userOrder->load('order_status');
 
-            DB::commit();
-
-            Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
-
-            if ($request->input('payment_type') == 'cod') {
-
-                return response(['status' => true, "message" => 'Successfully Ordered Placed']);
-            } else {
-                // Check online or offline call payment
+            if ($request->input('payment_type') == 'online') {
                 $paymentData=[
                     'amount'=>$sum,
                     'prefill'=>[
@@ -102,8 +94,17 @@ class UserOrderController extends Controller
                     'receipt'=> $userOrder->order_no
                 ];
                 $paymentOrders=$this->initiatePayment($paymentData, $userOrder);
+            }
 
+            DB::commit();
 
+            Mail::send(new NewOrderSendNotificationToAdmin($user, $userOrder));
+
+            if ($request->input('payment_type') == 'cod') {
+
+                return response(['status' => true, "message" => 'Successfully Ordered Placed']);
+            } else {
+                // Check online or offline call payment
                 return response()->json([$paymentOrders]);
             }
 
@@ -144,7 +145,9 @@ class UserOrderController extends Controller
             ],
             "theme"=> [
                 "color"=> "#3399cc"
-            ]
+            ],
+            "callback_url" => route('razorpay.payment_complete'),
+            "redirect" => true
         ];
         return $options;
     }
