@@ -126,6 +126,9 @@ class UserLoginController extends Controller
     $otpNumber= env('APP_ENV') == 'production' ? mt_rand(100000,999999) : '123456';
     $otpsModel=Otps::firstOrCreate(
         [
+            'phone_number'=>$phoneNumber
+        ],
+        [
            'phone_number'=>$phoneNumber,
            'otp'=>$otpNumber,
            'expires_at'=>now()->addMinutes(5)
