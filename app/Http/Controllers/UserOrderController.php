@@ -130,24 +130,26 @@ class UserOrderController extends Controller
 
         $siteInformation = SiteInformation::first();
         $results=$api->order->create(array('receipt' => (string)$paymentData['receipt'], 'amount' => (int) ($paymentData['amount']*100), 'currency' => 'INR', 'notes'=> array('key1'=> 'value3','key2'=> 'value2')));
-     $options = [
-            "key"=> config('services.razorpay.key'),
-            "amount"=> (int)($paymentData['amount']*100),
-            "currency"=> "INR",
-            "name"=> "Green Pharamacy Hall",
-            "description"=> "Online Payment",
-            "image"=> asset('web/images/logo/' . $siteInformation->logo),
-            "order_id"=> $results['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        $options = [
+            "type" => "link",
+            "view_less" => 1,
+            "key" => config('services.razorpay.key'),
+            "amount" => (int)($paymentData['amount'] * 100),
+            "currency" => "INR",
+            "name" => "Green Pharamacy Hall",
+            "description" => "Online Payment",
+            "image" => asset('web/images/logo/' . $siteInformation->logo),
+            "order_id" => $results['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "user_order_no" => $userOrder->order_no,
-            "prefill"=> $paymentData['prefill'],
-            "notes"=> [
-                "address"=> "Razorpay Corporate Office"
+            "prefill" => $paymentData['prefill'],
+            "notes" => [
+                "address" => "Razorpay Corporate Office"
             ],
-            "theme"=> [
-                "color"=> "#3399cc"
+            "theme" => [
+                "color" => "#3399cc"
             ],
-            "callback_url" => route('razorpay.payment_complete'),
-            "redirect" => true
+            "redirect" => true,
+            "callback_url" => route('payment_complete'),
         ];
         return $options;
     }

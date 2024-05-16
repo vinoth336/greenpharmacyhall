@@ -46,7 +46,7 @@ class RazorPayController extends Controller
             ],
             "theme" => [
                 "color" => "#3399cc"
-            ]
+            ],
         ];
         return view('razorpayView', [
             $options
@@ -79,70 +79,4 @@ class RazorPayController extends Controller
         return redirect()->back();
     }
 
-    public function paymentComplete(Request $request)
-    {
-        //$user = auth()->user();
-// Now verify the signature is correct . We create the private function for verify the signature
-        $signatureStatus = $this->SignatureVerify(
-            $request->all()['rzp_signature'],
-            $request->all()['rzp_paymentid'],
-            $request->all()['rzp_orderid']
-        );
-        // If Signature status is true We will save the payment response in our database
-        // In this tutorial we send the response to Success page if payment successfully made
-        if ($signatureStatus == true) {
-
-            info("Signature status");
-
-            info(print_r($signatureStatus, true));
-
-            info("Payment capture");
-            $api = new Api (env('RZR_KEY_ID'), env('RZR_KEY_SECRET'));
-            $payment = $api->payment->fetch($request->all()['rzp_paymentid']);
-            info(print_r($payment, true));
-            $userOrder = UserOrder::findOrFail($request->all()['rzp_user_order_no']);
-            $user = $userOrder->user;
-            // You can create this page
-            Payment::create([
-                'user_id' => $user->id,
-                'order_id' => $request->all()['rzp_orderid'],
-                'payment_id' => $request->all()['rzp_paymentid'],
-                'payment_signature' => $request->all()['rzp_signature'],
-                'user_order_no' => $request->all()['rzp_user_order_no'],
-                'amount' => $request->all()['amount'],
-                'status' => 'Paid'
-            ]);
-            Cart::where('user_id', $user->id)->update([
-                'status' => 0
-            ]);
-            return redirect()->route('public.order_list')->with(["message" => 'Order Placed Successfully', 'clear_cart' => true]);
-        } else {
-            // You can create this page
-            Payment::create([
-                'user_id' => $user->id,
-                'order_id' => $request->all()['rzp_orderid'],
-                'payment_id' => $request->all()['rzp_paymentid'],
-                'payment_signature' => $request->all()['rzp_signature'],
-                'user_order_no' => $request->all()['rzp_user_order_no'],
-                'amount' => $request->all()['amount'],
-                'status' => 'Failed'
-            ]);
-            // You can create this page
-            return view('payment-failed-page');
-        }
-    }
-
-    private function SignatureVerify($_signature, $_paymentId, $_orderId)
-    {
-        try {
-// Create an object of razorpay class
-            $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
-            $attributes = array('razorpay_signature' => $_signature, 'razorpay_payment_id' => $_paymentId, 'razorpay_order_id' => $_orderId);
-            $order = $api->utility->verifyPaymentSignature($attributes);
-            return true;
-        } catch (\Exception $e) {
-// If Signature is not correct its give a excetption so we use try catch
-            return false;
-        }
-    }
 }

@@ -203,6 +203,9 @@
         <input type="hidden" class="form-control" id="rzp_orderid" name="rzp_orderid">
         <input type="hidden" class="form-control" id="rzp_signature" name="rzp_signature">
         <input type="hidden" class="form-control" id="rzp_user_order_no" name="rzp_user_order_no">
+        <input type="hidden" class="form-control" id="callback_url" name="callback_url" value="{{ route('payment_complete') }}">
+        <input type="hidden" class="form-control" id="callback_method" name="callback_method" value="get">
+
 </form>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
