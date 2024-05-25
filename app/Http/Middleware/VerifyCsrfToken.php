@@ -24,16 +24,13 @@ class VerifyCsrfToken extends Middleware
             $this->inExceptArray($request) ||
             $this->tokensMatch($request)
         ) {
-            info("am inside");
             return tap($next($request), function ($response) use ($request) {
                 if ($this->shouldAddXsrfTokenCookie()) {
-                    info("am inside 2");
                     $this->addCookieToResponse($request, $response);
                 }
             });
         }
 
-        dd(request()->all(), "am inside");
 	return redirect()->route("public.login")->with('message', 'Page Expired');
         // throw new TokenMismatchException('CSRF token mismatch.');
     }
