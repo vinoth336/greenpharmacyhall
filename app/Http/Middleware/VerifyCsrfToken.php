@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        'payment-complete'
     ];
 
     public function handle($request, Closure $next)
