@@ -33,6 +33,10 @@ class UserOrder extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function order_payment_status()
+    {
+        return $this->hasOne(Payment::class, 'order_id', 'order_no');
+    }
     public function getDeliveryTypeAttribute()
     {
         return DELIVERY_TYPE[$this->attributes['delivery_type']] ?? null;

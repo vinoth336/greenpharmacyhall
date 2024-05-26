@@ -13,30 +13,24 @@ class PaymentController extends Controller
     public function paymentComplete(Request $request)
     {
         $signatureStatus = $this->SignatureVerify(
-            $request->all()['rzp_signature'],
-            $request->all()['rzp_paymentid'],
-            $request->all()['rzp_orderid']
+            $request->all()['razorpay_signature'],
+            $request->all()['razorpay_payment_id'],
+            $request->all()['razorpay_order_id']
         );
 
         $user = auth()->user();
         if ($signatureStatus == true) {
-
-            info("Signature status");
-
-            info(print_r($signatureStatus, true));
-
-            info("Payment capture");
             $api = new Api (env('RZR_KEY_ID'), env('RZR_KEY_SECRET'));
-            $payment = $api->payment->fetch($request->input('rzp_paymentid'));
-            $userOrder = UserOrder::where('order_no', $request->input('rzp_user_order_no'))->firstOrFail();
+            $payment = $api->payment->fetch($request->input('razorpay_payment_id'));
+            $userOrder = UserOrder::where('order_no', $request->input('razorpay_order_id'))->firstOrFail();
             // You can create this page
             Payment::create([
                 'user_id' => $user->id,
-                'order_id' => $request->input('rzp_orderid'),
-                'payment_id' => $request->input('rzp_paymentid'),
-                'payment_signature' => $request->input('rzp_signature'),
-                'user_order_no' => $request->input('rzp_user_order_no'),
-                'amount' => $request->input('amount'),
+                'order_id' => $request->input('razorpay_order_id'),
+                'payment_id' => $request->input('razorpay_payment_id'),
+                'payment_signature' => $request->input('razorpay_signature'),
+                'user_order_no' => $request->input('razorpay_order_id') ?? 123,
+                'amount' => $payment->amount / 100,
                 'status' => 'Paid'
             ]);
             Cart::where('user_id', $user->id)->update([
@@ -47,11 +41,11 @@ class PaymentController extends Controller
             // You can create this page
             Payment::create([
                 'user_id' => $user->id,
-                'order_id' => $request->all()['rzp_orderid'],
-                'payment_id' => $request->all()['rzp_paymentid'],
-                'payment_signature' => $request->all()['rzp_signature'],
-                'user_order_no' => $request->all()['rzp_user_order_no'],
-                'amount' => $request->all()['amount'],
+                'order_id' => $request->all()['razorpay_order_id'],
+                'payment_id' => $request->all()['razorpay_payment_id'],
+                'payment_signature' => $request->all()['razorpay_signature'],
+                'user_order_no' => $request->all()['razorpay_order_id'],
+                'amount' =>  $payment->amount / 100,
                 'status' => 'Failed'
             ]);
             // You can create this page

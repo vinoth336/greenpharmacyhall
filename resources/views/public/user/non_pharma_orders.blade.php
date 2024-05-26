@@ -12,7 +12,11 @@
 
                             <div>Delivery Type : {{ $order->delivery_type == 1 ? 'Door Delivery' : 'Shop PickUp' }}</div>
                             <div>Payment Type : {{ $order->payment_type =='cod' ? 'COD' : 'Online' }}</div>
-
+                            @if ($order->payment_type =='online')
+                                <div>
+                                    Payment Status : {{ optional($order->order_payment_status)->status ?? 'Failed' }}
+                                </div>
+                            @endif
                             <div>
                                 @if ($order->hasMedia('prescription_details'))
                                     <h4>Attachment's</h4>

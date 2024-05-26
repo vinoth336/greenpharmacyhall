@@ -127,9 +127,11 @@ class UserOrderController extends Controller
     private function initiatePayment($paymentData, $userOrder){
 
         $api = new Api(config('services.razorpay.key'),config('services.razorpay.secret'));
-
         $siteInformation = SiteInformation::first();
         $results=$api->order->create(array('receipt' => (string)$paymentData['receipt'], 'amount' => (int) ($paymentData['amount']*100), 'currency' => 'INR', 'notes'=> array('key1'=> 'value3','key2'=> 'value2')));
+        $userOrder->order_no = $results['id'];
+        $userOrder->save();
+
         $options = [
             "type" => "link",
             "view_less" => 1,
@@ -140,7 +142,6 @@ class UserOrderController extends Controller
             "description" => "Online Payment",
             "image" => asset('web/images/logo/' . $siteInformation->logo),
             "order_id" => $results['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "user_order_no" => $userOrder->order_no,
             "prefill" => $paymentData['prefill'],
             "notes" => [
                 "address" => "Razorpay Corporate Office"

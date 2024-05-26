@@ -25,7 +25,7 @@ class UserOrderDetailController extends Controller
                 $query->with([ 'product' => function($query) {
                         $query->with('ProductImages');
                 }]);
-        }, 'order_status', 'media'])->orderBy('created_at', 'DESC')->get();
+        }, 'order_payment_status',  'order_status', 'media'])->orderBy('created_at', 'DESC')->get();
 
 
         return view('public.user.orders')
